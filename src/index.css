@@ -1,0 +1,18 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #3D5656;
+    --color-secondary: #cff5de;
+    --color-accent: #68B984;
+
+    --font-primary: 'Roboto', sans-serif;
+  }
+
+  .align-super {
+    vertical-align: super;
+    font-size: 0.75rem; /* Sesuaikan ukuran font jika perlu */
+  }
