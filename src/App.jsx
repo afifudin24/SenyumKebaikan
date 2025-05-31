@@ -7,10 +7,11 @@ import Login from './pages/Login';
 function App() {
   return (
     <div className="font-primary">
-      {/* <nav className="mb-4 flex gap-4 text-blue-500">
+      <nav className="mb-4 flex gap-4 text-blue-500">
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
-      </nav> */}
+        <Link to="/login">Login</Link>
+      </nav>
 
       <Routes>
         <Route path="/" element={<Home />} />
