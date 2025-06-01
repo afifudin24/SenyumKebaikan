@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Toaster, toast } from 'react-hot-toast';
 import logo from '../assets/logo.png';
 import google from '../assets/google.png'
 import fb from '../assets/fb.png'
@@ -11,12 +13,12 @@ import { Line, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS,   ArcElement, CategoryScale, LinearScale, PointElement, LineElement,  BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { color } from 'chart.js/helpers';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -24,6 +26,12 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState('');
   const [showChart, setShowChart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+
+  const [users, setUsers] = useState([
+    { email: 'admin@gmail.com', password: 'password1', role: 'admin' },
+    { username: 'user@gmail.com', password: 'password2', role: 'user' },
+    // { username: 'user3', password: 'password3', role: 'volunteer' },
+  ]);
 const toggleMenu = () => {
   setShowMenu(!showMenu);
 };
@@ -54,20 +62,30 @@ const toggleChart = () => {
       setPasswordError('Password tidak boleh kosong');
       valid = false;
     }
+    // cek ada user tidak berdasarkan username dan password dari variabel users
+    const user = users.find(
+      (u) => u.email === email && u.password === password
+    );
+
     if (!valid) return;
+    if (user) {
+      toast.success('Login Berhasil!');
+    } else {
+      toast.error('Login Gagal!');
+    }
     // Jika lolos validasi
     console.log('Email:', email);
     console.log('Password:', password);
   };
   return (
-    <div className="flex  py-5 2xl:w-10/12 mx-auto overflow-x-hidden md:items-start items-center w-full gap-2  min-h-screen  justify-center px-5">
+    <div className="flex  py-5 2xl:w-10/12 mx-auto overflow-x-hidden md:items-center items-center w-full gap-2  h-screen  justify-center px-5">
       <button
   onClick={toggleMenu}
   className="md:hidden fixed top-4 right-4 z-50 bg-white text-primary hover:bg-primary hover:text-white p-2 rounded-md shadow"
 >
   {showMenu ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faChartSimple} />}
 </button>
-      <div className="px-4  w-12/12 md:w-6/12 h-full">
+      <div className="px-4  w-12/12 md:w-6/12 ">
         <div className='md:w-8/12 w-10/12  h-full mx-auto'>
         
               <div className="md:mb-6 md-3 text-center">
@@ -144,7 +162,7 @@ const toggleChart = () => {
         </div>
       
         <div
-  className={`bg-primary w-full overflow-y-auto md:w-6/12  px-2 2xl:py-10 py-3 text-white rounded-lg transition-transform duration-500 ease-in-out 
+  className={`bg-primary w-full overflow-y-auto md:overflow-y-hidden md:w-6/12  px-2 2xl:py-10 py-3 text-white rounded-lg transition-transform duration-500 ease-in-out 
     md:static h-full md:translate-x-0
     fixed top-0 left-0 z-40
     ${showMenu ? 'translate-x-0' : '-translate-x-full'}

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import logo from '../assets/logo.png';
-import google from '../assets/google.png'
-import fb from '../assets/fb.png'
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartLine, faChartSimple, faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+
 import { Line, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS,   ArcElement, CategoryScale, LinearScale, PointElement, LineElement,  BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
@@ -18,6 +18,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 import Grafik from '../components/Grafik';
 const Register = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [nama, setNama] = useState('');
   const [password, setPassword] = useState('');
@@ -25,7 +26,8 @@ const Register = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-   const [emailError, setEmailError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [namaError, setNamaError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [showChart, setShowChart] = useState(false);
@@ -53,6 +55,8 @@ const toggleChart = () => {
     // Reset error
     setEmailError('');
     setPasswordError('');
+    setConfirmPasswordError('');
+    setNamaError('');
     if (!email) {
       setEmailError('Email tidak boleh kosong');
       valid = false;
@@ -60,6 +64,12 @@ const toggleChart = () => {
       setEmailError('Format email tidak valid');
       valid = false;
     }
+
+    if(!nama){
+      setNamaError('Nama tidak boleh kosong');
+      valid = false;
+    }
+
     if (!password) {
       setPasswordError('Password tidak boleh kosong');
       valid = false;
@@ -69,20 +79,36 @@ const toggleChart = () => {
       setConfirmPasswordError('Konfirmasi password harus diisi')
       valid = false
     }
+
+    if(confirmPassword && password && confirmPassword !== password){
+      setConfirmPasswordError('Konfirmasi password tidak sesuai')
+      valid = false
+    }
+
     if (!valid) return;
     // Jika lolos validasi
+    if(valid) {
+      setPasswordError('');
+      setConfirmPasswordError('');
+      setEmailError('');
+      setNamaError('');
+      toast.success('Register Berhasil!');
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    }
     console.log('Email:', email);
     console.log('Password:', password);
   };
   return (
-    <div className="flex  py-5 2xl:w-10/12 mx-auto overflow-x-hidden md:items-start items-center w-full gap-2  min-h-screen  justify-center px-5">
+    <div className="flex  py-5 2xl:w-10/12 mx-auto overflow-x-hidden  items-center w-full gap-2  min-h-screen  justify-center px-5">
       <button
   onClick={toggleMenu}
   className="md:hidden fixed top-4 right-4 z-50 bg-white text-primary hover:bg-primary hover:text-white p-2 rounded-md shadow"
 >
   {showMenu ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faChartSimple} />}
 </button>
-      <div className="px-4  w-12/12 md:w-6/12 h-full">
+      <div className="px-4  w-12/12 md:w-6/12 ">
         <div className='md:w-8/12 w-10/12  h-full mx-auto'>
         
               <div className="md:mb-6 md-3 text-center">
@@ -102,7 +128,7 @@ const toggleChart = () => {
            
             />
           </div>
-           {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
+           {namaError && <p className="text-red-500 text-sm mt-1">{namaError}</p>}
           <div className="2xl:mb-4 mb-2">
             <label className="block text-sm font-medium text-primary">Email</label>
             <input
@@ -144,8 +170,8 @@ const toggleChart = () => {
                 type={showConfirmPassword ? 'text' : 'password'}
                 className="p-2 w-full font-secondary border text-sm border-gray-300 rounded-md"
                 placeholder="Ulangi Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
              
               />
               <button
@@ -156,14 +182,14 @@ const toggleChart = () => {
                 {showConfirmPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
               </button>
             </div>
-             {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
+             {confirmPasswordError && <p className="text-red-500 text-sm mt-1">{confirmPasswordError}</p>}
           </div>
           <div className='flex justify-end'>
  
 </div>
           <div className="flex justify-between items-center">
             <button type="submit" className="cursor-pointer text-xs md:text-sm bg-primary w-full text-white py-2 my-3 px-4 rounded-md hover:text-primary hover:bg-secondary">
-              Masuk
+              Buat Akun
             </button>
           </div>
         </form>
