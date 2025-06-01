@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import logo from '../assets/logo.png';
 import google from '../assets/google.png'
 import fb from '../assets/fb.png'
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartLine, faChartSimple, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faA, faArrowLeft, faArrowLeftLong, faChartLine, faChartSimple, faEnvelope, faEnvelopeOpen, faEye } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import { Line, Bar } from 'react-chartjs-2';
@@ -13,54 +13,27 @@ import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { color } from 'chart.js/helpers';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
+import { faEnvelopeCircleCheck } from '@fortawesome/free-solid-svg-icons/faEnvelopeCircleCheck';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
-const Login = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+
    const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
   const [showChart, setShowChart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [isSent, setIsSent] = useState(false);
 const toggleMenu = () => {
   setShowMenu(!showMenu);
 };
 const toggleChart = () => {
   setShowChart(!showChart);
 };
-  const togglePassword = () => {
-    setShowPassword(!showPassword);
-  };
-  const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let valid = true;
-    // Reset error
-    setEmailError('');
-    setPasswordError('');
-    if (!email) {
-      setEmailError('Email tidak boleh kosong');
-      valid = false;
-    } else if (!validateEmail(email)) {
-      setEmailError('Format email tidak valid');
-      valid = false;
-    }
-    if (!password) {
-      setPasswordError('Password tidak boleh kosong');
-      valid = false;
-    }
-    if (!valid) return;
-    // Jika lolos validasi
-    console.log('Email:', email);
-    console.log('Password:', password);
-  };
+ 
+
   return (
-    <div className="flex  py-5 2xl:w-10/12 mx-auto overflow-x-hidden md:items-start items-center w-full gap-2  min-h-screen  justify-center px-5">
+    <div className="flex  py-5 2xl:w-10/12 mx-auto overflow-x-hidden items-start w-full gap-2  min-h-screen  justify-center px-5">
       <button
   onClick={toggleMenu}
   className="md:hidden fixed top-4 right-4 z-50 bg-white text-primary hover:bg-primary hover:text-white p-2 rounded-md shadow"
@@ -69,77 +42,19 @@ const toggleChart = () => {
 </button>
       <div className="px-4  w-12/12 md:w-6/12 h-full">
         <div className='md:w-8/12 w-10/12  h-full mx-auto'>
-        
-              <div className="md:mb-6 md-3 text-center">
-                  <img className='w-24 mb-2 mx-auto' src={logo} alt="" />
-          <h1 className="2xl:text-4xl md:text-2xl text-xl font-semibold text-primary">Selamat datang <br /> di senyum kebaikan</h1>
-          <p className="text-sm md:text-base text-primary font-light 2xl:text-[20px] mt-2">Login Ke Akun Anda</p>
-        </div>
-        <form onSubmit={handleSubmit}>
-          <div className="2xl:mb-4 mb-2">
-            <label className="block text-sm font-medium text-primary">Email</label>
-            <input
-              type="email"
-              className="mt-2 p-2 w-full  font-secondary border  border-gray-300 text-sm rounded-md"
-              placeholder="Masukkan email anda"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-           
-            />
-          </div>
-           {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
-          <div className="2xl:mb-4 mb-2">
-            <label className="block text-sm font-medium text-primary">Password</label>
-            <div className="relative mt-2">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                className="p-2 w-full font-secondary border text-sm border-gray-300 rounded-md"
-                placeholder="Masukkan password anda"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-             
-              />
-              <button
-                type="button"
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                onClick={togglePassword}
-              >
-                {showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
-              </button>
-            </div>
-             {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
-          </div>
-          <div className='flex justify-end'>
-  <Link to="/forgotpassword" className="text-xs md:text-sm text-primary hover:underline">
-    Lupa Sandi?
-  </Link>
-</div>
-          <div className="flex justify-between items-center">
-            <button type="submit" className="cursor-pointer text-xs md:text-sm bg-primary w-full text-white py-2 my-3 px-4 rounded-md hover:text-primary hover:bg-secondary">
-              Masuk
-            </button>
-          </div>
-        </form>
-        
-        <div class="flex items-center justify-center my-3 md:my-6">
-  <hr class="flex-grow border-t border-gray-300"/>
-  <span class="mx-4 text-gray-600">atau</span>
-  <hr class="flex-grow border-t border-gray-300"/>
-</div>
-        <div className="flex justify-center items-center mt-3 text-sm md:mt-6 space-x-4">
-          <button className="flex items-center justify-center w-full p-2 border border-gray-300 rounded-md hover:bg-gray-100">
-            <img src={fb} alt="Google" className="w-5 h-5 mr-2" />
-            Google
-          </button>
-          <button className="flex items-center justify-center w-full p-2 border border-gray-300 rounded-md hover:bg-gray-100">
-            <img src={google} alt="Facebook" className="w-5 h-5 mr-2" />
-            Facebook
-          </button>
-        </div>
-        <div className="mt-4 text-center text-sm text-primary">
-          <span className='font-light'>Belum punya akun? </span>
-          <a href="/register" className="text-primary font-semibold hover:underline">Register</a>
-        </div>
+       <Link to="/login" className="w-fit">
+  <div className='p-2 flex gap-2 bg-[#f9fcfc] rounded-xl items-center font-light text-primary font-secondary w-25 cursor-pointer hover:bg-[#eef6f6] transition'>
+    <FontAwesomeIcon icon={faArrowLeftLong} />
+    <span>Kembali</span>
+  </div>
+</Link>
+
+            {
+                isSent ? <CheckEmailMessage /> : <FormForgotPassword setIsSent={setIsSent} email={email} setEmail={setEmail} emailError={emailError} setEmailError={setEmailError} />
+            }
+          
+
+       
         </div>
         </div>
       
@@ -357,4 +272,81 @@ const options = {
     </div>
   );
 };
-export default Login;
+
+const FormForgotPassword = ({setIsSent, email, setEmail, emailError, setEmailError}) => {
+      const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let valid = true;
+    // Reset error
+    setEmailError('');
+
+    if (!email) {
+      setEmailError('Email tidak boleh kosong');
+      valid = false;
+    } else if (!validateEmail(email)) {
+      setEmailError('Format email tidak valid');
+      valid = false;
+    }
+
+    if (!valid) return;
+    // Jika lolos validasi
+    console.log('Email:', email);
+
+    setIsSent(true);
+ 
+  };
+    return (
+        <div>
+                 <h1 className="2xl:text-4xl md:text-2xl text-xl mt-10 font-semibold text-center text-primary">Lupa Kata Sandi</h1>
+                <p className="text-sm md:text-sm text-center text-primary font-light 2xl:text-[20px] mt-3">Jangan khawatir masukan alamat anda dibawah ini, dan kami akan mengirimkan tautan untuk mengatur ulang sandi anda </p>
+               <form onSubmit={handleSubmit}>
+          <div className="2xl:mb-4 mb-2">
+            <label className="block text-sm font-medium text-primary">Email</label>
+            <input
+              type="email"
+              className="mt-2 p-2 w-full  font-secondary border  border-gray-300 text-sm rounded-md"
+              placeholder="Masukkan email anda"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+           
+            />
+          </div>
+           {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
+                <div className="flex justify-between items-center">
+            <button type="submit" className="cursor-pointer text-xs md:text-sm bg-primary w-full text-white py-2 my-3 px-4 rounded-md hover:text-primary hover:bg-secondary">
+              Kirim
+            </button>
+          </div>
+              </form>
+
+        </div>
+    )
+};
+
+const CheckEmailMessage = () => {
+  return (
+    <div className="text-center">
+        <div >
+        <FontAwesomeIcon className='text-5xl text-primary' icon={faEnvelopeCircleCheck} />
+        </div>
+          <h1 className="2xl:text-4xl md:text-2xl text-xl mt-5 font-semibold text-center text-primary">Periksa Email Anda</h1>
+          <p className="text-sm md:text-sm text-center text-primary font-light 2xl:text-[20px] mt-3">Kami telah mengirimkan tautan ke email anda untuk mengatur ulang kata sandi <br /> Silahkan periksa kotak masuk Email anda</p>
+          <Link to='/createnewpassword'>
+          <button  className='text-xs md:text-sm bg-primary w-full font-semibold text-white py-2 my-3 px-4 rounded-md hover:text-primary hover:bg-secondary'>
+            Buka Email
+          </button>
+          </Link>
+          <div >
+            <p className="text-sm md:text-sm text-center text-primary font-light 2xl:text-[20px] mt-3">Jika email tidak muncul di kotak masuk, silahkan periksa kotak spam</p>
+            <p className='text-sm md:text-sm text-center text-primary font-light 2xl:text-[20px] mt-3'>Tidak menerima email? 
+                <span className='font-semibold cursor-pointer hover:underline'> Kirim ulang</span></p>
+          </div>
+
+    </div>
+  );
+};
+export default ForgotPassword;
