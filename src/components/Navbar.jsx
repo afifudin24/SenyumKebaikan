@@ -3,21 +3,22 @@ import logo2 from "../assets/logo2.png"
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine, faCircle, faHome, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faHandHoldingHeart } from '@fortawesome/free-solid-svg-icons/faHandHoldingHeart';
 const Navbar = () => {
     const location = useLocation();
     const currentPath = location.pathname;
   
     const isActive = (path) => currentPath === path;
     const navItems = [
-        { label: 'Home', path: '/' },
-        { label: 'Donasi', path: '/donasi' },
-        { label: 'Pantau Donasi', path: '/pantau-donasi' },
-        { label: 'Cari Kebutuhan', path: '/cari-kebutuhan' },
+        { label: 'Home', path: '/', icon: faHome },
+        { label: 'Donasi', path: '/donasi', icon: faHandHoldingHeart },
+        { label: 'Pantau Donasi', path: '/pantau-donasi', icon: faChartLine },
+        { label: 'Cari Kebutuhan', path: '/cari-kebutuhan', icon: faSearch },
       ];
     return (
       <div className='fixed top-0 left-0 right-0 z-70 bg-white px-6 py-4 shadow-sm'>
-    <nav className="flex items-center justify-between  w-11/12 mx-auto md:w-10/12 ">
+    <nav className="flex items-center justify-between  w-12/12 mx-auto md:w-10/12 ">
       {/* Logo */}
       <div className="flex items-center gap-2">
         <img src={logo2} alt="Logo" className="h-8" />
@@ -49,14 +50,39 @@ const Navbar = () => {
 
       {/* Aksi */}
                 <div className="flex font-secondary  gap-4 items-center">
-                    <Link to={"/register"}>
+                    <Link className='hidden md:block' to={"/register"}>
                     <button className="text-primary hover:text-black text-sm">Daftar</button>
                     </Link>
                     <Link to="/login">
-        <button className="bg-primary text-white px-4 py-1.5 rounded-full text-sm">Log in</button>
+        <button className="bg-primary cursor-pointer text-white px-4 py-1.5 rounded-full text-sm">Log in</button>
                     </Link>
       </div>
             </nav>
+
+        <nav className='fixed bottom-0 left-0 right-0 z-70 rounded-t-xl px-4 py-4 shadow-up md:hidden bg-white'>
+          <div className='flex items-center justify-between'>
+            <ul className="flex gap-2 w-full text-primary justify-between text-sm font-secondary items-center">
+              {navItems.map((item) => (
+                <li key={item.path}>
+                  <Link
+                    to={item.path}
+                    className={`relative items-center justify-center  flex gap-2 flex-col  cursor-pointer ${
+                      isActive(item.path)
+                        ? 'font-semibold text-primary after:content-[""] after:absolute after:-bottom-3 after:left-1/2 after:-translate-x-1/2 after:w-10 after:h-1 after:bg-primary after:rounded-full'
+                        : 'hover:text-black text-primary'
+                    }`}
+                  >
+                    <FontAwesomeIcon icon={item.icon} className="text-md" />
+                    <p className='text-xs text-center'>
+                    
+                    {item.label}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
             </div>
   );
 };

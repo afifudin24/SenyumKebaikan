@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import Navbar from '../../components/Navbar'
 import Container from '../../components/Container'
 import home1 from '../../assets/home1.png'
@@ -12,7 +13,7 @@ import kebutuhan1 from '../../assets/home/kebutuhan1.png'
 import kebutuhan2 from '../../assets/home/kebutuhan2.png'
 import kebutuhan3 from '../../assets/home/kebutuhan3.png'
 import image from '../../assets/home/image.png'
-import { faArrowRight, faUpLong } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight, faLeftLong, faTimes, faUpLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons/faUpRightAndDownLeftFromCenter'
 import {
@@ -30,19 +31,25 @@ import { faEye } from '@fortawesome/free-solid-svg-icons/faEye'
 import Footer from '../../components/Footer'
 const Home = () => {
 
+  const [showImg, setShowImg] = useState(false);
+
+  const toggleImage = () => {
+    setShowImg(!showImg);
+  };
+
   return (
     <div>
       <Navbar />
-      <Container className={'mt-20'}>
+      <Container className={'mt-10 md:mt-20'}>
         <div className='grid grid-cols-1 mt-10 md:grid-cols-2 gap-4 p-4'>
           {/* Kiri: Gambar besar dan tombol */}
-          <div className='relative rounded-xl overflow-hidden border-2 border-blue-400'>
+          <div className='relative rounded-xl overflow-hidden '>
             <img
               src={home1}
               alt='Donasi'
               className='w-full h-full object-cover hover:scale-110 transition-all duration-100'
             />
-            <button className='absolute bottom-4 left-1/2 font-secondary -translate-x-1/2 hover:bg-primary hover:text-white bg-white text-primary px-4 py-2 rounded-full shadow'>
+            <button className='absolute bottom-4 left-1/2 font-secondary text-xs md:text-sm -translate-x-1/2 hover:bg-primary hover:text-white bg-white text-primary px-4 py-2 rounded-full shadow'>
               Donasi sekarang <FontAwesomeIcon icon={faArrowUpRightDots} />
             </button>
           </div>
@@ -51,13 +58,13 @@ const Home = () => {
           <div className='flex flex-col gap-4'>
             {/* Teks Selamat Datang */}
             <div className='bg-primary font-secondary p-4 rounded-xl'>
-              <h2 className='text-xl font-semibold text-white'>
+              <h2 className='text-lg md:text-xl font-semibold text-white'>
                 Selamat Datang
               </h2>
-              <p className='text-5xl font-bold my-2 text-secondary'>
+              <p className='md:text-5xl text-2xl font-bold my-2 text-secondary'>
                 Di Website Donasi Senyum Kebaikan
               </p>
-              <p className='text-sm text-white mt-1'>
+              <p className='text-xs md:text-sm text-white mt-1'>
                 Sebuah website donasi yang mengedepankan transparansi dan
                 akuntabilitas berteknologi blockchain
               </p>
@@ -92,16 +99,16 @@ const Home = () => {
         <div className='p-4 mx-4 my-3 rounded-xl font-secondary text-primary bg-secondary grid grid-cols-1 md:grid-cols-3 gap-4'>
           <div className='text-center'>
             <FontAwesomeIcon icon={faLock} className='text-5xl my-2' />
-            <h3 className='font-semibold text-2xl'>Blockchain</h3>
-            <p>
+            <h3 className='font-semibold text-xl  md:text-2xl'>Blockchain</h3>
+            <p className='text-sm md:text-lg'>
               Sistem menerapkan blockchain untuk memastikan keamanan dan
               akuntabilitas transaksi digital.
             </p>
           </div>
           <div className='text-center'>
             <FontAwesomeIcon icon={faEye} className='text-5xl my-2' />
-            <h3 className='font-semibold text-2xl'>Transparan</h3>
-            <p>
+            <h3 className='text-xl  md:text-2xl font-semibold'>Transparan</h3>
+            <p className='text-sm md:text-lg'>
               Website yang transparan memungkinkan pengguna untuk melihat semua
               informasi dan transaksi.
             </p>
@@ -113,17 +120,17 @@ const Home = () => {
             />
             <FontAwesomeIcon icon={faDesktop} className='text-5xl my-2' />
             <h3 className='font-semibold text-2xl'>Responsif</h3>
-            <p>
+            <p className='text-sm md:text-lg'>
               Tampilan website yang responsif memudahkan pengguna untuk
               mengakses dan berinteraksi dengan konten.
             </p>
           </div>
         </div>
 
-        <h4 className='text-center font-roboto font-semibold text-2xl md:text-4xl mt-10 text-primary'>
+        <h4 className='text-center font-roboto font-semibold text-xl md:text-4xl mt-10 text-primary'>
           Mari membantu mereka yang terdampak
         </h4>
-        <div className='mx-4 my-5 relative gap-4 rounded-2xl overflow-hidden bg-white shadow-md'>
+        <div className='mx-4 my-5 hidden md:block relative gap-4 rounded-2xl overflow-hidden bg-white shadow-md'>
           {/* Kiri: Konten */}
                   <div className='bg-primary text-white p-6 w-full flex flex-col justify-between'>
                       <div className='mb-4 w-7/12'>
@@ -160,7 +167,7 @@ const Home = () => {
 
             {/* Tombol */}
             <div className='flex gap-4 justify-center'>
-              <button className='bg-white text-[#36554A] px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-100 transition'>
+              <button className='bg-white text-primary px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-100 transition'>
                 Donasi sekarang <FontAwesomeIcon icon={ faArrowUpRightDots} />
               </button>
               <button className='border border-white px-4 py-2 rounded-full text-sm hover:bg-white hover:text-[#36554A] transition'>
@@ -173,27 +180,82 @@ const Home = () => {
 
           {/* Kanan: Gambar */}
                   </div>
+        </div>
+        <div className='flex flex-col md:hidden'>
+        <div className='mb-4 mt-5 w-11/12 px-2 py-5 mx-4 relative bg-primary rounded-xl text-white'>
+                          
+                      
+                          <div className='mb-4'>
+                            <p className='text-xs tracking-wider uppercase text-white'>
+                              Bencana Alam
+                            </p>
+                            <h2 className='text-lg md:text-3xl font-bold mt-3 leading-tight'>
+                              Banjir bandang di pinggiran kota{' '}
+                              <span className='uppercase'>Metropolitan</span>.
+                            </h2>
+                          </div>
+              
+                          {/* Progress */}
+                          <div className='w-full bg-white rounded-full h-1 mb-4'>
+                            <div
+                              className='bg-secondary h-2 rounded-full'
+                              style={{ width: '60%' }}
+                            ></div>
+                          </div>
+                          <div    style={{ width: '60%' }} className='font-light relative justify-between text-sm text-gray-200 mb-6'>
+                            <span>Rp 10.000.000</span>
+              <span className='absolute -right-5 top-0'>60% </span>
+              <p>(16 hari lagi)</p>
+                          </div>
+              
+                          {/* Deskripsi */}
+                          <p className='text-xs md:text-sm text-white mb-6 font-secondary'>
+                            Penyaluran bisa tidak tetap jika anda menunda dianggap membatalkan
+                            dan akan disaring sesuai masa pengecekan anda di tahap tinggi
+                            menunggu konfirmasi.
+                          </p>
+              
+                          {/* Tombol */}
+                          <div className='flex gap-4 justify-center'>
+                            <button className='bg-white text-primary px-4 py-2 rounded-full text-xs md:text-sm font-medium hover:bg-gray-100 transition'>
+                              Donasi sekarang <FontAwesomeIcon icon={ faArrowUpRightDots} />
+                            </button>
+                            <button className='border border-white px-4 py-2 rounded-full text-xs md:text-sm hover:bg-white hover:text-primary transition'>
+                              Selengkapnya <FontAwesomeIcon icon={ faArrowUpRightDots} />
+                            </button>
+                            <FontAwesomeIcon className='absolute z-50 top-2 right-2 text-white' onClick={toggleImage} icon={faLeftLong} />
+            </div>
+
+            <div className={`${showImg ? 'w-full' : 'w-0'} transition-all duration-150 absolute right-0 top-0 h-full`}>
+
+              <div className={`relative w-full h-full`}>
+              
+                <img src={home4} alt="" />
+
               </div>
+            </div>
+                                    </div>
+        </div>
               <div className='mx-4'>
               <p className='my-1 font-primary text-xl md:text-2xl font-semibold text-primary'>Pilihan Serupa</p>
               <DisasterCards />
-              <p className='my-2 font-primary text-xl md:text-2xl font-semibold text-primary text-center'>“Satu aksi kecil bisa berdampak besar. Kami mengundangmu untuk menjadi relawan donasi—ajukan programmu dan mari bantu mereka yang membutuhkan.”</p>
-              <h5 className='text-center text-primary text-2xl md:text-5xl mt-5'>50,765+</h5>
+              <p className='my-2 font-primary text-md md:text-2xl font-semibold text-primary text-center'>“Satu aksi kecil bisa berdampak besar. Kami mengundangmu untuk menjadi relawan donasi—ajukan programmu dan mari bantu mereka yang membutuhkan.”</p>
+              <h5 className='text-center text-primary text-5xl md:text-5xl mt-10'>50,765+</h5>
               <p className='my-2 text-lg md:text-xl  text-center font-secondary text-primary'>Relawan</p>
               <div className='mx-auto text-center'>
-              <button className='text-sm md:text-lg bg-primary mx-auto text-center font-secondary  text-white py-1 my-2 px-6 rounded-full w-auto hover:text-primary hover:bg-secondary'>Ajukan</button>
+              <button className='text-lg md:text-lg bg-primary mx-auto text-center font-secondary  text-white py-1 my-2 px-6 rounded-full w-auto hover:text-primary hover:bg-secondary'>Ajukan</button>
 
               </div>
               <div>
-                 <p className='my-3 font-primary text-center text-2xl md:text-3xl font-semibold text-primary'>Temukan Kebutuhanmu</p>
+                 <p className='mt-10 font-primary text-center text-2xl md:text-3xl font-semibold text-primary'>Temukan Kebutuhanmu</p>
                  <ProductCarousel />
               </div>
             </div>
 
             <div className='rounded-xl relative shadow-2xl my-3 overflow-hidden mx-4'>
                 <img src={image} alt="" />
-                <div className='absolute z-40 text-center top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 '>
-                  <p className='text-white text-2xl font-primary text-center'>MASIH RAGU DENGAN KAMI?
+                <div className='absolute z-40 text-center w-full p-2 top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 '>
+                  <p className='text-white md:text-2xl font-primary text-sm text-center'>MASIH RAGU DENGAN KAMI?
 KLIK DI BAWAH INI UNTUK MENUNJUKAN CARA KERJA MENGENAI TEKNOLOGI BLOCKCHAIN</p>
  <button className='border mx-auto border-white px-4 font-primary py-2 my-4 rounded-full text-sm hover:bg-primary bg-white text-primary hover:text-white transition'>
                 Selengkapnya <FontAwesomeIcon icon={ faArrowUpRightDots} />
@@ -202,7 +264,7 @@ KLIK DI BAWAH INI UNTUK MENUNJUKAN CARA KERJA MENGENAI TEKNOLOGI BLOCKCHAIN</p>
 
             </div>
 
-            <Footer className={'mx-4'} />
+            <Footer className={'md:mx-4 mx-0'} />
 
             
               
@@ -286,14 +348,14 @@ const ProductCarousel = () => {
   },
 ];
   return (
-    <div className='flex items-center'>
-      <div className='p-2 shadow-2xl w-4/12 rounded-3xl'>
+    <div className='flex items-center flex-col md:flex-row'>
+      <div className='p-4 shadow-2xl w-full md:w-4/12 rounded-3xl'>
         <p className='font-primary my-4 font-light'>BARANG</p>
-        <h4 className='text-primary text-xl my-4 font-semibold' >Pakaian keren yang dapat kamu gunakan</h4>
-        <button className='p-3 rounded-full border hover:shadow-2xl hover:bg-primary hover:text-white my-4 bg-white text-primary shadow-2xl font-secondary'>Selengkapnya <FontAwesomeIcon icon={faArrowUpRightDots} /></button>
+        <h4 className='text-primary md:text-xl text-md my-4 font-semibold' >Pakaian keren yang dapat kamu gunakan</h4>
+        <button className='p-3 rounded-full text-sm md:text-lg border hover:shadow-2xl hover:bg-primary hover:text-white my-4 bg-white text-primary shadow-2xl font-secondary'>Selengkapnya <FontAwesomeIcon icon={faArrowUpRightDots} /></button>
       </div>
   
-    <div className="flex w-8/12 overflow-x-scroll gap-2 h-full p-4">
+    <div className="flex md:w-8/12 w-full overflow-x-scroll gap-2 h-full p-4">
       {products.map((item, index) =>
         (
          <div
