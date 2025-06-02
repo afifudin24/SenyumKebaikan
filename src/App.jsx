@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import ForgotPassword from './pages/ForgotPassword';
 import CreateNewPassword from './pages/CreateNewPassword';
 import Register from './pages/Register';
+import Donasi from './pages/guest/Donasi';
 function App() {
   return (
     <div className="font-primary">
@@ -21,6 +22,7 @@ function App() {
       </nav> */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/donasi" element={<Donasi />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
