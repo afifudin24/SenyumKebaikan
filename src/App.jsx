@@ -8,6 +8,8 @@ import ForgotPassword from './pages/ForgotPassword';
 import CreateNewPassword from './pages/CreateNewPassword';
 import Register from './pages/Register';
 import Donasi from './pages/guest/Donasi';
+import DetailDonasi from './pages/guest/DetailDonasi';
+import DetailDonasiBarang from './pages/guest/DetailDonasiBarang';
 function App() {
   return (
     <div className="font-primary">
@@ -23,6 +25,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/donasi" element={<Donasi />} />
+        <Route path="/donasi/detaildonasi" element={<DetailDonasi />} />
+        <Route path="/donasi/detaildonasibarang" element={<DetailDonasiBarang />} />
+
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

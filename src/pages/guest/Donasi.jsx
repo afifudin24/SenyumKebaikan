@@ -3,8 +3,13 @@ import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import HorizontalScroll from "../../components/HorizontalScroll";
+import HorizontalScrollDonasiBarang from "../../components/HorizontalScrollDonasiBarang";
 import Container from "../../components/Container";
 const Donasi = () => {
+ 
+  const [pageActive, setPageActive] = useState(0);
+  
+
     const [dataDonasiPanti, setDataDonasiPanti] = useState([
         {
           type: 'Panti Asuhan',
@@ -15,9 +20,9 @@ const Donasi = () => {
           raised: 4500000,
         },
         {
-          type: 'Panti Jompo',
-          title: 'Kebutuhan Harian Lansia di Panti Mandiri',
-          description: 'Panti Mandiri membutuhkan bantuan logistik untuk kebutuhan harian lansia yang tinggal di sana.',
+         type: 'Panti Asuhan',
+          title: 'Bantu Biaya Sekolah Anak Panti Asuhan Al-Hikmah',
+          description: 'Anak-anak panti asuhan Al-Hikmah membutuhkan bantuan biaya pendidikan untuk semester baru.',
           percent: '70%',
           goal: '25',
           raised: 7000000,
@@ -31,9 +36,9 @@ const Donasi = () => {
           raised: 3000000,
         },
         {
-          type: 'Panti Difabel',
-          title: 'Perlengkapan Khusus untuk Anak Difabel',
-          description: 'Kami menggalang dana untuk membeli kursi roda dan perlengkapan belajar khusus anak-anak difabel.',
+          type: 'Panti Asuhan',
+          title: 'Bantu Biaya Sekolah Anak Panti Asuhan Al-Hikmah',
+          description: 'Anak-anak panti asuhan Al-Hikmah membutuhkan bantuan biaya pendidikan untuk semester baru.',
           percent: '50%',
           goal: '15',
           raised: 7500000,
@@ -90,14 +95,136 @@ const Donasi = () => {
         raised: 10000000,
       },
     ]);
+
+  const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
+  {
+    title: 'Untuk pendidikan panti asuhan A',
+    type: 'Panti Asuhan',
+    description: 'Untuk menunjang agar nyaman saat melaksanakan kegiatan menuntut ilmu maka perlu bebrapa perlengkapan pokok bersekolah. Bantuan dari anda semua adalah salah satu bentuk kepedulian dengan pendidikan di Indonesia untuk mencapai Indonesia emas.',
+    items: [
+      { title: 'Pakaian', progress: '50%' },
+      { title: 'Makanan', progress: '30%' },
+      { title: 'Perlengkapan', progress: '20%' },
+    ]
+  },
+  {
+    title: 'Untuk pendidikan panti asuhan B',
+    type: 'Panti Asuhan',
+    description: 'Untuk menunjang agar nyaman saat melaksanakan kegiatan menuntut ilmu maka perlu pengingkatan ketersediaan barang maupun pangan.',
+    items: [
+      { title: 'Pakaian', progress: '50%' },
+      { title: 'Makanan', progress: '30%' },
+      { title: 'Perlengkapan', progress: '20%' },
+    ]
+  },
+  {
+    title: 'Kebutuhan pokok panti asuhan C',
+    type: 'Panti Asuhan',
+    description: 'Kebutuhan pokok seperti makanan, pakaian, dan perlengkapan lainnya sangat penting bagi keseharian anak-anak di panti ini.',
+    items: [
+      { title: 'Pakaian', progress: '40%' },
+      { title: 'Makanan', progress: '60%' },
+      { title: 'Perlengkapan', progress: '25%' },
+    ]
+  },
+  {
+    title: 'Peningkatan sarana belajar panti D',
+    type: 'Panti Asuhan',
+    description: 'Untuk meningkatkan sarana belajar, dibutuhkan buku, alat tulis, dan perlengkapan kelas lainnya.',
+    items: [
+      { title: 'Pakaian', progress: '20%' },
+      { title: 'Makanan', progress: '45%' },
+      { title: 'Perlengkapan', progress: '35%' },
+    ]
+  },
+  {
+    title: 'Pemenuhan gizi anak-anak panti E',
+    type: 'Panti Asuhan',
+    description: 'Pemenuhan gizi menjadi fokus utama di panti ini demi mendukung pertumbuhan anak-anak.',
+    items: [
+      { title: 'Pakaian', progress: '10%' },
+      { title: 'Makanan', progress: '70%' },
+      { title: 'Perlengkapan', progress: '30%' },
+    ]
+  }
+]);
+
+
+const [dataDonasiBarangBencana, setDataDonasiBarangBencana] = useState([
+  {
+    title: 'Bantuan darurat untuk korban banjir di Jawa Tengah',
+    type: 'Bencana Alam',
+    description: 'Banjir besar menyebabkan banyak warga kehilangan rumah dan harta benda. Dibutuhkan bantuan darurat berupa makanan, pakaian, dan kebutuhan pokok lainnya.',
+    items: [
+      { title: 'Pakaian', progress: '60%' },
+      { title: 'Makanan', progress: '80%' },
+      { title: 'Perlengkapan', progress: '50%' },
+    ]
+  },
+  {
+    title: 'Pemulihan pasca gempa di Sulawesi Barat',
+    type: 'Bencana Alam',
+    description: 'Gempa bumi menyebabkan banyak kerusakan. Bantuan dibutuhkan untuk membangun kembali serta menyediakan perlengkapan hidup sementara.',
+    items: [
+      { title: 'Pakaian', progress: '30%' },
+      { title: 'Makanan', progress: '55%' },
+      { title: 'Perlengkapan', progress: '40%' },
+    ]
+  },
+  {
+    title: 'Bantuan untuk korban longsor di Sumatera Barat',
+    type: 'Bencana Alam',
+    description: 'Longsor menutup akses ke beberapa desa. Bantuan logistik sangat dibutuhkan untuk memenuhi kebutuhan dasar warga.',
+    items: [
+      { title: 'Pakaian', progress: '25%' },
+      { title: 'Makanan', progress: '65%' },
+      { title: 'Perlengkapan', progress: '35%' },
+    ]
+  }
+]);
+
+     const page = [
+      {
+        title : "Donasi Uang",
+        component :     <DonasiUang dataDonasiPanti={dataDonasiPanti} dataDonasiBencana={dataDonasiBencana}/>,
+      },{
+        title : "Donasi Barang",
+        component :       <DonasiBarang dataDonasiBarangBencana={dataDonasiBarangBencana} dataDonasiBarangPanti={dataDonasiBarangPanti} />
+      }
+  
+    
+
+  ]
     
       
     return (
         <div>
         <Navbar />
-        <Container className={'mt-10 md:mt-20'}>
-          <h1>Donasi</h1>
-          <HorizontalScroll data={dataDonasiPanti} />
+        <Container className={'mt-20 md:mt-20'}>
+          <div className="p-3 bg-secondary w-11/12 mx-auto h-auto rounded-2xl">
+            <p className="font-secondary my-2 text-xl md:text-2xl text-primary text-center">SILAHKAN </p>
+            <h4 className="my-2 text-center text-xl md:text-2xl text-primary">Pilih Donasi Anda</h4>
+            <div className="mx-auto flex justify-center gap-2">
+              {
+                page.map((item, index) => (
+                  <button onClick={() => setPageActive(index)} className={`md:p-3 p-2 md:rounded-xl rounded-lg hover:bg-accent hover:text-white font-secondary  ${index === pageActive ? 'bg-primary text-white' : 'bg-white text-primary'}`}>
+                    <p>{item.title}</p>
+                  </button>
+                ))
+                    
+              }
+              
+            </div>
+            <div>
+              <p className="text-center text-primary text-sm md:text-base my-3">Tumbuhkan rasa empati anda dengan memberikan mereka sedikit bantuan yang anda milki </p>
+            </div>
+          </div>
+          <div className="w-11/12 mx-auto">
+          {page[pageActive].component}
+          </div>
+
+ 
+         
             <Footer />
             </Container>
             </div>
@@ -105,4 +232,30 @@ const Donasi = () => {
 
 }
 
+const DonasiUang = ({dataDonasiPanti, dataDonasiBencana}) => {
+  return(
+    <div>
+      <h3 className="my-2 font-semibold text-xl md:text-2xl text-primary">Panti Asuhan</h3>
+     <HorizontalScroll data={dataDonasiPanti} />
+      <h3 className="my-2 font-semibold text-xl md:text-2xl text-primary">Bencana Alam</h3>
+     <HorizontalScroll data={dataDonasiBencana} />
+    </div>
+  )
+}
+
+const DonasiBarang = ({dataDonasiBarangBencana, dataDonasiBarangPanti}) => {
+  
+  return(
+    <div>
+
+     <h3 className="my-2 font-semibold text-xl md:text-2xl text-primary">Panti Asuhan</h3>
+     <HorizontalScrollDonasiBarang data={dataDonasiBarangPanti} />
+    
+     <h3 className="my-2 font-semibold text-xl md:text-2xl text-primary">Bencana Alam</h3>
+     <HorizontalScrollDonasiBarang data={dataDonasiBarangBencana} />
+    
+    </div>
+
+  )
+}
 export default Donasi;

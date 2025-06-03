@@ -2,11 +2,11 @@ import React from "react";
 import Logo1 from "../assets/logo3.png"
 const Footer = ({className}) => {
   return (
-    <footer className={`${className} bg-primary text-white  rounded-t-xl`}>
+    <footer className={`${className} pb-20 md:pb-0 bg-primary font-primary text-white  rounded-t-xl`}>
     
       <div className="flex flex-col md:flex-row justify-between rounded-2xl items-center md:items-center p-6 md:p-8  md:gap-16">
         {/* Logo & Divider */}
-        <div className="text-center  items-center md:items-center w-full md:w-1/4">
+        <div className="text-center   items-center md:items-center w-2/4 md:w-1/4">
           <img src={Logo1} alt="Senyum Kebaikan" className="md:mb-2 mx-auto   md:scale-150" />
         
         </div>

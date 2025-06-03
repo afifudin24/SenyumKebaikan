@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeftLong } from "@fortawesome/free-solid-svg-icons";
 import home4 from '../assets/home4.png'
 import { Link } from "react-router-dom";
-const DataDonasi = ({type, title, description, percent, raised, goal}) => {
+const DataDetailDonasi = ({type, title, description, percent, raised, goal}) => {
     const [showImg, setShowImg] = useState(false);
   
     const toggleImage = () => {
@@ -15,14 +15,14 @@ const DataDonasi = ({type, title, description, percent, raised, goal}) => {
     
   
     <div className="w-full h-full">
-        <div className='mx-4 my-5 hidden bg-white text-primary md:block relative   shadow-cool gap-4 overflow-hidden rounded-2xl '>
+        <div className='mx-4 my-5 hidden bg-primary text-white md:block relative   shadow-cool gap-4 overflow-hidden rounded-2xl '>
                   {/* Kiri: Konten */}
                           <div className=' p-6 w-full flex flex-col justify-between '>
                               <div className='mb-4 w-7/12'>
                                   
                               
                     <div className='mb-4'>
-                      <p className='text-xs tracking-wider uppercase text-primary'>
+                      <p className='text-xs tracking-wider uppercase text-white'>
                         {type}
                       </p>
                       <h2 className='text-xl md:text-3xl font-bold mt-3 leading-tight'>
@@ -44,7 +44,7 @@ const DataDonasi = ({type, title, description, percent, raised, goal}) => {
               {percent} 
             </div>
           </div>
-          <div className="flex justify-between text-primary text-xs font-sans mt-2 mb-3 px-1">
+          <div className="flex justify-between text-white text-xs font-sans mt-2 mb-3 px-1">
             <span>Rp {raised}</span>
             <span>{goal} hari lagi</span>
           </div>
@@ -52,7 +52,7 @@ const DataDonasi = ({type, title, description, percent, raised, goal}) => {
  
         
                     {/* Deskripsi */}
-                    <p className='text-sm text-primary mb-6 font-secondary'>
+                    <p className='text-sm text-white mb-6 font-secondary'>
                       {description}
                     </p>
         
@@ -61,11 +61,9 @@ const DataDonasi = ({type, title, description, percent, raised, goal}) => {
                       {/* <button className='bg-primary text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-100 hover:text-primary transition'>
                         Donasi sekarang <FontAwesomeIcon icon={ faArrowUpRightDots} />
                       </button> */}
-                       <Link to='/donasi/detaildonasi'>
                       <button className='border border-white bg-primary text-white px-4 py-2 rounded-full text-sm hover:bg-gray-100 hover:text-primary transition'>
                         Selengkapnya <FontAwesomeIcon icon={ faArrowUpRightDots} />
                       </button>
-                      </Link>
                     </div>
                               </div>
                               
@@ -118,11 +116,9 @@ const DataDonasi = ({type, title, description, percent, raised, goal}) => {
                                     <button className='bg-white text-primary px-4 py-2 rounded-full text-xs md:text-sm font-medium hover:bg-gray-100 transition'>
                                       Donasi sekarang <FontAwesomeIcon icon={ faArrowUpRightDots} />
                                     </button>
-                                    <Link to='/donasi/detaildonasi'>
                                     <button className='border border-white px-4 py-2 rounded-full text-xs md:text-sm hover:bg-white hover:text-primary transition'>
                                       Selengkapnya <FontAwesomeIcon icon={ faArrowUpRightDots} />
                                     </button>
-                                    </Link>
                                     <FontAwesomeIcon className='absolute z-50 top-2 right-2 text-white' onClick={toggleImage} icon={faLeftLong} />
                     </div>
         
@@ -139,4 +135,5 @@ const DataDonasi = ({type, title, description, percent, raised, goal}) => {
     </div>
     )
 }   
-export default DataDonasi;
+
+export default DataDetailDonasi;

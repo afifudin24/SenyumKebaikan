@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import DataDonasi from './DataDonasi';
+import DataDonasiBarang from './DataDonasiBarang';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
@@ -79,7 +79,7 @@ function PrevArrow(props) {
   );
 }
 
-const HorizontalScroll = ({data}) => {
+const HorizontalScrollDonasiBarang = ({data}) => {
 
 
 
@@ -89,7 +89,7 @@ const HorizontalScroll = ({data}) => {
     <Slider {...settings}>
       {data.map((item, i) => (
        <div className='w-full'>
-         <DataDonasi key={i} type={item.type} title={item.title} description={item.description} percent={item.percent} raised={item.raised} goal={item.goal} />
+         <DataDonasiBarang key={i} type={item.type} title={item.title} description={item.description} items={item.items}/>
           
        </div>
       ))}
@@ -98,4 +98,4 @@ const HorizontalScroll = ({data}) => {
   );
 };
 
-export default HorizontalScroll;
+export default HorizontalScrollDonasiBarang;

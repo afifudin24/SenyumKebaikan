@@ -9,6 +9,7 @@
     --color-primary: #3D5656;
     --color-secondary: #cff5de;
     --color-accent: #68B984;
+    --color-tertiary: #DADADA;
 
     --font-primary: 'Roboto', sans-serif;
     --font-secondary: 'Josefin Sans', sans-serif;
@@ -22,3 +23,22 @@
   .shadow-up{
     box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); /* Shadow ke atas */
   }
+
+   .pointer-down::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid #C6F6D5;
+      width: 0;
+      height: 0;
+    }
+
+     .shadow-cool {
+      box-shadow:
+        0 0 10px 2px rgba(0, 0, 0, 0.2),
+        0 0 15px 4px rgba(0, 0, 0, 0.15);
+    }

@@ -9,7 +9,20 @@ const Navbar = () => {
     const location = useLocation();
     const currentPath = location.pathname;
   
-    const isActive = (path) => currentPath === path;
+  const isActive = (path) => {
+     if (path === '/') {
+    return currentPath === '/';
+  }
+  const map = {
+    '/donasi': ['/donasi', '/detaildonasi'],
+    '/pantau-donasi': ['/pantau-donasi'],
+    '/cari-kebutuhan': ['/cari-kebutuhan'],
+    '/': ['/'],
+  };
+
+  return map[path]?.some(p => currentPath.startsWith(p));
+};
+
     const navItems = [
         { label: 'Home', path: '/', icon: faHome },
         { label: 'Donasi', path: '/donasi', icon: faHandHoldingHeart },
@@ -61,7 +74,7 @@ const Navbar = () => {
 
         <nav className='fixed bottom-0 left-0 right-0 z-70 rounded-t-xl px-4 py-4 shadow-up md:hidden bg-white'>
           <div className='flex items-center justify-between'>
-            <ul className="flex gap-2 w-full text-primary justify-between text-sm font-secondary items-center">
+            <ul className="flex gap-3 w-11/12 text-primary  mx-auto justify-between text-sm font-secondary items-center">
               {navItems.map((item) => (
                 <li key={item.path}>
                   <Link
