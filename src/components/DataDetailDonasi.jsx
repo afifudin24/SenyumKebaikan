@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeftLong } from "@fortawesome/free-solid-svg-icons";
 import home4 from '../assets/home4.png'
 import { Link } from "react-router-dom";
-const DataDetailDonasi = ({type, title, description, percent, raised, goal}) => {
+const DataDetailDonasi = ({type, title, description, percent, raised, goal, isAdd, setIsAdd}) => {
     const [showImg, setShowImg] = useState(false);
   
     const toggleImage = () => {
@@ -58,11 +58,11 @@ const DataDetailDonasi = ({type, title, description, percent, raised, goal}) => 
         
                     {/* Tombol */}
                     <div className='flex gap-4 justify-start'>
-                      {/* <button className='bg-primary text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-100 hover:text-primary transition'>
+                      <button onClick={() => setIsAdd(true)} className='bg-white text-primary px-4 py-2 rounded-full text-sm font-medium hover:bg-secondary hover:text-primary transition'>
                         Donasi sekarang <FontAwesomeIcon icon={ faArrowUpRightDots} />
-                      </button> */}
+                      </button>
                       <button className='border border-white bg-primary text-white px-4 py-2 rounded-full text-sm hover:bg-gray-100 hover:text-primary transition'>
-                        Selengkapnya <FontAwesomeIcon icon={ faArrowUpRightDots} />
+                      Lihat Transaksi Blockchain<FontAwesomeIcon icon={ faArrowUpRightDots} />
                       </button>
                     </div>
                               </div>
@@ -113,7 +113,7 @@ const DataDetailDonasi = ({type, title, description, percent, raised, goal}) => 
                       
                                   {/* Tombol */}
                                   <div className='flex gap-4 justify-center'>
-                                    <button className='bg-white text-primary px-4 py-2 rounded-full text-xs md:text-sm font-medium hover:bg-gray-100 transition'>
+                                    <button onClick={() => setIsAdd(true)} className='bg-white text-primary px-4 py-2 rounded-full text-xs md:text-sm font-medium hover:bg-gray-100 transition'>
                                       Donasi sekarang <FontAwesomeIcon icon={ faArrowUpRightDots} />
                                     </button>
                                     <button className='border border-white px-4 py-2 rounded-full text-xs md:text-sm hover:bg-white hover:text-primary transition'>
@@ -135,5 +135,4 @@ const DataDetailDonasi = ({type, title, description, percent, raised, goal}) => 
     </div>
     )
 }   
-
 export default DataDetailDonasi;
