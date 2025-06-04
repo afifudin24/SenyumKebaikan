@@ -1,13 +1,17 @@
 import React from 'react';
+import { useState } from 'react';
 import logo2 from "../assets/logo2.png"
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartLine, faCircle, faHome, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faChartLine, faCircle, faHome, faSearch, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faHandHoldingHeart } from '@fortawesome/free-solid-svg-icons/faHandHoldingHeart';
 const Navbar = () => {
     const location = useLocation();
-    const currentPath = location.pathname;
+  const currentPath = location.pathname;
+  const [isLogin, setIsLogin] = useState(() => {
+    return localStorage.getItem("isLogin") === "true";
+  });
   
   const isActive = (path) => {
      if (path === '/') {
@@ -62,13 +66,25 @@ const Navbar = () => {
     </ul>
 
       {/* Aksi */}
-                <div className="flex font-secondary  gap-4 items-center">
-                    <Link className='hidden md:block' to={"/register"}>
+          <div className="">
+            {
+              !isLogin ? (
+                <div className='flex font-secondary  gap-4 items-center'>
+                      <Link className='hidden md:block' to={"/register"}>
                     <button className="text-primary hover:text-black text-sm">Daftar</button>
                     </Link>
                     <Link to="/login">
         <button className="bg-primary cursor-pointer text-white px-4 py-1.5 rounded-full text-sm">Log in</button>
                     </Link>
+                </div>
+              ) : (
+                  <div className='flex font-secondary text-primary text-2xl  gap-5 items-center'>
+                    <FontAwesomeIcon icon={faBell} />
+                    <FontAwesomeIcon icon={faUserCircle} />
+                  </div>
+              )
+            }
+                  
       </div>
             </nav>
 

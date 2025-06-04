@@ -4,12 +4,14 @@ import Container from "../../components/Container";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import baju from "../../assets/baju.png"
 import { useLocation } from "react-router-dom";
 import Donasi from "../../assets/donasi/gambar.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightDots } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightDots, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { faFileCirclePlus } from "@fortawesome/free-solid-svg-icons/faFileCirclePlus";
 import { faCamera } from "@fortawesome/free-solid-svg-icons/faCamera";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 const DetailDonasiBarang = () => {
@@ -17,8 +19,13 @@ const DetailDonasiBarang = () => {
     const data = location.state;
   console.log(data)
   const [isAdd, setIsAdd] = useState(true);
-  const [showModal,setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+  const [showModalStatus, setShowModalStatus] = useState(false);
+  const [showModalDetailDonasi, setShowDetailDonasi] = useState(true);
   const [activeTab, setActiveTab] = useState('kabar');
+  const handleShowModalStatus = () => {
+    setShowModalStatus(true);
+  }
   const [dataDonasi, setDataDonasi] = useState([
     {
       nama: 'Budi Santoso',
@@ -120,7 +127,7 @@ const DetailDonasiBarang = () => {
 
           {
             isAdd ? (
-              <AddDonasi />
+              <AddDonasi modal={showModal} setModal={setShowModal} />
             ) : (
               <div className="mt-10">
               <nav className="flex justify-center gap-5  mx-auto text-sm text-gray-600 mb-6 cursor-pointer">
@@ -191,7 +198,9 @@ const DetailDonasiBarang = () => {
               </div>
             )
           }
-       
+          <ModalSuccess modal={showModal} setModal={setShowModal}  setShowModalStatus={setShowModalStatus}/>
+            <ModalStatus setShowModalStatus={setShowModalStatus} showModalStatus={showModalStatus} setShowDetailDonasi={setShowDetailDonasi} />
+            <ModalDetailDonasi setShowDetailDonasi={setShowDetailDonasi} showDetailDonasi={showModalDetailDonasi} />
             </Container>
             <Footer />
         </div>
@@ -294,11 +303,13 @@ const FormBank = () => {
       <button className="bg-accent text-white p-2 rounded-lg mt-4 font-secondary w-full">
         Donasi Sekarang
       </button>
+
+    
     </div>
   )
 }
 
-const AddDonasi = () => {
+const AddDonasi = ({modal, setModal}) => {
   const [selectedMetodeBayar, setSelectedMetodeBayar] = useState(0);
   const [preview, setPreview] = useState(null);
   const [file, setFile] = useState(null);
@@ -334,7 +345,7 @@ const AddDonasi = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     // Validasi input
     if (
       !nama ||
@@ -350,7 +361,7 @@ const AddDonasi = () => {
       toast.error("Pastikan semua data terisi");
       return;
     }
-
+  
     const formData = new FormData();
     formData.append("nama", nama);
     formData.append("email", email);
@@ -364,9 +375,38 @@ const AddDonasi = () => {
     formData.append("tanggal", tanggal);
     formData.append("waktu", waktu);
     formData.append("blockchain", setujuBlockchain);
-
-    // Kirim data
-    toast.success("Data berhasil dikirim! (simulasi)");
+  
+    // Buat data notifikasi
+    const newNotification = {
+      title: "Donasi Barang Berhasil",
+      type: "donasibarang",
+      data: {
+        nama,
+        email,
+        telp,
+        alamat,
+        kategori,
+        jumlah,
+        kondisi,
+        metode,
+        tanggal,
+        waktu,
+        setujuBlockchain,
+      },
+    };
+  
+    // Ambil notifikasi yang sudah ada
+    const existingNotifications = JSON.parse(localStorage.getItem("notifications")) || [];
+  
+    // Tambahkan notifikasi baru
+    existingNotifications.push(newNotification);
+  
+    // Simpan kembali ke localStorage
+    localStorage.setItem("notifications", JSON.stringify(existingNotifications));
+  
+    // Tampilkan toast dan buka modal
+    toast.success("Donasi Berhasil");
+    setModal(true);
   };
 
   return (
@@ -527,7 +567,7 @@ const AddDonasi = () => {
   );
 };
 
-const ModalSuccess = ({modal, setModal}) => {
+const ModalSuccess = ({modal, setModal, setShowModalStatus}) => {
   return (
    <div
   className={`rounded-xl mt-4 mb-4 text-center  ${
@@ -537,24 +577,19 @@ const ModalSuccess = ({modal, setModal}) => {
 
       <div className="flex relative flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 w-full bg-secondary ">
         <FontAwesomeIcon icon={faCheckCircle} className="text-5xl  text-accent" />
-      <h4 className="font-semibold my-2 text-primary">Donasi Berhasil!</h4>
-      <p className="text-sm">Donasi Anda berhasil diverifikasi & dicatat di blockchain</p>
+      <h4 className="font-semibold my-2 text-primary">Donasi Berhasil Diproses!</h4>
+      <p className="text-sm">Donasi anda telah diterima</p>
         <FontAwesomeIcon onClick={() => setModal(false)} className="absolute top-2 right-2" icon={faTimes} />
       </div>
-          <div className="flex flex-row justify-center gap-5 mt-5">
-          <div className="flex flex-col gap-1">
-              <h4 className="font-semibold">Rp100.000/0,005 ETH</h4>
-              <p>21-02-2024</p>
-              <p>0x9a29c4c</p>
-          </div>
-          <div>
+          <div className="justify-center text-center gap-5 mt-5">
+        <p>ID Donasi Barang</p>
+        <p>3FA59D64</p>
+        <button className="p-1 text-center my-3 bg-secondary text-primary">
+          Lihat di Etherscan
+        </button>
 
-          </div>
+        <p className="mt-1 mb-4 text-primary text-sm md:text-base">Status : Menunggu Penjemputan</p>
 
-          <div className="flex flex-col gap-1">
-            <h4> Bantuan Banjir Jakarta</h4>
-            <button className="rounded-lg bg-accent hover:bg-secondary text-xs md:text-sm text-white">Lihat di Etherscan</button>
-          </div>
       </div>
 
                <div className="p-5 w-8/12 mx-auto">
@@ -578,12 +613,13 @@ const ModalSuccess = ({modal, setModal}) => {
 
         </button>
         <div className="flex gap-2 mt-3 mb-3 justify-center flex-row w-9/12 mx-auto">
-            <button className="bg-primary hover:bg-secondary hover:text-primary text-white rounded-lg py-2 px-3 text-xs md:text-sm">
-              Kembali ke Campaign
+        <button onClick={() => {
+          setModal(false)
+          setShowModalStatus(true)
+            }} className="bg-primary hover:bg-secondary hover:text-primary text-white rounded-lg py-2 px-3 text-xs md:text-sm">
+           Lihat Status Donasi
             </button>
-            <button className="bg-primary hover:bg-secondary hover:text-primary text-white rounded-lg py-2 px-3 text-xs md:text-sm">
-              Dashboard Donasi Saya
-            </button>
+           
         </div>
 
         <div>
@@ -591,6 +627,133 @@ const ModalSuccess = ({modal, setModal}) => {
             Terima kash, Naufal! Dukungan anda sangat berarti bagi para penyitas 
           </p>
         </div>
+  
+    </div>
+  )
+}
+
+const ModalStatus = ({showModalStatus, setShowModalStatus, setShowDetailDonasi}) => {
+  return (
+   <div
+  className={`rounded-xl mt-4 mb-4 text-center  ${
+    showModalStatus ? "w-auto opacity-100 h-auto scale-100 " : "w-0 h-0 opacity-0 scale-95 "
+  } md:w-4/12  duration-300 transition-all top-1/2 fixed left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto overflow-hidden bg-white text-primary border border-gray-400`}
+>
+
+      <div className="flex relative flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 w-full bg-secondary ">
+       
+      <h4 className="font-semibold my-2 text-primary">Status Donasi Barang</h4>
+      <p className="text-sm">Situasi terupdate untuk barang anda</p>
+        <FontAwesomeIcon onClick={() => setShowModalStatus(false)} className="absolute top-2 right-2" icon={faTimes} />
+      </div>
+      <div className="mx-auto w-11/12 md:w-8/12 flex-row flex  justify-center text-start gap-6 mt-5">
+        {/* left */}
+        <div className="w-1/2 flex flex-col gap-2">
+          <p>ID Donasi</p>
+          <p>Nama Barang</p>
+          <p>Tgl & Waktu Penjemputan</p>
+          <p>Status Saat Ini</p>
+        </div>
+        {/* right */}
+        <div className="w-1/2 flex flex-col gap-2">
+          <p>3FA59D64</p>
+          <p>Pakaian anak - anak</p>
+          <p>21-02-2024</p>
+          <p>Menunggu Penjemputan</p>
+        </div>
+      
+
+      </div>
+
+      <button onClick={() => {
+        setShowDetailDonasi(true)
+        setShowModalStatus(false)
+      } 
+        
+      }
+      className="p-2 my-4 rounded-md hover:bg-primary hover:text-white duration-100 transition-all font-secondary bg-secondary mx-auto text-center text-primary">
+        Detail Donasi
+          </button>
+       
+        
+  
+    </div>
+  )
+}
+
+const ModalDetailDonasi = ({showDetailDonasi, setShowDetailDonasi}) => {
+  return (
+   <div
+  className={`rounded-xl mt-4 mb-4 text-center  ${
+    showDetailDonasi ? "w-auto opacity-100 h-auto scale-100 " : "w-0 h-0 opacity-0 scale-95 "
+  } md:w-4/12  duration-300 transition-all top-1/2 fixed left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto overflow-hidden bg-white text-primary border border-gray-400`}
+>
+
+      <div className="flex relative flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 w-full bg-secondary ">
+        <FontAwesomeIcon icon={faCheckCircle} className="text-5xl  text-accent"  />
+      <h4 className="font-semibold my-2 text-primary">Detail Donasi Barang</h4>
+      <p className="text-sm">Situasi terupdate untuk barang anda</p>
+        <FontAwesomeIcon onClick={() => setShowDetailDonasi(false)} className="absolute top-2 right-2" icon={faTimes} />
+      </div>
+      <div className="mx-auto w-11/12 md:w-8/12 flex-row flex  justify-center text-start gap-6 mt-5">
+        {/* left */}
+        <table class="text-sm text-left text-gray-700 border border-gray-200 rounded-lg w-full max-w-md">
+  <tbody>
+    <tr class="border-b">
+      <th class="py-2 px-4 font-medium w-1/3">Status</th>
+      <td class="py-2 px-4 flex items-center gap-2">
+        <span class="h-3 w-3 bg-green-400 rounded-full inline-block"></span>
+        Menunggu Penjemputan
+      </td>
+    </tr>
+    <tr class="border-b">
+      <th class="py-2 px-4 font-medium">ID Donasi</th>
+      <td class="py-2 px-4">3FA59D64</td>
+    </tr>
+    <tr class="border-b">
+      <th class="py-2 px-4 font-medium">Jumlah</th>
+      <td class="py-2 px-4">20pcs</td>
+    </tr>
+    <tr class="border-b">
+      <th class="py-2 px-4 font-medium">Deskripsi</th>
+      <td class="py-2 px-4">Pakaian anak umur 7-8 layak pakai</td>
+    </tr>
+    <tr class="border-b">
+      <th class="py-2 px-4 font-medium">Riwayat Transaksi</th>
+      <td class="py-2 px-4">
+        19 Jan 2025, 14.00 WIB<br />
+        Akan dijemput
+      </td>
+    </tr>
+    <tr class="border-b">
+      <th class="py-2 px-4 font-medium">Lokasi Penjemputan</th>
+      <td class="py-2 px-4">Jln. Nopel Gallagers</td>
+    </tr>
+    <tr class="border-b">
+      <th class="py-2 px-4 font-medium">Tgl & Waktu Penjemputan</th>
+      <td class="py-2 px-4">19 Januari 2025, 14.00 WIB</td>
+    </tr>
+    <tr class="border-b">
+      <th class="py-2 px-4 font-medium">Foto Barang</th>
+      <td class="py-2 px-4">
+        <img src={baju} alt="Foto Barang" class="w-24 h-auto rounded shadow" />
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="py-3 px-4 text-center">
+        <a href="#" class="inline-block px-4 py-2 text-sm bg-green-100 text-green-600 rounded hover:bg-green-200 transition">
+          Lihat di Etherscan
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+      
+
+      </div>
+
+       
+        
   
     </div>
   )
