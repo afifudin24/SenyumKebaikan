@@ -21,7 +21,7 @@ const DetailDonasiBarang = () => {
   const [isAdd, setIsAdd] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [showModalStatus, setShowModalStatus] = useState(false);
-  const [showModalDetailDonasi, setShowDetailDonasi] = useState(true);
+  const [showModalDetailDonasi, setShowDetailDonasi] = useState(false);
   const [activeTab, setActiveTab] = useState('kabar');
   const handleShowModalStatus = () => {
     setShowModalStatus(true);
@@ -686,7 +686,7 @@ const ModalDetailDonasi = ({showDetailDonasi, setShowDetailDonasi}) => {
    <div
   className={`rounded-xl mt-4 mb-4 text-center  ${
     showDetailDonasi ? "w-auto opacity-100 h-auto scale-100 " : "w-0 h-0 opacity-0 scale-95 "
-  } md:w-4/12  duration-300 transition-all top-1/2 fixed left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto overflow-hidden bg-white text-primary border border-gray-400`}
+  } md:w-6/12  duration-300 transition-all z-999 top-1/2 fixed left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto overflow-hidden bg-white text-primary border border-gray-400`}
 >
 
       <div className="flex relative flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 w-full bg-secondary ">
@@ -697,57 +697,60 @@ const ModalDetailDonasi = ({showDetailDonasi, setShowDetailDonasi}) => {
       </div>
       <div className="mx-auto w-11/12 md:w-8/12 flex-row flex  justify-center text-start gap-6 mt-5">
         {/* left */}
-        <table class="text-sm text-left text-gray-700 border border-gray-200 rounded-lg w-full max-w-md">
-  <tbody>
-    <tr class="border-b">
-      <th class="py-2 px-4 font-medium w-1/3">Status</th>
-      <td class="py-2 px-4 flex items-center gap-2">
-        <span class="h-3 w-3 bg-green-400 rounded-full inline-block"></span>
-        Menunggu Penjemputan
-      </td>
-    </tr>
-    <tr class="border-b">
-      <th class="py-2 px-4 font-medium">ID Donasi</th>
-      <td class="py-2 px-4">3FA59D64</td>
-    </tr>
-    <tr class="border-b">
-      <th class="py-2 px-4 font-medium">Jumlah</th>
-      <td class="py-2 px-4">20pcs</td>
-    </tr>
-    <tr class="border-b">
-      <th class="py-2 px-4 font-medium">Deskripsi</th>
-      <td class="py-2 px-4">Pakaian anak umur 7-8 layak pakai</td>
-    </tr>
-    <tr class="border-b">
-      <th class="py-2 px-4 font-medium">Riwayat Transaksi</th>
-      <td class="py-2 px-4">
-        19 Jan 2025, 14.00 WIB<br />
-        Akan dijemput
-      </td>
-    </tr>
-    <tr class="border-b">
-      <th class="py-2 px-4 font-medium">Lokasi Penjemputan</th>
-      <td class="py-2 px-4">Jln. Nopel Gallagers</td>
-    </tr>
-    <tr class="border-b">
-      <th class="py-2 px-4 font-medium">Tgl & Waktu Penjemputan</th>
-      <td class="py-2 px-4">19 Januari 2025, 14.00 WIB</td>
-    </tr>
-    <tr class="border-b">
-      <th class="py-2 px-4 font-medium">Foto Barang</th>
-      <td class="py-2 px-4">
-        <img src={baju} alt="Foto Barang" class="w-24 h-auto rounded shadow" />
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" class="py-3 px-4 text-center">
-        <a href="#" class="inline-block px-4 py-2 text-sm bg-green-100 text-green-600 rounded hover:bg-green-200 transition">
-          Lihat di Etherscan
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+   <div class="overflow-y-auto max-h-[400px] border border-gray-200 rounded-lg w-full max-w-md">
+  <table class="text-sm text-left text-gray-700 w-full">
+    <tbody>
+      <tr class="border-b">
+        <th class="py-2 px-4 font-medium w-1/3">Status</th>
+        <td class="py-2 px-4 flex items-center gap-2">
+          <span class="h-3 w-3 bg-green-400 rounded-full inline-block"></span>
+          Menunggu Penjemputan
+        </td>
+      </tr>
+      <tr class="border-b">
+        <th class="py-2 px-4 font-medium">ID Donasi</th>
+        <td class="py-2 px-4">3FA59D64</td>
+      </tr>
+      <tr class="border-b">
+        <th class="py-2 px-4 font-medium">Jumlah</th>
+        <td class="py-2 px-4">20pcs</td>
+      </tr>
+      <tr class="border-b">
+        <th class="py-2 px-4 font-medium">Deskripsi</th>
+        <td class="py-2 px-4">Pakaian anak umur 7-8 layak pakai</td>
+      </tr>
+      <tr class="border-b">
+        <th class="py-2 px-4 font-medium">Riwayat Transaksi</th>
+        <td class="py-2 px-4">
+          19 Jan 2025, 14.00 WIB<br />
+          Akan dijemput
+        </td>
+      </tr>
+      <tr class="border-b">
+        <th class="py-2 px-4 font-medium">Lokasi Penjemputan</th>
+        <td class="py-2 px-4">Jln. Nopel Gallagers</td>
+      </tr>
+      <tr class="border-b">
+        <th class="py-2 px-4 font-medium">Tgl & Waktu Penjemputan</th>
+        <td class="py-2 px-4">19 Januari 2025, 14.00 WIB</td>
+      </tr>
+      <tr class="border-b">
+        <th class="py-2 px-4 font-medium">Foto Barang</th>
+        <td class="py-2 px-4">
+          <img src={baju} alt="Foto Barang" class="w-20 h-auto rounded shadow" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="py-3 px-4 text-center">
+          <a href="#" class="inline-block px-4 py-2 text-sm bg-green-100 text-green-600 rounded hover:bg-green-200 transition">
+            Lihat di Etherscan
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
       
 
       </div>

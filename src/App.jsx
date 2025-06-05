@@ -10,6 +10,8 @@ import Register from './pages/Register';
 import Donasi from './pages/guest/Donasi';
 import DetailDonasi from './pages/guest/DetailDonasi';
 import DetailDonasiBarang from './pages/guest/DetailDonasiBarang';
+import PantauDonasi from './pages/guest/PantauDonasi';
+import RingkasanDonasi from './pages/guest/RingkasanDonasi';
 function App() {
   return (
     <div className="font-primary">
@@ -33,6 +35,10 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/createnewpassword" element={<CreateNewPassword />} />
+
+        {/* pantau donasi */}
+        <Route path="/pantaudonasi" element={<PantauDonasi />} />
+        <Route path='/pantaudonasi/ringkasandonasi' element={<RingkasanDonasi />} />
       </Routes>
     </div>
   );
