@@ -12,6 +12,9 @@ import DetailDonasi from './pages/guest/DetailDonasi';
 import DetailDonasiBarang from './pages/guest/DetailDonasiBarang';
 import PantauDonasi from './pages/guest/PantauDonasi';
 import RingkasanDonasi from './pages/guest/RingkasanDonasi';
+import CariKebutuhan from './pages/guest/CariKebutuhan';
+import PengajuanKebutuhan from './pages/guest/PengajuanKebutuhan';
+import Dashboard from './pages/DashboardAdmin/Dashboard';
 function App() {
   return (
     <div className="font-primary">
@@ -39,6 +42,13 @@ function App() {
         {/* pantau donasi */}
         <Route path="/pantaudonasi" element={<PantauDonasi />} />
         <Route path='/pantaudonasi/ringkasandonasi' element={<RingkasanDonasi />} />
+
+        {/* carikebutuhan */}
+        <Route path="/cari-kebutuhan" element={<CariKebutuhan />} />
+        <Route path="/cari-kebutuhan/pengajuan" element={<PengajuanKebutuhan />} />
+
+        {/* dashboard admin */}
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </div>
   );

@@ -15,14 +15,22 @@ const Navbar = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [showMenuProfile, setShowMenuProfile] = useState(false);
   const [showModalDetail, setShowModalDetail] = useState(false);
+  const [showModalPengajuan, setShowModalPengajuan] = useState(false);
   const [dataSelected, setDataSelected] = useState(null);
   const signOut = () => {
     localStorage.removeItem("isLogin");
     localStorage.removeItem("user");
     window.location.href = "/login";
   }
+  const toDashboard = () => {
+    window.location.href = "/dashboard";
+  }
   const clickNotification = (data) => {
-    setShowModalDetail(true);
+    if (data.type == 'donasibarang') {
+      setShowModalDetail(true)
+    } else {
+      setShowModalPengajuan(true)
+    }
     setDataSelected(data);
   }
   const [notification, setNotification] = useState([]);
@@ -56,7 +64,7 @@ const Navbar = () => {
   const map = {
     '/donasi': ['/donasi', '/detaildonasi'],
     '/pantaudonasi': ['/pantaudonasi', '/ringkasandonasi'],
-    '/cari-kebutuhan': ['/cari-kebutuhan'],
+    '/cari-kebutuhan': ['/cari-kebutuhan', 'pengajuan'],
     '/': ['/'],
   };
   return map[path]?.some(p => currentPath.startsWith(p));
@@ -119,7 +127,7 @@ const Navbar = () => {
     <div className="space-y-2 max-h-60 overflow-y-auto">
       {notification.length > 0 ? (
         notification.map((item) => (
-          <div key={item.id} onClick={() => clickNotification(item)} className="p-2 bg-gray-50 rounded hover:bg-gray-100 transition">
+          <div key={item.id} onClick={() => clickNotification(item)} className="p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition">
             <p className="text-sm text-gray-800">{item.title}</p>
             <p className="text-xs text-gray-500">{item.data.tanggal}</p>
           </div>
@@ -131,7 +139,8 @@ const Navbar = () => {
   </div>
 </div>
 {/* Modal */}
-      <ModalDetailDonasi setShowDetailDonasi={setShowModalDetail} showDetailDonasi={showModalDetail} />
+                    <ModalDetailDonasi setShowDetailDonasi={setShowModalDetail} showDetailDonasi={showModalDetail} />
+                    <ModalPengajuanDiterima setShowModalPengajuan={setShowModalPengajuan}  showModalPengajuan={showModalPengajuan} />
   {/* User Menu */}
   <div className="relative group">
     <FontAwesomeIcon icon={faUserCircle} onClick={() => setShowMenuProfile(!showMenuProfile)} className="cursor-pointer" />
@@ -244,6 +253,27 @@ const ModalDetailDonasi = ({showDetailDonasi, setShowDetailDonasi}) => {
         
   
     </div>
+  )
+}
+
+const ModalPengajuanDiterima = ({showModalPengajuan, setShowModalPengajuan}) => {
+  return (
+   <div
+  className={`rounded-xl mt-4 mb-4 text-center  ${
+    showModalPengajuan ? "w-auto opacity-100 h-auto scale-100 " : "w-0 h-0 opacity-0 scale-95 "
+  } md:w-6/12  duration-300 transition-all z-999 top-1/2 fixed left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto overflow-hidden bg-white text-primary border border-gray-400`}
+>
+      <div className="flex relative flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 w-full bg-secondary ">
+        <FontAwesomeIcon icon={faCheckCircle} className="text-5xl  text-accent"  />
+      <h4 className="font-semibold my-2 text-primary">Selamat Permintaan Anda Diterima</h4>
+        <FontAwesomeIcon onClick={() => setShowModalPengajuan(false)} className="absolute top-2 right-2" icon={faTimes} />
+      </div>
+      <div className='p-2 font-primary'>
+      <p className="text-sm text-center font-semibold my-2" >Status : barang segera diproses</p>
+      <p className='text-center text-sm my-2'> Barang akan sampai estimasi 2-3 hari dan tidak dipungut biaya apapun anda hanya perlu mengkonfirmasi jika barang sudah sampai. Terima kasih</p>
+      </div>
+
+      </div>
   )
 }
 export default Navbar;
