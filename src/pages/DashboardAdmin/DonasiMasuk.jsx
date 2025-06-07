@@ -22,8 +22,10 @@ const DonasiMasuk = () => {
 
             {
                 tab.map((item, index) => (
-                    <div key={index} onClick={() => setTabActive(index)} className={`w-11/12 md:w-10/12 mx-auto shadow-2xl rounded-2xl  cursor-pointer p-3 ${tabActive == index ? 'bg-primary text-white' : 'bg-white text-primary'}`} >
+                    <div key={index} onClick={() => setTabActive(index)} className={`w-11/12 text-center md:w-10/12 mx-auto shadow-2xl rounded-2xl  cursor-pointer p-3 ${tabActive == index ? 'bg-primary text-white' : 'bg-white text-primary'}`} >
+                        <p className="text-center mx-auto">
                         {item.title}
+                        </p>
                     </div>
                 ))
             }
