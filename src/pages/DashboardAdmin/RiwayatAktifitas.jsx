@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DashboardLayout from "../../components/DashboardLayout";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 const RiwayatAktifitas = () => {
     const [dataRiwayat, setDataRiwayat] = useState([
         {
@@ -139,20 +140,18 @@ const RiwayatAktifitas = () => {
             
         }, {
             title: 'Log Aktifitas',
-            component : <TabSemua data={dataRiwayat} />
+            component : <TabAktifitas data={dataRiwayat} />
         }, {
             title: 'Notifikasi',
-            component : <TabSemua data={dataRiwayat} />
+            component : <TabNotifikasi data={dataRiwayat} />
         }, {
             title: 'Log',
-            component : <TabSemua data={dataRiwayat} />
+            component : <TabLog data={dataRiwayat} />
         }
       
     ];
-
     return (
         <DashboardLayout>
-
             <div className="font-primary"> 
                 <div className="flex w-6/12  rounded-t-2xl justify-between gap-2 mx-auto bg-primary text-white">
                 {tab.map((item, index) => (
@@ -160,9 +159,10 @@ const RiwayatAktifitas = () => {
     key={index}
     className={`
       tab 
-      ${tabActive === index ? 'active' : ''} 
+      ${tabActive === index ? 'text-accent' : 'text-white'} 
       w-1/4 text-center p-2
-       
+       hover:cursor-pointer
+       hover:text-accent
       
       ${index !== tab.length - 1 ? 'border-r' : ''} 
     `}
@@ -171,7 +171,6 @@ const RiwayatAktifitas = () => {
     {item.title}
   </div>
 ))}
-
             </div>
             {
                 tab[tabActive].component
@@ -180,25 +179,89 @@ const RiwayatAktifitas = () => {
             </DashboardLayout>
     )
 }
-
 const TabSemua = ({data}) => {
     //    ambil data dengan filter where type == aktifitas
     // const filteredData = data.filter(item => item.type === 'Aktifitas');
     return (
-        <div>
+        <div className="w-11/12 md:w-10/12 mx-auto shadow-2xl rounded-2xl  p-5">
             {
                 data.map((item, index) => (
-                    <div key={index} className="tab-item text-center  flex justify-between items-center">
-                        <div>
-                        <div className="tab-item-title">{item.title}</div>
-                        <div className="tab-item-description">{item.description}</div>
+                    <div key={index} className="tab-item text-center py-4 text-primary  border-b-2 border-gray-400 items-center  flex justify-between ">
+                        <div className="text-start">
+                        <div className="tab-item-title font-semibold mt-2">{item.title}</div>
+                        <div className="tab-item-description mt-2">{item.description}</div>
+                         <div className="mt-2 font-light text-xs text-white bg-primary rounded-2xl w-auto inline-block px-2 py-1">{item.type}</div>
                         </div>
-                        <div className="tab-item-tanggal">{item.tanggal}</div>
+                        <div className="tab-item-tanggal flex gap-2 items-center" >
+                          <FontAwesomeIcon icon={faCalendar} />
+                          {item.tanggal}</div>
                     </div>
                 ))
             }
         </div>
     )
 }
-
+const TabAktifitas = ({data}) => {
+    const filteredData = data.filter(item => item.type === 'Aktifitas');
+    return (
+        <div className="w-11/12 md:w-10/12 mx-auto shadow-2xl rounded-2xl  p-5">
+            {
+                filteredData.map((item, index) => (
+                    <div key={index} className="tab-item text-center py-4 text-primary  border-b-2 border-gray-400 items-center  flex justify-between ">
+                        <div className="text-start">
+                        <div className="tab-item-title font-semibold">{item.title}</div>
+                        <div className="tab-item-description">{item.description}</div>
+                       
+                        </div>
+                        <div className="tab-item-tanggal flex gap-2 items-center" >
+                          <FontAwesomeIcon icon={faCalendar} />
+                          {item.tanggal}</div>
+                    </div>
+                ))
+            }
+        </div>
+    )
+}
+const TabNotifikasi = ({data}) => {
+  const filteredData = data.filter(item => item.type === 'Notifikasi');
+  return (
+      <div className="w-11/12 md:w-10/12 mx-auto shadow-2xl rounded-2xl  p-5">
+          {
+              filteredData.map((item, index) => (
+                  <div key={index} className="tab-item text-center py-4 text-primary  border-b-2 border-gray-400 items-center  flex justify-between ">
+                      <div className="text-start">
+                      <div className="tab-item-title font-semibold">{item.title}</div>
+                      <div className="tab-item-description">{item.description}</div>
+                     
+                      </div>
+                      <div className="tab-item-tanggal flex gap-2 items-center" >
+                        <FontAwesomeIcon icon={faCalendar} />
+                        {item.tanggal}</div>
+                  </div>
+              ))
+          }
+      </div>
+  )
+}
+const TabLog = ({data}) => {
+  const filteredData = data.filter(item => item.type === 'Log');
+  return (
+      <div className="w-11/12 md:w-10/12 mx-auto shadow-2xl rounded-2xl  p-5">
+          {
+              filteredData.map((item, index) => (
+                  <div key={index} className="tab-item text-center py-4 text-primary  border-b-2 border-gray-400 items-center  flex justify-between ">
+                      <div className="text-start">
+                      <div className="tab-item-title font-semibold">{item.title}</div>
+                      <div className="tab-item-description">{item.description}</div>
+                     
+                      </div>
+                      <div className="tab-item-tanggal flex gap-2 items-center" >
+                        <FontAwesomeIcon icon={faCalendar} />
+                        {item.tanggal}</div>
+                  </div>
+              ))
+          }
+      </div>
+  )
+}
 export default RiwayatAktifitas;

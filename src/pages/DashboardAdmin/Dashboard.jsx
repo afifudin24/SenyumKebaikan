@@ -51,7 +51,9 @@ const Dashboard = () => {
                 <p className="text-xs text-center text-green-600"> <span className='text-accent'> <FontAwesomeIcon icon={faChartLine} /> +25% </span> dari bulan lalu</p>
               </div>
 
+
           </div>
+              <UserJoin />
 
           <div className="p-6">
             <DonasiChart />
@@ -300,7 +302,7 @@ const Volunteer = () => {
       <h2 className="my-3 font-semibold text-primary text-xl">Volunteer</h2>
       {
         volunteerData.map((item, index) => (
-          <div className="flex justify-between items-center my-2">
+          <div className="flex justify-between items-center gap-2 my-2">
             <div className="w-2/12 text-center rounded-full">
               <img className="rounded-full w-20 h-20" src={CampaignProp} alt="" />
             </div>
@@ -313,5 +315,59 @@ const Volunteer = () => {
       }
       </div>
   )
+}
+
+const UserJoin = () => {
+ const userJoinData = [
+  { nama: 'Arif Alfiansyah' },
+  { nama: 'Budi Santoso' },
+  { nama: 'Citra Lestari' },
+  { nama: 'Dedi Pratama' },
+  { nama: 'Eka Nuraini' },
+  { nama: 'Fajar Hidayat' },
+  { nama: 'Gita Wulandari' },
+  { nama: 'Hendra Saputra' },
+  { nama: 'Indah Permata' },
+  { nama: 'Joko Susilo' },
+  { nama: 'Kiki Ramadhan' },
+  { nama: 'Lina Marlina' },
+  { nama: 'Mahmud Fauzi' },
+  { nama: 'Nina Septiani' },
+  { nama: 'Oki Hermawan' },
+  { nama: 'Putri Andini' },
+  { nama: 'Qori Azizah' },
+  { nama: 'Rian Nugroho' },
+  { nama: 'Siti Aisyah' },
+  { nama: 'Taufik Hidayat' }
+];
+
+return (
+  <div className=''>
+    <h1 className='text-primary text-2xl font-semibold'>889 Pengguna</h1>
+    <p className='text-primary opacity-50'>Sudah bergabung dengan Senyum Kebaikan</p>
+    <div className='mt-5 flex flex-wrap gap-1 font-secondary'>
+        {
+          userJoinData.map((item, index) => (
+            <div key={index} className='flex flex-col gap-1 text-primary justify-center items-center px-2 py-1 rounded-lg'>
+            <img 
+  src={CampaignProp} 
+  className="w-16 h-16 object-cover rounded-full" 
+  alt="" 
+/>
+              {item.nama}
+              </div>
+          ))
+        }
+        <div className='flex flex-col justify-center items-center'>
+
+        <div className="w-16 h-16 object-cover border-gray-400 bg-secondary text-primary flex justify-center items-center rounded-full "> 
+            <FontAwesomeIcon icon={faArrowRight} />
+        </div>
+        <p>Selengkapnya</p>
+        </div>
+    </div>
+  </div>
+)
+
 }
 export default Dashboard;

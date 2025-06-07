@@ -16,6 +16,9 @@ import CariKebutuhan from './pages/guest/CariKebutuhan';
 import PengajuanKebutuhan from './pages/guest/PengajuanKebutuhan';
 import Dashboard from './pages/DashboardAdmin/Dashboard';
 import RiwayatAktifitas from './pages/DashboardAdmin/RiwayatAktifitas';
+import DataUsers from './pages/DashboardAdmin/DataUsers';
+import InformasiUser from './pages/DashboardAdmin/InformasiUser';
+import DonasiMasuk from './pages/DashboardAdmin/DonasiMasuk';
 function App() {
   return (
     <div className="font-primary">
@@ -51,6 +54,10 @@ function App() {
         {/* dashboard admin */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path='/riwayataktifitas' element={<RiwayatAktifitas />} />
+        <Route path='/datausers' element={<DataUsers />} />
+        <Route path='/informasiuser' element={<InformasiUser />} />
+        <Route path='/donasimasuk' element={<DonasiMasuk />} />
+        <Route path="*" element={<div>404</div>} />
       </Routes>
     </div>
   );
