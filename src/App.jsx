@@ -19,6 +19,7 @@ import RiwayatAktifitas from './pages/DashboardAdmin/RiwayatAktifitas';
 import DataUsers from './pages/DashboardAdmin/DataUsers';
 import InformasiUser from './pages/DashboardAdmin/InformasiUser';
 import DonasiMasuk from './pages/DashboardAdmin/DonasiMasuk';
+import Profil from './pages/DashboardAdmin/Profil';
 function App() {
   return (
     <div className="font-primary">
@@ -57,6 +58,7 @@ function App() {
         <Route path='/datausers' element={<DataUsers />} />
         <Route path='/informasiuser' element={<InformasiUser />} />
         <Route path='/donasimasuk' element={<DonasiMasuk />} />
+        <Route path='/profil' element={<Profil />} />
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </div>

@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import Sidebar from './Sidebar';
-
+import DashboardHeader from './DashboardHeader';
 const DashboardLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div className="grid grid-cols-[auto_1fr] h-screen">
+    <div className="grid grid-cols-[auto_1fr] overflow-hidden h-screen">
       <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
-      <main className="p-6 overflow-y-auto bg-white">{children}</main>
+      <div className='overflow-y-auto relative'>
+      {/* <DashboardHeader /> */}
+      <main className="p-6   bg-white">{children}</main>
+      </div>
     </div>
   );
 };
