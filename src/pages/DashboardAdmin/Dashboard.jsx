@@ -55,9 +55,7 @@ const Dashboard = () => {
           </div>
               <UserJoin />
 
-          <div className="p-6">
-            <DonasiChart />
-          </div>
+         
          
         </div>
         <div className="w-full md:w-5/12 p-2">
@@ -83,80 +81,100 @@ const Dashboard = () => {
 
           <Volunteer />
         </div>
+
+        
       </div>
+       <div className="p-6">
+            <DonasiChart />
+          </div>
       {/* Konten lainnya */}
     </DashboardLayout>
   );
 };
 
+const donationData = {
+  bencanaAceh: {
+    name: 'Bencana Alam Aceh',
+    bulanan: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+      uang: [100000, 120000, 90000, 110000, 130000, 95000],
+      barang: [60, 80, 70, 90, 100, 85],
+    },
+    mingguan: {
+      labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4'],
+      uang: [30000, 40000, 35000, 45000],
+      barang: [20, 25, 30, 28],
+    },
+    harian: {
+      labels: ['1', '2', '3', '4', '5', '6', '7'],
+      uang: [5000, 7000, 6500, 8000, 7500, 9000, 8500],
+      barang: [3, 5, 6, 7, 4, 8, 9],
+    },
+  },
+  pendidikan: {
+    name: 'Pendidikan untuk Negeri',
+    bulanan: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+      uang: [80000, 85000, 90000, 95000, 100000, 105000],
+      barang: [40, 45, 50, 55, 60, 65],
+    },
+    mingguan: {
+      labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4'],
+      uang: [20000, 25000, 22000, 27000],
+      barang: [15, 18, 20, 22],
+    },
+    harian: {
+      labels: ['1', '2', '3', '4', '5', '6', '7'],
+      uang: [3000, 3500, 3200, 3700, 3900, 4200, 4100],
+      barang: [1, 2, 3, 2, 4, 3, 5],
+    },
+  },
+  kesehatanAnak: {
+    name: 'Kesehatan dan Gizi Anak',
+    bulanan: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+      uang: [95000, 97000, 99000, 105000, 110000, 108000],
+      barang: [70, 75, 80, 85, 90, 88],
+    },
+    mingguan: {
+      labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4'],
+      uang: [33000, 36000, 39000, 41000],
+      barang: [21, 23, 26, 28],
+    },
+    harian: {
+      labels: ['1', '2', '3', '4', '5', '6', '7'],
+      uang: [4000, 4200, 4400, 4600, 4800, 5000, 5200],
+      barang: [2, 3, 4, 5, 4, 6, 5],
+    },
+  },
+};
+
+
 
 const DonasiChart = () => {
-  const [periodType, setPeriodType] = useState('Bulanan');
+  const [periodType, setPeriodType] = useState('bulanan');
+  const [selectedCampaign, setSelectedCampaign] = useState('bencanaAceh');
 
-  // Data berdasarkan periodType
-  const getDataByPeriod = () => {
-    if (periodType === 'Bulanan') {
-      return {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
-        datasets: [
-          {
-            label: 'Donasi Uang (Ribuan)',
-            data: [100000, 90000, 120000, 130000, 80000, 110000, 95000, 105000, 140000, 130000, 110000, 100000],
-            borderColor: 'rgba(34, 197, 94, 1)',
-            backgroundColor: 'rgba(207, 253, 225, 1)',
-            yAxisID: 'y1',
-          },
-          {
-            label: 'Donasi Barang (pcs)',
-            data: [50, 60, 70, 110, 80, 90, 100, 130, 140, 120, 110, 90],
-            borderColor: 'rgba(99, 234, 155, 1)',
-            backgroundColor: 'rgba(104, 185, 132, 1)',
-            yAxisID: 'y2',
-          },
-        ],
-      };
-    } else if (periodType === 'Mingguan') {
-      return {
-        labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4'],
-        datasets: [
-          {
-            label: 'Donasi Uang (Ribuan)',
-            data: [30000, 40000, 35000, 45000],
-            borderColor: 'rgba(34, 197, 94, 1)',
-            backgroundColor: 'rgba(207, 253, 225, 1)',
-            yAxisID: 'y1',
-          },
-          {
-            label: 'Donasi Barang (pcs)',
-            data: [20, 25, 30, 28],
-            borderColor: 'rgba(99, 234, 155, 1)',
-            backgroundColor: 'rgba(104, 185, 132, 1)',
-            yAxisID: 'y2',
-          },
-        ],
-      };
-    } else {
-      // Harian
-      return {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
-        datasets: [
-          {
-            label: 'Donasi Uang (Ribuan)',
-            data: [5000, 7000, 6500, 8000, 7500, 9000, 8500],
-            borderColor: 'rgba(34, 197, 94, 1)',
-            backgroundColor: 'rgba(207, 253, 225, 1)',
-            yAxisID: 'y1',
-          },
-          {
-            label: 'Donasi Barang (pcs)',
-            data: [3, 5, 6, 7, 4, 8, 9],
-            borderColor: 'rgba(99, 234, 155, 1)',
-            backgroundColor: 'rgba(104, 185, 132, 1)',
-            yAxisID: 'y2',
-          },
-        ],
-      };
-    }
+  const currentData = donationData[selectedCampaign][periodType];
+
+  const chartData = {
+    labels: currentData.labels,
+    datasets: [
+      {
+        label: 'Donasi Uang (Ribuan)',
+        data: currentData.uang,
+        borderColor: 'rgba(34, 197, 94, 1)',
+        backgroundColor: 'rgba(207, 253, 225, 1)',
+        yAxisID: 'y1',
+      },
+      {
+        label: 'Donasi Barang (pcs)',
+        data: currentData.barang,
+        borderColor: 'rgba(99, 234, 155, 1)',
+        backgroundColor: 'rgba(104, 185, 132, 1)',
+        yAxisID: 'y2',
+      },
+    ],
   };
 
   const options = {
@@ -194,27 +212,43 @@ const DonasiChart = () => {
 
   return (
     <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-white text-xl">Donasi ({periodType})</h3>
-        <select
-          value={periodType}
-          onChange={(e) => setPeriodType(e.target.value)}
-          className="p-2 rounded bg-white text-black"
-        >
-          <option value="Bulanan">Bulanan</option>
-          <option value="Mingguan">Mingguan</option>
-          <option value="Harian">Harian</option>
-        </select>
+      <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
+        <h3 className="text-white text-xl">
+          Donasi: {donationData[selectedCampaign].name} ({periodType.charAt(0).toUpperCase() + periodType.slice(1)})
+        </h3>
+        <div className="flex gap-2">
+          <select
+            value={selectedCampaign}
+            onChange={(e) => setSelectedCampaign(e.target.value)}
+            className="p-2 rounded bg-white text-black"
+          >
+            {Object.entries(donationData).map(([key, value]) => (
+              <option key={key} value={key}>
+                {value.name}
+              </option>
+            ))}
+          </select>
+          <select
+            value={periodType}
+            onChange={(e) => setPeriodType(e.target.value)}
+            className="p-2 rounded bg-white text-black"
+          >
+            <option value="bulanan">Bulanan</option>
+            <option value="mingguan">Mingguan</option>
+            <option value="harian">Harian</option>
+          </select>
+        </div>
       </div>
       <div className="2xl:hidden block">
-        <Bar data={getDataByPeriod()} options={options} height={120} />
+        <Bar data={chartData} options={options} height={120} />
       </div>
       <div className="2xl:block hidden">
-        <Bar data={getDataByPeriod()} options={options} height={150} />
+        <Bar data={chartData} options={options} height={150} />
       </div>
     </div>
   );
 };
+
 
 
 

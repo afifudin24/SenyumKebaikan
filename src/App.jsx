@@ -22,6 +22,7 @@ import DonasiMasuk from './pages/DashboardAdmin/DonasiMasuk';
 import Profil from './pages/DashboardAdmin/Profil';
 import DataCampaign from './pages/DashboardAdmin/DataCampaign';
 import PengajuanKebutuhanDashboard from './pages/DashboardAdmin/PengajuanKebutuhan';
+import KontakMasuk from './pages/DashboardAdmin/KontakMasuk';
 function App() {
   return (
     <div className="font-primary">
@@ -63,6 +64,7 @@ function App() {
         <Route path='/profil' element={<Profil />} />
         <Route path='/datacampaign' element={<DataCampaign />} />
         <Route path='/pengajuankebutuhan' element={<PengajuanKebutuhanDashboard />} />
+        <Route path='/kontakmasuk' element={<KontakMasuk />} />
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </div>
