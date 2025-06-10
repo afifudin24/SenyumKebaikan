@@ -4,6 +4,7 @@ import { useState } from "react";
 import Dashboard from "./Dashboard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
+import toast from "react-hot-toast";
 const KontakMasuk = () => { 
          const [kontakMasuk, setKontakMasuk] = useState([
     { id: 1, tanggal: '2025-06-01', pengirim: 'Ali', pesan: 'Pesan 1', status: 'Belum Dibaca' },
@@ -66,6 +67,7 @@ const KontakMasuk = () => {
 
 
   const handleKirim = (id) => {
+    toast.success("Pesan berhasil dikirim!");
     console.log(`Pesan terkirim ke ID ${id}:`, replyMessage);
     setReplyMessage('');
     setShowReplyForm(null);
@@ -127,15 +129,7 @@ const KontakMasuk = () => {
                   >
                     Balas
                   </button>
-                  <button
-                    onClick={(e) => {
-                     e.stopPropagation();
-                      handleClose(item.id);
-                    }}
-                    className="text-xs bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
-                  >
-                    Tutup
-                  </button>
+                
                  
                 </div>
 
