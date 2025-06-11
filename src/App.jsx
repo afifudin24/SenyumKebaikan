@@ -24,6 +24,8 @@ import DataCampaign from './pages/DashboardAdmin/DataCampaign';
 import PengajuanKebutuhanDashboard from './pages/DashboardAdmin/PengajuanKebutuhan';
 import KontakMasuk from './pages/DashboardAdmin/KontakMasuk';
 import DetailCampaign from './pages/DashboardAdmin/DetailCampaign';
+import Audit from './pages/DashboardAdmin/Audit';
+import DetailAudit from './pages/DashboardAdmin/DetailAudit';
 function App() {
   return (
     <div className="font-primary">
@@ -67,6 +69,8 @@ function App() {
         <Route path='/datacampaign/detailcampaign' element={<DetailCampaign />} />
         <Route path='/pengajuankebutuhan' element={<PengajuanKebutuhanDashboard />} />
         <Route path='/kontakmasuk' element={<KontakMasuk />} />
+        <Route path="/audit" element={<Audit />} />
+        <Route path='/audit/detailaudit' element={<DetailAudit />} />
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import toast from "react-hot-toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -324,15 +324,37 @@ const DataCampaign = () => {
     },
   ]);
   const [isAddForm, setIsAddForm] = useState(false);
-  
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredCampaigns, setFilteredCampaigns] = useState([]);
   const [expandedRow, setExpandedRow] = useState(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  const totalPages = Math.ceil(campaigns.length / itemsPerPage);
+  // Saat pertama kali load, filteredCampaigns = semua campaigns
+  useEffect(() => {
+    setFilteredCampaigns(campaigns);
+  }, [campaigns]);
+
+  const handleSearch = (e) => {
+    const keyword = e.target.value.toLowerCase();
+    setSearchTerm(keyword);
+    setCurrentPage(1); // reset ke halaman pertama saat pencarian
+
+    const filtered = campaigns.filter((item) =>
+      item.namaprogram.toLowerCase().includes(keyword)
+    );
+    setFilteredCampaigns(filtered);
+  };
+
+  const totalPages = Math.ceil(filteredCampaigns.length / itemsPerPage);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-    const currentItems = campaigns.slice(startIndex, startIndex + itemsPerPage);
+  const currentItems = filteredCampaigns.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
     const [newData, setNewData] = useState({
         judul: "",
         kategori: "",
@@ -384,12 +406,27 @@ const DataCampaign = () => {
       <h1 className="text-2xl font-bold mb-4 text-center text-primary mt-2">
         {isAddForm ? "Tambah Campaign Baru" : "Data Campaign"}
               </h1>
+              <div className="flex justify-between">
               <button
           onClick={() => setIsAddForm(!isAddForm)}
           className="px-4 py-2 bg-primary text-white rounded"
-        >
+          >
           {isAddForm ? "Kembali" : "Tambah Campaign"}
         </button>
+
+      <div className="relative w-full max-w-sm">
+  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+    <i className="fas fa-search"></i>
+  </span>
+  <input
+    type="text"
+    onChange={handleSearch}
+    className="pl-10 border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-300"
+    placeholder="Cari Campaign"
+  />
+</div>
+
+          </div>
               {isAddForm && (
                   <div className="bg-white p-6 rounded shadow-md">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

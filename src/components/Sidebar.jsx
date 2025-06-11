@@ -11,7 +11,8 @@ import {
   faUser,
   faCog,
   faSignOutAlt,
-  faUserAlt
+  faUserAlt,
+  faMagnifyingGlass
 } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLocation } from 'react-router-dom';
 import LogoBaru from '../assets/logobaru.png'
@@ -36,6 +37,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
   { icon: faChartLine, text: 'Data Campaign', url: '/datacampaign' },
   { icon: faHandHoldingUsd, text: 'Donasi Masuk', url: '/donasimasuk' },
   { icon: faFileAlt, text: 'Pengajuan Kebutuhan', url: '/pengajuankebutuhan' },
+   { icon: faMagnifyingGlass, text: 'Audit', url: '/audit' },
    { icon: faEnvelopeOpenText, text: 'Kontak Masuk', url: '/kontakmasuk' },
    { icon: faUserAlt, text: 'Profil', url: '/profil' },
   { icon: faSignOutAlt, text: 'Keluar', url: '/logout' },
@@ -56,7 +58,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
         <button className='md:block hidden' onClick={() => setCollapsed(!collapsed)}>☰</button>
       </div>
 
-      <nav className="space-y-4 ">
+      <nav className="space-y-2 ">
         {menu.map((item, index) => (
           <SidebarItem
             key={index}
@@ -79,7 +81,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
 const SidebarItem = ({ icon, text, to, collapsed, active }) => (
   <Link
     to={to}
-    className={`flex items-center w-auto  relative group space-x-2 gap-1 hover:bg-secondary p-2 rounded cursor-pointer transition-colors duration-200 
+    className={`flex items-center  ${collapsed ? 'mx-0' : 'mx-3'}  w-auto text-sm 2xl:text-base relative group space-x-2 gap-1 hover:bg-secondary p-2 rounded cursor-pointer transition-colors duration-200 
       ${active ? 'text-primary' : 'text-primary/50'}`}
   >
     <span><FontAwesomeIcon icon={icon} /></span>

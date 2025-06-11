@@ -325,8 +325,8 @@ const [dataUsers, setDataUsers] = useState([
   return (
     <div>
       <DashboardLayout>
-        <h1 className="text-center text-xl md:text-2xl font-semibold mb-4 font-primary text-primary">Data Users</h1>
-        <div className="w-11/12 mx-auto md:w-9/12 overflow-x-auto">
+        <h1 className="text-center text-xl md:text-2xl font-semibold mb-4 font-primary text-primary ">Data Users</h1>
+        <div className="w-11/12 mx-auto md:w-9/12 overflow-x-auto shadow-md">
           <table className="w-full table-auto border border-gray-300 text-sm font-primary overflow-hidden  rounded-md shadow-2xl min-w-max">
             <thead className="bg-primary text-white">
               <tr>
