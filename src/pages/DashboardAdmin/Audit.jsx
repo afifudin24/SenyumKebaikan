@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faTimes,
+  faCheckCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 const Audit = () => {
+  const [selectedAudit, setSelectedAudit] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const handleShowModal = (audit) => {
+    setSelectedAudit(audit);
+    setShowModal(true);
+  }
   const [dataAudit, setDataAudit] = useState([
     {
       namadonatur: "Aulia Rahma",
@@ -195,21 +205,22 @@ const Audit = () => {
   useEffect(() => {
     setFilteredDataAudit(dataAudit);
   }, [dataAudit]);
- const handleSearch = (e) => {
-  const keyword = e.target.value.toLowerCase();
-  setSearchTerm(keyword);
-  setCurrentPage(1); // Reset ke halaman pertama saat pencarian
+  const handleSearch = (e) => {
+    const keyword = e.target.value.toLowerCase();
+    setSearchTerm(keyword);
+    setCurrentPage(1); // Reset ke halaman pertama saat pencarian
 
-  const filtered = dataAudit.filter((item) =>
-    item.namadonatur.toLowerCase().includes(keyword) ||
-    item.tanggal.toLowerCase().includes(keyword) ||
-    item.status.toLowerCase().includes(keyword) ||
-    item.idtransaksi.toLowerCase().includes(keyword)
-  );
+    const filtered = dataAudit.filter(
+      (item) =>
+        item.namadonatur.toLowerCase().includes(keyword) ||
+        item.tanggal.toLowerCase().includes(keyword) ||
+        item.status.toLowerCase().includes(keyword) ||
+        item.idtransaksi.toLowerCase().includes(keyword)
+    );
 
-  console.log(filtered);
-  setFilteredDataAudit(filtered);
-};
+    console.log(filtered);
+    setFilteredDataAudit(filtered);
+  };
   const totalPages = Math.ceil(filteredDataAudit.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentItems = filteredDataAudit.slice(
@@ -244,71 +255,130 @@ const Audit = () => {
               />
             </div>
           </div>
+          <ModalDetailAudit
+            showModal={showModal}
+            setShowModal={setShowModal}
+            selectedAudit={selectedAudit}
+          />
           <div className="rounded-lg overflow-hidden">
-
-          <table className="min-w-full text-left bg-white rounded shadow border-gray-400 border roounded-4xl ">
-            <thead className="bg-primary text-left overflow-hidden  text-white p-2 rounded-b-4xl">
-              <tr className="rounded-b-4xl bg-primary">
-                <th className="py-2 px-4">ID</th>
-                <th className="py-2 px-4">Nama Donatur</th>
-                <th className="py-2 px-4 ">Jumlah Donasi</th>
-                <th className="py-2 px-4 ">Status</th>
-                <th className="py-2 px-4 ">Tanggal</th>
-                <th className="py-2 px-4 ">Detail</th>
-              </tr>
-            </thead>
-            <tbody className="text-left">
-              {currentItems.map((audit, index) => (
-                <React.Fragment key={audit.idtransaksi}>
-                  <tr className="">
-                    <td className="py-2 px-4">{audit.idtransaksi}</td>
-                    <td className="py-2 px-4">{audit.namadonatur}</td>
-                    <td className="py-2 px-4 capitalize">{audit.donasi}</td>
-                    <td className="py-2 px-4">
-                      {audit.status === "terverifikasi" ? (
+            <table className="min-w-full text-left bg-white rounded shadow border-gray-400 border roounded-4xl ">
+              <thead className="bg-primary text-left overflow-hidden  text-white p-2 rounded-b-4xl">
+                <tr className="rounded-b-4xl bg-primary">
+                  <th className="py-2 px-4">ID</th>
+                  <th className="py-2 px-4">Nama Donatur</th>
+                  <th className="py-2 px-4 ">Jumlah Donasi</th>
+                  <th className="py-2 px-4 ">Status</th>
+                  <th className="py-2 px-4 ">Tanggal</th>
+                  <th className="py-2 px-4 ">Detail</th>
+                </tr>
+              </thead>
+              <tbody className="text-left">
+                {currentItems.map((audit, index) => (
+                  <React.Fragment key={audit.idtransaksi}>
+                    <tr className="">
+                      <td className="py-2 px-4">{audit.idtransaksi}</td>
+                      <td className="py-2 px-4">{audit.namadonatur}</td>
+                      <td className="py-2 px-4 capitalize">{audit.donasi}</td>
+                      <td className="py-2 px-4">
+                        {audit.status === "terverifikasi" ? (
                           <span className="text-green-500">Terverifikasi</span>
                         ) : (
-                            <span className="text-red-500">Pending</span>
+                          <span className="text-red-500">Pending</span>
                         )}
-                    </td>
-                    <td className="py-2 px-4">{audit.tanggal}</td>
-                    <td>
-                      <div className=" ">
-                        <Link
-                          to={"/audit/detailaudit"}
-                          state={audit}
-                          className="flex gap-2 font-light items-center"
-                          >
-                          <p>Lihat Detail</p>
-                          <FontAwesomeIcon icon={faArrowRight} />
-                        </Link>
-                      </div>
-                    </td>
-                  </tr>
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
-          {/* Pagination */}
-          <div className="flex justify-center mt-4 gap-2">
-            {Array.from({ length: totalPages }, (_, i) => (
+                      </td>
+                      <td className="py-2 px-4">{audit.tanggal}</td>
+                      <td>
+                        <div className=" ">
+                          {/* <Link
+                            to={"/audit/detailaudit"}
+                            state={audit}
+                            className="flex gap-2 font-light items-center"
+                          > */}
+                          <div onClick={() => handleShowModal(audit)} className="flex cursor-pointer gap-2 font-light items-center">
+
+                            <p>Lihat Detail</p>
+                            <FontAwesomeIcon icon={faArrowRight} />
+                          </div>
+                          {/* </Link> */}
+                        </div>
+                      </td>
+                    </tr>
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
+            {/* Pagination */}
+            <div className="flex justify-center mt-4 gap-2">
+              {Array.from({ length: totalPages }, (_, i) => (
                 <button
-                key={i}
-                onClick={() => handlePageChange(i + 1)}
-                className={`px-3 py-1 rounded ${
+                  key={i}
+                  onClick={() => handlePageChange(i + 1)}
+                  className={`px-3 py-1 rounded ${
                     currentPage === i + 1
-                    ? "bg-primary text-white"
-                    : "bg-gray-200 text-black hover:bg-gray-300"
-                }`}
+                      ? "bg-primary text-white"
+                      : "bg-gray-200 text-black hover:bg-gray-300"
+                  }`}
                 >
-                {i + 1}
-              </button>
-            ))}
-          </div>
+                  {i + 1}
+                </button>
+              ))}
             </div>
+          </div>
         </div>
       </div>
     </DashboardLayout>
+  );
+};
+
+const ModalDetailAudit = ({ showModal, setShowModal, selectedAudit }) => {
+  return (
+    <div
+      className={`rounded-xl mt-4 mb-4 text-center  ${
+        showModal
+          ? "w-auto opacity-100 h-auto scale-100 "
+          : "w-0 h-0 opacity-0 scale-95 "
+      } md:w-6/12  duration-300 transition-all z-999 top-1/2 fixed left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto overflow-hidden bg-white text-primary border border-gray-400`}
+    >
+      <div>
+        <div className="flex relative flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 w-full bg-secondary ">
+          <FontAwesomeIcon
+            icon={faCheckCircle}
+            className="text-5xl  text-accent"
+          />
+          <h4 className="font-semibold my-2 text-primary">
+            Transaksi Berhasil Dicatat Ke Blockchain!
+          </h4>
+          <p className="text-sm">Donasi anda telah diterima</p>
+          <FontAwesomeIcon
+            onClick={() => setShowModal(false)}
+            className="absolute top-2 right-2 cursor-pointer"
+            icon={faTimes}
+          />
+        </div>
+        <div>
+          <div className="w-5/12 mx-auto">
+            <p className="text-sm font-roboto my-1">
+              ID Transaksi : {selectedAudit?.idtransaksi || "-"}
+            </p>
+            <p className="text-sm font-roboto my-1">
+              Nama Donatur : {selectedAudit?.namadonatur || "-"}
+            </p>
+            <p className="text-sm font-roboto my-1">
+              Donasi : {selectedAudit?.donasi || "-"}
+            </p>
+            <p>
+              Link : {selectedAudit ? <a href="/">Lihat di blockchain</a> : "-"}
+            </p>
+          </div>
+
+          <div className="p-3">
+            <p className="text-sm font-roboto">
+              Klik link jika ingin melihat transaksi di Blockchain exploler
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 export default Audit;

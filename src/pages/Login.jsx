@@ -28,8 +28,8 @@ const Login = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const [users, setUsers] = useState([
-    { email: 'admin@gmail.com', password: 'password1', role: 'admin' },
-    { username: 'user@gmail.com', password: 'password2', role: 'user' },
+    { email: 'admin@gmail.com', password: 'password1', role: 'admin', isVolunteer: false },
+    { username: 'user@gmail.com', password: 'password2', role: 'user', isVolunteer : true },
     // { username: 'user3', password: 'password3', role: 'volunteer' },
   ]);
 const toggleMenu = () => {
@@ -70,6 +70,16 @@ const toggleChart = () => {
     if (!valid) return;
     if (user) {
       toast.success('Login Berhasil!');
+       localStorage.setItem('user', JSON.stringify(user));
+       localStorage.setItem('isLogin', true);
+      if(user.role === 'admin'){
+        navigate('/');
+        // set ke localstorage
+
+      } else if(user.role === 'user' && user.isVolunteer === true){
+        navigate('/dashboardvolunteer');
+        // set ke localstorage
+      }
     } else {
       toast.error('Login Gagal!');
     }
