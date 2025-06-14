@@ -26,6 +26,12 @@ import KontakMasuk from './pages/DashboardAdmin/KontakMasuk';
 import DetailCampaign from './pages/DashboardAdmin/DetailCampaign';
 import Audit from './pages/DashboardAdmin/Audit';
 import DetailAudit from './pages/DashboardAdmin/DetailAudit';
+import PengelolaanAPK from './pages/DashboardAdmin/PengelolaanAPK';
+import DashboardUser from './pages/DashboardUser/DashboardUser';
+import RiwayatAktifitasUser from './pages/DashboardUser/RiwayatAktifitasUser';
+import RiwayatDonasi from './pages/DashboardUser/RiwayatDonasi';
+import PesanSaya from './pages/DashboardUser/PesanSaya';
+import PengajuanKebutuhanSaya from './pages/DashboardUser/PengajuanKebutuhanSaya';
 function App() {
   return (
     <div className="font-primary">
@@ -71,6 +77,15 @@ function App() {
         <Route path='/kontakmasuk' element={<KontakMasuk />} />
         <Route path="/audit" element={<Audit />} />
         <Route path='/audit/detailaudit' element={<DetailAudit />} />
+        <Route path='/pengelolaanapk'  element={<PengelolaanAPK />} />
+
+        {/* dashboard user */}
+        <Route path="/dashboarduser" element={<DashboardUser />} />
+        <Route path='/riwayataktifitasuser' element={<RiwayatAktifitasUser />} />
+        <Route path='/riwayatdonasi' element={<RiwayatDonasi/>} />
+        <Route path='/pesansaya' element={<PesanSaya/>} />
+        <Route path='/pengajuankebutuhansaya' element={<PengajuanKebutuhanSaya/>} />
+
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </div>

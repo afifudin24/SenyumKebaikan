@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faTimes } from "@fortawesome/free-solid-svg-icons";
 const PengajuanKebutuhanDashboard = () => {
 
 const [showModal, setShowModal] = useState(false);
+const [selectedPengajuan, setSelectedPengajuan] = useState(null);
+const handleShowModal = (pengajuan) => {
+  setSelectedPengajuan(pengajuan);
+  setShowModal(true);
+}
 const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
   {
     namalengkap: 'Ahmad Fauzi',
@@ -287,7 +292,7 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
                            <ModalDetailPengajuan
                              showModal={showModal}
                              setShowModal={setShowModal}
-                             selectedAudit={selectedAudit}
+                             selectedPengajuan={selectedPengajuan}
                            /> 
                            <div className="rounded-lg overflow-hidden">
                              <table className="min-w-full text-left bg-white rounded shadow border-gray-400 border roounded-4xl ">
@@ -317,7 +322,7 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
                                              state={audit}
                                              className="flex gap-2 font-light items-center"
                                            > */}
-                                           <div onClick={() => handleShowModal(audit)} className="flex cursor-pointer gap-2 font-light items-center">
+                                           <div onClick={() => handleShowModal(kebutuhan)} className="flex cursor-pointer gap-2 font-light items-center">
                  
                                              <p>Lihat Detail</p>
                                              <FontAwesomeIcon icon={faArrowRight} />
@@ -353,7 +358,7 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
     )
 }
 
-const ModalDetailPengajuan = ({ showModal, setShowModal, selectedAudit }) => {
+const ModalDetailPengajuan = ({ showModal, setShowModal, selectedPengajuan }) => {
   return (
     <div
       className={`rounded-xl mt-4 mb-4 text-center  ${
@@ -368,7 +373,7 @@ const ModalDetailPengajuan = ({ showModal, setShowModal, selectedAudit }) => {
           <h4 className="font-semibold my-2 text-primary">
           Detail Pengajuan Kebutuhan
           </h4>
-          <p className="text-sm">Donasi anda telah diterima</p>
+          
           <FontAwesomeIcon
             onClick={() => setShowModal(false)}
             className="absolute top-2 right-2 cursor-pointer"
@@ -378,24 +383,27 @@ const ModalDetailPengajuan = ({ showModal, setShowModal, selectedAudit }) => {
         <div>
           <div className="w-5/12 mx-auto">
             <p className="text-sm font-roboto my-1">
-              ID Transaksi : {selectedAudit?.idtransaksi || "-"}
+              Nama : {selectedPengajuan?.namalengkap || "-"}
             </p>
             <p className="text-sm font-roboto my-1">
-              Nama Donatur : {selectedAudit?.namadonatur || "-"}
+              Barang yang diajukan : {selectedPengajuan?.namabarang || "-"}
             </p>
             <p className="text-sm font-roboto my-1">
-              Donasi : {selectedAudit?.donasi || "-"}
+              Kategori Barang : {selectedPengajuan?.kategoribarang || "-"}
             </p>
-            <p>
-              Link : {selectedAudit ? <a href="/">Lihat di blockchain</a> : "-"}
+            <p className="text-sm font-roboto my-1">
+              Jumlah : {selectedPengajuan?.jumlahdibutuhkan || "-"}
             </p>
+            <p className="text-sm font-roboto my-1">
+              Alamat : {selectedPengajuan?.alamat || "-"}
+            </p>
+            <p className="text-sm font-roboto my-1">
+              Urgensi Kebutuhan : {selectedPengajuan?.urgensikebutuhan || "-"}
+            </p>
+          
           </div>
 
-          <div className="p-3">
-            <p className="text-sm font-roboto">
-              Klik link jika ingin melihat transaksi di Blockchain exploler
-            </p>
-          </div>
+       
         </div>
       </div>
     </div>

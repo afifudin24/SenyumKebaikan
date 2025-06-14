@@ -27,11 +27,29 @@ const Login = () => {
   const [showChart, setShowChart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
-  const [users, setUsers] = useState([
-    { email: 'admin@gmail.com', password: 'password1', role: 'admin', isVolunteer: false },
-    { username: 'user@gmail.com', password: 'password2', role: 'user', isVolunteer : true },
-    // { username: 'user3', password: 'password3', role: 'volunteer' },
-  ]);
+ const [users, setUsers] = useState([
+  {
+    email: 'admin@gmail.com',
+    namadepan: 'Nopal',
+    namabelakang: 'Rahman',
+    password: 'password1',
+    role: 'admin',
+    isVolunteer: false,
+    alamat: 'Jl. Mawar No. 1, Jakarta',
+    notelepon: '081234567890'
+  },
+  {
+    email: 'user@gmail.com',
+    namadepan: 'Palno',
+    namabelakang: 'Santoso',
+    password: 'password2',
+    role: 'user',
+    isVolunteer: true,
+    alamat: 'Jl. Kenanga No. 2, Bandung',
+    notelepon: '089876543210'
+  }
+]);
+
 const toggleMenu = () => {
   setShowMenu(!showMenu);
 };
@@ -76,8 +94,8 @@ const toggleChart = () => {
         navigate('/');
         // set ke localstorage
 
-      } else if(user.role === 'user' && user.isVolunteer === true){
-        navigate('/dashboardvolunteer');
+      } else if(user.role === 'user'){
+        navigate('/dashboarduser');
         // set ke localstorage
       }
     } else {

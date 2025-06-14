@@ -5,19 +5,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faEdit, faUser } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 const Profil = () => {
-  const [profil, setProfil] = useState({
-    nama: "asik",
-    email: "asik",
-      alamat: "asik",
-      notelepon: '081548763241233',
-    namabelakang : 'banget'
-  });
+const [profil, setProfil] = useState(() => {
+  const storedUser = localStorage.getItem("user");
+  return storedUser
+    ? JSON.parse(storedUser)
+    : {
+        namadepan: "",
+        email: "",
+        alamat: "",
+        notelepon: "",
+        password: "",
+      };
+});
+
 
     const [editable, setEditable] = useState(false);
     const [editableEtherium, setEditableEtherium] = useState(false);
     
     const [showPasswordForm, setShowPasswordForm] = useState(false);
-    const [passwordLama, setPasswordLama] = useState("asik");
+    const [passwordLama, setPasswordLama] = useState(profil.password);
     const [passwordBaru, setPasswordBaru] = useState("");
     const [etherium, setEtherium] = useState("8347892374973467dfadf76");
   
@@ -39,14 +45,14 @@ const Profil = () => {
     };
 
   // Ambil data profil dari localStorage saat komponen mount
-  useEffect(() => {
-    const savedProfil = JSON.parse(localStorage.getItem("profil")) || {
-      nama: "Nama Pengguna",
-      email: "user@example.com",
-      alamat: "Alamat pengguna"
-    };
-    setProfil(savedProfil);
-  }, []);
+  // useEffect(() => {
+  //   const savedProfil = JSON.parse(localStorage.getItem("profil")) || {
+  //     nama: "Nama Pengguna",
+  //     email: "user@example.com",
+  //     alamat: "Alamat pengguna"
+  //   };
+  //   setProfil(savedProfil);
+  // }, []);
 
   // Handle input perubahan
   const handleChange = (e) => {
@@ -83,7 +89,7 @@ const Profil = () => {
                   <div className="flex flex-row gap-4 items-center ">
                       <FontAwesomeIcon icon={faUser} size="2xl" className="" style={{ marginRight: '10px' }} />
                       <div>
-                          <h3 className="text-lg font-normal">{profil.nama}</h3>
+                          <h3 className="text-lg font-normal">{profil.namadepan} {profil.namabelakang}</h3>
                           <p className="text-sm ">{profil.email}</p>
                       </div>
                   </div>
@@ -109,8 +115,8 @@ const Profil = () => {
             <label className="block text-sm font-light mb-1">Nama</label>
             <input
               type="text"
-              name="nama"
-              value={profil.nama}
+              name="namadepan"
+              value={profil.namadepan}
               onChange={handleChange}
               disabled={!editable}
               className="w-full px-4 py-2 text-sm rounded bg-white  text-primary"
