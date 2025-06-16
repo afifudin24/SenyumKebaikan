@@ -151,6 +151,7 @@ const donationData = {
 
 
 
+
 const DonasiChart = () => {
   const [periodType, setPeriodType] = useState('bulanan');
   const [selectedCampaign, setSelectedCampaign] = useState('bencanaAceh');
@@ -165,12 +166,14 @@ const DonasiChart = () => {
         data: currentData.uang,
         borderColor: 'rgba(34, 197, 94, 1)',
         backgroundColor: 'rgba(207, 253, 225, 1)',
+         borderRadius: 5, // 🔸 inilah yang membuat batangnya rounded
         yAxisID: 'y1',
       },
       {
         label: 'Donasi Barang (pcs)',
         data: currentData.barang,
         borderColor: 'rgba(99, 234, 155, 1)',
+         borderRadius: 5, // 🔸 inilah yang membuat batangnya rounded
         backgroundColor: 'rgba(104, 185, 132, 1)',
         yAxisID: 'y2',
       },
@@ -180,13 +183,17 @@ const DonasiChart = () => {
   const options = {
     responsive: true,
     plugins: {
-      legend: { position: 'top' },
+      legend: { position: 'top', labels: { color: '#fff' } },
+
     },
     scales: {
-      x: { beginAtZero: true },
+      x: { beginAtZero: true,  ticks: {
+      color: '#fff', // Ini membuat label bawah (Jan, Feb, dst) berwarna putih
+    }, },
       y1: {
         beginAtZero: true,
         ticks: {
+          color: 'rgba(99, 234, 155, 1)',
           callback: function (value) {
             return value / 1000 + 'k';
           },
@@ -199,7 +206,7 @@ const DonasiChart = () => {
       },
       y2: {
         beginAtZero: true,
-        ticks: { stepSize: 10 },
+        ticks: { stepSize: 10, color: 'rgba(34, 197, 94, 1)' },
         position: 'right',
         title: {
           display: true,
@@ -211,7 +218,7 @@ const DonasiChart = () => {
   };
 
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+    <div className="bg-primary p-6 rounded-lg shadow-xl">
       <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
         <h3 className="text-white text-xl">
           Donasi: {donationData[selectedCampaign].name} ({periodType.charAt(0).toUpperCase() + periodType.slice(1)})
@@ -248,7 +255,6 @@ const DonasiChart = () => {
     </div>
   );
 };
-
 
 
 

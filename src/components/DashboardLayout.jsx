@@ -5,13 +5,14 @@ import DashboardHeader from './DashboardHeader';
 const DashboardLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [user, setUser] = useState(() => {
-    return localStorage.getItem("user");
+    return JSON.parse( localStorage.getItem("user"));
   })
+  console.log(user);
   return (
     <div className="grid grid-cols-[auto_1fr] overflow-hidden h-screen">
       {
         user.role === 'admin' ?
-        <SidebarUser collapsed={collapsed} setCollapsed={setCollapsed} /> :
+        <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} /> :
         <SidebarUser collapsed={collapsed} setCollapsed={setCollapsed} />
       }
     

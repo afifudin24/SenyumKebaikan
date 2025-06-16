@@ -17,6 +17,10 @@ const Navbar = () => {
   const [showModalDetail, setShowModalDetail] = useState(false);
   const [showModalPengajuan, setShowModalPengajuan] = useState(false);
   const [dataSelected, setDataSelected] = useState(null);
+   const [user, setUser] = useState(() => {
+              const savedUser = localStorage.getItem('user');
+              return savedUser ? JSON.parse(savedUser) : null;
+            }) 
   const signOut = () => {
     localStorage.removeItem("isLogin");
     localStorage.removeItem("user");
@@ -149,9 +153,11 @@ const Navbar = () => {
           <p>N</p>
         </div>
         <p className='text-sm text-center my-2 text-gray-800'>Naufal Nurcahyo</p>
-        <Link to={"/dashboard"}>
-      <p className="text-sm bg-gray-50 rounded hover:bg-gray-100 p-2 text-primary my-1">Dashboard</p>
-        </Link>
+        <Link to={user.role === 'admin' ? '/dashboard' : '/dashboarduser'}>
+  <p className="text-sm bg-gray-50 rounded hover:bg-gray-100 p-2 text-primary my-1">
+    Dashboard
+  </p>
+</Link>
         <Link to={"/profil"}>
       <p className="text-sm text-primary my-1 bg-gray-50 rounded hover:bg-gray-100 p-2">Profil</p>
         </Link>

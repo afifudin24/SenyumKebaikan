@@ -32,6 +32,15 @@ import RiwayatAktifitasUser from './pages/DashboardUser/RiwayatAktifitasUser';
 import RiwayatDonasi from './pages/DashboardUser/RiwayatDonasi';
 import PesanSaya from './pages/DashboardUser/PesanSaya';
 import PengajuanKebutuhanSaya from './pages/DashboardUser/PengajuanKebutuhanSaya';
+import AjukanDonasi from './pages/DashboardUser/AjukanDonasi';
+import DashboardVolunteer from './pages/DashboardVolunteer/DashboardVolunteer';
+import AjukanProgramBaru from './pages/DashboardVolunteer/AjukanProgrambaru';
+import ProgramAktif from './pages/DashboardVolunteer/ProgramAktif';
+import LaporanKegiatan from './pages/DashboardVolunteer/LaporanKegiatan';
+import UpdateDistribusi from './pages/DashboardVolunteer/UpdateDistribusi';
+import DetailUpdateDistribusi from './pages/DashboardVolunteer/DetailUpdateDistribusi';
+import PesanKeAdmin from './pages/DashboardVolunteer/PesanKeAdmin';
+import RiwayatAktifitasVolunteer from './pages/DashboardVolunteer/RiwayatAktifitasVolunteer';
 function App() {
   return (
     <div className="font-primary">
@@ -85,6 +94,18 @@ function App() {
         <Route path='/riwayatdonasi' element={<RiwayatDonasi/>} />
         <Route path='/pesansaya' element={<PesanSaya/>} />
         <Route path='/pengajuankebutuhansaya' element={<PengajuanKebutuhanSaya/>} />
+        <Route path='/ajukandonasiuser' element={<AjukanDonasi/>} />
+
+        {/* dashboard volunteer */}
+        <Route path='/dashboardvolunteer' element={<DashboardVolunteer />} />
+        <Route path='/ajukanprogrambaru' element={<AjukanProgramBaru />} />
+        <Route path='/programaktif' element={<ProgramAktif />} />
+        <Route path='/laporankegiatan' element={<LaporanKegiatan />} />
+        <Route path='/updatedistribusi' element={<UpdateDistribusi />} />
+        <Route path='/updatedistribusi/detailupdate' element={<DetailUpdateDistribusi />} />
+        <Route path='/pesankeadmin' element={<PesanKeAdmin />} />
+        <Route path='/riwayataktifitasvolunteer' element={<RiwayatAktifitasVolunteer />} />
+
 
         <Route path="*" element={<div>404</div>} />
       </Routes>
