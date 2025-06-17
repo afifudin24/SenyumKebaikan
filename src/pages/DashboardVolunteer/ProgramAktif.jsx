@@ -16,7 +16,6 @@ const ProgramAktif = () => {
         </DashboardVolunteerLayout>
     )
 }
-
 const ManajemenDonasiAktif = () => {
   return (
     <div className="p-4 md:p-8">
@@ -29,7 +28,6 @@ const ManajemenDonasiAktif = () => {
           Update real-time progres penyaluran bantuan
         </p>
       </div>
-
       {/* Card Program */}
       <div className="flex flex-wrap gap-4 justify-center mb-6">
         {/* Card 1 */}
@@ -53,7 +51,6 @@ const ManajemenDonasiAktif = () => {
           </div>
           <p className="mt-4 text-green-300 text-sm">Status distribusi: <span className="font-semibold">Proses</span></p>
         </div>
-
         {/* Card 2 */}
         <div className="bg-white border rounded-lg p-4 w-[300px] shadow-sm">
           <h3 className="text-sm font-medium text-green-800">BENCANA ALAM</h3>
@@ -76,12 +73,10 @@ const ManajemenDonasiAktif = () => {
           <p className="mt-4 text-green-600 text-sm">Status distribusi: <span className="font-semibold">Proses</span></p>
         </div>
       </div>
-
       {/* Tabel Donatur */}
       <div className="bg-white rounded-lg shadow-md overflow-x-auto">
        <TabelDonatur />
       </div>
-
       {/* Tombol Update */}
       <div className="text-right mt-4">
         <button className="bg-[#2d4a48] text-white px-4 py-2 rounded hover:bg-[#3d615f]">
@@ -91,7 +86,6 @@ const ManajemenDonasiAktif = () => {
     </div>
   );
 };
-
 const TabelDonatur = () => {
   // Data dummy berbeda-beda
   const [donaturData] = useState([
@@ -116,23 +110,18 @@ const TabelDonatur = () => {
     { nama: "Rama", nominal: "Rp. 600.000", tanggal: "20/07/2024" },
     { nama: "Putri", nominal: "Rp. 480.000", tanggal: "21/07/2024" },
   ]);
-
   const [currentPage, setCurrentPage] = useState(1);
   const dataPerPage = 5;
   const totalPages = Math.ceil(donaturData.length / dataPerPage);
-
   const indexOfLast = currentPage * dataPerPage;
   const indexOfFirst = indexOfLast - dataPerPage;
   const currentData = donaturData.slice(indexOfFirst, indexOfLast);
-
   const nextPage = () => {
     if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
   };
-
   const prevPage = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);
   };
-
   return (
     <div className="bg-white rounded-lg shadow-md overflow-x-auto">
       <table className="min-w-full text-sm text-left text-gray-700">
@@ -153,7 +142,6 @@ const TabelDonatur = () => {
           ))}
         </tbody>
       </table>
-
       {/* Pagination */}
       <div className="flex justify-center items-center gap-2 py-4">
         <button

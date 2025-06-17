@@ -203,4 +203,6 @@ const toggleChart = () => {
   );
 };
 
+
+
 export default Register;
