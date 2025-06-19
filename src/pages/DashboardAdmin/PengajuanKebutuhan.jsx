@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faFileAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+import ktpFile from "../../assets/ktp.png";
 const PengajuanKebutuhanDashboard = () => {
 
 const [showModal, setShowModal] = useState(false);
@@ -361,53 +362,58 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
 const ModalDetailPengajuan = ({ showModal, setShowModal, selectedPengajuan }) => {
   return (
     <div
-      className={`rounded-xl mt-4 mb-4 text-center  ${
+      className={`${
         showModal
-          ? "w-auto opacity-100 h-auto scale-100 "
-          : "w-0 h-0 opacity-0 scale-95 "
-      } md:w-6/12  duration-300 transition-all z-999 top-1/2 fixed left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto overflow-hidden bg-white text-primary border border-gray-400`}
+          ? "opacity-100 scale-100"
+          : "opacity-0 scale-95 pointer-events-none"
+      } fixed z-50 inset-0 flex items-center justify-center transition-all duration-300`}
     >
-      <div>
-        <div className="flex relative flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 w-full bg-secondary ">
-        
-          <h4 className="font-semibold my-2 text-primary">
-          Detail Pengajuan Kebutuhan
-          </h4>
-          
+      <div className="bg-white rounded-xl w-full max-w-3xl shadow-xl border border-gray-300 overflow-hidden">
+        {/* Header */}
+        <div className="bg-secondary text-primary relative p-4 flex justify-center items-center">
+          <h4 className="font-semibold text-lg">Detail Pengajuan Kebutuhan</h4>
           <FontAwesomeIcon
-            onClick={() => setShowModal(false)}
-            className="absolute top-2 right-2 cursor-pointer"
             icon={faTimes}
+            className="absolute top-4 right-4 text-lg cursor-pointer text-primary hover:text-red-500"
+            onClick={() => setShowModal(false)}
           />
         </div>
-        <div>
-          <div className="w-5/12 mx-auto">
-            <p className="text-sm font-roboto my-1">
-              Nama : {selectedPengajuan?.namalengkap || "-"}
-            </p>
-            <p className="text-sm font-roboto my-1">
-              Barang yang diajukan : {selectedPengajuan?.namabarang || "-"}
-            </p>
-            <p className="text-sm font-roboto my-1">
-              Kategori Barang : {selectedPengajuan?.kategoribarang || "-"}
-            </p>
-            <p className="text-sm font-roboto my-1">
-              Jumlah : {selectedPengajuan?.jumlahdibutuhkan || "-"}
-            </p>
-            <p className="text-sm font-roboto my-1">
-              Alamat : {selectedPengajuan?.alamat || "-"}
-            </p>
-            <p className="text-sm font-roboto my-1">
-              Urgensi Kebutuhan : {selectedPengajuan?.urgensikebutuhan || "-"}
-            </p>
-          
-          </div>
 
-       
+        {/* Gambar */}
+        <div className="flex justify-center p-4 border-b">
+          <img
+            src={ktpFile}
+            alt="Gambar Pengajuan"
+            className="w-52 h-40 object-cover rounded shadow"
+          />
+        </div>
+
+        {/* Informasi */}
+        <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700 font-roboto">
+          <p><strong>Nama:</strong> {selectedPengajuan?.namalengkap || "-"}</p>
+          <p><strong>Barang yang diajukan:</strong> {selectedPengajuan?.namabarang || "-"}</p>
+          <p><strong>Kategori Barang:</strong> {selectedPengajuan?.kategoribarang || "-"}</p>
+          <p><strong>Jumlah:</strong> {selectedPengajuan?.jumlahdibutuhkan || "-"}</p>
+          <p><strong>Alamat:</strong> {selectedPengajuan?.alamat || "-"}</p>
+          <p><strong>Urgensi Kebutuhan:</strong> {selectedPengajuan?.urgensikebutuhan || "-"}</p>
+        </div>
+
+        {/* Tombol Link Dokumen */}
+        <div className="px-6 pb-6 text-center">
+          {selectedPengajuan &&(
+            <a
+              
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded hover:bg-accent transition"
+            >
+              <FontAwesomeIcon icon={faFileAlt} />
+              Lihat Dokumen Pendukung
+            </a>
+          )}
         </div>
       </div>
     </div>
   );
 };
-
 export default PengajuanKebutuhanDashboard;

@@ -146,17 +146,24 @@ const Home = () => {
               </h2>
             </div>
 
-            {/* Progress */}
-            <div className='w-full bg-white rounded-full h-1 mb-4'>
-              <div
-                className='bg-secondary h-2 rounded-full'
-                style={{ width: '60%' }}
-              ></div>
+            <div>
+          <div className="relative h-2 rounded-full bg-[#3A3A3A] mt-10">
+            <div
+              className="absolute top-0 left-0 h-2 rounded-full bg-[#C6F6D5]"
+              style={{ width: `60%` }}
+            ></div>
+            <div
+              className="absolute -top-8 left-[70%] -translate-x-1/2 bg-[#C6F6D5] text-[#1E1E1E] text-[10px] font-sans px-1 rounded pointer-down"
+              style={{ width: "28px", left: `60%` }}
+            >
+              60% 
             </div>
-            <div    style={{ width: '60%' }} className='flex font-light justify-between text-sm text-gray-200 mb-6'>
-              <span>Rp 10.000.000</span>
-              <span>60% (16 hari lagi)</span>
-            </div>
+          </div>
+          <div className="flex justify-between text-primary text-xs font-sans mt-2 mb-3 px-1">
+            <span>Rp 30000</span>
+            <span>30 hari lagi</span>
+          </div>
+        </div>
 
             {/* Deskripsi */}
             <p className='text-sm text-white mb-6 font-secondary'>
@@ -196,18 +203,30 @@ const Home = () => {
                           </div>
               
                           {/* Progress */}
-                          <div className='w-full bg-white rounded-full h-1 mb-4'>
-                            <div
-                              className='bg-secondary h-2 rounded-full'
-                              style={{ width: '60%' }}
-                            ></div>
-                          </div>
-                          <div    style={{ width: '60%' }} className='font-light relative justify-between text-sm text-gray-200 mb-6'>
+                          <div>
+          <div className="relative h-2 rounded-full bg-[#3A3A3A] mt-7">
+            <div
+              className="absolute top-0 left-0 h-2 rounded-full bg-[#C6F6D5]"
+              style={{ width: `60%` }}
+            ></div>
+            <div
+              className="absolute -top-8 left-[70%] -translate-x-1/2 bg-[#C6F6D5] text-[#1E1E1E] text-[10px] font-sans px-1 rounded pointer-down"
+              style={{ width: "28px", left: `60%` }}
+            >
+              60% 
+            </div>
+          </div>
+          <div className="flex justify-between text-primary text-xs font-sans mt-2 mb-3 px-1">
+            <span>Rp 30000</span>
+            <span>30 hari lagi</span>
+          </div>
+        </div>
+                          {/* <div    style={{ width: '60%' }} className='font-light relative justify-between text-sm text-gray-200 mb-6'>
                             <span>Rp 10.000.000</span>
               <span className='absolute -right-5 top-0'>60% </span>
               <p>(16 hari lagi)</p>
                           </div>
-              
+               */}
                           {/* Deskripsi */}
                           <p className='text-xs md:text-sm text-white mb-6 font-secondary'>
                             Penyaluran bisa tidak tetap jika anda menunda dianggap membatalkan

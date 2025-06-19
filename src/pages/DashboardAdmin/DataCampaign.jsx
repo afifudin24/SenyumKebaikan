@@ -21,13 +21,18 @@ const DataCampaign = () => {
       id: "CAMP001",
       namaprogram: "Bantuan Pangan Lebaran",
       Jenis: "barang",
-      target: 1000, // Angka saja (misal: 1000 paket)
-      tercapai: 850, // Angka saja
-      status_distribusi: "Selesai",
+      target: 1000,
+      tercapai: 850,
       status: "Aktif",
       rekdistribusi: "BNI Syariah - 1234567890",
-      tanggal_mulai: "2024-03-01", // Tanggal mulai
-      tanggal_selesai: "2024-03-31", // Tanggal selesai
+      tanggal_mulai: "2024-03-01",
+      tanggal_selesai: "2024-03-31",
+      distribusi: {
+        status: "Selesai",
+        tanggal_distribusi: "2024-04-02",
+        bukti: "bukti_camp001.jpg",
+        konfirmasi_distribusi: "Dikonfirmasi"
+      },
       donatur: [
         { nama: "Andi Susanto", tanggal: "2024-03-10", nominal: 500000, email: "andi.s@example.com" },
         { nama: "Budi Santoso", tanggal: "2024-03-12", nominal: 250000, email: "budi.s@example.com" },
@@ -40,11 +45,16 @@ const DataCampaign = () => {
       Jenis: "dana",
       target: 75000000,
       tercapai: 62000000,
-      status_distribusi: "Berlangsung",
       status: "Aktif",
       rekdistribusi: "Bank Mandiri - 0987654321",
       tanggal_mulai: "2024-04-01",
       tanggal_selesai: "2024-09-30",
+      distribusi: {
+        status: "Berlangsung",
+        tanggal_distribusi: null,
+        bukti: null,
+        konfirmasi_distribusi: "Menunggu Konfirmasi"
+      },
       donatur: [
         { nama: "Dewi Lestari", tanggal: "2024-04-01", nominal: 750000, email: "dewi.l@example.com" },
         { nama: "Eko Pratama", tanggal: "2024-04-05", nominal: 300000, email: "eko.p@example.com" },
@@ -56,11 +66,11 @@ const DataCampaign = () => {
       Jenis: "dana",
       target: 200000000,
       tercapai: 15000000,
-      status_distribusi: "Belum Dimulai",
       status: "Aktif",
       rekdistribusi: "BCA - 1122334455",
       tanggal_mulai: "2024-07-01",
       tanggal_selesai: "2024-12-31",
+      distribusi: null,
       donatur: [
         { nama: "Fajar Nugraha", tanggal: "2024-05-20", nominal: 5000000, email: "fajar.n@example.com" },
       ],
@@ -69,13 +79,18 @@ const DataCampaign = () => {
       id: "CAMP004",
       namaprogram: "Sembako untuk Dhuafa",
       Jenis: "barang",
-      target: 500, // Angka saja
-      tercapai: 500, // Angka saja
-      status_distribusi: "Selesai",
+      target: 500,
+      tercapai: 500,
       status: "Non-Aktif",
       rekdistribusi: "BRI - 6789012345",
       tanggal_mulai: "2023-11-01",
       tanggal_selesai: "2023-12-15",
+      distribusi: {
+        status: "Selesai",
+        tanggal_distribusi: "2023-12-20",
+        bukti: "bukti_camp004.png",
+        konfirmasi_distribusi: "Ditolak"
+      },
       donatur: [
         { nama: "Gita Permata", tanggal: "2023-12-01", nominal: 200000, email: "gita.p@example.com" },
         { nama: "Hadi Kusumo", tanggal: "2023-12-05", nominal: 150000, email: "hadi.k@example.com" },
@@ -84,245 +99,134 @@ const DataCampaign = () => {
     },
     {
       id: "CAMP005",
-      namaprogram: "Pengadaan Buku Perpustakaan",
-      Jenis: "barang",
-      target: 1000, // Angka saja
-      tercapai: 750, // Angka saja
-      status_distribusi: "Berlangsung",
+      namaprogram: "Operasi Gratis",
+      Jenis: "dana",
+      target: 100000000,
+      tercapai: 20000000,
       status: "Aktif",
-      rekdistribusi: "CIMB Niaga - 2345678901",
-      tanggal_mulai: "2024-05-15",
-      tanggal_selesai: "2024-08-31",
+      rekdistribusi: "CIMB Niaga - 5566778899",
+      tanggal_mulai: "2024-05-01",
+      tanggal_selesai: "2024-10-30",
+      distribusi: null,
       donatur: [
-        { nama: "Joko Santoso", tanggal: "2024-06-01", nominal: 100000, email: "joko.s@example.com" },
-        { nama: "Kartika Putri", tanggal: "2024-06-03", nominal: 50000, email: "kartika.p@example.com" },
+        { nama: "Joko Widodo", tanggal: "2024-05-05", nominal: 1000000, email: "joko.w@example.com" }
       ],
     },
     {
       id: "CAMP006",
-      namaprogram: "Ambulans Gratis",
-      Jenis: "dana",
-      target: 150000000,
-      tercapai: 0,
-      status_distribusi: "Belum Dimulai",
+      namaprogram: "Bantuan Banjir Kalimantan",
+      Jenis: "barang",
+      target: 2000,
+      tercapai: 1500,
       status: "Aktif",
-      rekdistribusi: "BTN - 3456789012",
-      tanggal_mulai: "2024-09-01",
-      tanggal_selesai: "2025-02-28",
-      donatur: [],
-    },
-    {
-      id: "CAMP007",
-      namaprogram: "Renovasi Sekolah Rusak",
-      Jenis: "dana",
-      target: 300000000,
-      tercapai: 310000000,
-      status_distribusi: "Selesai",
-      status: "Aktif",
-      rekdistribusi: "Danamon - 4567890123",
-      tanggal_mulai: "2024-01-01",
-      tanggal_selesai: "2024-04-30",
+      rekdistribusi: "Danamon - 6677889900",
+      tanggal_mulai: "2024-01-10",
+      tanggal_selesai: "2024-02-10",
+      distribusi: {
+        status: "Selesai",
+        tanggal_distribusi: "2024-02-12",
+        bukti: "bukti_camp006.jpg",
+        konfirmasi_distribusi: "Dikonfirmasi"
+      },
       donatur: [
-        { nama: "Linda Wijaya", tanggal: "2024-01-15", nominal: 10000000, email: "linda.w@example.com" },
-        { nama: "Martin Purnomo", tanggal: "2024-01-20", nominal: 5000000, email: "martin.p@example.com" },
+        { nama: "Lina Marlina", tanggal: "2024-01-15", nominal: 250000, email: "lina.m@example.com" },
       ],
     },
     {
-      id: "CAMP008",
-      namaprogram: "Pengadaan Sumur Bor",
+      id: "CAMP007",
+      namaprogram: "Santunan Lansia",
       Jenis: "dana",
-      target: 80000000,
-      tercapai: 45000000,
-      status_distribusi: "Berlangsung",
+      target: 30000000,
+      tercapai: 18000000,
       status: "Aktif",
-      rekdistribusi: "Permata Bank - 5678901234",
-      tanggal_mulai: "2024-05-01",
-      tanggal_selesai: "2024-08-31",
+      rekdistribusi: "BTN - 3344556677",
+      tanggal_mulai: "2024-06-01",
+      tanggal_selesai: "2024-08-01",
+      distribusi: null,
+      donatur: [],
+    },
+    {
+      id: "CAMP008",
+      namaprogram: "Pendidikan Santri",
+      Jenis: "dana",
+      target: 50000000,
+      tercapai: 30000000,
+      status: "Non-Aktif",
+      rekdistribusi: "BSI - 8899001122",
+      tanggal_mulai: "2023-09-01",
+      tanggal_selesai: "2023-12-01",
+      distribusi: {
+        status: "Selesai",
+        tanggal_distribusi: "2023-12-10",
+        bukti: "bukti_camp008.jpg",
+        konfirmasi_distribusi: "Dikonfirmasi"
+      },
       donatur: [
-        { nama: "Nia Ramadhani", tanggal: "2024-05-10", nominal: 2000000, email: "nia.r@example.com" },
+        { nama: "Mahmud Arif", tanggal: "2023-10-15", nominal: 1000000, email: "mahmud.a@example.com" },
       ],
     },
     {
       id: "CAMP009",
-      namaprogram: "Bantuan Korban Bencana Alam",
+      namaprogram: "Bantuan Air Bersih",
       Jenis: "barang",
-      target: 2000, // Angka saja
-      tercapai: 2100, // Angka saja
-      status_distribusi: "Selesai",
-      status: "Non-Aktif",
-      rekdistribusi: "BSI - 67890123456",
-      tanggal_mulai: "2023-10-01",
-      tanggal_selesai: "2023-11-30",
-      donatur: [
-        { nama: "Olivia Wijaya", tanggal: "2023-11-01", nominal: 1000000, email: "olivia.w@example.com" },
-        { nama: "Putra Jaya", tanggal: "2023-11-03", nominal: 750000, email: "putra.j@example.com" },
-        { nama: "Qori Amelia", tanggal: "2023-11-05", nominal: 500000, email: "qori.a@example.com" },
-      ],
+      target: 1200,
+      tercapai: 900,
+      status: "Aktif",
+      rekdistribusi: "Mega Syariah - 7766554433",
+      tanggal_mulai: "2024-02-01",
+      tanggal_selesai: "2024-03-15",
+      distribusi: {
+        status: "Berlangsung",
+        tanggal_distribusi: null,
+        bukti: null,
+        konfirmasi_distribusi: "Menunggu Konfirmasi"
+      },
+      donatur: [],
     },
     {
       id: "CAMP010",
-      namaprogram: "Pelatihan Keterampilan Disabilitas",
-      Jenis: "dana",
-      target: 60000000,
-      tercapai: 25000000,
-      status_distribusi: "Berlangsung",
-      status: "Aktif",
-      rekdistribusi: "OCBC NISP - 7890123456",
-      tanggal_mulai: "2024-06-01",
-      tanggal_selesai: "2024-11-30",
-      donatur: [
-        { nama: "Rina Wijayanti", tanggal: "2024-06-08", nominal: 300000, email: "rina.w@example.com" },
-      ],
-    },
-    {
-      id: "CAMP011",
-      namaprogram: "Program Gizi Balita",
+      namaprogram: "Al-Qur'an untuk Pelosok",
       Jenis: "barang",
-      target: 500, // Angka saja
-      tercapai: 480, // Angka saja
-      status_distribusi: "Selesai",
+      target: 500,
+      tercapai: 200,
       status: "Aktif",
-      rekdistribusi: "BTN Syariah - 8901234567",
-      tanggal_mulai: "2024-01-15",
-      tanggal_selesai: "2024-03-15",
-      donatur: [
-        { nama: "Santi Rahayu", tanggal: "2024-02-10", nominal: 150000, email: "santi.r@example.com" },
-        { nama: "Taufik Hidayat", tanggal: "2024-02-12", nominal: 200000, email: "taufik.h@example.com" },
-      ],
-    },
-    {
-      id: "CAMP012",
-      namaprogram: "Beasiswa Mahasiswa Kurang Mampu",
-      Jenis: "dana",
-      target: 90000000,
-      tercapai: 0,
-      status_distribusi: "Belum Dimulai",
-      status: "Aktif",
-      rekdistribusi: "Panin Bank - 9012345678",
-      tanggal_mulai: "2024-08-01",
-      tanggal_selesai: "2025-01-31",
+      rekdistribusi: "Muamalat - 5566442211",
+      tanggal_mulai: "2024-07-10",
+      tanggal_selesai: "2024-09-10",
+      distribusi: null,
       donatur: [],
     },
-    {
-      id: "CAMP013",
-      namaprogram: "Rehabilitasi Rumah Tidak Layak Huni",
-      Jenis: "dana",
-      target: 180000000,
-      tercapai: 90000000,
-      status_distribusi: "Berlangsung",
-      status: "Aktif",
-      rekdistribusi: "Maybank - 0123456789",
-      tanggal_mulai: "2024-04-15",
-      tanggal_selesai: "2024-10-15",
-      donatur: [
-        { nama: "Umar Bakri", tanggal: "2024-05-01", nominal: 5000000, email: "umar.b@example.com" },
-      ],
-    },
-    {
-      id: "CAMP014",
-      namaprogram: "Distribusi Air Bersih",
-      Jenis: "barang",
-      target: 100, // Angka saja
-      tercapai: 105, // Angka saja
-      status_distribusi: "Selesai",
-      status: "Non-Aktif",
-      rekdistribusi: "Bank Muamalat - 12345678901",
-      tanggal_mulai: "2023-09-01",
-      tanggal_selesai: "2023-11-15",
-      donatur: [
-        { nama: "Vina Lestari", tanggal: "2023-10-15", nominal: 300000, email: "vina.l@example.com" },
-        { nama: "Wahyu Agung", tanggal: "2023-10-18", nominal: 250000, email: "wahyu.a@example.com" },
-      ],
-    },
-    {
-      id: "CAMP015",
-      namaprogram: "Bantuan Modal UMKM",
-      Jenis: "dana",
-      target: 110000000,
-      tercapai: 70000000,
-      status_distribusi: "Berlangsung",
-      status: "Aktif",
-      rekdistribusi: "Bank Syariah Indonesia - 23456789012",
-      tanggal_mulai: "2024-06-01",
-      tanggal_selesai: "2024-12-31",
-      donatur: [
-        { nama: "Xena Adelia", tanggal: "2024-06-05", nominal: 1000000, email: "xena.a@example.com" },
-      ],
-    },
-    {
-      id: "CAMP016",
-      namaprogram: "Pendirian Sanggar Belajar",
-      Jenis: "dana",
-      target: 130000000,
-      tercapai: 0,
-      status_distribusi: "Belum Dimulai",
-      status: "Aktif",
-      rekdistribusi: "Commonwealth Bank - 34567890123",
-      tanggal_mulai: "2024-10-01",
-      tanggal_selesai: "2025-03-31",
-      donatur: [],
-    },
-    {
-      id: "CAMP017",
-      namaprogram: "Operasi Katarak Gratis",
-      Jenis: "dana",
-      target: 95000000,
-      tercapai: 100000000,
-      status_distribusi: "Selesai",
-      status: "Aktif",
-      rekdistribusi: "Bank Mega - 45678901234",
-      tanggal_mulai: "2024-03-01",
-      tanggal_selesai: "2024-04-15",
-      donatur: [
-        { nama: "Yuni Kartika", tanggal: "2024-03-20", nominal: 4000000, email: "yuni.k@example.com" },
-        { nama: "Zainal Abidin", tanggal: "2024-03-22", nominal: 2000000, email: "zainal.a@example.com" },
-      ],
-    },
-    {
-      id: "CAMP018",
-      namaprogram: "Pemberian Hewan Kurban",
-      Jenis: "barang",
-      target: 50, // Angka saja
-      tercapai: 45, // Angka saja
-      status_distribusi: "Berlangsung",
-      status: "Aktif",
-      rekdistribusi: "Bank Jabar Banten - 56789012345",
-      tanggal_mulai: "2024-05-20",
-      tanggal_selesai: "2024-06-30",
-      donatur: [
-        { nama: "Bunga Melati", tanggal: "2024-06-01", nominal: 500000, email: "bunga.m@example.com" },
-      ],
-    },
-    {
-      id: "CAMP019",
-      namaprogram: "Bantuan Pendidikan Prasekolah",
-      Jenis: "dana",
-      target: 45000000,
-      tercapai: 0,
-      status_distribusi: "Belum Dimulai",
-      status: "Aktif",
-      rekdistribusi: "Bank Kalsel - 67890123456",
-      tanggal_mulai: "2024-09-15",
-      tanggal_selesai: "2025-04-30",
-      donatur: [],
-    },
-    {
-      id: "CAMP020",
-      namaprogram: "Pembangunan MCK Umum",
-      Jenis: "dana",
-      target: 85000000,
-      tercapai: 90000000,
-      status_distribusi: "Selesai",
-      status: "Aktif",
-      rekdistribusi: "Bank Jateng - 78901234567",
-      tanggal_mulai: "2024-04-01",
-      tanggal_selesai: "2024-06-01",
-      donatur: [
-        { nama: "Dian Permata", tanggal: "2024-04-10", nominal: 1500000, email: "dian.p@example.com" },
-        { nama: "Fajar Gemilang", tanggal: "2024-04-12", nominal: 1000000, email: "fajar.g@example.com" },
-      ],
-    },
+    // Tambahan sampai 20
+    ...Array.from({ length: 10 }, (_, i) => {
+      const idNum = i + 11;
+      return {
+        id: `CAMP${String(idNum).padStart(3, '0')}`,
+        namaprogram: `Program Bantuan ${idNum}`,
+        Jenis: i % 2 === 0 ? "barang" : "dana",
+        target: i % 2 === 0 ? 1000 + i * 100 : 5000000 + i * 1000000,
+        tercapai: i % 2 === 0 ? 800 + i * 50 : 2500000 + i * 500000,
+        status: i % 3 === 0 ? "Non-Aktif" : "Aktif",
+        rekdistribusi: `Bank ${idNum} - ${1000000000 + idNum}`,
+        tanggal_mulai: `2024-${String((i % 12) + 1).padStart(2, '0')}-01`,
+        tanggal_selesai: `2024-${String((i % 12) + 2).padStart(2, '0')}-01`,
+        distribusi: i % 4 === 0 ? {
+          status: "Selesai",
+          tanggal_distribusi: `2024-${String((i % 12) + 2).padStart(2, '0')}-10`,
+          bukti: `bukti_camp${idNum}.jpg`,
+          konfirmasi_distribusi: "Dikonfirmasi"
+        } : null,
+        donatur: [
+          {
+            nama: `Donatur ${idNum}`,
+            tanggal: `2024-${String((i % 12) + 1).padStart(2, '0')}-10`,
+            nominal: 100000 * idNum,
+            email: `donatur${idNum}@example.com`
+          }
+        ]
+      };
+    })
   ]);
+  
   const [isAddForm, setIsAddForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredCampaigns, setFilteredCampaigns] = useState([]);
@@ -387,7 +291,8 @@ const DataCampaign = () => {
         };
         setCampaigns(prev => [...prev, newCampaign]);
           setIsAddForm(false);
-          toast.success("Campaign berhasil ditambahkan!");
+      toast.success("Campaign berhasil ditambahkan!");
+      setIsAddForm(false);
         setNewData({
           judul: "",
           kategori: "",
@@ -414,7 +319,9 @@ const DataCampaign = () => {
           {isAddForm ? "Kembali" : "Tambah Campaign"}
         </button>
 
-      <div className="relative w-full max-w-sm">
+          {
+            !isAddForm && (
+              <div className="relative w-full max-w-sm">
   <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
     <i className="fas fa-search"></i>
   </span>
@@ -425,36 +332,87 @@ const DataCampaign = () => {
     placeholder="Cari Campaign"
   />
 </div>
+            )
+          }
+      {/* <div className="relative w-full max-w-sm">
+  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+    <i className="fas fa-search"></i>
+            </span>
+            
+  <input
+    type="text"
+    onChange={handleSearch}
+    className="pl-10 border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-300"
+    placeholder="Cari Campaign"
+  />
+</div> */}
 
           </div>
               {isAddForm && (
                   <div className="bg-white p-6 rounded shadow-md">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {[
-  { label: "Judul", name: "judul" },
-  { label: "Kategori", name: "kategori" },
-  { label: "Target Dana", name: "targetDana" },
-  { label: "Tanggal Mulai", name: "tanggalMulai" },
-  { label: "Tanggal Selesai", name: "tanggalSelesai" },
-  { label: "No Telepon", name: "noTelepon" },
+  { label: "Nama Program", name: "namaprogram" },
+  {
+    label: "Kategori / Jenis",
+    name: "Jenis",
+    type: "select",
+    options: ["Pendidikan", "Bencana Alam", "Bantuan Sosial"],
+  },
+  { label: "Target Dana", name: "target", type: "number" },
+  { label: "Tanggal Mulai", name: "tanggal_mulai", type: "date" },
+  { label: "Tanggal Selesai", name: "tanggal_selesai", type: "date" },
+  {
+    label: "Status",
+    name: "status",
+    type: "select",
+    options: ["Aktif", "Tidak Aktif"],
+  },
+  {
+    label: "Status Distribusi",
+    name: "status_distribusi",
+    type: "select",
+    options: ["Belum Diajukan", "Menunggu Konfirmasi", "Dikonfirmasi"],
+  },
+  { label: "Rekening Distribusi", name: "rekdistribusi" },
 ].map((field) => (
-  <div key={field.name}>
+  <div key={field.name} className="mb-4">
     <label className="block mb-1">{field.label}</label>
-    <input
-      type={
-        field.name.includes("tanggal")
-          ? "date"
-          : field.name === "targetDana"
-          ? "number"
-          : "text"
-      }
-      name={field.name}
-      value={newData[field.name]}
-      onChange={handleChange}
-      className="w-full border px-3 py-2 rounded"
-    />
+
+    {field.type === "select" ? (
+      <select
+        name={field.name}
+        value={newData[field.name] || ""}
+        onChange={handleChange}
+        className="w-full border px-3 py-2 rounded"
+      >
+        <option value="">-- Pilih {field.label} --</option>
+        {field.options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    ) : (
+      <input
+        type={
+          field.type
+            ? field.type
+            : field.name.includes("tanggal")
+            ? "date"
+            : field.name === "target"
+            ? "number"
+            : "text"
+        }
+        name={field.name}
+        value={newData[field.name] || ""}
+        onChange={handleChange}
+        className="w-full border px-3 py-2 rounded"
+      />
+    )}
   </div>
 ))}
+
 
                       </div>
                       <button
@@ -486,7 +444,8 @@ const DataCampaign = () => {
                  
                     <td className="py-2 px-4">{campaign.namaprogram}</td>
                     <td className="py-2 px-4 capitalize">{campaign.Jenis}</td>
-                    <td className="py-2 px-4">{campaign.status_distribusi}</td>
+                    <td className="py-2 px-4">{campaign.distribusi?.status ?? '-'}</td>
+
                     <td className="py-2 px-4">
                       {campaign.status === "Aktif" ? (
                         <span className="text-green-500">Aktif</span>

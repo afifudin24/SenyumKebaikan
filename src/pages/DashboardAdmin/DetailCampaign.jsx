@@ -55,27 +55,66 @@ const DetailCampaign = () => {
                     </div>
                     <div className="py-3 px-8 bg-primary rounded-2xl w-6/12 text-white font-primary">
                         <h4 className="font-semibold">Detail Distribusi</h4>
-                        <div>
-                            <p className="my-2 font-light">Status Distribusi</p>
-                            <p className="my-2">{data.status_distribusi}</p>
-                        </div>
-                        <div>
-                            <p className="my-2 font-light">Tanggal Distribusi</p>
-                            <p className="my-2">{data.tanggal_distribusi ? data.tanggal_distribusi : "-"}</p>
-                        </div>
-                        <div>
-                            <p className="my-2 font-light">Bukti Distribusi</p>
-                            <p className="my-2">{data.bukti_distribusi ? data.bukti_distribusi : "-"}</p>
-                            {
-                                !data.bukti_distribusi && (
-                                    <input type="file" className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none" />
-                                )
-                            }
-                            <button className="my-2 rounded-lg bg-accent hover:bg-secondary text-xs md:text-sm p-3 text-white">
-                                Distribusi
-                            </button>
-                        </div>
-                    </div>
+                        {!data.distribusi ? (
+  <p className="mt-2 text-gray-500 italic">Belum ada pengajuan distribusi</p>
+) : (
+  <>
+    {/* Status Distribusi */}
+    <div>
+      <p className="my-2 font-light">Status Distribusi</p>
+      <p className="my-2">{data.distribusi.status || "-"}</p>
+    </div>
+
+    {/* Tanggal Distribusi */}
+    <div>
+      <p className="my-2 font-light">Tanggal Distribusi</p>
+      <p className="my-2">{data.distribusi.tanggal_distribusi || "-"}</p>
+    </div>
+
+    {/* Bukti Distribusi */}
+    <div>
+      <p className="my-2 font-light">Bukti Distribusi</p>
+      <p className="my-2">{data.distribusi.bukti || "-"}</p>
+
+      {!data.distribusi.bukti && (
+        <input
+          type="file"
+          className="mt-1 w-full px-4 py-2 text-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
+        />
+      )}
+    </div>
+
+    {/* Konfirmasi Distribusi */}
+    <div className="mt-4">
+      <label className="block mb-1 text-sm font-light">Konfirmasi Distribusi</label>
+      <select
+        value={data.distribusi.konfirmasi_distribusi || ""}
+        onChange={(e) => {
+          // setData((prev) => ({
+          //   ...prev,
+          //   distribusi: {
+          //     ...prev.distribusi,
+          //     konfirmasi_distribusi: e.target.value,
+          //   }
+          // }))
+        }}
+        className="w-full px-4 py-2 text-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
+      >
+        <option value="">-- Pilih Status --</option>
+        <option value="Menunggu Konfirmasi">Menunggu Konfirmasi</option>
+        <option value="Dikonfirmasi">Dikonfirmasi</option>
+        <option value="Ditolak">Ditolak</option>
+      </select>
+    </div>
+  </>
+)}
+ 
+
+    <button className="my-4 rounded-lg bg-accent hover:bg-secondary text-xs md:text-sm px-6 py-2 text-white">
+      Distribusi
+    </button>
+  </div>
+{/* </div> */}
                 </div>
                 <h4 className="text-center font-semibold text-2xl font-primary text-primary my-5">Riwayat Donatur</h4>
                 <div>

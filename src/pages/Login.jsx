@@ -28,28 +28,79 @@ const Login = () => {
   const [showChart, setShowChart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
- const [users, setUsers] = useState([
-  {
-    email: 'admin@gmail.com',
-    namadepan: 'Nopal',
-    namabelakang: 'Rahman',
-    password: 'password1',
-    role: 'admin',
-    isVolunteer: false,
-    alamat: 'Jl. Mawar No. 1, Jakarta',
-    notelepon: '081234567890'
-  },
-  {
-    email: 'user@gmail.com',
-    namadepan: 'Palno',
-    namabelakang: 'Santoso',
-    password: 'password2',
-    role: 'user',
-    isVolunteer: true,
-    alamat: 'Jl. Kenanga No. 2, Bandung',
-    notelepon: '089876543210'
-  }
-]);
+  const [users, setUsers] = useState([
+    {
+      email: 'admin@gmail.com',
+      namadepan: 'Nopal',
+      namabelakang: 'Rahman',
+      password: 'password1',
+      role: 'admin',
+      isVolunteer: false,
+      alamat: 'Jl. Mawar No. 1, Jakarta',
+      notelepon: '081234567890'
+    },
+    {
+      email: 'user@gmail.com',
+      namadepan: 'Palno',
+      namabelakang: 'Santoso',
+      password: 'password2',
+      role: 'user',
+      isVolunteer: true,
+      alamat: 'Jl. Kenanga No. 2, Bandung',
+      notelepon: '089876543210'
+    },
+    {
+      email: 'dina@gmail.com',
+      namadepan: 'Dina',
+      namabelakang: 'Permata',
+      password: 'password3',
+      role: 'user',
+      isVolunteer: true,
+      alamat: 'Jl. Melati No. 3, Surabaya',
+      notelepon: '081122334455'
+    },
+    {
+      email: 'rudi@gmail.com',
+      namadepan: 'Rudi',
+      namabelakang: 'Hartono',
+      password: 'password4',
+      role: 'user',
+      isVolunteer: false,
+      alamat: 'Jl. Anggrek No. 4, Medan',
+      notelepon: '082233445566'
+    },
+    {
+      email: 'sari@gmail.com',
+      namadepan: 'Sari',
+      namabelakang: 'Wulandari',
+      password: 'password5',
+      role: 'user',
+      isVolunteer: true,
+      alamat: 'Jl. Flamboyan No. 5, Yogyakarta',
+      notelepon: '083344556677'
+    },
+    {
+      email: 'budi@gmail.com',
+      namadepan: 'Budi',
+      namabelakang: 'Prasetyo',
+      password: 'password6',
+      role: 'user',
+      isVolunteer: false,
+      alamat: 'Jl. Cemara No. 6, Semarang',
+      notelepon: '084455667788'
+    },
+    {
+      email: 'lisa@gmail.com',
+      namadepan: 'Lisa',
+      namabelakang: 'Maulida',
+      password: 'password7',
+      role: 'user',
+      isVolunteer: true,
+      alamat: 'Jl. Teratai No. 7, Bali',
+      notelepon: '085566778899'
+    }
+  ]);
+  
 
 const toggleMenu = () => {
   setShowMenu(!showMenu);
