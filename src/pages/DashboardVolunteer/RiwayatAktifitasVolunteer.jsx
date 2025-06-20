@@ -96,7 +96,7 @@ const ActivityHistory = () => {
           <FontAwesomeIcon icon={faSearch} className="absolute left-2 top-2.5 text-gray-400 text-xs" />
           <input
             type="text"
-            className="w-full border bg-white  pl-8 pr-2 py-1 text-sm rounded-lg"
+            className="w-full border text-primary bg-white  pl-8 pr-2 py-1 text-sm rounded-lg"
             placeholder="Cari..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}

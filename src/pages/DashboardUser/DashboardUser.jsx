@@ -2,7 +2,7 @@ import DashboardLayout from "../../components/DashboardLayout";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Container from "../../components/Container"
-import { faEllipsis, faChartLine, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsis, faChartLine, faArrowRight, faCalendar, faDonate, faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 import CampaignProp from "../../assets/campaignpop.png"
 import Grafik from "../../components/Grafik";
 import { Line, Bar } from 'react-chartjs-2';
@@ -19,14 +19,19 @@ const DashboardUser = () => {
   }) 
   return (
     <DashboardLayout>
-     
-      <h2 className="text-4xl md:text-2xl font-primary font-bold text-primary mb-4">Hi, {user.namadepan}</h2>
+      <div className="flex justify-between w-10/12 mx-auto">
+        <div>
+        <h2 className="text-4xl md:text-2xl font-primary font-bold text-primary mb-4">Hi, {user.namadepan}</h2>
       <p className="text-xs md:text-sm font-secondary">Selamat datang di halaman dashboard User</p>
-      <div className="flex flex-col md:flex-row justify-between">
-        <div className="w-7/12">
-
-        
-         <div className="grid grid-cols-1  sm:grid-cols-3 gap-6 p-6">
+        </div>
+        <div>
+          <div className="px-5 py-2 rounded-full font-light font-primary border flex gap-2 items-center border-primary text-primary">
+             <FontAwesomeIcon icon={faCalendar} /> <h3 className="text-base">Februari 2025 - Juni 2025</h3>
+          </div>
+        </div>
+      </div>
+      <div className="2xl:w-10/12 md:w-11/12 mx-auto">
+      <div className="grid grid-cols-1  sm:grid-cols-3 gap-6 p-6">
               {/* Kartu Donasi Uang */}
                   <div className="px-4 py-2 h-auto rounded-xl shadow-lg bg-secondary">
                     <div className='flex justify-between items-center mb-2 '>
@@ -57,42 +62,188 @@ const DashboardUser = () => {
 
 
           </div>
-              <UserJoin />
+      <DonasiChart />
 
-         
-         
-        </div>
-        <div className="w-full md:w-5/12 p-2">
-          <div className="bg-primary p-2 font-secondary text-white text-center rounded-2xl font-light">
-            <p className="text-center text-2xl my-2 font-normal">Program</p>
-            <div className="flex justify-between px-6 py-2">
-              <div>
-                <p>Aktif</p>
-                <p>19</p>
-              </div>
-              <div>
-                <p>Menunggu</p>
-                <p>11</p>
-              </div>
-              <div>
-                <p>Selesai</p>
-                <p>576</p>
-              </div>
-            </div>
+      <div className="flex gap-2 mt-5"> 
+        <div className="riwayat rounded-xl border p-3 w-6/12 shadow-md border-primary">
+          <div className="p-1 flex justify-between">
+            <p className="text-lg font-secondary text-primary">Riwayat Aktifitas</p>
+            <FontAwesomeIcon className='text-primary' icon={faEllipsis} />
           </div>
-          
-          <CampaignPopuler />
 
-          <Volunteer />
+          <RiwayatDonasi />
         </div>
+        <div className="campaign rounded-xl border  w-6/12 shadow-md border-primary">
+        <div className="flex justify-center p-1 border-b-primary border-b">
+            <p className="text-lg font-secondary text-primary">Campaign Yang Didukung</p>
+            
+          </div>
+          <div className="p-3">
+          <CampaignChart />
 
-        
+          </div>
+        </div>
       </div>
-       <div className="p-6">
-            <DonasiChart />
-          </div>
+      </div>
+
+     
+   
+      
+     
       {/* Konten lainnya */}
     </DashboardLayout>
+  );
+};
+
+
+const CampaignChart = () => {
+  const data = {
+    // labels: ['Bantuan Pendidikan', 'Donasi Barang', 'Bantuan Pendidikan'],
+    datasets: [
+      {
+        data: [40, 25, 35], // persentase
+        backgroundColor: ['#c6f6d5', '#1a202c', '#68d391'], // warna sesuai gambar
+        borderWidth: 0,
+      },
+    ],
+  };
+const options = {
+  cutout: '70%', // lubang tengah donat
+  plugins: {
+    legend: {
+      display: true,
+      position: 'center',
+      labels: {
+        color: '#333',
+       
+        font: {
+          size: 12
+        }
+      }
+    },
+   datalabels: {
+  color: '#68B984', // warna teks
+  backgroundColor: '#fff', // warna latar belakang label
+  borderRadius: 999, // untuk membulatkan hingga tampak seperti lingkaran
+  padding: 10, // jarak teks dengan tepi
+  shadow : {
+    color: '#68B984',
+    offset: {
+      x: 2,
+      y: 2
+    }
+  },
+  font: {
+    weight: 'bold',
+    size: 14
+  },
+  formatter: (value, context) => {
+    const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+    const percentage = ((value / total) * 100).toFixed(0);
+    return `${percentage}%`;
+  },
+  anchor: 'center',
+  align: 'center',
+  display: 'auto'
+}
+  }
+};
+  return (
+    <div className="w-full gap-3 flex flex-col justify-center items-center mx-auto">
+      <div className='h-full relative'>
+      <Doughnut className=' w-full text-center mx-auto' data={data} options={options} />
+      <div className="absolute font-secondary text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  flex flex-col items-center justify-center text-primary">
+        <p className="text-xs">Total Campaign</p>
+        <p className="text-2xl font-bold">5</p>
+      </div>
+      </div>
+      {/* Legend Manual */}
+      <div className="text-sm mt-4 flex flex-row flex-wrap gap-3 items-center justify-center">
+        <div className="flex items-center gap-2 text-primary font-secondary">
+          <span className="w-4 h-4 rounded-full  bg-[#c6f6d5] font-secondary"></span> Bantuan Pendidikan
+        </div>
+        <div className="flex items-center gap-2 text-primary font-secondary">
+          <span className="w-4 h-4 rounded-full bg-[#1a202c]"></span> Donasi Barang
+        </div>
+        <div className="flex items-center gap-2 text-primary font-secondary">
+          <span className="w-4 h-4 rounded-full bg-[#94c4a7]"></span> Bantuan Pendidikan
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const RiwayatDonasi = () => {
+  const [donasiList] = useState([
+    {
+      id: 1,
+      jenis: "Donasi Uang",
+      tanggal: "12 Jul 2025",
+      status: "Berhasil",
+      hash: "0x9a29c4...",
+    },
+    {
+      id: 2,
+      jenis: "Donasi Barang",
+      tanggal: "12 Okt 2025",
+      status: "Proses",
+      hash: "0x9a29c4...",
+    },
+    {
+      id: 3,
+      jenis: "Donasi Uang",
+      tanggal: "12 Jul 2025",
+      status: "Berhasil",
+      hash: "0x9a29c4...",
+    },
+    {
+      id: 4,
+      jenis: "Donasi Barang",
+      tanggal: "12 Okt 2025",
+      status: "Proses",
+      hash: "0x9a29c4...",
+    },
+    {
+      id: 5,
+      jenis: "Donasi Barang",
+      tanggal: "12 Okt 2025",
+      status: "Proses",
+      hash: "0x9a29c4...",
+    },
+  ]);
+
+  return (
+    <div className="mx-auto p-4 space-y-4 font-sans">
+      {donasiList.map((item) => (
+        <div
+          key={item.id}
+          className="flex items-center justify-between border-b pb-3"
+        >
+          {/* Icon dan Info Kiri */}
+          <div className="flex items-center gap-3">
+            <div className="text-2xl text-primary">
+              {item.jenis === "Donasi Uang" ? <FontAwesomeIcon icon={faDonate} /> : <FontAwesomeIcon icon={faBoxOpen} />}
+            </div>
+            <div>
+              <p className="font-semibold text-primary">{item.jenis}</p>
+              <p className="text-sm text-gray-500">{item.tanggal}</p>
+            </div>
+          </div>
+
+          {/* Status dan Hash */}
+          <div className="text-right">
+            <p
+              className={`font-semibold ${
+                item.status === "Berhasil" ? "text-green-500" : "text-gray-500"
+              }`}
+            >
+              {item.status}
+            </p>
+            <p className="text-xs text-gray-500">{item.hash}</p>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 
@@ -155,6 +306,8 @@ const donationData = {
 
 
 
+
+
 const DonasiChart = () => {
   const [periodType, setPeriodType] = useState('bulanan');
   const [selectedCampaign, setSelectedCampaign] = useState('bencanaAceh');
@@ -169,12 +322,14 @@ const DonasiChart = () => {
         data: currentData.uang,
         borderColor: 'rgba(34, 197, 94, 1)',
         backgroundColor: 'rgba(207, 253, 225, 1)',
+         borderRadius: 5, // 🔸 inilah yang membuat batangnya rounded
         yAxisID: 'y1',
       },
       {
         label: 'Donasi Barang (pcs)',
         data: currentData.barang,
         borderColor: 'rgba(99, 234, 155, 1)',
+         borderRadius: 5, // 🔸 inilah yang membuat batangnya rounded
         backgroundColor: 'rgba(104, 185, 132, 1)',
         yAxisID: 'y2',
       },
@@ -184,13 +339,17 @@ const DonasiChart = () => {
   const options = {
     responsive: true,
     plugins: {
-      legend: { position: 'top' },
+      legend: { position: 'top', labels: { color: '#fff' } },
+
     },
     scales: {
-      x: { beginAtZero: true },
+      x: { beginAtZero: true,  ticks: {
+      color: '#fff', // Ini membuat label bawah (Jan, Feb, dst) berwarna putih
+    }, },
       y1: {
         beginAtZero: true,
         ticks: {
+          color: 'rgba(99, 234, 155, 1)',
           callback: function (value) {
             return value / 1000 + 'k';
           },
@@ -203,7 +362,7 @@ const DonasiChart = () => {
       },
       y2: {
         beginAtZero: true,
-        ticks: { stepSize: 10 },
+        ticks: { stepSize: 10, color: 'rgba(34, 197, 94, 1)' },
         position: 'right',
         title: {
           display: true,
@@ -215,7 +374,7 @@ const DonasiChart = () => {
   };
 
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+    <div className="bg-primary p-6 rounded-lg shadow-xl">
       <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
         <h3 className="text-white text-xl">
           Donasi: {donationData[selectedCampaign].name} ({periodType.charAt(0).toUpperCase() + periodType.slice(1)})
@@ -254,158 +413,4 @@ const DonasiChart = () => {
 };
 
 
-
-
-
-const CampaignPopuler = () => {
-  const formatRupiah = (angka) => {
-    return 'Rp. ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  };
-  const campaign = [
-    {
-      title: 'Bantuan Pendidikan',
-      donasi: 1000000,
-      sisahari: '12',
-      percent: '50%',
-    },
-    {
-      title: 'Donasi Bencana Alam',
-      donasi: 2500000,
-      sisahari: '8',
-      percent: '70%',
-    },
-    {
-      title: 'Santunan Anak Yatim',
-      donasi: 1750000,
-      sisahari: '5',
-      percent: '35%',
-    },
-  ];
-  
-  return (
-    <div className="rounded-xl shadow-lg mt-5">
-      <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-xl font-bold text-primary mb-4">Campaign Populer</h2>
-        <div className="space-y-4">
-          {campaign.map((item, index) => (
-            <div key={index} className="flex gap-2 items-center">
-              <div className="w-2/12">
-                <img src={CampaignProp} className="w-full" alt="" />
-              </div>
-              <div className="w-10/12">
-
-              <div className="flex justify-between items-center my-2">
-                <h3 className="text-lg font-semibold text-primary ">{item.title}</h3>
-                <p className="text-primary">{formatRupiah(item.donasi)}</p>
-              </div>
-              <div>
-                <div className="w-full rounded-lg bg-primary my-2"> 
-                  <div className="p-1 rounded-lg bg-accent" style={{width: `${item.percent}`}}>
-                  </div>
-                </div>
-                <div className="flex justify-between my-2" style={{width: `${item.percent}`}}>
-                <p className="text-primary"> Sisa {item.sisahari} hari </p>
-                <p className="text-primary">{item.percent}</p>
-
-                </div>
-              </div>
-            </div>
-              </div>
-          ))}
-        </div>
-      </div>
-      </div>
-      )
-}
-
-const Volunteer = () => {
-  const volunteerData = [
-    {
-      name: 'Arif Alfiansyah',
-      campaign: 'Bantuan banjir Brebes',
-    },
-    {
-      name: 'Siti Nurhaliza',
-      campaign: 'Donasi Pendidikan Anak Yatim',
-    },
-    {
-      name: 'Rizky Hidayat',
-      campaign: 'Santunan Korban Gempa Cianjur',
-    },
-  ];
-  
-  return (
-
-    <div className="rounded-2xl shadow-lg p-6  bg-white mt-5">
-      <h2 className="my-3 font-semibold text-primary text-xl">Volunteer</h2>
-      {
-        volunteerData.map((item, index) => (
-          <div className="flex justify-between items-center gap-2 my-2">
-            <div className="w-2/12 text-center rounded-full">
-              <img className="rounded-full w-20 h-20" src={CampaignProp} alt="" />
-            </div>
-            <div className="w-10/12">
-            <p className="text-primary">{item.name}</p>
-            <p className="text-primary">Campaign <FontAwesomeIcon icon={faArrowRight} /> {item.campaign}</p>
-            </div>
-          </div>
-        ))
-      }
-      </div>
-  )
-}
-
-const UserJoin = () => {
- const userJoinData = [
-  { nama: 'Arif Alfiansyah' },
-  { nama: 'Budi Santoso' },
-  { nama: 'Citra Lestari' },
-  { nama: 'Dedi Pratama' },
-  { nama: 'Eka Nuraini' },
-  { nama: 'Fajar Hidayat' },
-  { nama: 'Gita Wulandari' },
-  { nama: 'Hendra Saputra' },
-  { nama: 'Indah Permata' },
-  { nama: 'Joko Susilo' },
-  { nama: 'Kiki Ramadhan' },
-  { nama: 'Lina Marlina' },
-  { nama: 'Mahmud Fauzi' },
-  { nama: 'Nina Septiani' },
-  { nama: 'Oki Hermawan' },
-  { nama: 'Putri Andini' },
-  { nama: 'Qori Azizah' },
-  { nama: 'Rian Nugroho' },
-  { nama: 'Siti Aisyah' },
-  { nama: 'Taufik Hidayat' }
-];
-
-return (
-  <div className=''>
-    <h1 className='text-primary text-2xl font-semibold'>889 Pengguna</h1>
-    <p className='text-primary opacity-50'>Sudah bergabung dengan Senyum Kebaikan</p>
-    <div className='mt-5 flex flex-wrap gap-1 font-secondary'>
-        {
-          userJoinData.map((item, index) => (
-            <div key={index} className='flex flex-col gap-1 text-primary justify-center items-center px-2 py-1 rounded-lg'>
-            <img 
-  src={CampaignProp} 
-  className="w-16 h-16 object-cover rounded-full" 
-  alt="" 
-/>
-              {item.nama}
-              </div>
-          ))
-        }
-        <div className='flex flex-col justify-center items-center'>
-
-        <div className="w-16 h-16 object-cover border-gray-400 bg-secondary text-primary flex justify-center items-center rounded-full "> 
-            <FontAwesomeIcon icon={faArrowRight} />
-        </div>
-        <p>Selengkapnya</p>
-        </div>
-    </div>
-  </div>
-)
-
-}
 export default DashboardUser;

@@ -36,7 +36,7 @@ const SidebarUser = ({ collapsed, setCollapsed }) => {
   // ];
 
 const menu = [
-  { icon: faTachometerAlt, text: 'Dashboard', url: '/dashboard' },
+  { icon: faTachometerAlt, text: 'Dashboard', url: '/dashboarduser' },
   { icon: faClock, text: 'Riwayat Aktifitas', url: '/riwayataktifitasuser' },
   { icon: faHandHoldingUsd, text: 'Riwayat Donasi', url: '/riwayatdonasi' },
   { icon: faEnvelopeOpenText, text: 'Pesan Saya', url: '/pesansaya' },
