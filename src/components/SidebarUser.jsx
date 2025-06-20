@@ -65,11 +65,13 @@ if(user.isVolunteer){
       <div className={`flex ${collapsed ? 'justify-center' : 'justify-between'} items-center mb-6`}>
         {/* <h1 className={`text-xl font-bold ${collapsed && 'hidden'}`}>Senyum</h1>
          */}
+         <Link to={'/'}>
        <img
   src={LogoBaru}
   className={`w-44 ${collapsed ? 'hidden md:hidden' : 'hidden md:block'}`}
   alt=""
 />
+  </Link>
 
         <button className='md:block hidden' onClick={() => setCollapsed(!collapsed)}>☰</button>
       </div>

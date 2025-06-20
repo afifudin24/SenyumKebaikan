@@ -98,7 +98,7 @@ const DetailCampaign = () => {
           //   }
           // }))
         }}
-        className="w-full px-4 py-2 text-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
+        className="w-full px-4 py-2 text-primary border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
       >
         <option value="">-- Pilih Status --</option>
         <option value="Menunggu Konfirmasi">Menunggu Konfirmasi</option>

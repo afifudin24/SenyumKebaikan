@@ -4,11 +4,14 @@ import logo2 from "../assets/logo2.png"
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faChartLine, faCircle, faHome, faSearch, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faChartLine, faCircle, faEnvelope, faEnvelopeOpenText, faEnvelopesBulk, faHome, faSearch, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faHandHoldingHeart } from '@fortawesome/free-solid-svg-icons/faHandHoldingHeart';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt, faUpload } from "@fortawesome/free-solid-svg-icons";
+import toast from 'react-hot-toast';
 import baju from "../assets/baju.png"
+import { faEnvelopeCircleCheck } from '@fortawesome/free-solid-svg-icons/faEnvelopeCircleCheck';
 const Navbar = () => {
     const location = useLocation();
   const currentPath = location.pathname;
@@ -16,6 +19,8 @@ const Navbar = () => {
   const [showMenuProfile, setShowMenuProfile] = useState(false);
   const [showModalDetail, setShowModalDetail] = useState(false);
   const [showModalPengajuan, setShowModalPengajuan] = useState(false);
+  const [showModalPengajuanForm, setShowModalPengajuanForm] = useState(false);
+  const [showModalPengajuanKonfirmasi, setShowModalPengajuanKonfirmasi] = useState(false);
   const [dataSelected, setDataSelected] = useState(null);
    const [user, setUser] = useState(() => {
               const savedUser = localStorage.getItem('user');
@@ -144,7 +149,9 @@ const Navbar = () => {
 </div>
 {/* Modal */}
                     <ModalDetailDonasi setShowDetailDonasi={setShowModalDetail} showDetailDonasi={showModalDetail} />
-                    <ModalPengajuanDiterima setShowModalPengajuan={setShowModalPengajuan}  showModalPengajuan={showModalPengajuan} />
+                    <ModalPengajuanDiterima setShowModalPengajuan={setShowModalPengajuan} setShowModalPengajuanKonfirmasi={setShowModalPengajuanKonfirmasi} showModalPengajuan={showModalPengajuan} />
+                    <ModalPengajuanDikonfirmasi setShowModalPengajuan={setShowModalPengajuan} setShowModalPengajuanForm={setShowModalPengajuanForm} setShowModalPengajuanKonfirmasi={setShowModalPengajuanKonfirmasi}  showModalPengajuanDikonfirmasi={showModalPengajuanKonfirmasi} />
+                    <ModalFormKonfirmasiPenerimaanBarang setShowModalPengajuanKonfirmasi={setShowModalPengajuanKonfirmasi} showModalPengajuanForm={showModalPengajuanForm} setShowModalPengajuanForm={setShowModalPengajuanForm} showModalPengajuanDikonfirmasi={showModalPengajuanKonfirmasi} />
   {/* User Menu */}
   <div className="relative group">
     <FontAwesomeIcon icon={faUserCircle} onClick={() => setShowMenuProfile(!showMenuProfile)} className="cursor-pointer" />
@@ -262,7 +269,7 @@ const ModalDetailDonasi = ({showDetailDonasi, setShowDetailDonasi}) => {
   )
 }
 
-const ModalPengajuanDiterima = ({showModalPengajuan, setShowModalPengajuan}) => {
+const ModalPengajuanDiterima = ({showModalPengajuan, setShowModalPengajuan, setShowModalPengajuanKonfirmasi}) => {
   return (
    <div
   className={`rounded-xl mt-4 mb-4 text-center  ${
@@ -279,7 +286,170 @@ const ModalPengajuanDiterima = ({showModalPengajuan, setShowModalPengajuan}) => 
       <p className='text-center text-sm my-2'> Barang akan sampai estimasi 2-3 hari dan tidak dipungut biaya apapun anda hanya perlu mengkonfirmasi jika barang sudah sampai. Terima kasih</p>
       </div>
 
+      <button onClick={() => {
+        setShowModalPengajuan(false);
+        setShowModalPengajuanKonfirmasi(true);
+      }} className='p-2 mb-3 rounded-md text-xl text-white bg-accent hover:bg-secondary transition-all duration-100 cursor-pointer'>
+          Konfirmasi
+      </button>
+
       </div>
   )
 }
+
+const ModalPengajuanDikonfirmasi = ({setShowModalPengajuan, showModalPengajuanDikonfirmasi, setShowModalPengajuanKonfirmasi, setShowModalPengajuanForm}) => {
+  return (
+   <div
+  className={`rounded-xl mt-4 mb-4 text-center  ${
+    showModalPengajuanDikonfirmasi ? "w-auto opacity-100 h-auto scale-100 " : "w-0 h-0 opacity-0 scale-95 "
+  } md:w-6/12  duration-300 transition-all z-999 top-1/2 fixed left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto overflow-hidden bg-white text-primary border border-gray-400`}
+>
+      <div className="flex relative flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 w-full bg-secondary ">
+        <FontAwesomeIcon icon={faEnvelopeOpenText} className="text-5xl  text-accent"  />
+      <h4 className="font-semibold my-2 text-primary">Konfirmasi Penerimaan Barang</h4>
+        <FontAwesomeIcon onClick={() => setShowModalPengajuanKonfirmasi(false)} className="absolute top-2 right-2" icon={faTimes} />
+      </div>
+      <div className='p-2 font-primary'>
+      <p className="text-sm text-center font-semibold my-2" >Status : Barang sudah diterima</p>
+      <p className='text-center text-sm my-2'>Klik di bawah untuk mengkonfirmasi</p>
+      </div>
+      <button
+      onClick={() => {
+        setShowModalPengajuanKonfirmasi(false)
+        setShowModalPengajuanForm(true);
+      }}
+      className='p-2 mb-3 rounded-md text-xl text-white bg-accent hover:bg-secondary transition-all duration-100 cursor-pointer'>
+          Konfirmasi Sekarang
+      </button>
+
+      </div>
+  )
+}
+
+const ModalFormKonfirmasiPenerimaanBarang = ({showModalPengajuanDikonfirmasi, setShowModalPengajuanKonfirmasi, showModalPengajuanForm, setShowModalPengajuanForm}) => {
+  const [formData, setFormData] = useState({
+    namaBarang: "Pakaian",
+    jumlahDiterima: "30",
+    tglTerima: "2025-07-30",
+    catatan: "Barang Diterima Dengan Baik",
+    fileBukti: null,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    setFormData({
+      ...formData,
+      [name]: files ? files[0] : value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Data dikirim:", formData);
+    toast.success('Konfirmasi telah terkirim');
+  setShowModalPengajuanForm(false);
+  };
+
+  return (
+    <div
+    className={`rounded-xl mt-4 mb-4 text-center  ${
+      showModalPengajuanForm ? "w-auto opacity-100 h-auto scale-100 " : "w-0 h-0 opacity-0 scale-95 "
+    } md:w-6/12  duration-300 transition-all z-999 top-1/2 fixed left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto overflow-hidden bg-white text-primary border border-gray-400`}
+  >
+    <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 font-sans">
+      <h2 className="text-lg font-semibold text-center text-gray-700 mb-6">
+        Form Konfirmasi Penerimaan Barang
+      </h2>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Nama Barang */}
+        <div>
+          <label className="block text-sm mb-1 text-gray-700">Nama Barang</label>
+          <input
+            type="text"
+            name="namaBarang"
+            value={formData.namaBarang}
+            disabled
+            className="w-full border border-gray-300 px-3 py-2 rounded-md bg-gray-100 text-gray-600"
+          />
+        </div>
+
+        {/* Jumlah Yang Diterima */}
+        <div>
+          <label className="block text-sm mb-1 text-gray-700">Jumlah Yang Diterima</label>
+          <input
+            type="text"
+            name="jumlahDiterima"
+            placeholder="@gmail.com"
+            value={formData.jumlahDiterima}
+            onChange={handleChange}
+            className="w-full border border-gray-300 px-3 py-2 rounded-md"
+          />
+        </div>
+
+        {/* Tgl Terima */}
+        <div>
+          <label className="block text-sm mb-1 text-gray-700">Tgl Terima</label>
+          <div className="relative">
+            <input
+              type="date"
+              name="tglTerima"
+              value={formData.tglTerima}
+              onChange={handleChange}
+              className="w-full border border-gray-300 px-3 py-2 rounded-md"
+            />
+            <FontAwesomeIcon
+              icon={faCalendarAlt}
+              className="absolute right-3 top-3 text-gray-400"
+            />
+          </div>
+        </div>
+
+        {/* Catatan */}
+        <div>
+          <label className="block text-sm mb-1 text-gray-700">
+            Catatan / Kondisi Barang
+          </label>
+          <textarea
+            name="catatan"
+            rows={3}
+            value={formData.catatan}
+            onChange={handleChange}
+            className="w-full border border-gray-300 px-3 py-2 rounded-md"
+          />
+        </div>
+
+        {/* Upload Bukti */}
+        <div>
+          <label className="block text-sm mb-2 text-gray-700">
+            Upload Bukti Penerimaan:
+          </label>
+          <div className="flex items-center justify-center border border-dashed border-gray-400 px-4 py-8 rounded-md cursor-pointer">
+            <label htmlFor="fileUpload" className="flex flex-col items-center text-gray-500 cursor-pointer">
+              <FontAwesomeIcon icon={faUpload} className="text-2xl mb-2" />
+              <span className="text-sm">Upload Video / foto disini</span>
+            </label>
+            <input
+              type="file"
+              id="fileUpload"
+              name="fileBukti"
+              accept="image/*,video/*"
+              className="hidden"
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        {/* Submit */}
+        <button
+          type="submit"
+          className="w-full bg-primary text-white py-2 rounded-md hover:bg-green-700 transition"
+        >
+          Kirim Konfirmasi
+        </button>
+      </form>
+    </div>
+    </div>
+  );
+};
 export default Navbar;
