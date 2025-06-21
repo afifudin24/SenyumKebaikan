@@ -126,76 +126,170 @@ const toggleChart = () => {
     </div>
   );
 };
+
+
+const donationData = {
+  bencanaAceh: {
+    name: 'Bencana Alam Aceh',
+    bulanan: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+      uang: [100000, 120000, 90000, 110000, 130000, 95000],
+      barang: [60, 80, 70, 90, 100, 85],
+    },
+    mingguan: {
+      labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4'],
+      uang: [30000, 40000, 35000, 45000],
+      barang: [20, 25, 30, 28],
+    },
+    harian: {
+      labels: ['1', '2', '3', '4', '5', '6', '7'],
+      uang: [5000, 7000, 6500, 8000, 7500, 9000, 8500],
+      barang: [3, 5, 6, 7, 4, 8, 9],
+    },
+  },
+  pendidikan: {
+    name: 'Pendidikan untuk Negeri',
+    bulanan: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+      uang: [80000, 85000, 90000, 95000, 100000, 105000],
+      barang: [40, 45, 50, 55, 60, 65],
+    },
+    mingguan: {
+      labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4'],
+      uang: [20000, 25000, 22000, 27000],
+      barang: [15, 18, 20, 22],
+    },
+    harian: {
+      labels: ['1', '2', '3', '4', '5', '6', '7'],
+      uang: [3000, 3500, 3200, 3700, 3900, 4200, 4100],
+      barang: [1, 2, 3, 2, 4, 3, 5],
+    },
+  },
+  kesehatanAnak: {
+    name: 'Kesehatan dan Gizi Anak',
+    bulanan: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+      uang: [95000, 97000, 99000, 105000, 110000, 108000],
+      barang: [70, 75, 80, 85, 90, 88],
+    },
+    mingguan: {
+      labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4'],
+      uang: [33000, 36000, 39000, 41000],
+      barang: [21, 23, 26, 28],
+    },
+    harian: {
+      labels: ['1', '2', '3', '4', '5', '6', '7'],
+      uang: [4000, 4200, 4400, 4600, 4800, 5000, 5200],
+      barang: [2, 3, 4, 5, 4, 6, 5],
+    },
+  },
+};
+
 const DonasiChart = () => {
-  const data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', '25', '28', '29', '30'],
+  const [periodType, setPeriodType] = useState('bulanan');
+  const [selectedCampaign, setSelectedCampaign] = useState('bencanaAceh');
+
+  const currentData = donationData[selectedCampaign][periodType];
+
+  const chartData = {
+    labels: currentData.labels,
     datasets: [
       {
         label: 'Donasi Uang (Ribuan)',
-        data: [100000, 90000, 120000, 130000, 80000, 110000, 95000, 105000, 140000, 130000, 110000, 100000],
+        data: currentData.uang,
         borderColor: 'rgba(34, 197, 94, 1)',
         backgroundColor: 'rgba(207, 253, 225, 1)',
-        yAxisID: 'y1', // Menggunakan sumbu Y pertama
+         borderRadius: 5, // 🔸 inilah yang membuat batangnya rounded
+        yAxisID: 'y1',
       },
       {
         label: 'Donasi Barang (pcs)',
-        data: [50, 60, 70, 110, 80, 90, 100, 130, 140, 120, 110, 90],
+        data: currentData.barang,
         borderColor: 'rgba(99, 234, 155, 1)',
-        
+         borderRadius: 5, // 🔸 inilah yang membuat batangnya rounded
         backgroundColor: 'rgba(104, 185, 132, 1)',
-        yAxisID: 'y2', // Menggunakan sumbu Y kedua
+        yAxisID: 'y2',
       },
     ],
   };
+
   const options = {
     responsive: true,
     plugins: {
-      legend: {
-        position: 'top',
-      },
+      legend: { position: 'top', labels: { color: '#fff' } },
+
     },
     scales: {
-      x: {
-        beginAtZero: true,
-      },
+      x: { beginAtZero: true,  ticks: {
+      color: '#fff', // Ini membuat label bawah (Jan, Feb, dst) berwarna putih
+    }, },
       y1: {
         beginAtZero: true,
         ticks: {
+          color: 'rgba(99, 234, 155, 1)',
           callback: function (value) {
-            return value / 1000 + 'k'; // Menampilkan angka dalam ribuan
+            return value / 1000 + 'k';
           },
         },
         title: {
           display: true,
           text: 'Donasi Uang (Ribuan)',
-          color  : 'rgba(34, 197, 94, 1)',
+          color: 'rgba(99, 234, 155, 1)',
         },
       },
       y2: {
         beginAtZero: true,
-        ticks: {
-          stepSize: 10, // Menyesuaikan step size untuk sumbu Y kedua (pcs)
-        },
+        ticks: { stepSize: 10, color: 'rgba(34, 197, 94, 1)' },
+        position: 'right',
         title: {
           display: true,
-          color: 'rgba(99, 234, 155, 1)',
+          color: 'rgba(34, 197, 94, 1)',
           text: 'Donasi Barang (pcs)',
         },
       },
     },
   };
+
   return (
-    <div className="bg-gray-800 p-5 rounded-lg shadow-lg">
-      <h3 className="text-white 2xl:text-xl text:lg mb-4">Donasi Bulan Ini</h3>
-      <div className='2xl:hidden block'>
-      <Bar data={data} options={options} height={120}/>
+    <div className="bg-primary p-6 rounded-lg shadow-xl">
+      <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
+        <h3 className="text-white text-xl">
+          Donasi: {donationData[selectedCampaign].name} ({periodType.charAt(0).toUpperCase() + periodType.slice(1)})
+        </h3>
+        <div className="flex gap-2">
+          <select
+            value={selectedCampaign}
+            onChange={(e) => setSelectedCampaign(e.target.value)}
+            className="p-2 rounded bg-white text-black"
+          >
+            {Object.entries(donationData).map(([key, value]) => (
+              <option key={key} value={key}>
+                {value.name}
+              </option>
+            ))}
+          </select>
+          <select
+            value={periodType}
+            onChange={(e) => setPeriodType(e.target.value)}
+            className="p-2 rounded bg-white text-black"
+          >
+            <option value="bulanan">Bulanan</option>
+            <option value="mingguan">Mingguan</option>
+            <option value="harian">Harian</option>
+          </select>
+        </div>
       </div>
-      <div className='2xl:block hidden'>
-      <Bar data={data} options={options} className='hidden 2xl:block' height={200}/>
+      <div className="2xl:hidden block">
+        <Bar data={chartData} options={options} height={120} />
+      </div>
+      <div className="2xl:block hidden">
+        <Bar data={chartData} options={options} height={150} />
       </div>
     </div>
   );
 };
+
+
 const CampaignChart = () => {
   const data = {
     // labels: ['Bantuan Pendidikan', 'Donasi Barang', 'Bantuan Pendidikan'],

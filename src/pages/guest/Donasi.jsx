@@ -96,59 +96,63 @@ const Donasi = () => {
       },
     ]);
 
-  const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
+const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
   {
     title: 'Untuk pendidikan panti asuhan A',
     type: 'Panti Asuhan',
-    description: 'Untuk menunjang agar nyaman saat melaksanakan kegiatan menuntut ilmu maka perlu bebrapa perlengkapan pokok bersekolah. Bantuan dari anda semua adalah salah satu bentuk kepedulian dengan pendidikan di Indonesia untuk mencapai Indonesia emas.',
+    description:
+      'Untuk menunjang agar nyaman saat melaksanakan kegiatan menuntut ilmu maka perlu beberapa perlengkapan pokok bersekolah. Bantuan dari anda semua adalah salah satu bentuk kepedulian dengan pendidikan di Indonesia untuk mencapai Indonesia emas.',
     items: [
-      { title: 'Pakaian', progress: '50%' },
-      { title: 'Makanan', progress: '30%' },
-      { title: 'Perlengkapan', progress: '20%' },
-    ]
+      { title: 'Pakaian', progress: '50%', kebutuhan: 100, terkumpul: 50 },
+      { title: 'Makanan', progress: '30%', kebutuhan: 150, terkumpul: 45 },
+      { title: 'Perlengkapan', progress: '20%', kebutuhan: 200, terkumpul: 40 },
+    ],
   },
   {
     title: 'Untuk pendidikan panti asuhan B',
     type: 'Panti Asuhan',
-    description: 'Untuk menunjang agar nyaman saat melaksanakan kegiatan menuntut ilmu maka perlu pengingkatan ketersediaan barang maupun pangan.',
+    description:
+      'Untuk menunjang agar nyaman saat melaksanakan kegiatan menuntut ilmu maka perlu peningkatan ketersediaan barang maupun pangan.',
     items: [
-      { title: 'Pakaian', progress: '50%' },
-      { title: 'Makanan', progress: '30%' },
-      { title: 'Perlengkapan', progress: '20%' },
-    ]
+      { title: 'Pakaian', progress: '50%', kebutuhan: 80, terkumpul: 40 },
+      { title: 'Makanan', progress: '30%', kebutuhan: 120, terkumpul: 36 },
+      { title: 'Perlengkapan', progress: '20%', kebutuhan: 100, terkumpul: 20 },
+    ],
   },
   {
     title: 'Kebutuhan pokok panti asuhan C',
     type: 'Panti Asuhan',
-    description: 'Kebutuhan pokok seperti makanan, pakaian, dan perlengkapan lainnya sangat penting bagi keseharian anak-anak di panti ini.',
+    description:
+      'Kebutuhan pokok seperti makanan, pakaian, dan perlengkapan lainnya sangat penting bagi keseharian anak-anak di panti ini.',
     items: [
-      { title: 'Pakaian', progress: '40%' },
-      { title: 'Makanan', progress: '60%' },
-      { title: 'Perlengkapan', progress: '25%' },
-    ]
+      { title: 'Pakaian', progress: '40%', kebutuhan: 90, terkumpul: 36 },
+      { title: 'Makanan', progress: '60%', kebutuhan: 150, terkumpul: 90 },
+      { title: 'Perlengkapan', progress: '25%', kebutuhan: 80, terkumpul: 20 },
+    ],
   },
   {
     title: 'Peningkatan sarana belajar panti D',
     type: 'Panti Asuhan',
-    description: 'Untuk meningkatkan sarana belajar, dibutuhkan buku, alat tulis, dan perlengkapan kelas lainnya.',
+    description:
+      'Untuk meningkatkan sarana belajar, dibutuhkan buku, alat tulis, dan perlengkapan kelas lainnya.',
     items: [
-      { title: 'Pakaian', progress: '20%' },
-      { title: 'Makanan', progress: '45%' },
-      { title: 'Perlengkapan', progress: '35%' },
-    ]
+      { title: 'Pakaian', progress: '20%', kebutuhan: 60, terkumpul: 12 },
+      { title: 'Makanan', progress: '45%', kebutuhan: 130, terkumpul: 58 },
+      { title: 'Perlengkapan', progress: '35%', kebutuhan: 110, terkumpul: 39 },
+    ],
   },
   {
     title: 'Pemenuhan gizi anak-anak panti E',
     type: 'Panti Asuhan',
-    description: 'Pemenuhan gizi menjadi fokus utama di panti ini demi mendukung pertumbuhan anak-anak.',
+    description:
+      'Pemenuhan gizi menjadi fokus utama di panti ini demi mendukung pertumbuhan anak-anak.',
     items: [
-      { title: 'Pakaian', progress: '10%' },
-      { title: 'Makanan', progress: '70%' },
-      { title: 'Perlengkapan', progress: '30%' },
-    ]
-  }
+      { title: 'Pakaian', progress: '10%', kebutuhan: 50, terkumpul: 5 },
+      { title: 'Makanan', progress: '70%', kebutuhan: 180, terkumpul: 126 },
+      { title: 'Perlengkapan', progress: '30%', kebutuhan: 90, terkumpul: 27 },
+    ],
+  },
 ]);
-
 
 const [dataDonasiBarangBencana, setDataDonasiBarangBencana] = useState([
   {
@@ -156,9 +160,9 @@ const [dataDonasiBarangBencana, setDataDonasiBarangBencana] = useState([
     type: 'Bencana Alam',
     description: 'Banjir besar menyebabkan banyak warga kehilangan rumah dan harta benda. Dibutuhkan bantuan darurat berupa makanan, pakaian, dan kebutuhan pokok lainnya.',
     items: [
-      { title: 'Pakaian', progress: '60%' },
-      { title: 'Makanan', progress: '80%' },
-      { title: 'Perlengkapan', progress: '50%' },
+      { title: 'Pakaian', progress: '60%', kebutuhan: 100, terkumpul: 60 },
+      { title: 'Makanan', progress: '80%', kebutuhan: 200, terkumpul: 160 },
+      { title: 'Perlengkapan', progress: '50%', kebutuhan: 150, terkumpul: 75 },
     ]
   },
   {
@@ -166,9 +170,9 @@ const [dataDonasiBarangBencana, setDataDonasiBarangBencana] = useState([
     type: 'Bencana Alam',
     description: 'Gempa bumi menyebabkan banyak kerusakan. Bantuan dibutuhkan untuk membangun kembali serta menyediakan perlengkapan hidup sementara.',
     items: [
-      { title: 'Pakaian', progress: '30%' },
-      { title: 'Makanan', progress: '55%' },
-      { title: 'Perlengkapan', progress: '40%' },
+      { title: 'Pakaian', progress: '30%', kebutuhan: 100, terkumpul: 30 },
+      { title: 'Makanan', progress: '55%', kebutuhan: 200, terkumpul: 110 },
+      { title: 'Perlengkapan', progress: '40%', kebutuhan: 150, terkumpul: 60 },
     ]
   },
   {
@@ -176,12 +180,13 @@ const [dataDonasiBarangBencana, setDataDonasiBarangBencana] = useState([
     type: 'Bencana Alam',
     description: 'Longsor menutup akses ke beberapa desa. Bantuan logistik sangat dibutuhkan untuk memenuhi kebutuhan dasar warga.',
     items: [
-      { title: 'Pakaian', progress: '25%' },
-      { title: 'Makanan', progress: '65%' },
-      { title: 'Perlengkapan', progress: '35%' },
+      { title: 'Pakaian', progress: '25%', kebutuhan: 80, terkumpul: 20 },
+      { title: 'Makanan', progress: '65%', kebutuhan: 150, terkumpul: 98 },
+      { title: 'Perlengkapan', progress: '35%', kebutuhan: 100, terkumpul: 35 },
     ]
   }
 ]);
+
 
      const page = [
       {

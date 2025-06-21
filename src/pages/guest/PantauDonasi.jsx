@@ -2,10 +2,12 @@ import React from "react";
 import Container from "../../components/Container";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { faCheckCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 const PantauDonasi = () => {
   
-  const [showDetail, setShowDetail] = useState(false);
+  const [showModalDetail, setShowModalDetail] = useState(false);
   
   return (
     <div>
@@ -22,11 +24,11 @@ const PantauDonasi = () => {
           </p>
         </div>
 
-        {!showDetail ? (
-          <DonationTrackerForm onShowDetail={() => setShowDetail(true)} />
-        ) : (
-          <DetailDonasi onBack={() => setShowDetail(false)} />
-        )}
+           <DonationTrackerForm onShowDetail={() => setShowModalDetail(true)} />
+
+      
+          <DetailDonasi onBack={() => setShowDetail(false)} showDetail={showModalDetail} setShowDetail={setShowModalDetail} />
+        
       </Container>
       <Footer />
     </div>
@@ -101,50 +103,87 @@ const DonationTrackerForm = ({ onShowDetail }) => {
   );
 };
 
-const DetailDonasi = ({ onBack }) => {
+
+const DetailDonasi = ({ showDetail, setShowDetail, onBack }) => {
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-md font-sans">
-      <h2 className="text-center text-xl font-semibold text-primary mb-4">
-        Detail Donasi Anda
-      </h2>
+    <div
+      className={`rounded-xl mt-4 mb-4 text-center ${
+        showDetail
+          ? "w-auto opacity-100 h-auto scale-100"
+          : "w-0 h-0 opacity-0 scale-95"
+      } md:w-96 duration-300 transition-all z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto overflow-hidden bg-white text-primary border border-gray-300 shadow-lg`}
+    >
+      {/* Header Hijau */}
+      <div className="flex flex-col items-center justify-center bg-green-100 p-5 rounded-t-xl text-green-700 relative">
+        <FontAwesomeIcon icon={faCheckCircle} className="text-4xl mb-2" />
+        <h3 className="text-lg font-semibold">Donasi Ditemukan</h3>
+        <p className="text-sm">(Tx Hash Valid)</p>
+      </div>
 
-      {/* Contoh Detail (isi sesuai data sebenarnya) */}
-      <div className="mb-6 space-y-3 text-sm text-gray-700">
-  <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded-md shadow-sm">
-    <p className="font-semibold text-green-800 mb-1">Status</p>
-    <p className="text-green-700">Terkonfirmasi</p>
-  </div>
+      {/* Ringkasan Transaksi */}
+      <div className="px-6 py-5">
+        <h4 className="text-lg font-semibold text-gray-800 mb-4">
+          RINGKASAN TRANSAKSI
+        </h4>
 
-  <div className="bg-white border rounded-md p-4 shadow-sm">
-    <p className="font-semibold text-gray-800">ID Donasi</p>
-    <p className="text-gray-600 break-words">0x123abc456def789ghi...</p>
-  </div>
+        <div className="text-left text-sm text-gray-700 space-y-3">
+          <div className="flex items-start">
+            <span className="w-28 font-medium">Status</span>
+            <span className="mr-1">:</span>
+            <span className="text-green-600 font-medium flex items-center gap-1">
+              ✅ Terkonfirmasi
+            </span>
+          </div>
+          <div className="flex items-start">
+            <span className="w-28 font-medium">Tx Hash</span>
+            <span className="mr-1">:</span>
+            <span className="break-all">0x9a296a7b...</span>
+          </div>
+          <div className="flex items-start">
+            <span className="w-28 font-medium">Waktu Blok</span>
+            <span className="mr-1">:</span>
+            <span>24 Apr 2025 10:16 WIB</span>
+          </div>
+          <div className="flex items-start">
+            <span className="w-28 font-medium">Jumlah</span>
+            <span className="mr-1">:</span>
+            <span>Rp100.000 / 0,005 ETH</span>
+          </div>
+          <div className="flex items-start">
+            <span className="w-28 font-medium">Dari → Ke</span>
+            <span className="mr-1">:</span>
+            <span>
+              Anonim → <span className="font-medium">Bencana Banjir</span>
+            </span>
+          </div>
+          <div className="flex items-start">
+            <span className="w-28 font-medium">Gas Fee</span>
+            <span className="mr-1">:</span>
+            <span>0,00021 ETH</span>
+          </div>
+        </div>
+      </div>
 
-  <div className="bg-white border rounded-md p-4 shadow-sm">
-    <p className="font-semibold text-gray-800">Campaign</p>
-    <p className="text-gray-600">Campaign A</p>
-  </div>
-
-  <div className="bg-white border rounded-md p-4 shadow-sm">
-    <p className="font-semibold text-gray-800">Jumlah Donasi</p>
-    <p className="text-green-600 font-bold text-lg">Rp1.000.000</p>
-  </div>
-
-  <div className="bg-white border rounded-md p-4 shadow-sm">
-    <p className="font-semibold text-gray-800">Tanggal Donasi</p>
-    <p className="text-gray-600">1 Juni 2025</p>
-  </div>
-</div>
-
-      <button
-        onClick={onBack}
-        className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-md transition duration-200"
-      >
-        Kembali
-      </button>
+      {/* Tombol Aksi */}
+      <div className="flex justify-center gap-4 p-4 bg-green-50 rounded-b-xl">
+        <button
+          onClick={() => {
+            setShowDetail(false)
+          }}
+          className="bg-green-200 text-green-900 px-4 py-2 rounded-md font-semibold hover:bg-green-300"
+        >
+          Kembali
+        </button>
+        <a
+          href="https://etherscan.io/tx/0x9a296a7b..." // Contoh link
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-green-200 text-green-900 px-4 py-2 rounded-md font-semibold hover:bg-green-300"
+        >
+          Lihat di Etherscan
+        </a>
+      </div>
     </div>
   );
 };
-
-
 export default PantauDonasi;

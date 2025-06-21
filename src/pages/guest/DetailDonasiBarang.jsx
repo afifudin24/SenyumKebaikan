@@ -18,7 +18,7 @@ const DetailDonasiBarang = () => {
     const location = useLocation();
     const data = location.state;
   console.log(data)
-  const [isAdd, setIsAdd] = useState(true);
+  const [isAdd, setIsAdd] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showModalStatus, setShowModalStatus] = useState(false);
   const [showModalDetailDonasi, setShowDetailDonasi] = useState(false);
@@ -98,22 +98,35 @@ const DetailDonasiBarang = () => {
                     <p className="text-white font-primary my-2 text-2xl font-semibold">{data.title}</p>
                     <p className="text-white my-2 font-primary text-sm"> 12 hari tersisa untuk melakukan donasi</p>
                     <p className="font-secondary text-sm text-white my-2">{data.description} </p>
+                    
+                    <div>
+
+                    </div>
                     <div className="flex flex-col gap-2 md:flex-row my-5">
                     
                     <div className="flex flex-col gap-2 w-1/2">
                         {
                             data.items.map((item, index) => (
-                                <div key={index} className="flex gap-2 items-center">
+                                <div key={index} className="">
+                                  <div className="flex gap-2 items-center">
                                     <div className=" p-2 rounded-xl bg-white text-primary">
                                             {item.progress}
                                     </div>
+                                    <div>
                                     <p className="font-secondary text-sm text-white">{item.title}</p>
+                                    <p className="font-primary text-sm font-light  text-white">Terkumpul {item.terkumpul} dari {item.dibutuhkan} yang dibutuhkan</p>
+
+                                    </div>
+                                  </div>
+                                    <div>
+
+                                    </div>
                                 </div>
                             ))
                         }
                     </div>
                     <div className="border-l-2 text-center font-secondary gap-4 px-4 justify-center border-white flex flex-col ">
-                            <button className="bg-white hover:bg-primary hover:text-white hover:shadow-2xl text-primary p-2 rounded-full">
+                            <button onClick={() => setIsAdd(true)} className="bg-white hover:bg-primary hover:text-white hover:shadow-2xl text-primary p-2 rounded-full">
                                 Donasi Sekarang <FontAwesomeIcon icon={faArrowUpRightDots} />
                             </button>
                             <button className="bg-white hover:bg-primary hover:text-white hover:shadow-2xl text-primary p-2 rounded-full">
@@ -127,7 +140,7 @@ const DetailDonasiBarang = () => {
 
           {
             isAdd ? (
-              <AddDonasi modal={showModal} setModal={setShowModal} />
+              <AddDonasi modal={showModal} setModal={setShowModal} setIsAdd={setIsAdd} />
             ) : (
               <div className="mt-10">
               <nav className="flex justify-center gap-5  mx-auto text-sm text-gray-600 mb-6 cursor-pointer">
@@ -309,7 +322,7 @@ const FormBank = () => {
   )
 }
 
-const AddDonasi = ({modal, setModal}) => {
+const AddDonasi = ({modal, setModal, setIsAdd}) => {
   const [selectedMetodeBayar, setSelectedMetodeBayar] = useState(0);
   const [preview, setPreview] = useState(null);
   const [file, setFile] = useState(null);
@@ -412,10 +425,12 @@ const AddDonasi = ({modal, setModal}) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-2 rounded-xl mt-4 mb-4 text-center w-9/12 mx-auto bg-white text-primary border border-gray-400"
+      className="p-2 rounded-xl mt-4 mb-4 text-center w-9/12 mx-auto bg-white text-primary border relative border-gray-400"
     >
-     
-      <p className="text-xl font-semibold">Formulir Donasi Barang</p>
+      <div className="absolute top-2 right-2 cursor-pointer" onClick={() => setIsAdd(false)}>
+        <FontAwesomeIcon icon={faTimes}  />
+      </div>
+      <p className="text-xl font-semibold mt-4">Formulir Donasi Barang</p>
 
       <div className="w-8/12 mx-auto">
         <h4 className="text-start my-2 font-semibold">Nama Lengkap</h4>
