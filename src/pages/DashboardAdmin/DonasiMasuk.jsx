@@ -246,10 +246,10 @@ const [dataDonasiUang, setDataDonasiUang] = useState([
     <div className="p-4">
     
       <table className="w-full table-auto border border-gray-300 rounded-lg overflow-hidden">
-        <thead className="bg-accent font-normal text-white text-left">
+        <thead className="bg-primary font-normal text-white text-left">
           <tr>
             <th className="p-2">No</th>
-            <th className="p-2">Volunteer</th>
+            <th className="p-2">Donatur</th>
             <th className="p-2">Nominal</th>
             <th className="p-2 hidden md:table-cell">Tanggal</th>
             <th className="p-2 hidden md:table-cell">Campaign</th>
@@ -381,10 +381,10 @@ const DonasiBarang = () => {
   return (
     <div className="p-4">
       <table className="w-full table-auto border border-gray-300 rounded-lg overflow-hidden">
-        <thead className="bg-accent font-normal text-white text-left">
+        <thead className="bg-primary font-normal text-white text-left">
           <tr>
             <th className="p-2">No</th>
-            <th className="p-2">Volunteer</th>
+            <th className="p-2">Donatur</th>
             <th className="p-2">Barang</th>
             <th className="p-2 hidden md:table-cell">QTY</th>
             <th className="p-2 hidden md:table-cell">Kualitas</th>
