@@ -34,6 +34,10 @@ const Navbar = () => {
   const toDashboard = () => {
     window.location.href = "/dashboard";
   }
+  // fungsi ambil huruf depan dari string
+  const getFirstLetter = (name) => {
+    return name.charAt(0);
+  }
   const clickNotification = (data) => {
     if (data.type == 'donasibarang') {
       setShowModalDetail(true)
@@ -157,9 +161,9 @@ const Navbar = () => {
     <FontAwesomeIcon icon={faUserCircle} onClick={() => setShowMenuProfile(!showMenuProfile)} className="cursor-pointer" />
     <div className={`absolute right-0 mt-0 font-primary w-80 bg-white shadow-md rounded-md p-6 ${showMenuProfile ? 'block' : 'hidden'} z-50`}>
         <div className='rounded-full mx-auto bg-secondary flex w-20 h-20 items-center justify-center '>
-          <p>N</p>
+                          <p>{ getFirstLetter(user.namadepan)}</p>
         </div>
-        <p className='text-sm text-center my-2 text-gray-800'>Naufal Nurcahyo</p>
+                        <p className='text-sm text-center my-2 text-gray-800'>{user.namadepan} {user.namabelakang}</p>
         <Link to={user.role === 'admin' ? '/dashboard' : '/dashboarduser'}>
   <p className="text-sm bg-gray-50 rounded hover:bg-gray-100 p-2 text-primary my-1">
     Dashboard

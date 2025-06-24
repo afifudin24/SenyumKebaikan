@@ -5,6 +5,8 @@ import Footer from "../../components/Footer";
 import HorizontalScroll from "../../components/HorizontalScroll";
 import HorizontalScrollDonasiBarang from "../../components/HorizontalScrollDonasiBarang";
 import Container from "../../components/Container";
+import gambar1 from "../../assets/donasi/barang1.png"
+import gambar2 from "../../assets/donasi/barang2.png"
 const Donasi = () => {
  
   const [pageActive, setPageActive] = useState(0);
@@ -254,10 +256,10 @@ const DonasiBarang = ({dataDonasiBarangBencana, dataDonasiBarangPanti}) => {
     <div>
 
      <h3 className="my-2 font-semibold text-xl md:text-2xl text-primary">Panti Asuhan</h3>
-     <HorizontalScrollDonasiBarang data={dataDonasiBarangPanti} />
+     <HorizontalScrollDonasiBarang data={dataDonasiBarangPanti} img={gambar1} />
     
      <h3 className="my-2 font-semibold text-xl md:text-2xl text-primary">Bencana Alam</h3>
-     <HorizontalScrollDonasiBarang data={dataDonasiBarangBencana} />
+     <HorizontalScrollDonasiBarang data={dataDonasiBarangBencana} img={gambar2} />
     
     </div>
 
