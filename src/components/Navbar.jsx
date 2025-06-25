@@ -366,92 +366,88 @@ const ModalFormKonfirmasiPenerimaanBarang = ({showModalPengajuanDikonfirmasi, se
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Nama Barang */}
-        <div>
-          <label className="block text-sm mb-1 text-gray-700">Nama Barang</label>
-          <input
-            type="text"
-            name="namaBarang"
-            value={formData.namaBarang}
-            disabled
-            className="w-full border border-gray-300 px-3 py-2 rounded-md bg-gray-100 text-gray-600"
-          />
-        </div>
+  {/* Baris 1: Nama Barang & Jumlah Diterima */}
+  <div className="flex flex-col md:flex-row md:space-x-4">
+    {/* Nama Barang */}
+    <div className="md:w-1/2">
+      <label className="block text-sm mb-1 text-gray-700">Nama Barang</label>
+      <input
+        type="text"
+        name="namaBarang"
+        value={formData.namaBarang}
+        disabled
+        className="w-full border border-gray-300 px-3 py-1 text-sm rounded-md bg-gray-100 text-gray-600"
+      />
+    </div>
 
-        {/* Jumlah Yang Diterima */}
-        <div>
-          <label className="block text-sm mb-1 text-gray-700">Jumlah Yang Diterima</label>
-          <input
-            type="text"
-            name="jumlahDiterima"
-            placeholder="@gmail.com"
-            value={formData.jumlahDiterima}
-            onChange={handleChange}
-            className="w-full border border-gray-300 px-3 py-2 rounded-md"
-          />
-        </div>
+    {/* Jumlah Yang Diterima */}
+    <div className="md:w-1/2 mt-2 md:mt-0">
+      <label className="block text-sm mb-1 text-gray-700">Jumlah Yang Diterima</label>
+      <input
+        type="text"
+        name="jumlahDiterima"
+        value={formData.jumlahDiterima}
+        onChange={handleChange}
+        className="w-full border border-gray-300 px-3 py-1 text-sm rounded-md"
+      />
+    </div>
+  </div>
 
-        {/* Tgl Terima */}
-        <div>
-          <label className="block text-sm mb-1 text-gray-700">Tgl Terima</label>
-          <div className="relative">
-            <input
-              type="date"
-              name="tglTerima"
-              value={formData.tglTerima}
-              onChange={handleChange}
-              className="w-full border border-gray-300 px-3 py-2 rounded-md"
-            />
-            <FontAwesomeIcon
-              icon={faCalendarAlt}
-              className="absolute right-3 top-3 text-gray-400"
-            />
-          </div>
-        </div>
+  {/* Baris 2: Tgl Terima & Catatan */}
+  <div className="flex flex-col md:flex-row md:space-x-4">
+    {/* Tgl Terima */}
+    <div className="md:w-1/2">
+      <label className="block text-sm mb-1 text-gray-700">Tgl Terima</label>
+      <input
+        type="date"
+        name="tglTerima"
+        value={formData.tglTerima}
+        onChange={handleChange}
+        className="w-full border border-gray-300 px-3 py-1 text-sm rounded-md"
+      />
+    </div>
 
-        {/* Catatan */}
-        <div>
-          <label className="block text-sm mb-1 text-gray-700">
-            Catatan / Kondisi Barang
-          </label>
-          <textarea
-            name="catatan"
-            rows={3}
-            value={formData.catatan}
-            onChange={handleChange}
-            className="w-full border border-gray-300 px-3 py-2 rounded-md"
-          />
-        </div>
+    {/* Catatan */}
+    <div className="md:w-1/2 mt-2 md:mt-0">
+      <label className="block text-sm mb-1 text-gray-700">Catatan / Kondisi Barang</label>
+      <textarea
+        name="catatan"
+        rows={3}
+        value={formData.catatan}
+        onChange={handleChange}
+        className="w-full border border-gray-300 px-3 py-1 text-sm rounded-md"
+      />
+    </div>
+  </div>
 
-        {/* Upload Bukti */}
-        <div>
-          <label className="block text-sm mb-2 text-gray-700">
-            Upload Bukti Penerimaan:
-          </label>
-          <div className="flex items-center justify-center border border-dashed border-gray-400 px-4 py-8 rounded-md cursor-pointer">
-            <label htmlFor="fileUpload" className="flex flex-col items-center text-gray-500 cursor-pointer">
-              <FontAwesomeIcon icon={faUpload} className="text-2xl mb-2" />
-              <span className="text-sm">Upload Video / foto disini</span>
-            </label>
-            <input
-              type="file"
-              id="fileUpload"
-              name="fileBukti"
-              accept="image/*,video/*"
-              className="hidden"
-              onChange={handleChange}
-            />
-          </div>
-        </div>
+  {/* Upload Bukti */}
+  <div>
+    <label className="block text-sm mb-2 text-gray-700">Upload Bukti Penerimaan:</label>
+    <div className="flex items-center justify-center border border-dashed border-gray-400 px-4 py-4 rounded-md cursor-pointer">
+      <label htmlFor="fileUpload" className="flex flex-col items-center text-gray-500 cursor-pointer">
+        <FontAwesomeIcon icon={faUpload} className="text-xl mb-2" />
+        <span className="text-sm">Upload Video / foto disini</span>
+      </label>
+      <input
+        type="file"
+        id="fileUpload"
+        name="fileBukti"
+        accept="image/*,video/*"
+        className="hidden"
+        onChange={handleChange}
+      />
+    </div>
+  </div>
 
-        {/* Submit */}
-        <button
-          type="submit"
-          className="w-full bg-primary text-white py-2 rounded-md hover:bg-green-700 transition"
-        >
-          Kirim Konfirmasi
-        </button>
-      </form>
+  {/* Submit */}
+  <button
+    type="submit"
+    className="w-full bg-primary text-white py-2 rounded-md hover:bg-green-700 transition"
+  >
+    Kirim Konfirmasi
+  </button>
+</form>
+
     </div>
     </div>
   );

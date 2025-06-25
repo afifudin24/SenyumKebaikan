@@ -2,10 +2,11 @@ import DashboardLayout from "../../components/DashboardLayout";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Container from "../../components/Container"
-import { faEllipsis, faChartLine, faSearch, faArrowRight, faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsis, faChartLine, faSearch, faArrowRight, faCalendar, faQuestion, faQuestionCircle, faEnvelopeCircleCheck, faCheckCircle, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import CampaignProp from "../../assets/campaignpop.png"
 import Grafik from "../../components/Grafik";
 import { Line, Bar } from 'react-chartjs-2';
+import toast from "react-hot-toast";
 import { Chart as ChartJS,   ArcElement, CategoryScale, LinearScale, PointElement, LineElement,  BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -13,6 +14,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 const Dashboard = () => {
+
   return (
     <DashboardLayout>
      
@@ -92,6 +94,8 @@ const Dashboard = () => {
       <div className="p-6">
         <ProgramSummaryHeader />
         <ProgramTable />
+
+        <TransactionTable />
       </div>
     </DashboardLayout>
   );
@@ -610,4 +614,371 @@ function ProgramTable() {
     </div>
   );
 }
+
+const dataAwal = [
+  { id: 1, transaksi: "INV-09878", nama: "Imam", status: "Terkonfirmasi" },
+  { id: 2, transaksi: "INV-09878", nama: "Mukmin", status: "Terkonfirmasi" },
+  { id: 3, transaksi: "INV-09878", nama: "Salim", status: "Terverifikasi" },
+  { id: 4, transaksi: "INV-09878", nama: "Salim", status: "Gagal" },
+  { id: 5, transaksi: "INV-09879", nama: "Budi", status: "Menunggu Konfirmasi" },
+  { id: 6, transaksi: "INV-09880", nama: "Aisyah", status: "Menunggu Konfirmasi" },
+  { id: 7, transaksi: "INV-09881", nama: "Rahma", status: "Menunggu Konfirmasi" },
+  { id: 8, transaksi: "INV-09882", nama: "Hasan", status: "Menunggu Konfirmasi" },
+  { id: 9, transaksi: "INV-09883", nama: "Nina", status: "Menunggu Konfirmasi" },
+];
+
+const statusColor = {
+  "Terkonfirmasi": "text-green-600",
+  "Terverifikasi": "text-blue-600",
+  "Gagal": "text-red-600",
+  "Menunggu Konfirmasi": "text-gray-500 italic",
+};
+
+const TransactionTable = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState({ title: "", body: "" });
+  
+  const [dataItem, setDataItem] = useState([
+    { id: 1, transaksi: "INV-09878", nama: "Imam", nominal: 500000, status: "Terkonfirmasi" },
+    { id: 2, transaksi: "INV-09878", nama: "Mukmin", nominal: 250000, status: "Terkonfirmasi" },
+    { id: 3, transaksi: "INV-09878", nama: "Salim", nominal: 300000, status: "Terverifikasi" },
+    { id: 4, transaksi: "INV-09878", nama: "Salim", nominal: 150000, status: "Gagal" },
+    { id: 5, transaksi: "INV-09879", nama: "Budi", nominal: 400000, status: "Menunggu Konfirmasi" },
+    { id: 6, transaksi: "INV-09880", nama: "Aisyah", nominal: 1000000, status: "Menunggu Konfirmasi" },
+    { id: 7, transaksi: "INV-09881", nama: "Rahma", nominal: 750000, status: "Menunggu Konfirmasi" },
+    { id: 8, transaksi: "INV-09882", nama: "Hasan", nominal: 600000, status: "Menunggu Konfirmasi" },
+    { id: 9, transaksi: "INV-09883", nama: "Nina", nominal: 550000, status: "Menunggu Konfirmasi" },
+  ]);
+  
+
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const perPage = 6;
+
+  const filteredData = dataItem.filter(item =>
+    item.transaksi.toLowerCase().includes(search.toLowerCase()) ||
+    item.nama.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const totalPage = Math.ceil(filteredData.length / perPage);
+  const paginatedData = filteredData.slice((page - 1) * perPage, page * perPage);
+
+  const konfirmasi = (item) => {
+    toast.success("Donasi berhasil dikonfirmasi!");
+    // update status dari item menjadi "Terkonfirmasi"
+    const updatedData = dataItem.map((data) => {
+      if (data.id === item.id) {
+        return { ...data, status: "Terkonfirmasi" };
+      }
+      return data;
+    });
+  
+    setDataItem(updatedData); // ini yang penting!
+    setModalOpen(false);
+    setModalContent({ title: "", body: "" });
+
+  }
+  const catat = (item) => {
+    toast.success("Donasi berhasil dicatat!");
+    // update status dari item menjadi "Terkonfirmasi"
+    const updatedData = dataItem.map((data) => {
+      if (data.id === item.id) {
+        return { ...data, status: "Terverifikasi" };
+      }
+      return data;
+    });
+  
+    setDataItem(updatedData); // ini yang penting!
+    setModalOpen(false);
+    setModalContent({ title: "", body: "" });
+  }
+  // modal
+  const openModal = (item, type) => {
+    let content = { title: "", body: "" };
+  
+    switch (type) {
+      case "konfirmasi":
+        content = {
+          title: "Konfirmasi Donasi",
+          icon : <FontAwesomeIcon className="text-4xl text-accent" icon={faQuestionCircle} />,
+          body: (
+            <div className="flex  gap-2 justify-center mt-2 items-center">
+              <div className="flex flex-col gap-2">
+                <h3 className="text-center font-semibold text-primary">Bukti Transfer</h3>
+                <div className="w-50 bg-primary rounded-2xl h-50"></div>
+              </div>
+              <div>
+                <h3 className="text-lg font-primary text-primary font-semibold">Campaign Tujuan</h3>
+                <p className="my-1 text-primary">Bantuan Pendidikan</p>
+                <p className="font-primary  text-sm my-1">Status : Belum Tercatat</p>
+                <p className="font-semibold mt-3">
+                  Nama Donatur: <span className="font-light">{item.nama}</span>
+                </p>
+                <p className="font-semibold mt-2">
+                  Tanggal: <span className="font-light">3 Juni 2025</span>
+                </p>
+                <div className="flex mt-5 gap-1">
+                  <button
+                    className="px-3 py-1 bg-gray-200 text-sm rounded hover:bg-secondary transition-all"
+                  >
+                    Tolak
+                  </button>
+                  <button
+                    onClick={() => konfirmasi(item) }
+                    className="px-3 py-1 bg-accent text-sm rounded text-white hover:bg-secondary transition-all"
+                  >
+                    Konfirmasi
+                  </button>
+                </div>
+              </div>
+            </div>
+          )
+        };
+        break;
+      case "blockchain":
+        content = {
+          icon : <FontAwesomeIcon className="text-4xl text-accent" icon={faEnvelopeCircleCheck} />,
+          title: "Konfirmasi Pencatatan Ke Blockchain",
+          body: (
+            <div className="">
+              <h3 className="text-center">Status Ringaksan Transaksi</h3>
+              <div className="flex gap-1 justify-center w-8/12 mx-auto">
+                <div className="text-primary text-base">
+                <h4 className="">ID Transaksi</h4>
+                <h4>Nominal</h4>
+                <h4>Nama Pengirim</h4>
+                  
+                </div>
+                <div>
+                  <h4>: {item.transaksi}</h4>
+                  <h4>: {item.nominal}</h4>
+                  <h4>: {item.nama}</h4>
+
+
+                </div>
+              </div>
+              <p className="text-primary text-sm font-light text-center">Apakah anda yakin ingin menactat transaksi ini ke blockchain?</p>
+              <div className="text-center">
+                <button onClick={() => catat(item)} className="px-4 py-2 mt-3 mx-auto bg-primary text-white hover:text-primary text-sm rounded hover:bg-secondary">
+                  Catat
+              </button>
+
+              </div>
+
+
+            </div>
+          ),
+        };
+        break;
+      case "detail":
+        content = {
+          icon : <FontAwesomeIcon className="text-4xl text-accent" icon={faCheckCircle} />,
+          title: "Transaksi Berhasil Dicatat ke Blockchain",
+          body: (
+            <div>
+              <h3 className="text-center">Status Ringaksan Transaksi</h3>
+              <div className="flex gap-1 justify-center w-8/12 mx-auto">
+                <div className="text-primary text-base">
+                <h4 className="">ID Transaksi</h4>
+                <h4>Nominal</h4>
+                <h4>Nama Pengirim</h4>
+                <h4>Link</h4>
+                  
+                </div>
+                <div>
+                  <h4>: {item.transaksi}</h4>
+                  <h4>: {item.nominal}</h4>
+                  <h4>: {item.nama}</h4>
+                  <h4>: <a className="text-blue-500" href="https://etherscan.io/">[Lihat di Blockchain]</a></h4>
+                </div>
+              </div>
+              <p>
+                Klik link jika ingin melihat transaksi di blockchain explorer
+              </p>
+            </div>
+          ),
+        };
+        break;
+      case "gagal":
+        content = {
+          icon : <FontAwesomeIcon className="text-4xl text-accent" icon={faXmarkCircle} />,
+          title: "Donasi Gagal",
+          body: (
+            <div>
+              <p className="text-center">Donasi dari {item.nama} gagal diverifikasi</p>
+            </div>
+          ),
+        };
+        break;
+      default:
+        break;
+    }
+  
+    setModalContent(content);
+    setModalOpen(true);
+  };
+  
+
+
+  const renderAksi = (item) => {
+    switch (item.status) {
+      case "Menunggu Konfirmasi":
+        return (
+          <button
+            className="text-blue-500 hover:underline"
+            onClick={() => openModal(item, "konfirmasi")}
+          >
+            Konfirmasi
+          </button>
+        );
+      case "Terkonfirmasi":
+        return (
+          <button
+            className="text-green-600 hover:underline"
+            onClick={() => openModal(item, "blockchain")}
+          >
+            Catat di Blockchain →
+          </button>
+        );
+      case "Terverifikasi":
+        return (
+          <button
+            className="text-gray-600 hover:underline"
+            onClick={() => openModal(item, "detail")}
+          >
+            Detail →
+          </button>
+        );
+      case "Gagal":
+        return (
+          <button
+            className="text-red-500 hover:underline"
+            onClick={() => openModal(item, "gagal")}
+          >
+            Detail Gagal →
+          </button>
+        );
+      default:
+        return null;
+    }
+  };
+  
+  const Modal = ({ isOpen, icon, onClose, title, children }) => {
+    if (!isOpen) return null;
+  
+    return (
+      <div className="fixed inset-0  bg-opacity-30 flex items-center justify-center z-50">
+        <div className="bg-white rounded-lg w-full max-w-md shadow-lg relative">
+         <div className="flex relative flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 w-full bg-secondary ">
+               {icon}
+            <h4 className="font-semibold my-2 text-primary">{ title}</h4>
+               
+          </div>
+          <div className="w-11/12 mx-auto">
+         {children}
+
+          </div>
+
+          {/* {children} */}
+          <div className="text-center my-3">
+
+          <button
+            onClick={onClose}
+            className="px-4 py-2 mt-3 mx-auto bg-secondary text-primary hover:text-white text-sm rounded hover:bg-primary"
+            >
+          Tutup
+          </button>
+            </div>
+        </div>
+      </div>
+    );
+  };
+  
+  
+
+
+  return (
+    <div className="w-full mx-auto mt-10">
+      <div className="flex justify-between items-center mb-4">
+        <div className="bg-primary text-white px-4 py-2 rounded-t-md font-semibold">
+          Verifikasi Donasi Bank
+        </div>
+        <input
+          type="text"
+          placeholder="🔍 Cari..."
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1); // reset halaman jika search
+          }}
+          className="border border-gray-300 rounded-full px-3 py-1 text-sm"
+        />
+      </div>
+
+      <div className="bg-white border border-gray-300 rounded-md overflow-hidden">
+        <table className="w-full text-sm">
+          <thead className="bg-gray-100 text-gray-700">
+            <tr>
+              <th className="text-left px-4 py-2">ID Transaksi</th>
+              <th className="text-left px-4 py-2">Nama</th>
+              <th className="text-left px-4 py-2">Status</th>
+              <th className="text-left px-4 py-2">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {paginatedData.length > 0 ? (
+              paginatedData.map((item) => (
+                <tr key={item.id} className="border-t">
+                  <td className="px-4 py-2 font-medium">{item.transaksi}</td>
+                  <td className="px-4 py-2">{item.nama}</td>
+                  <td className={`px-4 py-2 ${statusColor[item.status] || ""}`}>
+                    {item.status}
+                  </td>
+                  <td className="px-4 py-2">{renderAksi(item)}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="4" className="text-center py-4 text-gray-500">
+                  Tidak ada data ditemukan.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+
+        {/* Pagination */}
+        <div className="flex justify-center items-center gap-4 py-3">
+          <button
+            className="text-xl disabled:text-gray-300"
+            disabled={page === 1}
+            onClick={() => setPage((prev) => prev - 1)}
+          >
+            ‹
+          </button>
+          <span className="text-sm">
+            Halaman {page} dari {totalPage}
+          </span>
+          <button
+            className="text-xl disabled:text-gray-300"
+            disabled={page === totalPage}
+            onClick={() => setPage((prev) => prev + 1)}
+          >
+            ›
+          </button>
+        </div>
+      </div>
+      <Modal
+  isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        icon ={modalContent.icon}
+  title={modalContent.title}
+>
+  {modalContent.body}
+</Modal>
+    </div>
+    
+  );
+  
+};
 export default Dashboard;
