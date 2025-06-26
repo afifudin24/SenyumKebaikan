@@ -9,6 +9,7 @@ import home4 from '../../assets/home4.png'
 import pilihan1 from '../../assets/home/pilihan1.png'
 import pilihan2 from '../../assets/home/pilihan2.png'
 import pilihan3 from '../../assets/home/pilihan3.png'
+import { Link } from 'react-router-dom'
 import kebutuhan1 from '../../assets/home/kebutuhan1.png'
 import kebutuhan2 from '../../assets/home/kebutuhan2.png'
 import kebutuhan3 from '../../assets/home/kebutuhan3.png'
@@ -49,9 +50,11 @@ const Home = () => {
               alt='Donasi'
               className='w-full h-full object-cover hover:scale-110 transition-all duration-100'
             />
+            <Link to='/donasi'>
             <button className='absolute bottom-4 left-1/2 font-secondary text-xs md:text-sm -translate-x-1/2 hover:bg-primary hover:text-white bg-white text-primary px-4 py-2 rounded-full shadow'>
               Donasi sekarang <FontAwesomeIcon icon={faArrowUpRightDots} />
             </button>
+            </Link>
           </div>
 
           {/* Kanan: Teks dan dua kartu donasi */}
@@ -174,9 +177,11 @@ const Home = () => {
 
             {/* Tombol */}
             <div className='flex gap-4 justify-center'>
+               <Link to='/donasi'>
               <button className='bg-white text-primary px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-100 transition'>
                 Donasi sekarang <FontAwesomeIcon icon={ faArrowUpRightDots} />
               </button>
+               </Link>
               <button className='border border-white px-4 py-2 rounded-full text-sm hover:bg-white hover:text-[#36554A] transition'>
                 Selengkapnya <FontAwesomeIcon icon={ faArrowUpRightDots} />
               </button>
@@ -236,9 +241,11 @@ const Home = () => {
               
                           {/* Tombol */}
                           <div className='flex gap-4 justify-center'>
+                            <Link to='/donasi'>
                             <button className='bg-white text-primary px-4 py-2 rounded-full text-xs md:text-sm font-medium hover:bg-gray-100 transition'>
                               Donasi sekarang <FontAwesomeIcon icon={ faArrowUpRightDots} />
                             </button>
+                            </Link>
                             <button className='border border-white px-4 py-2 rounded-full text-xs md:text-sm hover:bg-white hover:text-primary transition'>
                               Selengkapnya <FontAwesomeIcon icon={ faArrowUpRightDots} />
                             </button>

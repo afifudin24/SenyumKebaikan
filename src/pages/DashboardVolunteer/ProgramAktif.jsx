@@ -78,11 +78,7 @@ const ManajemenDonasiAktif = () => {
        <TabelDonatur />
       </div>
       {/* Tombol Update */}
-      <div className="text-right mt-4">
-        <button className="bg-[#2d4a48] text-white px-4 py-2 rounded hover:bg-[#3d615f]">
-          Update Status Program
-        </button>
-      </div>
+    
     </div>
   );
 };
