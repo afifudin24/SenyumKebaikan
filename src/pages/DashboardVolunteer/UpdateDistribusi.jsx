@@ -2,6 +2,7 @@ import React from "react";
 import DashboardVolunteerLayout from "../../components/DashboardVolunteerLayout";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 const UpdateDistribusi = () => {
       const [user, setUser] = useState(() => {
                 const savedUser = localStorage.getItem('user');
@@ -33,8 +34,8 @@ const Modal = ({ children, onClose }) => {
   );
 };
 
-const DistribusiForm = ({ onClose, item, setDistribusiData }) => {
-  console.log(item);
+const DistribusiForm = ({ onClose, item, setDistribusiData, distribusiData }) => {
+
  const [status, setStatus] = useState(item?.status || "");
 const [file, setFile] = useState(item?.file || null);
 const [deskripsi, setDeskripsi] = useState(item?.deskripsi || "");
@@ -52,10 +53,11 @@ const [deskripsi, setDeskripsi] = useState(item?.deskripsi || "");
       deskripsi,
     };
 
-    // Update distribusi berdasarkan ID
-    setDistribusiData((prevData) =>
-      prevData.map((d) => (d.id === item.id ? updatedItem : d))
-    );
+    const filteredData = distribusiData.filter((d) => d.id !== item.id);
+   
+    const newData = [...filteredData, updatedItem]; // Tambah updated item di akhir (bisa diubah kalau perlu urutan)
+
+    setDistribusiData(newData);
 
     toast.success("Data berhasil disimpan!");
     onClose();
@@ -80,6 +82,7 @@ const [deskripsi, setDeskripsi] = useState(item?.deskripsi || "");
           <option value="">Pilih Status</option>
           <option value="selesai">Selesai</option>
           <option value="Menunggu">Menunggu</option>
+          <option value="Dalam perjalanan">Dalam Perjalanan</option>
           <option value="tertunda">Tertunda</option>
           <option value="dibatalkan">Dibatalkan</option>
         </select>
@@ -135,6 +138,7 @@ const [deskripsi, setDeskripsi] = useState(item?.deskripsi || "");
 
 const DetailDistribusi = ({ data, onClose }) => {
   if (!data) return null;
+  console.log(data);
 
   const { status, file, deskripsi } = data;
 
@@ -193,38 +197,42 @@ const DistribusiDonasi = () => {
   const itemsPerPage = 5;
 
   const [distribusiData, setDistribusiData] = useState([
-    { lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '02/07/2024', status: 'Menunggu' },
-    { lokasi: 'Kecamatan B', bantuan: 'Uang', tanggal: '02/07/2024', status: 'Selesai' },
-    { lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '02/07/2024', status: 'Dalam perjalanan' },
-    { lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '02/07/2024', status: 'Selesai' },
-    { lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '03/07/2024', status: 'Menunggu' },
-    { lokasi: 'Kecamatan A', bantuan: 'Uang', tanggal: '03/07/2024', status: 'Selesai' },
-    { lokasi: 'Kecamatan A', bantuan: 'Barang', tanggal: '03/07/2024', status: 'Dalam perjalanan' },
-    { lokasi: 'Kecamatan A', bantuan: 'Barang', tanggal: '03/07/2024', status: 'Menunggu' },
-    { lokasi: 'Kecamatan A', bantuan: 'Barang', tanggal: '04/07/2024', status: 'Selesai' },
-    { lokasi: 'Kecamatan C', bantuan: 'Uang', tanggal: '04/07/2024', status: 'Dalam perjalanan' },
-    { lokasi: 'Kecamatan C', bantuan: 'Barang', tanggal: '04/07/2024', status: 'Menunggu' },
-    { lokasi: 'Kecamatan C', bantuan: 'Barang', tanggal: '04/07/2024', status: 'Selesai' },
-    { lokasi: 'Kecamatan D', bantuan: 'Uang', tanggal: '05/07/2024', status: 'Menunggu' },
-    { lokasi: 'Kecamatan D', bantuan: 'Barang', tanggal: '05/07/2024', status: 'Selesai' },
-    { lokasi: 'Kecamatan D', bantuan: 'Barang', tanggal: '05/07/2024', status: 'Dalam perjalanan' },
-    { lokasi: 'Kecamatan D', bantuan: 'Barang', tanggal: '05/07/2024', status: 'Menunggu' },
-    { lokasi: 'Kecamatan E', bantuan: 'Barang', tanggal: '06/07/2024', status: 'Selesai' },
-    { lokasi: 'Kecamatan E', bantuan: 'Barang', tanggal: '06/07/2024', status: 'Menunggu' },
-    { lokasi: 'Kecamatan E', bantuan: 'Uang', tanggal: '06/07/2024', status: 'Selesai' },
-    { lokasi: 'Kecamatan E', bantuan: 'Barang', tanggal: '06/07/2024', status: 'Menunggu' },
+    { id: 1, lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '02/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Distribusi barang tahap awal' },
+    { id: 2, lokasi: 'Kecamatan B', bantuan: 'Uang', tanggal: '02/07/2024', status: 'Selesai', campaign: 'bencana1', deskripsi: 'Dana bantuan telah disalurkan' },
+    { id: 3, lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '02/07/2024', status: 'Dalam perjalanan', campaign: 'bencana2', deskripsi: 'Barang dalam pengiriman' },
+    { id: 4, lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '02/07/2024', status: 'Selesai', campaign: 'bencana2', deskripsi: 'Pengiriman selesai diterima' },
+    { id: 5, lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '03/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Menunggu jadwal pengiriman' },
+    { id: 6, lokasi: 'Kecamatan A', bantuan: 'Uang', tanggal: '03/07/2024', status: 'Selesai', campaign: 'bencana2', deskripsi: 'Bantuan uang telah dikirim' },
+    { id: 7, lokasi: 'Kecamatan A', bantuan: 'Barang', tanggal: '03/07/2024', status: 'Dalam perjalanan', campaign: 'bencana1', deskripsi: 'Pengiriman sedang dilakukan' },
+    { id: 8, lokasi: 'Kecamatan A', bantuan: 'Barang', tanggal: '03/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Barang masih di gudang' },
+    { id: 9, lokasi: 'Kecamatan A', bantuan: 'Barang', tanggal: '04/07/2024', status: 'Selesai', campaign: 'bencana2', deskripsi: 'Barang diterima oleh warga' },
+    { id: 10, lokasi: 'Kecamatan C', bantuan: 'Uang', tanggal: '04/07/2024', status: 'Dalam perjalanan', campaign: 'bencana1', deskripsi: 'Dana sedang dalam proses pengiriman' },
+    { id: 11, lokasi: 'Kecamatan C', bantuan: 'Barang', tanggal: '04/07/2024', status: 'Menunggu', campaign: 'bencana2', deskripsi: 'Akan dikirim setelah jadwal ditentukan' },
+    { id: 12, lokasi: 'Kecamatan C', bantuan: 'Barang', tanggal: '04/07/2024', status: 'Selesai', campaign: 'bencana1', deskripsi: 'Barang telah diterima' },
+    { id: 13, lokasi: 'Kecamatan D', bantuan: 'Uang', tanggal: '05/07/2024', status: 'Menunggu', campaign: 'bencana2', deskripsi: 'Menunggu validasi penerima' },
+    { id: 14, lokasi: 'Kecamatan D', bantuan: 'Barang', tanggal: '05/07/2024', status: 'Selesai', campaign: 'bencana1', deskripsi: 'Barang sudah tersalurkan' },
+    { id: 15, lokasi: 'Kecamatan D', bantuan: 'Barang', tanggal: '05/07/2024', status: 'Dalam perjalanan', campaign: 'bencana2', deskripsi: 'Dalam proses pengantaran' },
+    { id: 16, lokasi: 'Kecamatan D', bantuan: 'Barang', tanggal: '05/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Distribusi dijadwalkan minggu depan' },
+    { id: 17, lokasi: 'Kecamatan E', bantuan: 'Barang', tanggal: '06/07/2024', status: 'Selesai', campaign: 'bencana2', deskripsi: 'Sudah sampai tujuan' },
+    { id: 18, lokasi: 'Kecamatan E', bantuan: 'Barang', tanggal: '06/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Masih menunggu pengemudi' },
+    { id: 19, lokasi: 'Kecamatan E', bantuan: 'Uang', tanggal: '06/07/2024', status: 'Selesai', campaign: 'bencana1', deskripsi: 'Transfer dana sukses' },
+    { id: 20, lokasi: 'Kecamatan E', bantuan: 'Barang', tanggal: '06/07/2024', status: 'Menunggu', campaign: 'bencana2', deskripsi: 'Akan diproses besok pagi' },
   ]);
-
-  const totalPages = Math.ceil(distribusiData.length / itemsPerPage);
-  const paginatedData = distribusiData.slice(
+  
+  const filteredData = selectedCampaign
+  ? distribusiData.filter((d) => d.campaign === selectedCampaign)
+  : distribusiData;
+  
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const paginatedData = filteredData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
-
+  
   const [selectedItem, setSelectedItem] = useState();
   const showModal = (status, item) => {
   const lowerStatus = status.toLowerCase();
-  console.log(lowerStatus);
+
 
   if (lowerStatus === 'menunggu') {
     setModalOpen(true);           // untuk modal update
@@ -241,28 +249,28 @@ const DistribusiDonasi = () => {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      <div>
-        <label className="block font-semibold text-gray-700">Campaign</label>
-        <select
-          className="mt-1 border rounded w-full p-2"
-          value={selectedCampaign}
-          onChange={(e) => setSelectedCampaign(e.target.value)}
-        >
-          <option value="">Pilih campaign</option>
-          <option value="bencana1">Bencana Alam 1</option>
-          <option value="bencana2">Bencana Alam 2</option>
-        </select>
-      </div>
+     <div>
+  <label className="block font-semibold text-gray-700">Campaign</label>
+  <select
+    className="mt-1 border rounded w-full p-2"
+    value={selectedCampaign}
+    onChange={(e) => setSelectedCampaign(e.target.value)}
+  >
+    <option value="">Pilih campaign</option>
+    <option value="bencana1">Bencana Alam 1</option>
+    <option value="bencana2">Bencana Alam 2</option>
+  </select>
+</div>
 
       <div>
           {modalOpen && (
         <Modal onClose={() => setModalOpen(false)}>
-          <DistribusiForm item={selectedItem} setDistribusiData={setDistribusiData} onClose={() => setModalOpen(false)} />
+          <DistribusiForm item={selectedItem} setDistribusiData={setDistribusiData} distribusiData={distribusiData} onClose={() => setModalOpen(false)} />
         </Modal>
       )}
        {modalLihat && (
         <Modal onClose={() => setModalLihat(false)}>
-          <DetailDistribusi data={selectedItem}  onClose={() => setModalOpen(false)} />
+          <DetailDistribusi data={selectedItem}  onClose={() => setModalLihat(false)} />
         </Modal>
       )}
         <h2 className="text-lg font-semibold text-gray-800">Jadwal Distribusi</h2>
