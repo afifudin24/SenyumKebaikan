@@ -20,7 +20,7 @@ const Dashboard = () => {
      
       <h2 className="text-4xl md:text-2xl font-primary font-bold text-primary mb-4">Hi, Admin</h2>
       <p className="text-xs md:text-sm font-secondary">Selamat datang di halaman dashboard admin</p>
-      <div className="flex flex-col md:flex-row justify-between">
+      <div className="flex flex-col sm:flex-row justify-between">
         <div className="w-7/12">
 
         
@@ -96,6 +96,7 @@ const Dashboard = () => {
         <ProgramTable />
 
         <TransactionTable />
+        <TableTransactionCrypto />
       </div>
     </DashboardLayout>
   );
@@ -980,5 +981,206 @@ const TransactionTable = () => {
     
   );
   
+};
+
+
+const TableTransactionCrypto = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState({ title: "", body: "", icon: null });
+
+  const [dataItem, setDataItem] = useState([
+    { id: 1, txHash: "0xabc123", nama: "Ali", donasi: 0.5, status: "Belum Diverifikasi" },
+    { id: 2, txHash: "0xdef456", nama: "Dina", donasi: 1.2, status: "Terverifikasi" },
+    { id: 3, txHash: "0xghi789", nama: "Rudi", donasi: 0.3, status: "Gagal" },
+  ]);
+
+  const verif = (item) => {
+    toast.success('Berhasil Diverifikasi');
+    const updatedData = dataItem.map((data) => {
+      if (data.id === item.id) {
+        return { ...data, status: "Terverifikasi" };
+      }
+      return data;
+    });
+  
+    setDataItem(updatedData); // ini yang penting!
+    setModalOpen(false);
+    
+    
+  }
+
+  const openModal = (item, type) => {
+    let content = { title: "", body: "", icon: null };
+
+    switch (type) {
+      case "lihat":
+        content = {
+          icon: <FontAwesomeIcon className="text-4xl text-accent" icon={faQuestionCircle} />,
+          title: "Detail Transaksi Crypto",
+          body: (
+            <div className="flex w-9/12 mx-auto justify-center">
+          
+            <div className="text-sm text-primary">
+              <p>Nama Donatur: {item.nama}</p>
+              <p>Tx Hash: {item.txHash}</p>
+              <p>Donasi: {item.donasi} ETH</p>
+              <p>Status: {item.status}</p>
+              <div className="text-center">
+
+              <button onClick={() => verif(item)} className='mx-auto px-4 mt-5 py-2 bg-primary text-white hover:text-primary text-sm rounded hover:bg-secondary'> 
+                Verifikasi
+                </button>
+              </div>
+            </div>
+             
+            </div>
+          ),
+        };
+        break;
+      case "lihatBlockchain":
+        content = {
+          icon: <FontAwesomeIcon className="text-4xl text-accent" icon={faCheckCircle} />,
+          title: "Terverifikasi di Blockchain",
+          body: (
+            <div className="text-sm text-primary">
+              <p>Nama Donatur: {item.nama}</p>
+              <p>Tx Hash: {item.txHash}</p>
+              <p>Donasi: {item.donasi} ETH</p>
+              <p>Status: {item.status}</p>
+              <p>
+                Link:{" "}
+                <a
+                  className="text-blue-500 underline"
+                  href={`https://etherscan.io/tx/${item.txHash}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Lihat di Blockchain
+                </a>
+              </p>
+            </div>
+          ),
+        };
+        break;
+      case "gagal":
+        content = {
+          icon: <FontAwesomeIcon className="text-4xl text-accent" icon={faXmarkCircle} />,
+          title: "Transaksi Gagal",
+          body: (
+            <div className="text-sm text-center text-primary">
+              <p>Transaksi oleh {item.nama} dengan hash {item.txHash} gagal diverifikasi.</p>
+            </div>
+          ),
+        };
+        break;
+      default:
+        break;
+    }
+
+    setModalContent(content);
+    setModalOpen(true);
+  };
+
+  const renderAksi = (item) => {
+    switch (item.status) {
+      case "Belum Diverifikasi":
+        return (
+          <button
+            className="text-blue-500 hover:underline"
+            onClick={() => openModal(item, "lihat")}
+          >
+            Lihat
+          </button>
+        );
+      case "Terverifikasi":
+        return (
+          <button
+            className="text-green-600 hover:underline"
+            onClick={() => openModal(item, "lihatBlockchain")}
+          >
+            Lihat di Blockchain →
+          </button>
+        );
+      case "Gagal":
+        return (
+          <button
+            className="text-red-500 hover:underline"
+            onClick={() => openModal(item, "gagal")}
+          >
+            Detail Gagal →
+          </button>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const Modal = ({ isOpen, icon, onClose, title, children }) => {
+    if (!isOpen) return null;
+
+    return (
+      <div className="fixed inset-0  bg-opacity-30 flex items-center justify-center z-50">
+        <div className="bg-white rounded-lg w-full max-w-md shadow-lg relative">
+          <div className="flex flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 bg-secondary">
+            {icon}
+            <h4 className="font-semibold my-2 text-primary">{title}</h4>
+          </div>
+          <div className="p-4">{children}</div>
+          <div className="text-center mb-4">
+            <button
+              onClick={onClose}
+              className="px-4 py-2 bg-secondary text-primary hover:text-white text-sm rounded hover:bg-primary"
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="w-full mx-auto mt-10">
+      <div className="flex justify-between items-center mb-4">
+        <div className="bg-primary text-white px-4 py-2 rounded-t-md font-semibold">
+          Verifikasi Donasi Crypto
+        </div>
+      </div>
+
+      <div className="bg-white border border-gray-300 rounded-md overflow-hidden">
+        <table className="w-full text-sm">
+          <thead className="bg-gray-100 text-gray-700">
+            <tr>
+              <th className="text-left px-4 py-2">Tx Hash</th>
+              <th className="text-left px-4 py-2">Nama</th>
+              <th className="text-left px-4 py-2">Donasi (ETH)</th>
+              <th className="text-left px-4 py-2">Status</th>
+              <th className="text-left px-4 py-2">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataItem.map((item) => (
+              <tr key={item.id} className="border-t">
+                <td className="px-4 py-2 font-mono">{item.txHash}</td>
+                <td className="px-4 py-2">{item.nama}</td>
+                <td className="px-4 py-2">{item.donasi}</td>
+                <td className="px-4 py-2">{item.status}</td>
+                <td className="px-4 py-2">{renderAksi(item)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <Modal
+        isOpen={modalOpen}
+        icon={modalContent.icon}
+        onClose={() => setModalOpen(false)}
+        title={modalContent.title}
+      >
+        {modalContent.body}
+      </Modal>
+    </div>
+  );
 };
 export default Dashboard;
