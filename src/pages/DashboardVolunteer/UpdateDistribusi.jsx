@@ -11,8 +11,7 @@ const UpdateDistribusi = () => {
               
     return (
         <DashboardVolunteerLayout>
-             <h2 className="text-4xl md:text-2xl font-primary font-bold text-primary mb-4">Hi, {user.namadepan}</h2>
-                <p className="text-xs md:text-sm font-secondary">Selamat datang di halaman dashboard Volunteer</p>
+          
                 <div className="mt-5">
           <DistribusiDonasi/>
                 </div>
