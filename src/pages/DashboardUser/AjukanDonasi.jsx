@@ -2,8 +2,11 @@ import React from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 const AjukanDonasi = () => {
-    const [newData, setNewData] = useState({
+  const [showModal, setShowModal] = useState(false);
+     const [newData, setNewData] = useState({
   judulProgram: '',
   kategori: '',
   tanggalMulai: '',
@@ -47,7 +50,8 @@ const handleSave = () => {
     lokasiTKP
   ) {
     console.log('Berhasil melakukan pengajuan', newData);
-    toast.success('Berhasil melakukan pengajuan');
+    // toast.success('Berhasil melakukan pengajuan');
+    setShowModal(true);
   } else {
     console.log(newData)
     console.log('Semua field harus diisi!');
@@ -163,9 +167,37 @@ const handleSave = () => {
             <div className="text-center my-4">
                 <button onClick={handleSave} className="w-auto mx-auto bg-primary hover:bg-secondary cursor-pointer hover:text-primary text-white rounded-lg py-2 px-3 text-base md:text-lg">Kirim Pengajuan</button>
             </div>
-            </div>
+        </div>
+        
+        <ModalSuccess showModal={showModal} setShowModal={setShowModal} />
         </DashboardLayout>
     );
+}
+
+const ModalSuccess = ({showModal, setShowModal}) => {
+  return (
+   <div
+  className={`rounded-xl mt-4 mb-4 text-center  ${
+    showModal ? "w-auto opacity-100 h-auto scale-100 " : "w-0 h-0 opacity-0 scale-95 "
+  } md:w-6/12  duration-300 transition-all z-999 top-1/2 fixed left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto overflow-hidden bg-white text-primary border border-gray-400`}
+>
+      <div className="flex relative flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 w-full bg-secondary ">
+        <FontAwesomeIcon icon={faCheckCircle} className="text-5xl  text-accent"  />
+      <h4 className="font-semibold my-2 text-primary">Selamat, Pengajuan Anda Telah Berhasil.</h4>
+     
+        <FontAwesomeIcon onClick={() => setShowModal(false)} className="absolute top-2 right-2" icon={faTimes} />
+      </div>
+      <div className="mx-auto w-11/12 md:w-8/12 text-center gap-6 mt-5">
+        <p className="my-1 text-primary font-primary text-base">Status : Menunggu Konfirmasi Admin</p>
+        <p className="my-1 text-primary font-primary text-base">Silahkan pantau donasi yang telah diajukan, untuk mengetahui status pengajuan</p>
+        <p className="my-1 text-primary font-primary text-base">Akun anda akan menjadi volunteer setelah donasi diterima</p>
+        <button onClick={() => setShowModal(false)} className="p-2 rounded-xl my-2 w-4/12 bg-accent text-white hover:bg-secondary hover:text-primary">Tutup</button>
+      </div>
+       
+        
+  
+    </div>
+  )
 }
 
 export default AjukanDonasi;

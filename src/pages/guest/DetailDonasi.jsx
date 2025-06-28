@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Container from "../../components/Container";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import DataDetailDonasi from "../../components/DataDetailDonasi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileInvoice, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import { Toaster, toast } from 'react-hot-toast';
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 const DetailDonasi = () => {
@@ -242,7 +242,8 @@ const DetailDonasi = () => {
 }
 
 
-const FormCrypto = ({modal, setModal}) => {
+const FormCrypto = ({ modal, setModal }) => {
+  const [connectWallet, setConnectWallet] = useState(false);
   const [formData, setFormData] = useState({
     nominal: "20000",
     nama: "",
@@ -317,13 +318,23 @@ const FormCrypto = ({modal, setModal}) => {
         />
       </div>
 
-      <button
-        type="button"
-        className="p-2 rounded-lg bg-accent text-white mt-4 mx-auto block"
-        onClick={() => console.log("Connect Wallet clicked")} // sementara, bisa diganti dengan logika Web3
-      >
-        Connect Wallet
-      </button>
+      {
+        connectWallet ? (
+          <p className="text-primary text-center my-4 p-2 bg-secondary rounded-2xl">
+            Wallet Terhubung 0xyza567bcd890
+            </p>
+        ): (
+          <button
+          type="button"
+          className="p-2 rounded-lg bg-accent text-white mt-4 mx-auto block"
+          onClick={() => setConnectWallet(!connectWallet)} // sementara, bisa diganti dengan logika Web3
+        >
+          Connect Wallet
+        </button>
+        )
+      }
+
+      
 
       <div>
         <h4 className="text-primary text-start my-4 font-semibold">Pesan Untuk Campaign</h4>
@@ -367,6 +378,20 @@ const FormBank = ({modal, setModal}) => {
     pesan: "",
     setujuBlockchain: false,
   });
+  const fileInputRef = useRef(null);
+  const [fileName, setFileName] = useState("");
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFileName(file.name);
+      setFormData({ ...formData, buktiTransfer: file });
+    }
+  };
+
+  const handleClickBox = () => {
+    fileInputRef.current.click();
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -438,16 +463,26 @@ const FormBank = ({modal, setModal}) => {
       </div>
 
       <div>
-        <h4 className="text-primary text-start my-4 font-semibold">Upload Bukti Transfer</h4>
-        <input
-          type="text"
-          name="buktiTransfer"
-          value={formData.buktiTransfer}
-          onChange={handleChange}
-          className="border w-full border-gray-400 rounded-lg p-2"
-          placeholder="Link atau nama file"
-        />
+      <h4 className="text-primary text-start my-4 font-semibold">Upload Bukti Transfer</h4>
+
+      <div
+        onClick={handleClickBox}
+        className="border-2 border-gray-300 border-dashed rounded-md h-40 flex flex-col justify-center items-center cursor-pointer hover:border-gray-500 transition"
+        >
+          <FontAwesomeIcon icon={faFolderOpen} className="text-4xl text-gray-400 mb-2" />
+
+        <p className="text-gray-600">{fileName ? fileName : "Upload di sini"}</p>
+        <p className="text-sm text-gray-500">Format: .jpg, .png</p>
       </div>
+
+      <input
+        type="file"
+        accept=".jpg,.png"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+        className="hidden"
+      />
+    </div>
 
       <div>
         <h4 className="text-primary text-start my-4 font-semibold">Pesan Untuk Campaign</h4>

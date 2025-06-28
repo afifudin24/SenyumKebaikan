@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Container from "../../components/Container";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
@@ -13,6 +13,7 @@ import { faFileCirclePlus } from "@fortawesome/free-solid-svg-icons/faFileCircle
 import { faCamera } from "@fortawesome/free-solid-svg-icons/faCamera";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import SignatureCanvas from "react-signature-canvas";
 import toast from "react-hot-toast";
 const DetailDonasiBarang = () => {
     const location = useLocation();
@@ -337,6 +338,31 @@ const AddDonasi = ({modal, setModal, setIsAdd}) => {
   const [jumlah, setJumlah] = useState("");
   const [kondisi, setKondisi] = useState([]);
   const [setujuBlockchain, setSetujuBlockchain] = useState(false);
+ 
+  const sigCanvas = useRef(null);
+  const [signatureURL, setSignatureURL] = useState("");
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (sigCanvas.current.isEmpty()) {
+  //     alert("Silakan isi tanda tangan terlebih dahulu.");
+  //     return;
+  //   }
+
+  //   const dataUrl = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
+  //   setSignatureURL(dataUrl);
+
+  //   // Kirim data `dataUrl` ke backend atau proses selanjutnya
+  //   console.log("Signature image base64:", dataUrl);
+
+  //   // Lanjutkan dengan pengiriman form...
+  // };
+
+  const clearSignature = () => {
+    sigCanvas.current.clear();
+    setSignatureURL("");
+  };
+
 
   const handleCheckboxChange = (value) => {
     setKondisi((prev) =>
@@ -407,7 +433,8 @@ const AddDonasi = ({modal, setModal, setIsAdd}) => {
         setujuBlockchain,
       },
     };
-  
+      //  const dataUrl = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
+      // setSignatureURL(dataUrl);
     // Ambil notifikasi yang sudah ada
     const existingNotifications = JSON.parse(localStorage.getItem("notifications")) || [];
   
@@ -558,11 +585,22 @@ const AddDonasi = ({modal, setModal, setIsAdd}) => {
 
       <div className="w-8/12 mx-auto">
         <h4 className="text-start my-2 font-semibold">Persetujuan dan Konfirmasi</h4>
-        <div className="border border-gray-400 rounded-md h-32 text-center flex flex-col justify-center items-center text-gray-500">
-          <p className="text-sm text-gray-700">Tanda Tangan</p>
-          <p className="text-2xl">✍️</p>
-          <p className="text-sm">Di sini</p>
+        <div className="border border-gray-400 rounded-md text-center text-gray-500 p-2">
+          <p className="text-sm text-gray-700 mb-1">Tanda Tangan</p>
+          <SignatureCanvas
+            penColor="black"
+            canvasProps={{ className: "w-full h-32 border rounded" }}
+            ref={sigCanvas}
+          />
+          <button
+            type="button"
+            onClick={clearSignature}
+            className="text-xs mt-2 text-red-500 underline"
+          >
+            Hapus Tanda Tangan
+          </button>
         </div>
+
         <label className="flex gap-2 mt-2">
           <input
             type="checkbox"
@@ -599,9 +637,9 @@ const ModalSuccess = ({modal, setModal, setShowModalStatus}) => {
           <div className="justify-center text-center gap-5 mt-5">
         <p>ID Donasi Barang</p>
         <p>3FA59D64</p>
-        <button className="p-1 text-center my-3 bg-secondary text-primary">
+        {/* <button className="p-1 text-center my-3 bg-secondary text-primary">
           Lihat di Etherscan
-        </button>
+        </button> */}
 
         <p className="mt-1 mb-4 text-primary text-sm md:text-base">Status : Menunggu Penjemputan</p>
 

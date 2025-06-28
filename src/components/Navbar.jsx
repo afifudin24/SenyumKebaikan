@@ -133,14 +133,34 @@ const Navbar = () => {
               ) : (
                   <div className="flex font-secondary text-primary text-2xl gap-5 items-center relative">
   {/* Notifikasi */}
-<div className="relative group">
-  <FontAwesomeIcon icon={faBell} onClick={() => setShowNotification(!showNotification)} className="cursor-pointer" />
-  <div className={`absolute right-0 mt-0 w-64 bg-white shadow-md rounded-md p-4 ${showNotification ? 'block' : 'hidden'} z-50`}>
+  <div className="relative group">
+  <div className="relative">
+    <FontAwesomeIcon
+      icon={faBell}
+      onClick={() => setShowNotification(!showNotification)}
+      className="cursor-pointer text-xl"
+    />
+    {notification.length > 0 && (
+      <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center animate-pulse">
+        {notification.length > 9 ? '9+' : notification.length}
+      </span>
+    )}
+  </div>
+
+  <div
+    className={`absolute right-0 mt-0 w-64 bg-white shadow-md rounded-md p-4 ${
+      showNotification ? 'block' : 'hidden'
+    } z-50`}
+  >
     <p className="text-base font-semibold text-primary mb-2">Notifikasi Terbaru</p>
     <div className="space-y-2 max-h-60 overflow-y-auto">
       {notification.length > 0 ? (
         notification.map((item) => (
-          <div key={item.id} onClick={() => clickNotification(item)} className="p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition">
+          <div
+            key={item.id}
+            onClick={() => clickNotification(item)}
+            className="p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition"
+          >
             <p className="text-sm text-gray-800">{item.title}</p>
             <p className="text-xs text-gray-500">{item.data.tanggal}</p>
           </div>
@@ -151,6 +171,7 @@ const Navbar = () => {
     </div>
   </div>
 </div>
+
 {/* Modal */}
                     <ModalDetailDonasi setShowDetailDonasi={setShowModalDetail} showDetailDonasi={showModalDetail} />
                     <ModalPengajuanDiterima setShowModalPengajuan={setShowModalPengajuan} setShowModalPengajuanKonfirmasi={setShowModalPengajuanKonfirmasi} showModalPengajuan={showModalPengajuan} />

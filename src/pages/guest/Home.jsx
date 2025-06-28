@@ -6,13 +6,20 @@ import home1 from '../../assets/home1.png'
 import home2 from '../../assets/home2.png'
 import home3 from '../../assets/home3.png'
 import home4 from '../../assets/home4.png'
+import home42 from '../../assets/home4-2.png'; 
 import pilihan1 from '../../assets/home/pilihan1.png'
 import pilihan2 from '../../assets/home/pilihan2.png'
 import pilihan3 from '../../assets/home/pilihan3.png'
+import pilihan4 from '../../assets/home/pilihan4.png'
+import pilihan5 from '../../assets/home/pilihan5.png'
+import pilihan6 from '../../assets/home/pilihan6.png'
 import { Link } from 'react-router-dom'
 import kebutuhan1 from '../../assets/home/kebutuhan1.png'
 import kebutuhan2 from '../../assets/home/kebutuhan2.png'
 import kebutuhan3 from '../../assets/home/kebutuhan3.png'
+import kebutuhan4 from '../../assets/home/kebutuhan4.png'
+import kebutuhan5 from '../../assets/home/kebutuhan5.png'
+import kebutuhan6 from '../../assets/home/kebutuhan6.png'
 import image from '../../assets/home/image.png'
 import { faArrowRight, faLeftLong, faTimes, faUpLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -33,6 +40,13 @@ import Footer from '../../components/Footer'
 const Home = () => {
 
   const [showImg, setShowImg] = useState(false);
+  //dapatkan informasi sudah isLogin dari localstorage dan masukan ke useState
+   const [user, setUser] = useState(() => {
+                const savedUser = localStorage.getItem('user');
+                return savedUser ? JSON.parse(savedUser) : null;
+              }) 
+
+  
 
   const toggleImage = () => {
     setShowImg(!showImg);
@@ -187,8 +201,14 @@ const Home = () => {
               </button>
             </div>
                       </div>
-                      
-                      <img src={home4} className='absolute right-0 top-0 h-full' alt="" />
+            {
+              user ? (
+                <img src={home42} className='absolute right-0 top-0 h-full' alt="" />
+              ): (
+                <img src={home4} className='absolute right-0 top-0 h-full' alt="" />
+              )
+                      }
+                   
 
           {/* Kanan: Gambar */}
                   </div>
@@ -300,24 +320,28 @@ KLIK DI BAWAH INI UNTUK MENUNJUKAN CARA KERJA MENGENAI TEKNOLOGI BLOCKCHAIN</p>
 }
 
 const DisasterCards = () => {
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem('user');
+    return savedUser ? JSON.parse(savedUser) : null;
+  }) 
   const disasters = [
     {
       title: "Banjir Bandang",
       description: "Terjang Desa Wombo di Donggala\nImbas Air Sungai Meluap",
       location: "",
-      image: pilihan1
+      image: user ? pilihan4 : pilihan1 
     },
     {
       title: "Atap Ruang Kelas MTS Di Sukabumi Ambruk",
       description: "",
       location: "Sukalarang, Sukabumi, Jabar",
-      image: pilihan2
+      image: user ? pilihan6 : pilihan2
     },
     {
       title: "Banjir Lembang PAUD Ambruk",
       description: "",
-      location: "Banbung, Jawa Barat",
-      image: pilihan3
+      location: "Bandung, Jawa Barat",
+      image: user ?  pilihan5 : pilihan3
     },
   ];
 
@@ -358,19 +382,23 @@ const DisasterCards = () => {
 };
 
 const ProductCarousel = () => {
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem('user');
+    return savedUser ? JSON.parse(savedUser) : null;
+  }) 
   const products = [
   
   {
-    image: kebutuhan1,
+    image: user ? kebutuhan4 : kebutuhan1,
   },
   {
-    image: kebutuhan2,
+    image: user ? kebutuhan5 : kebutuhan2,
   },
   {
-    image: kebutuhan3,
+    image: user ? kebutuhan6 : kebutuhan3,
   },
   {
-    image: kebutuhan1,
+    image: user ? kebutuhan4 : kebutuhan1,
   },
 ];
   return (
