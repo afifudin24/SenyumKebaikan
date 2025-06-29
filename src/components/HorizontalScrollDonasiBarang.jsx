@@ -79,7 +79,7 @@ function PrevArrow(props) {
   );
 }
 
-const HorizontalScrollDonasiBarang = ({data}) => {
+const HorizontalScrollDonasiBarang = ({data, img}) => {
 
 
 
@@ -89,7 +89,7 @@ const HorizontalScrollDonasiBarang = ({data}) => {
     <Slider {...settings}>
       {data.map((item, i) => (
        <div className='w-full'>
-         <DataDonasiBarang key={i} type={item.type} title={item.title} description={item.description} items={item.items}/>
+          <DataDonasiBarang img={img} key={i} type={item.type} title={item.title} description={item.description} items={item.items}/>
           
        </div>
       ))}

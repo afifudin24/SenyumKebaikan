@@ -8,7 +8,15 @@ import { faFileInvoice, faCheck, faTimes } from "@fortawesome/free-solid-svg-ico
 import { faCheckCircle, faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import { Toaster, toast } from 'react-hot-toast';
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FaCcVisa, FaUniversity, FaWallet, FaCcMastercard, FaCcAmazonPay, FaCcApplePay, FaCcPaypal} from "react-icons/fa";
+import { SiWalletconnect} from "react-icons/si";
+import { MdAccountBalance, MdOutlineAttachEmail } from "react-icons/md";
+import ikongopay from '../../assets/gopay.png'
+import ikongenius from '../../assets/genius.png'
+import ikonovo from '../../assets/ovo.png'
+import ikondana from '../../assets/dana.png'
 const DetailDonasi = () => {
+  const [valueForm, setValueForm] = useState(null);
     const [dataDonasi, setDataDonasi] = useState([
     {
       nama: 'Budi Santoso',
@@ -87,7 +95,7 @@ const DetailDonasi = () => {
 
             {
               isAdd ? (
-              <AddDonasi isAdd={isAdd} setIsAdd={setIsAdd} modal={modal} setModal={setModal} />
+              <AddDonasi setValueForm={setValueForm} isAdd={isAdd} setIsAdd={setIsAdd} modal={modal} setModal={setModal} />
               ) : (
                 <div>
                         <nav className="flex justify-center gap-5  mx-auto text-sm text-gray-600 mb-6 cursor-pointer">
@@ -231,7 +239,7 @@ const DetailDonasi = () => {
               )
             }
 
-<ModalSuccess modal={modal} setModal={setModal} />
+<ModalSuccess modal={modal} formData={valueForm} setModal={setModal} />
      
       
           <Footer />
@@ -369,155 +377,183 @@ const FormCrypto = ({ modal, setModal }) => {
   );
 };
 
-const FormBank = ({modal, setModal}) => {
+const FormBank = ({ modal, setModal, setValueForm }) => {
   const [formData, setFormData] = useState({
     nominal: "20000",
+    metode: "",
     nama: "",
     email: "",
-    buktiTransfer: "",
     pesan: "",
-    setujuBlockchain: false,
   });
-  const fileInputRef = useRef(null);
-  const [fileName, setFileName] = useState("");
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFileName(file.name);
-      setFormData({ ...formData, buktiTransfer: file });
-    }
-  };
-
-  const handleClickBox = () => {
-    fileInputRef.current.click();
-  };
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
-    
     e.preventDefault();
-   const { nominal, email, buktiTransfer, pesan, setujuBlockchain } = formData;
-    if (!nominal || !email || !buktiTransfer || !pesan || !setujuBlockchain) {
-      toast.error('Pastikan semua data terisi');
+    const { nominal, metode, email } = formData;
+
+    if (!nominal || !metode || !email) {
+      toast.error("Pastikan nominal, metode, dan email diisi");
       return;
     }
 
     console.log("Data siap dikirim:", formData);
-
+    setValueForm(formData);
     setModal(true);
-
   };
 
+  const metodeList = [
+    {
+      label: "E-Wallet",
+      items: [
+        { name: "Gopay", value: "gopay", img : ikongopay },
+        { name: "OVO", value: "ovo", img: ikonovo },
+        
+        { name: "Dana", value: "dana", img : ikondana  },
+        { name: "GeniusPay", value: "geniuspay", img: ikongenius },
+      ],
+    },
+    {
+      label: "Bank Transfer",
+      items: [
+        { name: "Bank Syariah Indonesia", value: "bni", icon: <FaUniversity className="text-orange-600" /> },
+        { name: "Bank Central Asia", value: "bca", icon: <MdAccountBalance className="text-blue-700" /> },
+        { name: "Bank Mandiri", value: "mandiri", icon: <FaCcVisa className="text-yellow-500" /> },
+        { name: "Bank Syariah Indonesia", value: "bsi", icon: <FaCcMastercard className="text-green-500" /> },
+        { name: "Bank Muamalat", value: "muamalat", icon: <FaCcApplePay className="text-emerald-600" /> },
+        { name: "Maybank Syariah", value: "maybank", icon: <FaCcPaypal className="text-yellow-600" /> },
+        { name: "Bank Rakyat Indonesia", value: "bri", icon: <FaUniversity className="text-blue-500" /> },
+      ],
+    },
+  ];
+
   return (
-    <form onSubmit={handleSubmit} className="w-5/12 text-start mx-auto">
+    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto text-start">
+      {/* Nominal */}
       <div>
-        <h4 className="text-primary text-start my-4 font-semibold">Nominal Pembayaran</h4>
+        <label className="text-primary font-semibold mb-2 block">Nominal pembayaran</label>
         <select
           name="nominal"
           value={formData.nominal}
           onChange={handleChange}
           className="border w-full border-gray-400 rounded-lg p-2"
         >
-          <option value="20000">Rp 20.000</option>
-          <option value="30000">Rp 30.000</option>
-          <option value="40000">Rp 40.000</option>
-          <option value="50000">Rp 50.000</option>
-          <option value="60000">Rp 60.000</option>
-          <option value="70000">Rp 70.000</option>
-          <option value="80000">Rp 80.000</option>
-          <option value="90000">Rp 90.000</option>
-          <option value="100000">Rp 100.000</option>
+          <option value="">Pilih Nominal</option>
+          {[...Array(9)].map((_, i) => {
+            const nominal = (i + 2) * 10000;
+            return (
+              <option key={nominal} value={nominal}>
+                Rp {nominal.toLocaleString("id-ID")}
+              </option>
+            );
+          })}
         </select>
       </div>
 
-      <div>
-        <h4 className="text-primary text-start my-4 font-semibold">Nama (Opsional)</h4>
+      {/* Metode */}
+      <div className="mt-4">
+        <div className="border border-green-300 rounded-lg p-4 space-y-4">
+       
+        <label className="text-primary font-semibold mb-2 block">Pilih Metode Pembayaran</label>
+          {metodeList.map((group) => (
+            <div key={group.label}>
+              <p className="text-sm text-gray-600 font-semibold mb-2">{group.label}</p>
+              <div className="space-y-2">
+                {group.items.map((item) => (
+                  <label
+                    key={item.value}
+                    className={`flex items-center gap-2 cursor-pointer border p-2 rounded-lg ${
+                      formData.metode === item.value
+                        ? "border-green-500 bg-green-50"
+                        : "border-gray-300"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="metode"
+                      value={item.value}
+                      checked={formData.metode === item.value}
+                      onChange={handleChange}
+                      className="hidden"
+                    />
+                   
+                    {
+                      item.img ? (
+                        // <p>{item.img}</p>
+                        <img src={item.img} alt={item.name} className="w-4 h-4" />
+                      ) : (
+                          <p>
+
+                        <p>{}</p>
+                        <span className="text-xl">{item.icon}</span>
+                          </p>
+                      )
+                      
+                    }
+                    {/* <span className="text-xl">{item.icon}</span> */}
+                    <span>{item.name}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Nama */}
+      <div className="mt-4">
+        <label className="text-primary font-semibold mb-2 block">Nama (Opsional)</label>
         <input
           type="text"
           name="nama"
           value={formData.nama}
           onChange={handleChange}
           className="border w-full border-gray-400 rounded-lg p-2"
-          placeholder=""
         />
       </div>
 
-      <div>
-        <h4 className="text-primary text-start my-4 font-semibold">Email</h4>
+      {/* Email */}
+      <div className="mt-4">
+        <label className="text-primary font-semibold mb-2 block">Email</label>
         <input
           type="email"
           name="email"
           value={formData.email}
           onChange={handleChange}
           className="border w-full border-gray-400 rounded-lg p-2"
-          placeholder=""
         />
       </div>
 
-      <div>
-      <h4 className="text-primary text-start my-4 font-semibold">Upload Bukti Transfer</h4>
-
-      <div
-        onClick={handleClickBox}
-        className="border-2 border-gray-300 border-dashed rounded-md h-40 flex flex-col justify-center items-center cursor-pointer hover:border-gray-500 transition"
-        >
-          <FontAwesomeIcon icon={faFolderOpen} className="text-4xl text-gray-400 mb-2" />
-
-        <p className="text-gray-600">{fileName ? fileName : "Upload di sini"}</p>
-        <p className="text-sm text-gray-500">Format: .jpg, .png</p>
-      </div>
-
-      <input
-        type="file"
-        accept=".jpg,.png"
-        ref={fileInputRef}
-        onChange={handleFileChange}
-        className="hidden"
-      />
-    </div>
-
-      <div>
-        <h4 className="text-primary text-start my-4 font-semibold">Pesan Untuk Campaign</h4>
+      {/* Pesan */}
+      <div className="mt-4">
+        <label className="text-primary font-semibold mb-2 block">Pesan untuk campaign</label>
         <textarea
           name="pesan"
           value={formData.pesan}
           onChange={handleChange}
-          cols="20"
-          rows="5"
-          className="rounded-lg border w-full border-gray-400"
+          className="border w-full border-gray-400 rounded-lg p-2"
+          rows="4"
         ></textarea>
       </div>
 
-      <div className="flex gap-1 mt-4">
-        <input
-          type="checkbox"
-          name="setujuBlockchain"
-          checked={formData.setujuBlockchain}
-          onChange={handleChange}
-          className="my-auto rounded-sm"
-        />
-        <p>Saya setuju donasi ini dicatat di blockchain</p>
-      </div>
-
+      {/* Tombol Submit */}
       <button
         type="submit"
-        className="bg-accent cursor-pointer text-white p-2 rounded-lg mt-4 font-secondary w-full"
+        className="bg-green-200 text-green-800 font-semibold mt-6 rounded-lg p-3 w-full hover:bg-green-300 transition"
       >
-        Donasi Sekarang
+        Lanjut Pembayaran
       </button>
     </form>
-  )
-}
+  );
+};
 
-const AddDonasi = ({modal, setModal, isAdd, setIsAdd}) => {
+const AddDonasi = ({modal, setModal, isAdd, setIsAdd, setValueForm}) => {
   const [selectedMetodeBayar, setSelectedMetodeBayar] = useState(0);
   const metodeBayar = [
     {
@@ -525,8 +561,8 @@ const AddDonasi = ({modal, setModal, isAdd, setIsAdd}) => {
       component : <FormCrypto modal={modal} setModal={setModal} />
     },
     {
-      title : 'Bank',
-      component : <FormBank modal={modal} setModal={setModal} />
+      title : 'Bank/Ewallet',
+      component : <FormBank modal={modal} setValueForm={setValueForm} setModal={setModal} />
     }
    
   ]
@@ -552,7 +588,7 @@ const AddDonasi = ({modal, setModal, isAdd, setIsAdd}) => {
 }
 
 
-const ModalSuccess = ({modal, setModal}) => {
+const ModalSuccess = ({modal, setModal, formData}) => {
   return (
    <div
   className={`rounded-xl mt-4 mb-4 text-center  ${
@@ -568,7 +604,7 @@ const ModalSuccess = ({modal, setModal}) => {
       </div>
           <div className="flex flex-row justify-center gap-5 mt-5">
           <div className="flex flex-col gap-1">
-              <h4 className="font-semibold">Rp100.000/0,005 ETH</h4>
+          <h4 className="font-semibold"> Rp{formData ? formData.nominal : ''}/ { formData ? formData.nominal / 50000  : ''}ETH</h4>
               <p>21-02-2024</p>
               <p>0x9a29c4c</p>
           </div>
@@ -603,12 +639,12 @@ const ModalSuccess = ({modal, setModal}) => {
 
         </button>
         <div className="flex gap-2 mt-3 mb-3 justify-center flex-row w-9/12 mx-auto">
-            <button className="bg-primary hover:bg-secondary hover:text-primary text-white rounded-lg py-2 px-3 text-xs md:text-sm">
-              Kembali ke Campaign
+            <button onClick={() => setModal(false)} className="bg-primary hover:bg-secondary hover:text-primary text-white rounded-lg py-2 px-3 text-xs md:text-sm">
+           Tutup
             </button>
-            <button className="bg-primary hover:bg-secondary hover:text-primary text-white rounded-lg py-2 px-3 text-xs md:text-sm">
+            {/* <button className="bg-primary hover:bg-secondary hover:text-primary text-white rounded-lg py-2 px-3 text-xs md:text-sm">
               Dashboard Donasi Saya
-            </button>
+            </button> */}
         </div>
 
         <div>
