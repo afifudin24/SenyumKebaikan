@@ -1,13 +1,19 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { faArrowUpRightDots } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeftLong } from "@fortawesome/free-solid-svg-icons";
 import home4 from '../assets/home4.png'
 import { Link } from "react-router-dom";
 const DataDetailDonasi = ({type, title, description, percent, raised, goal, isAdd, setIsAdd}) => {
-    const [showImg, setShowImg] = useState(false);
-  
+  const [showImg, setShowImg] = useState(false);
+  const navigate = useNavigate();
+    const [user, setUser] = useState(() => {
+      const storedUser = localStorage.getItem('user');
+      return storedUser ? JSON.parse(storedUser) : null;
+    })
+  console.log(user);
     const toggleImage = () => {
       setShowImg(!showImg);
   };
@@ -58,7 +64,16 @@ const DataDetailDonasi = ({type, title, description, percent, raised, goal, isAd
         
                     {/* Tombol */}
                     <div className='flex gap-4 justify-start'>
-                      <button onClick={() => setIsAdd(true)} className='bg-white text-primary px-4 py-2 rounded-full text-sm font-medium hover:bg-secondary hover:text-primary transition'>
+              <button onClick={() => {
+                if (user) {
+                  setIsAdd(true)
+
+                } else {
+                  navigate('/login')
+                }
+              }
+              }
+               className='bg-white text-primary px-4 py-2 rounded-full text-sm font-medium hover:bg-secondary hover:text-primary transition'>
                         Donasi sekarang <FontAwesomeIcon icon={ faArrowUpRightDots} />
                       </button>
                       <button className='border border-white bg-primary text-white px-4 py-2 rounded-full text-sm hover:bg-gray-100 hover:text-primary transition'>
@@ -113,7 +128,15 @@ const DataDetailDonasi = ({type, title, description, percent, raised, goal, isAd
                       
                                   {/* Tombol */}
                                   <div className='flex gap-4 justify-center'>
-                                    <button onClick={() => setIsAdd(true)} className='bg-white text-primary px-4 py-2 rounded-full text-xs md:text-sm font-medium hover:bg-gray-100 transition'>
+            <button onClick={() => {
+              if (user) { 
+                setIsAdd(true)
+
+              } else {
+                navigate('/login')
+              }
+              
+                                    } } className='bg-white text-primary px-4 py-2 rounded-full text-xs md:text-sm font-medium hover:bg-gray-100 transition'>
                                       Donasi sekarang <FontAwesomeIcon icon={ faArrowUpRightDots} />
                                     </button>
                                     <button className='border border-white px-4 py-2 rounded-full text-xs md:text-sm hover:bg-white hover:text-primary transition'>
