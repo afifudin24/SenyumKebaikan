@@ -15,6 +15,7 @@ import {
   faChevronDown,
   faWallet,
   faLink,
+  faUpload,
 } from '@fortawesome/free-solid-svg-icons';
 import { faCheckCircle, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 import { Toaster, toast } from 'react-hot-toast';
@@ -41,6 +42,7 @@ import ikondana from '../../assets/dana.png';
 const DetailDonasi = () => {
   const [valueForm, setValueForm] = useState(null);
   const [showPayment, setShowPayment] = useState(false);
+  const [showDetailDonasi, setShowDetailDonasi] = useState('');
   const [dataDonasi, setDataDonasi] = useState([
     {
       nama: 'Budi Santoso',
@@ -137,7 +139,9 @@ const DetailDonasi = () => {
               isAdd={isAdd}
               setIsAdd={setIsAdd}
               modal={modal}
+              showDetailDonasi={showDetailDonasi}
               setModal={setModal}
+              setShowDetailDonasi={setShowDetailDonasi}
             />
           ) : (
             <div>
@@ -322,6 +326,7 @@ const DetailDonasi = () => {
 
 const FormCrypto = ({ modal, setModal, setValueForm }) => {
   const [connectWallet, setConnectWallet] = useState(false);
+  const [konfirmasiWallet, setKonfirmasiWallet] = useState(false);
 
   const [walletPilihan, setWalletPilihan] = useState(null);
   const [showWalletModal, setShowWalletModal] = useState(false);
@@ -354,7 +359,8 @@ const FormCrypto = ({ modal, setModal, setValueForm }) => {
       toast.error('Pastikan semua data terisi');
       return;
     }
-    setModal(true);
+    // setModal(true);
+    setKonfirmasiWallet(true);
     setValueForm(formData);
     console.log('Data siap dikirim:', formData);
     // Lanjutkan proses pengiriman data
@@ -491,6 +497,44 @@ const FormCrypto = ({ modal, setModal, setValueForm }) => {
           </div>
         </div>
       )}
+
+      {konfirmasiWallet && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg w-80 shadow-xl text-start">
+            <div className='flex justify-start p-2 gap-2'>
+            <img src={walletPilihan.img} className="w-8 h-8" alt="" />
+            <h3 className="text-lg font-semibold"> {walletPilihan.name}</h3>
+            </div>
+            <p className='text-center text-primary text-lg'>Kirim</p>
+            <div className='flex justify-between'>
+              <div className='flex flex-col gap-2'>
+                <p className='text-primary font-semibold'>Tujuan :</p>
+                <p className='text-primary font-semibold'>Jumlah :</p>
+                <p className='text-primary font-semibold'>Biaya Gas :</p>
+              </div>
+              <div className='flex flex-col gap-2'>
+                <p className='text-primary font-light'>0xabc1234...dcba5678</p>
+                <p className='text-primary font-light'>{formData.nominal} ETH</p>
+                <p className='text-primary font-light'>0.001 ETH</p>
+              </div>
+            </div>
+            <div className='text-center'>
+            
+            <button
+                onClick={() =>
+                {
+                  setModal(true)
+                    setKonfirmasiWallet(false)
+                }
+                }
+              className="mt-4 text-sm text-primary p-3 bg-secondary rounded-md w-9/12 mx-auto font-secondary hover:underline"
+              >
+              Konfirmasi
+            </button>
+              </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
@@ -502,6 +546,8 @@ const FormBank = ({
   setValueForm,
   showPayment,
   setShowPayment,
+  showDetailDonasi,
+  setShowDetailDonasi
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -533,8 +579,16 @@ const FormBank = ({
 
     console.log('Data siap dikirim:', formData);
     setValueForm(formData);
-    // setModal(true);
+    const bankValues = [
+      "bni", "bca", "mandiri", "bsi", "muamalat", "maybank", "bri"
+    ];
     setShowPayment(true);
+    // Jika metode adalah bank
+    if (bankValues.includes(formData.metode)) {
+      setShowDetailDonasi('bank');
+    } else {
+      setShowDetailDonasi('crypto');
+    }
   };
 
   const handleDownload = () => {
@@ -549,6 +603,7 @@ const FormBank = ({
     downloadLink.click();
     document.body.removeChild(downloadLink);
   };
+
 
   const metodeList = [
     {
@@ -769,56 +824,97 @@ const FormBank = ({
           </button>
         </form>
       ) : (
-        <div className="max-w-sm mx-auto  overflow-hidden mt-5 bg-white border rounded-lg shadow-md">
-          <div className="bg-primary overflow-hidden text-start text-white p-3 font-primary">
-            <h2 className="font-semibold text-lg mb-1">Senyum Kebaikan</h2>
-          </div>
-          <div className="text-start p-3">
-            <p className="text-2xl my-1 font-bold text-primary">
-              Rp{Number(valueForm.nominal).toLocaleString()}
-            </p>
-            <div className="flex justify-between">
-              <p className="text-sm my-1 font-light text-primary ">
-                Order ID: #DNS{Date.now()}
+          
+            showDetailDonasi !== 'bank' ? (
+              <div className="max-w-sm mx-auto  overflow-hidden mt-5 bg-white border rounded-lg shadow-md">
+              <div className="bg-primary overflow-hidden text-start text-white p-3 font-primary">
+                <h2 className="font-semibold text-lg mb-1">Senyum Kebaikan</h2>
+              </div>
+              <div className="text-start p-3">
+                <p className="text-2xl my-1 font-bold text-primary">
+                  Rp{Number(valueForm.nominal).toLocaleString()}
+                </p>
+                <div className="flex justify-between">
+                  <p className="text-sm my-1 font-light text-primary ">
+                    Order ID: #DNS{Date.now()}
+                  </p>
+                  <p className="text-sm my-1  text-primary font-semibold">
+                    Detail <FontAwesomeIcon icon={faChevronDown} />
+                  </p>
+                </div>
+              </div>
+              <p className="text-sm text-white bg-primary/40 text-center py-2  mb-4">
+                Pay within 00:14:40
               </p>
-              <p className="text-sm my-1  text-primary font-semibold">
-                Detail <FontAwesomeIcon icon={faChevronDown} />
-              </p>
+              <div className="flex justify-start px-4">
+                <p className="mb-1 capitalize font-bold text-primary">
+                  {valueForm.metode}
+                </p>
+              </div>
+    
+              <div className="flex justify-center my-4">
+                <QRCodeCanvas
+                  id="qrcode"
+                  value={`Pembayaran via ${valueForm.metode}, nominal: Rp${valueForm.nominal}, email: ${valueForm.email}`}
+                  size={180}
+                  level="H"
+                  includeMargin={true}
+                />
+              </div>
+              <div className="flex flex-col gap-2 p-3 w-9/12 mx-auto">
+                <button
+                  onClick={handleDownload}
+                  className="border font-secondary w-full py-2 mb-2 rounded text-primary"
+                >
+                  Download Qris
+                </button>
+                <button
+                  onClick={() => setModal(true)}
+                  className="bg-primary font-secondary text-white w-full py-2 rounded"
+                >
+                  Check Status
+                </button>
+              </div>
             </div>
-          </div>
-          <p className="text-sm text-white bg-primary/40 text-center py-2  mb-4">
-            Pay within 00:14:40
-          </p>
-          <div className="flex justify-start px-4">
-            <p className="mb-1 capitalize font-bold text-primary">
-              {valueForm.metode}
-            </p>
-          </div>
-
-          <div className="flex justify-center my-4">
-            <QRCodeCanvas
-              id="qrcode"
-              value={`Pembayaran via ${valueForm.metode}, nominal: Rp${valueForm.nominal}, email: ${valueForm.email}`}
-              size={180}
-              level="H"
-              includeMargin={true}
-            />
-          </div>
-          <div className="flex flex-col gap-2 p-3 w-9/12 mx-auto">
-            <button
-              onClick={handleDownload}
-              className="border font-secondary w-full py-2 mb-2 rounded text-primary"
-            >
-              Download Qris
+          ) : (
+            <div className="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg p-6 text-center border">
+            <h2 className="text-gray-700 font-semibold text-lg mb-1">Intruksi pembayaran</h2>
+            <p className="text-sm text-gray-500 mb-4">transfer sesuai nominal di bawah ini</p>
+      
+            <h3 className="text-2xl font-bold text-green-600 mb-4">Rp30.000</h3>
+      
+            <div className="mb-4">
+              <p className="text-sm text-gray-700">Ke rekening Bank Mandiri</p>
+              <p className="font-medium text-lg text-gray-900">101.00.0662668.1</p>
+              <p className="text-sm text-gray-700">An. Senyum Kebaikan</p>
+            </div>
+      
+            <div className="text-left text-sm text-gray-600 mb-4 space-y-1">
+              <p><strong>ID Donasi:</strong> DNS27201602753262</p>
+              <p><strong>Tanggal Transaksi:</strong> 27 Juni 2025, 20:16</p>
+              <p><strong>Atas Nama:</strong> Naufal Nurcahyo</p>
+              <p><strong>Metode Pembayaran:</strong> Bank Transfer</p>
+              <p><strong>Nama Bank:</strong> Bank Mandiri</p>
+              <p><strong>Donasi:</strong> 20.000</p>
+              <p><strong>Admin:</strong> 0</p>
+              <p><strong>Kode Unik:</strong> 321</p>
+              <p><strong>Total:</strong> 30.000</p>
+            </div>
+      
+            <div className="mb-6">
+              <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition">
+                <FontAwesomeIcon icon={faUpload} />
+                Unggah bukti
+              </button>
+            </div>
+      
+            <button className="w-full bg-green-100 text-green-700 font-medium py-2 rounded-md hover:bg-green-200 transition">
+              Lanjut Pembayaran
             </button>
-            <button
-              onClick={() => setModal(true)}
-              className="bg-primary font-secondary text-white w-full py-2 rounded"
-            >
-              Check Status
-            </button>
           </div>
-        </div>
+            )
+          
+      
       )}
     </>
   );
@@ -832,7 +928,9 @@ const AddDonasi = ({
   valueForm,
   setValueForm,
   showPayment,
+  showDetailDonasi,
   setShowPayment,
+  setShowDetailDonasi
 }) => {
   const [selectedMetodeBayar, setSelectedMetodeBayar] = useState(0);
   const metodeBayar = [
@@ -844,6 +942,8 @@ const AddDonasi = ({
       title: 'Bank/Ewallet',
       component: (
         <FormBank
+          showDetailDonasi={showDetailDonasi}
+          setShowDetailDonasi={setShowDetailDonasi}
           modal={modal}
           setValueForm={setValueForm}
           valueForm={valueForm}
