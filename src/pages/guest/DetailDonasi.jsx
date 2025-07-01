@@ -878,37 +878,65 @@ const FormBank = ({
             </div>
           ) : (
             <div className="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg p-6 text-center border">
-            <h2 className="text-gray-700 font-semibold text-lg mb-1">Intruksi pembayaran</h2>
+            <h2 className="text-primary font-semibold text-lg mb-1">Intruksi Pembayaran</h2>
             <p className="text-sm text-gray-500 mb-4">transfer sesuai nominal di bawah ini</p>
       
-            <h3 className="text-2xl font-bold text-green-600 mb-4">Rp30.000</h3>
+            <h3 className="text-2xl font-bold text-primary mb-4">Rp{valueForm.nominal}</h3>
       
             <div className="mb-4">
-              <p className="text-sm text-gray-700">Ke rekening Bank Mandiri</p>
-              <p className="font-medium text-lg text-gray-900">101.00.0662668.1</p>
+              <p className="text-sm text-gray-700">Ke rekening Bank <span className='capitalize'>{valueForm.metode}</span> </p>
+              <p className="font-medium text-lg text-primary my-1">101.00.0662668.1</p>
               <p className="text-sm text-gray-700">An. Senyum Kebaikan</p>
             </div>
       
-            <div className="text-left text-sm text-gray-600 mb-4 space-y-1">
-              <p><strong>ID Donasi:</strong> DNS27201602753262</p>
-              <p><strong>Tanggal Transaksi:</strong> 27 Juni 2025, 20:16</p>
-              <p><strong>Atas Nama:</strong> Naufal Nurcahyo</p>
-              <p><strong>Metode Pembayaran:</strong> Bank Transfer</p>
-              <p><strong>Nama Bank:</strong> Bank Mandiri</p>
-              <p><strong>Donasi:</strong> 20.000</p>
-              <p><strong>Admin:</strong> 0</p>
-              <p><strong>Kode Unik:</strong> 321</p>
-              <p><strong>Total:</strong> 30.000</p>
-            </div>
+          <div className="text-sm text-gray-600 mb-4 space-y-1">
+  <div className="flex justify-between">
+    <span className="text-start font-semibold">ID Donasi:</span>
+    <span className="text-end">DNS27201602753262</span>
+  </div>
+  <div className="flex justify-between">
+    <span className="text-start font-semibold">Tanggal Transaksi:</span>
+    <span className="text-end">27 Juni 2025, 20:16</span>
+  </div>
+  <div className="flex justify-between">
+    <span className="text-start font-semibold">Atas Nama:</span>
+    <span className="text-end">Naufal Nurcahyo</span>
+  </div>
+  <div className="flex justify-between">
+    <span className="text-start font-semibold">Metode Pembayaran:</span>
+    <span className="text-end">Bank Transfer</span>
+  </div>
+  <div className="flex justify-between">
+    <span className="text-start font-semibold">Nama Bank:</span>
+    <span className="text-end">Bank Mandiri</span>
+  </div>
+  <div className="flex justify-between">
+    <span className="text-start font-semibold">Donasi:</span>
+    <span className="text-end">20.000</span>
+  </div>
+  <div className="flex justify-between">
+    <span className="text-start font-semibold">Admin:</span>
+    <span className="text-end">0</span>
+  </div>
+  <div className="flex justify-between">
+    <span className="text-start font-semibold">Kode Unik:</span>
+    <span className="text-end">321</span>
+  </div>
+  <div className="flex justify-between">
+    <span className="text-start font-semibold">Total:</span>
+    <span className="text-end">30.000</span>
+  </div>
+</div>
+
       
-            <div className="mb-6">
-              <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition">
+            <div className="mb-6 text-center">
+              <button className="flex items-center justify-center text-center mx-auto gap-2 px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition">
                 <FontAwesomeIcon icon={faUpload} />
                 Unggah bukti
               </button>
             </div>
       
-            <button className="w-full bg-green-100 text-green-700 font-medium py-2 rounded-md hover:bg-green-200 transition">
+            <button  onClick={() => setModal(true)} className="w-full bg-green-100 text-primary font-secondary font-medium py-2 rounded-md hover:bg-green-200 transition">
               Lanjut Pembayaran
             </button>
           </div>

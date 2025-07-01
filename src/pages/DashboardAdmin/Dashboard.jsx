@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { Chart as ChartJS,   ArcElement, CategoryScale, LinearScale, PointElement, LineElement,  BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Link } from "react-router-dom";
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
@@ -457,29 +458,188 @@ function ProgramSummaryHeader() {
 function ProgramTable() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
-  const [programs, setPrograms] = useState([
-    { id: 1, nama: "Tarikum Slam", judul: "Air Bersih Lereng Merapi", targetDana: 50000000, lokasi: "Klaten, Jawa Tengah", status: "Menunggu" },
-    { id: 2, nama: "Anisa Rahma", judul: "Donasi Buku Pelosok", targetDana: 15000000, lokasi: "Lombok, NTB", status: "Diterima" },
-    { id: 3, nama: "Rian Pratama", judul: "Jembatan Desa Terisolir", targetDana: 100000000, lokasi: "Banten, Jawa Barat", status: "Ditolak" },
-    { id: 4, nama: "Siti Aisyah", judul: "Sumur Daerah Kering", targetDana: 75000000, lokasi: "Sumba Timur, NTT", status: "Menunggu" },
-    { id: 5, nama: "Budi Hartono", judul: "Perahu untuk Nelayan", targetDana: 30000000, lokasi: "Karimun Jawa, Jateng", status: "Diterima" },
-    { id: 6, nama: "Rika Ningsih", judul: "Panti Asuhan Harapan", targetDana: 25000000, lokasi: "Bandung, Jawa Barat", status: "Menunggu" },
-    { id: 7, nama: "Deni Maulana", judul: "Pelatihan UMKM", targetDana: 20000000, lokasi: "Sukabumi, Jawa Barat", status: "Ditolak" },
-    { id: 8, nama: "Lisa Fitriani", judul: "Beasiswa Anak Petani", targetDana: 45000000, lokasi: "Madura, Jawa Timur", status: "Diterima" },
-    { id: 9, nama: "Agus Haryanto", judul: "Kebun Sekolah", targetDana: 12000000, lokasi: "Bogor, Jawa Barat", status: "Menunggu" },
-    { id: 10, nama: "Nani Kartika", judul: "Posyandu Mandiri", targetDana: 18000000, lokasi: "Tegal, Jawa Tengah", status: "Diterima" },
-    { id: 11, nama: "Hendra Wijaya", judul: "Pembangunan Mushola", targetDana: 70000000, lokasi: "Depok, Jawa Barat", status: "Menunggu" },
-    { id: 12, nama: "Melati Ayu", judul: "Sanitasi Sekolah", targetDana: 55000000, lokasi: "Mataram, NTB", status: "Diterima" },
-    { id: 13, nama: "Bayu Wicaksono", judul: "Solar Panel Desa", targetDana: 95000000, lokasi: "Wonosobo, Jawa Tengah", status: "Ditolak" },
-    { id: 14, nama: "Winda Permata", judul: "Perpustakaan Mini", targetDana: 30000000, lokasi: "Cilacap, Jawa Tengah", status: "Diterima" },
-    { id: 15, nama: "Indra Lesmana", judul: "Bengkel Gratis", targetDana: 40000000, lokasi: "Palembang, Sumsel", status: "Menunggu" },
-    { id: 16, nama: "Rosa Kurnia", judul: "Klinik Gratis Lansia", targetDana: 80000000, lokasi: "Padang, Sumbar", status: "Diterima" },
-    { id: 17, nama: "Slamet Riyadi", judul: "Koperasi Sekolah", targetDana: 23000000, lokasi: "Purwokerto, Jateng", status: "Ditolak" },
-    { id: 18, nama: "Andini Safira", judul: "Laptop untuk Siswa", targetDana: 60000000, lokasi: "Cirebon, Jawa Barat", status: "Menunggu" },
-    { id: 19, nama: "Tegar Prasetyo", judul: "Pengadaan Air Bersih", targetDana: 51000000, lokasi: "Grobogan, Jateng", status: "Diterima" },
-    { id: 20, nama: "Lutfiana Dewi", judul: "Rumah Ramah Anak", targetDana: 67000000, lokasi: "Kudus, Jawa Tengah", status: "Menunggu" },
-  ]);
-
+const [programs, setPrograms] = useState([
+  {
+    id: 1,
+    nama: "Tarikum Slam",
+    judul: "Air Bersih Lereng Merapi",
+    targetDana: 50000000,
+    lokasi: "Klaten, Jawa Tengah",
+    status: "Menunggu",
+    deskripsi: "Penyediaan sumber air bersih untuk warga yang tinggal di lereng Merapi dengan membangun sumur dan instalasi penjernih air."
+  },
+  {
+    id: 2,
+    nama: "Anisa Rahma",
+    judul: "Donasi Buku Pelosok",
+    targetDana: 15000000,
+    lokasi: "Lombok, NTB",
+    status: "Diterima",
+    deskripsi: "Program pengiriman buku bacaan dan pelajaran ke sekolah dasar di daerah terpencil Lombok."
+  },
+  {
+    id: 3,
+    nama: "Rian Pratama",
+    judul: "Jembatan Desa Terisolir",
+    targetDana: 100000000,
+    lokasi: "Banten, Jawa Barat",
+    status: "Ditolak",
+    deskripsi: "Pembangunan jembatan darurat untuk menghubungkan desa yang terisolir akibat banjir dan kerusakan jalan."
+  },
+  {
+    id: 4,
+    nama: "Siti Aisyah",
+    judul: "Sumur Daerah Kering",
+    targetDana: 75000000,
+    lokasi: "Sumba Timur, NTT",
+    status: "Menunggu",
+    deskripsi: "Penggalian dan pembuatan sumur air bersih untuk warga yang mengalami kekeringan panjang."
+  },
+  {
+    id: 5,
+    nama: "Budi Hartono",
+    judul: "Perahu untuk Nelayan",
+    targetDana: 30000000,
+    lokasi: "Karimun Jawa, Jateng",
+    status: "Diterima",
+    deskripsi: "Bantuan perahu dan alat tangkap ikan untuk nelayan kecil agar bisa melaut dengan aman dan efektif."
+  },
+  {
+    id: 6,
+    nama: "Rika Ningsih",
+    judul: "Panti Asuhan Harapan",
+    targetDana: 25000000,
+    lokasi: "Bandung, Jawa Barat",
+    status: "Menunggu",
+    deskripsi: "Perbaikan fasilitas panti asuhan dan pengadaan perlengkapan pendidikan bagi anak-anak yatim piatu."
+  },
+  {
+    id: 7,
+    nama: "Deni Maulana",
+    judul: "Pelatihan UMKM",
+    targetDana: 20000000,
+    lokasi: "Sukabumi, Jawa Barat",
+    status: "Ditolak",
+    deskripsi: "Pelatihan keterampilan dan pengelolaan bisnis untuk pelaku UMKM lokal agar dapat berkembang mandiri."
+  },
+  {
+    id: 8,
+    nama: "Lisa Fitriani",
+    judul: "Beasiswa Anak Petani",
+    targetDana: 45000000,
+    lokasi: "Madura, Jawa Timur",
+    status: "Diterima",
+    deskripsi: "Memberikan beasiswa pendidikan bagi anak-anak petani berprestasi yang kurang mampu."
+  },
+  {
+    id: 9,
+    nama: "Agus Haryanto",
+    judul: "Kebun Sekolah",
+    targetDana: 12000000,
+    lokasi: "Bogor, Jawa Barat",
+    status: "Menunggu",
+    deskripsi: "Membangun kebun edukatif di lingkungan sekolah untuk mendukung program ketahanan pangan."
+  },
+  {
+    id: 10,
+    nama: "Nani Kartika",
+    judul: "Posyandu Mandiri",
+    targetDana: 18000000,
+    lokasi: "Tegal, Jawa Tengah",
+    status: "Diterima",
+    deskripsi: "Peningkatan sarana dan prasarana Posyandu agar pelayanan kesehatan ibu dan anak lebih optimal."
+  },
+  {
+    id: 11,
+    nama: "Hendra Wijaya",
+    judul: "Pembangunan Mushola",
+    targetDana: 70000000,
+    lokasi: "Depok, Jawa Barat",
+    status: "Menunggu",
+    deskripsi: "Membangun mushola baru di pemukiman padat yang belum memiliki tempat ibadah."
+  },
+  {
+    id: 12,
+    nama: "Melati Ayu",
+    judul: "Sanitasi Sekolah",
+    targetDana: 55000000,
+    lokasi: "Mataram, NTB",
+    status: "Diterima",
+    deskripsi: "Pembangunan toilet dan tempat cuci tangan yang layak untuk siswa dan guru di sekolah dasar."
+  },
+  {
+    id: 13,
+    nama: "Bayu Wicaksono",
+    judul: "Solar Panel Desa",
+    targetDana: 95000000,
+    lokasi: "Wonosobo, Jawa Tengah",
+    status: "Ditolak",
+    deskripsi: "Penyediaan panel surya untuk daerah pedalaman yang belum terjangkau listrik PLN."
+  },
+  {
+    id: 14,
+    nama: "Winda Permata",
+    judul: "Perpustakaan Mini",
+    targetDana: 30000000,
+    lokasi: "Cilacap, Jawa Tengah",
+    status: "Diterima",
+    deskripsi: "Pendirian perpustakaan mini keliling untuk meningkatkan literasi di kampung pesisir."
+  },
+  {
+    id: 15,
+    nama: "Indra Lesmana",
+    judul: "Bengkel Gratis",
+    targetDana: 40000000,
+    lokasi: "Palembang, Sumsel",
+    status: "Menunggu",
+    deskripsi: "Bengkel keliling gratis untuk perbaikan motor warga tidak mampu dan pelatihan mekanik muda."
+  },
+  {
+    id: 16,
+    nama: "Rosa Kurnia",
+    judul: "Klinik Gratis Lansia",
+    targetDana: 80000000,
+    lokasi: "Padang, Sumbar",
+    status: "Diterima",
+    deskripsi: "Layanan pemeriksaan kesehatan gratis untuk lansia setiap minggu di desa terpencil."
+  },
+  {
+    id: 17,
+    nama: "Slamet Riyadi",
+    judul: "Koperasi Sekolah",
+    targetDana: 23000000,
+    lokasi: "Purwokerto, Jateng",
+    status: "Ditolak",
+    deskripsi: "Pengembangan koperasi sekolah sebagai tempat belajar kewirausahaan siswa."
+  },
+  {
+    id: 18,
+    nama: "Andini Safira",
+    judul: "Laptop untuk Siswa",
+    targetDana: 60000000,
+    lokasi: "Cirebon, Jawa Barat",
+    status: "Menunggu",
+    deskripsi: "Pengadaan laptop untuk siswa tidak mampu guna menunjang pembelajaran digital."
+  },
+  {
+    id: 19,
+    nama: "Tegar Prasetyo",
+    judul: "Pengadaan Air Bersih",
+    targetDana: 51000000,
+    lokasi: "Grobogan, Jateng",
+    status: "Diterima",
+    deskripsi: "Proyek pembuatan jaringan pipa air bersih dari sumber mata air ke desa rawan kekeringan."
+  },
+  {
+    id: 20,
+    nama: "Lutfiana Dewi",
+    judul: "Rumah Ramah Anak",
+    targetDana: 67000000,
+    lokasi: "Kudus, Jawa Tengah",
+    status: "Menunggu",
+    deskripsi: "Pembangunan pusat kegiatan anak-anak agar bisa bermain dan belajar dengan aman."
+  }
+]);
   const itemsPerPage = 5;
 
   const filteredPrograms = programs.filter((item) =>
@@ -577,7 +737,9 @@ function ProgramTable() {
                     </select>
                   </td>
                   <td className="p-3 text-primary hover:underline cursor-pointer">
+                    <Link state={item} to='/programdetailcard'>
                     Lihat Detail →
+                    </Link>
                   </td>
                 </tr>
               ))

@@ -27,6 +27,23 @@ const handleChange = (e) => {
   }
 };
 
+const resetForm = () => {
+ 
+  setNewData({
+    judulProgram: '',
+    kategori: '',
+    tanggalMulai: '',
+    noTelepon: '',
+    targetDana: '',
+    tanggalSelesai: '',
+    deskripsi : '',
+    buktiIdentitas: null,
+    lokasiTKP: null,
+  });
+
+  console.log('databaru', newData);
+}
+
 const handleSave = () => {
   const {
     judulProgram,
@@ -50,6 +67,7 @@ const handleSave = () => {
     lokasiTKP
   ) {
     console.log('Berhasil melakukan pengajuan', newData);
+    resetForm();
     // toast.success('Berhasil melakukan pengajuan');
     setShowModal(true);
   } else {
@@ -191,7 +209,7 @@ const ModalSuccess = ({showModal, setShowModal}) => {
         <p className="my-1 text-primary font-primary text-base">Status : Menunggu Konfirmasi Admin</p>
         <p className="my-1 text-primary font-primary text-base">Silahkan pantau donasi yang telah diajukan, untuk mengetahui status pengajuan</p>
         <p className="my-1 text-primary font-primary text-base">Akun anda akan menjadi volunteer setelah donasi diterima</p>
-        <button onClick={() => setShowModal(false)} className="p-2 rounded-xl my-2 w-4/12 bg-accent text-white hover:bg-secondary hover:text-primary">Tutup</button>
+        <button onClick={() => location.reload()} className="p-2 rounded-xl my-2 w-4/12 bg-accent text-white hover:bg-secondary hover:text-primary">Tutup</button>
       </div>
        
         

@@ -42,88 +42,89 @@ const RiwayatDonasi = () => {
 }
 
 const DonasiUang = () => {
-  const [dataDonasiUang, setDataDonasiUang] = useState([
-    {
-      id: 1,
-      nominal: 500000,
-      tanggal: "2024-08-01",
-      campaign: "Bantu Sekolah",
-      type: "Transfer",
-      detail: "Donasi dilakukan melalui transfer bank Mandiri"
-    },
-    {
-      id: 2,
-      nominal: 1000000,
-      tanggal: "2024-08-02",
-      campaign: "Donasi Bencana Alam",
-      type: "Blockchain",
-      detail: "Transaksi menggunakan ETH blockchain"
-    },
-    {
-      id: 3,
-      nominal: 750000,
-      tanggal: "2024-08-03",
-      campaign: "Bantu Lansia",
-      type: "Transfer",
-      detail: "Transfer via BCA Virtual Account"
-    },
-    {
-      id: 4,
-      nominal: 850000,
-      tanggal: "2024-08-04",
-      campaign: "Peduli Anak Yatim",
-      type: "Transfer",
-      detail: "Donasi melalui QRIS"
-    },
-    {
-      id: 5,
-      nominal: 200000,
-      tanggal: "2024-08-05",
-      campaign: "Pembangunan Masjid",
-      type: "Blockchain",
-      detail: "Menggunakan BNB Smart Chain"
-    },
-    {
-      id: 6,
-      nominal: 450000,
-      tanggal: "2024-08-06",
-      campaign: "Donasi Air Bersih",
-      type: "Transfer",
-      detail: "Transfer melalui Bank BNI"
-    },
-    {
-      id: 7,
-      nominal: 950000,
-      tanggal: "2024-08-07",
-      campaign: "Beasiswa Mahasiswa",
-      type: "Transfer",
-      detail: "Virtual Account Bank Mandiri"
-    },
-    {
-      id: 8,
-      nominal: 300000,
-      tanggal: "2024-08-08",
-      campaign: "Donasi Gempa",
-      type: "Blockchain",
-      detail: "Donasi dalam bentuk USDT"
-    },
-    {
-      id: 9,
-      nominal: 100000,
-      tanggal: "2024-08-09",
-      campaign: "Peduli Pendidikan",
-      type: "Transfer",
-      detail: "Transfer antar bank BCA"
-    },
-    {
-      id: 10,
-      nominal: 400000,
-      tanggal: "2024-08-10",
-      campaign: "Donasi Bencana Banjir",
-      type: "Blockchain",
-      detail: "Via wallet Metamask"
-    }
-  ]);
+const [dataDonasiUang, setDataDonasiUang] = useState([
+  {
+    id: 1,
+    nominal: 500000,
+    tanggal: "2024-08-01",
+    campaign: "Bantu Sekolah",
+    type: "Transfer",
+    detail: "Donasi dilakukan melalui transfer bank Mandiri"
+  },
+  {
+    id: 2,
+    nominal: 1000000,
+    tanggal: "2024-08-02",
+    campaign: "Donasi Bencana Alam",
+    type: "Blockchain",
+    detail: "Transaksi menggunakan ETH blockchain. txHash: 0xabc123def456"
+  },
+  {
+    id: 3,
+    nominal: 750000,
+    tanggal: "2024-08-03",
+    campaign: "Bantu Lansia",
+    type: "Transfer",
+    detail: "Transfer via BCA Virtual Account"
+  },
+  {
+    id: 4,
+    nominal: 850000,
+    tanggal: "2024-08-04",
+    campaign: "Peduli Anak Yatim",
+    type: "Transfer",
+    detail: "Donasi melalui QRIS"
+  },
+  {
+    id: 5,
+    nominal: 200000,
+    tanggal: "2024-08-05",
+    campaign: "Pembangunan Masjid",
+    type: "Blockchain",
+    detail: "Menggunakan BNB Smart Chain. txHash: 0xbnb987zyx321"
+  },
+  {
+    id: 6,
+    nominal: 450000,
+    tanggal: "2024-08-06",
+    campaign: "Donasi Air Bersih",
+    type: "Transfer",
+    detail: "Transfer melalui Bank BNI"
+  },
+  {
+    id: 7,
+    nominal: 950000,
+    tanggal: "2024-08-07",
+    campaign: "Beasiswa Mahasiswa",
+    type: "Transfer",
+    detail: "Virtual Account Bank Mandiri"
+  },
+  {
+    id: 8,
+    nominal: 300000,
+    tanggal: "2024-08-08",
+    campaign: "Donasi Gempa",
+    type: "Blockchain",
+    detail: "Donasi dalam bentuk USDT. txHash: 0xusdt456aa998"
+  },
+  {
+    id: 9,
+    nominal: 100000,
+    tanggal: "2024-08-09",
+    campaign: "Peduli Pendidikan",
+    type: "Transfer",
+    detail: "Transfer antar bank BCA"
+  },
+  {
+    id: 10,
+    nominal: 400000,
+    tanggal: "2024-08-10",
+    campaign: "Donasi Bencana Banjir",
+    type: "Blockchain",
+    detail: "Via wallet Metamask. txHash: 0xmeta999tx001"
+  }
+]);
+
 
   const [expandedRow, setExpandedRow] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);

@@ -41,6 +41,7 @@ import UpdateDistribusi from './pages/DashboardVolunteer/UpdateDistribusi';
 import DetailUpdateDistribusi from './pages/DashboardVolunteer/DetailUpdateDistribusi';
 import PesanKeAdmin from './pages/DashboardVolunteer/PesanKeAdmin';
 import RiwayatAktifitasVolunteer from './pages/DashboardVolunteer/RiwayatAktifitasVolunteer';
+import ProgramDetailCard from './pages/DashboardAdmin/ProgramDetailCard';
 function App() {
   return (
     <div className="font-primary">
@@ -105,6 +106,7 @@ function App() {
         <Route path='/updatedistribusi/detailupdate' element={<DetailUpdateDistribusi />} />
         <Route path='/pesankeadmin' element={<PesanKeAdmin />} />
         <Route path='/riwayataktifitasvolunteer' element={<RiwayatAktifitasVolunteer />} />
+        <Route path='/programdetailcard' element={<ProgramDetailCard />} />
 
 
         <Route path="*" element={<div>404</div>} />

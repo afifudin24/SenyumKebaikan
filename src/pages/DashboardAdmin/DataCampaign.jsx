@@ -3,8 +3,9 @@ import React, { useState, useEffect } from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import toast from "react-hot-toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { elements } from "chart.js";
 
 const dummyCampaigns = Array.from({ length: 20 }, (_, index) => ({
   id: index + 1,
@@ -17,7 +18,35 @@ const dummyCampaigns = Array.from({ length: 20 }, (_, index) => ({
 }));
 
 const DataCampaign = () => {
-  const [campaigns, setCampaigns] = useState([
+  const [selectedNav, setSelectedNav] = useState(0);
+  const nav = [
+    { id: 0, name: "Data Campaign", element : <DaftarCampaign /> },
+    { id: 1, name: "Pengajuan Campaign",  element : <PengajuanCampaign /> },
+  
+  ]
+
+  return (
+    <DashboardLayout>
+       <div className="mx-auto flex justify-center gap-2">
+              {
+                nav.map((item, index) => (
+                  <button onClick={() => setSelectedNav(index)} className={`md:p-3 p-2 md:rounded-xl rounded-lg hover:bg-accent hover:text-white font-secondary  ${index === selectedNav ? 'bg-primary text-white' : 'bg-white text-primary'}`}>
+                    <p>{item.name}</p>
+                  </button>
+                ))
+                    
+              }
+              
+            </div>
+      {
+        nav[selectedNav].element
+      }
+    </DashboardLayout>
+  )
+ 
+};
+const DaftarCampaign = () => {
+   const [campaigns, setCampaigns] = useState([
     {
       id: "CAMP001",
       namaprogram: "Bantuan Pangan Lebaran",
@@ -82,7 +111,7 @@ const DataCampaign = () => {
       Jenis: "barang",
       target: 500,
       tercapai: 500,
-      status: "Non-Aktif",
+    status: "Aktif",
       rekdistribusi: "BRI - 6789012345",
       tanggal_mulai: "2023-11-01",
       tanggal_selesai: "2023-12-15",
@@ -152,7 +181,7 @@ const DataCampaign = () => {
       Jenis: "dana",
       target: 50000000,
       tercapai: 30000000,
-      status: "Non-Aktif",
+    status: "Aktif",
       rekdistribusi: "BSI - 8899001122",
       tanggal_mulai: "2023-09-01",
       tanggal_selesai: "2023-12-01",
@@ -206,7 +235,7 @@ const DataCampaign = () => {
         Jenis: i % 2 === 0 ? "barang" : "dana",
         target: i % 2 === 0 ? 1000 + i * 100 : 5000000 + i * 1000000,
         tercapai: i % 2 === 0 ? 800 + i * 50 : 2500000 + i * 500000,
-        status: i % 3 === 0 ? "Non-Aktif" : "Aktif",
+        status:  "Aktif",
         rekdistribusi: `Bank ${idNum} - ${1000000000 + idNum}`,
         tanggal_mulai: `2024-${String((i % 12) + 1).padStart(2, '0')}-01`,
         tanggal_selesai: `2024-${String((i % 12) + 2).padStart(2, '0')}-01`,
@@ -305,7 +334,7 @@ const DataCampaign = () => {
       };
 
   return (
-      <DashboardLayout>
+     
           <div className="w-11/12 md:w-9/12 mx-auto">
               
           
@@ -488,8 +517,333 @@ const DataCampaign = () => {
         </div>
               )}
               </div>
-    </DashboardLayout>
+   
   );
-};
+}
+
+const PengajuanCampaign = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+   const [searchTerm, setSearchTerm] = useState("");
+ const [programs, setPrograms] = useState([
+   {
+     id: 1,
+     nama: "Tarikum Slam",
+     judul: "Air Bersih Lereng Merapi",
+     targetDana: 50000000,
+     lokasi: "Klaten, Jawa Tengah",
+     status: "Menunggu",
+     deskripsi: "Penyediaan sumber air bersih untuk warga yang tinggal di lereng Merapi dengan membangun sumur dan instalasi penjernih air."
+   },
+   {
+     id: 2,
+     nama: "Anisa Rahma",
+     judul: "Donasi Buku Pelosok",
+     targetDana: 15000000,
+     lokasi: "Lombok, NTB",
+     status: "Diterima",
+     deskripsi: "Program pengiriman buku bacaan dan pelajaran ke sekolah dasar di daerah terpencil Lombok."
+   },
+   {
+     id: 3,
+     nama: "Rian Pratama",
+     judul: "Jembatan Desa Terisolir",
+     targetDana: 100000000,
+     lokasi: "Banten, Jawa Barat",
+     status: "Ditolak",
+     deskripsi: "Pembangunan jembatan darurat untuk menghubungkan desa yang terisolir akibat banjir dan kerusakan jalan."
+   },
+   {
+     id: 4,
+     nama: "Siti Aisyah",
+     judul: "Sumur Daerah Kering",
+     targetDana: 75000000,
+     lokasi: "Sumba Timur, NTT",
+     status: "Menunggu",
+     deskripsi: "Penggalian dan pembuatan sumur air bersih untuk warga yang mengalami kekeringan panjang."
+   },
+   {
+     id: 5,
+     nama: "Budi Hartono",
+     judul: "Perahu untuk Nelayan",
+     targetDana: 30000000,
+     lokasi: "Karimun Jawa, Jateng",
+     status: "Diterima",
+     deskripsi: "Bantuan perahu dan alat tangkap ikan untuk nelayan kecil agar bisa melaut dengan aman dan efektif."
+   },
+   {
+     id: 6,
+     nama: "Rika Ningsih",
+     judul: "Panti Asuhan Harapan",
+     targetDana: 25000000,
+     lokasi: "Bandung, Jawa Barat",
+     status: "Menunggu",
+     deskripsi: "Perbaikan fasilitas panti asuhan dan pengadaan perlengkapan pendidikan bagi anak-anak yatim piatu."
+   },
+   {
+     id: 7,
+     nama: "Deni Maulana",
+     judul: "Pelatihan UMKM",
+     targetDana: 20000000,
+     lokasi: "Sukabumi, Jawa Barat",
+     status: "Ditolak",
+     deskripsi: "Pelatihan keterampilan dan pengelolaan bisnis untuk pelaku UMKM lokal agar dapat berkembang mandiri."
+   },
+   {
+     id: 8,
+     nama: "Lisa Fitriani",
+     judul: "Beasiswa Anak Petani",
+     targetDana: 45000000,
+     lokasi: "Madura, Jawa Timur",
+     status: "Diterima",
+     deskripsi: "Memberikan beasiswa pendidikan bagi anak-anak petani berprestasi yang kurang mampu."
+   },
+   {
+     id: 9,
+     nama: "Agus Haryanto",
+     judul: "Kebun Sekolah",
+     targetDana: 12000000,
+     lokasi: "Bogor, Jawa Barat",
+     status: "Menunggu",
+     deskripsi: "Membangun kebun edukatif di lingkungan sekolah untuk mendukung program ketahanan pangan."
+   },
+   {
+     id: 10,
+     nama: "Nani Kartika",
+     judul: "Posyandu Mandiri",
+     targetDana: 18000000,
+     lokasi: "Tegal, Jawa Tengah",
+     status: "Diterima",
+     deskripsi: "Peningkatan sarana dan prasarana Posyandu agar pelayanan kesehatan ibu dan anak lebih optimal."
+   },
+   {
+     id: 11,
+     nama: "Hendra Wijaya",
+     judul: "Pembangunan Mushola",
+     targetDana: 70000000,
+     lokasi: "Depok, Jawa Barat",
+     status: "Menunggu",
+     deskripsi: "Membangun mushola baru di pemukiman padat yang belum memiliki tempat ibadah."
+   },
+   {
+     id: 12,
+     nama: "Melati Ayu",
+     judul: "Sanitasi Sekolah",
+     targetDana: 55000000,
+     lokasi: "Mataram, NTB",
+     status: "Diterima",
+     deskripsi: "Pembangunan toilet dan tempat cuci tangan yang layak untuk siswa dan guru di sekolah dasar."
+   },
+   {
+     id: 13,
+     nama: "Bayu Wicaksono",
+     judul: "Solar Panel Desa",
+     targetDana: 95000000,
+     lokasi: "Wonosobo, Jawa Tengah",
+     status: "Ditolak",
+     deskripsi: "Penyediaan panel surya untuk daerah pedalaman yang belum terjangkau listrik PLN."
+   },
+   {
+     id: 14,
+     nama: "Winda Permata",
+     judul: "Perpustakaan Mini",
+     targetDana: 30000000,
+     lokasi: "Cilacap, Jawa Tengah",
+     status: "Diterima",
+     deskripsi: "Pendirian perpustakaan mini keliling untuk meningkatkan literasi di kampung pesisir."
+   },
+   {
+     id: 15,
+     nama: "Indra Lesmana",
+     judul: "Bengkel Gratis",
+     targetDana: 40000000,
+     lokasi: "Palembang, Sumsel",
+     status: "Menunggu",
+     deskripsi: "Bengkel keliling gratis untuk perbaikan motor warga tidak mampu dan pelatihan mekanik muda."
+   },
+   {
+     id: 16,
+     nama: "Rosa Kurnia",
+     judul: "Klinik Gratis Lansia",
+     targetDana: 80000000,
+     lokasi: "Padang, Sumbar",
+     status: "Diterima",
+     deskripsi: "Layanan pemeriksaan kesehatan gratis untuk lansia setiap minggu di desa terpencil."
+   },
+   {
+     id: 17,
+     nama: "Slamet Riyadi",
+     judul: "Koperasi Sekolah",
+     targetDana: 23000000,
+     lokasi: "Purwokerto, Jateng",
+     status: "Ditolak",
+     deskripsi: "Pengembangan koperasi sekolah sebagai tempat belajar kewirausahaan siswa."
+   },
+   {
+     id: 18,
+     nama: "Andini Safira",
+     judul: "Laptop untuk Siswa",
+     targetDana: 60000000,
+     lokasi: "Cirebon, Jawa Barat",
+     status: "Menunggu",
+     deskripsi: "Pengadaan laptop untuk siswa tidak mampu guna menunjang pembelajaran digital."
+   },
+   {
+     id: 19,
+     nama: "Tegar Prasetyo",
+     judul: "Pengadaan Air Bersih",
+     targetDana: 51000000,
+     lokasi: "Grobogan, Jateng",
+     status: "Diterima",
+     deskripsi: "Proyek pembuatan jaringan pipa air bersih dari sumber mata air ke desa rawan kekeringan."
+   },
+   {
+     id: 20,
+     nama: "Lutfiana Dewi",
+     judul: "Rumah Ramah Anak",
+     targetDana: 67000000,
+     lokasi: "Kudus, Jawa Tengah",
+     status: "Menunggu",
+     deskripsi: "Pembangunan pusat kegiatan anak-anak agar bisa bermain dan belajar dengan aman."
+   }
+ ]);
+   const itemsPerPage = 5;
+ 
+   const filteredPrograms = programs.filter((item) =>
+     item.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
+     item.judul.toLowerCase().includes(searchTerm.toLowerCase())
+   );
+ 
+   const totalPages = Math.ceil(filteredPrograms.length / itemsPerPage);
+   const startIndex = (currentPage - 1) * itemsPerPage;
+   const displayedPrograms = filteredPrograms.slice(startIndex, startIndex + itemsPerPage);
+ 
+   const formatRupiah = (angka) =>
+     new Intl.NumberFormat("id-ID", {
+       style: "currency",
+       currency: "IDR",
+     }).format(angka);
+ 
+   const statusColor = {
+     Menunggu: "text-yellow-500",
+     Diterima: "text-green-600",
+     Ditolak: "text-red-600",
+   };
+ 
+   const handleStatusChange = (id, newStatus) => {
+     setPrograms((prev) =>
+       prev.map((p) =>
+         p.id === id ? { ...p, status: newStatus } : p
+       )
+     );
+   };
+ 
+   return (
+   
+     <div className="p-6 bg-white rounded-lg shadow">
+       {/* Header & Search */}
+       <div className="flex justify-between items-center mb-4">
+         <h2 className="text-xl font-semibold">Daftar Program</h2>
+         <div className="relative w-64">
+           <FontAwesomeIcon
+             icon={faSearch}
+             className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+           />
+           <input
+             type="text"
+             placeholder="Cari..."
+             value={searchTerm}
+             onChange={(e) => {
+               setSearchTerm(e.target.value);
+               setCurrentPage(1);
+             }}
+             className="w-full pl-10 pr-3 py-2 border rounded-lg text-sm outline-none focus:outline-none focus:ring-1 focus:ring-accent border-primary"
+           />
+         </div>
+       </div>
+ 
+       {/* Table */}
+       <div className="overflow-x-auto">
+         <table className="min-w-full table-auto border-collapse">
+           <thead className="bg-primary text-white rounded-2xl">
+             <tr>
+               <th className="p-3 text-left">Nama</th>
+               <th className="p-3 text-left">Judul Program</th>
+               <th className="p-3 text-left">Target Dana</th>
+               <th className="p-3 text-left">Lokasi</th>
+               <th className="p-3 text-left">Status</th>
+               <th className="p-3 text-left">Aksi</th>
+             </tr>
+           </thead>
+           <tbody>
+             {displayedPrograms.length > 0 ? (
+               displayedPrograms.map((item) => (
+                 <tr key={item.id} className="border-b hover:bg-gray-50">
+                   <td className="p-3">
+                     <div className="flex items-center gap-2">
+                       <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-xs font-bold">
+                         {item.nama.split(" ").map((n) => n[0]).join("")}
+                       </div>
+                       <span>{item.nama}</span>
+                     </div>
+                   </td>
+                   <td className="p-3">
+                     <p className="font-medium">{item.judul}</p>
+                     <p className="text-sm text-gray-500">Program sosial untuk masyarakat.</p>
+                   </td>
+                   <td className="p-3">{formatRupiah(item.targetDana)}</td>
+                   <td className="p-3">{item.lokasi}</td>
+                   <td className="p-3">
+                     <select
+                       value={item.status}
+                       onChange={(e) => handleStatusChange(item.id, e.target.value)}
+                       className={`text-sm font-semibold rounded px-2 py-1 bg-transparent ${statusColor[item.status]} focus:outline-none`}
+                     >
+                       <option value="Menunggu">Menunggu</option>
+                       <option value="Diterima">Diterima</option>
+                       <option value="Ditolak">Ditolak</option>
+                     </select>
+                   </td>
+                   <td className="p-3 text-primary hover:underline cursor-pointer">
+                     <Link state={item} to='/programdetailcard'>
+                     Lihat Detail →
+                     </Link>
+                   </td>
+                 </tr>
+               ))
+             ) : (
+               <tr>
+                 <td colSpan="6" className="p-4 text-center text-gray-500">
+                   Tidak ada data yang cocok.
+                 </td>
+               </tr>
+             )}
+           </tbody>
+         </table>
+ 
+         {/* Pagination */}
+         <div className="flex justify-between items-center mt-4">
+           <button
+             className="px-3 py-1 bg-gray-200 text-sm rounded disabled:opacity-50"
+             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+             disabled={currentPage === 1}
+           >
+             Prev
+           </button>
+           <div className="text-sm text-gray-700">
+             Halaman {currentPage} dari {totalPages || 1}
+           </div>
+           <button
+             className="px-3 py-1 bg-gray-200 text-sm rounded disabled:opacity-50"
+             onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+             disabled={currentPage === totalPages}
+           >
+             Next
+           </button>
+         </div>
+       </div>
+     </div>
+
+   );
+ }
 
 export default DataCampaign;

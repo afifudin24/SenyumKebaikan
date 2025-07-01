@@ -1,10 +1,20 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import { useLocation } from "react-router-dom";
+import toast from "react-hot-toast";
 const DetailCampaign = () => {
     const location = useLocation()
-    const data = location.state;
+    // const data = location.state;
+    const [data, setData] = useState({});
+    useEffect(() => {
+        if (location.state) {
+            setData(location.state);
+        }
+    }, [])
     console.log(data);
+
     const formatAmount = (jenis, amount) => {
         if (typeof amount !== 'number') {
           return amount; // Mengembalikan apa adanya jika bukan angka (misal: "Loading...")
@@ -24,6 +34,10 @@ const DetailCampaign = () => {
         }
         return amount; // Default jika jenis tidak dikenali
       };
+
+      const handleUpdate = () => {
+        toast.success("Status berhasil diperbarui!");
+      }
     return (
         <DashboardLayout>
             <div className="w-11/12 mx-auto md:w-9/12 mt-3">
@@ -74,7 +88,8 @@ const DetailCampaign = () => {
     {/* Bukti Distribusi */}
     <div>
       <p className="my-2 font-light">Bukti Distribusi</p>
-      <p className="my-2">{data.distribusi.bukti || "-"}</p>
+
+      <a target="_blank" href="https://lazismubelitung.or.id/wp-content/uploads/2022/06/P1130100.jpg" className="my-2 text-blue-300 underline">{data.distribusi.bukti || "-"}</a>
 
       {!data.distribusi.bukti && (
         <input
@@ -87,31 +102,34 @@ const DetailCampaign = () => {
     {/* Konfirmasi Distribusi */}
     <div className="mt-4">
       <label className="block mb-1 text-sm font-light">Konfirmasi Distribusi</label>
-      <select
-        value={data.distribusi.konfirmasi_distribusi || ""}
-        onChange={(e) => {
-          // setData((prev) => ({
-          //   ...prev,
-          //   distribusi: {
-          //     ...prev.distribusi,
-          //     konfirmasi_distribusi: e.target.value,
-          //   }
-          // }))
-        }}
-        className="w-full px-4 py-2 text-primary border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
-      >
-        <option value="">-- Pilih Status --</option>
-        <option value="Menunggu Konfirmasi">Menunggu Konfirmasi</option>
-        <option value="Dikonfirmasi">Dikonfirmasi</option>
-        <option value="Ditolak">Ditolak</option>
-      </select>
+  <select
+  value={data.distribusi.status || ""}
+  onChange={(e) => {
+    const selectedStatus = e.target.value;
+    setData((prev) => ({
+      ...prev,
+      distribusi: {
+        ...prev.distribusi,
+        status: selectedStatus // ✅ inilah yang akan tampil di bawah
+      }
+    }));
+  }}
+  className="w-full px-4 py-2 text-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
+>
+  <option className="text-primary" value="">-- Pilih Status --</option>
+  <option className="text-primary" value="Menunggu Konfirmasi">Menunggu Konfirmasi</option>
+  <option className="text-primary" value="Distribusi">Distribusi</option>
+  <option className="text-primary" value="Dikonfirmasi">Dikonfirmasi</option>
+  <option className="text-primary" value="Ditolak">Ditolak</option>
+  <option className="text-primary" value="Selesai">Selesai</option>
+</select>
     </div>
   </>
 )}
  
 
-    <button className="my-4 rounded-lg bg-accent hover:bg-secondary text-xs md:text-sm px-6 py-2 text-white">
-      Distribusi
+    <button onClick={handleUpdate} className="my-4 rounded-lg bg-accent hover:bg-secondary text-xs md:text-sm px-6 py-2 text-white">
+      Perbarui
     </button>
   </div>
 {/* </div> */}
@@ -133,7 +151,8 @@ const DetailCampaign = () => {
                          
                                 <tbody>
                                     {
-                                        data.donatur.map((donatur, index) => (
+                                      data.donatur && (
+                                            data.donatur.map((donatur, index) => (
                                             <tr key={index}>
                                                 <td>{donatur.nama}</td>
                                                 <td>{donatur.tanggal}</td>
@@ -141,6 +160,8 @@ const DetailCampaign = () => {
                                                 <td>{donatur.email}</td>
                                             </tr>
                                         ))
+                                      )
+                                      
                                     }
                                 </tbody>
                             </table>
