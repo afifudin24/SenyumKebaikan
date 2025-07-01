@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import programdetail1 from "../../assets/programdetail1.png";
+import programdetail2 from "../../assets/programdetail2.png";
+import programdetail3 from "../../assets/programdetail3.png";
+import logo from "../../assets/logo2.png"
 const ProgramDetailCard = () => {
  const location = useLocation();
  const navigate = useNavigate();
@@ -38,11 +42,11 @@ const ProgramDetailCard = () => {
   };
   return (
     <div className="flex justify-center gap-1 items-center">
-      <div className="w-3/12">
+      <div className="text-center w-3/12">
         <img
-          src="https://via.placeholder.com/200x200"
+          src={logo}
           alt="Gambar utama"
-          className="h-40 object-cover rounded"
+          className=" scale-75 mx-auto object-cover rounded"
         />
         </div>    
     <div className="w-9/12 mx-auto p-6 bg-primary font-primary text-white shadow-lg border rounded-lg">
@@ -57,18 +61,18 @@ const ProgramDetailCard = () => {
       {/* Gambar */}
       <div className="grid grid-cols-3 gap-2 mb-6">
         <img
-          src="https://via.placeholder.com/400x200"
+          src={programdetail1}
           alt="Gambar utama"
           className="col-span-2 h-40 object-cover rounded"
           />
         <div className="flex flex-col gap-2">
           <img
-            src="https://via.placeholder.com/150x90"
+            src={programdetail2}
             alt="Gambar 1"
             className="h-20 object-cover rounded"
             />
           <img
-            src="https://via.placeholder.com/150x90"
+            src={programdetail3}
             alt="Gambar 2"
             className="h-20 object-cover rounded"
             />

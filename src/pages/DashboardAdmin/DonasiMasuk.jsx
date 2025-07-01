@@ -2,7 +2,8 @@ import React from "react";
 import { useState } from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle, faQuestionCircle, faEnvelopeCircleCheck, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+
+import { faCheckCircle, faEye, faTrash, faQuestionCircle, faEnvelopeCircleCheck, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 
 const DonasiMasuk = () => {
@@ -539,7 +540,7 @@ const DonasiCrypto = () => {
   const Modal = ({ isOpen, icon, onClose, title, children }) => {
     if (!isOpen) return null;
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+      <div className="fixed inset-0 bg-black/60 bg-opacity-30 flex items-center justify-center z-50">
         <div className="bg-white rounded-lg w-full max-w-md shadow-lg relative">
           <div className="flex flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 bg-secondary">
             {icon}
@@ -649,14 +650,19 @@ const DonasiCrypto = () => {
 
 
 const DonasiBarang = () => {
-  const [dataDonasiBarang, setDataDonasiBarang] = useState([
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState({ title: "", body: "" });
+  const [dataBarang, setDataBarang] = useState([
     {
       id: 1,
       volunteer: "John Doe",
       campaign: "Bantu Sekolah",
       namabarang: "Buku Tulis",
       qty: 100,
-      kualitas: "Baru"
+      kualitas: "Baru",
+      status: "Menunggu Konfirmasi",
+      kota: "Jakarta",
+      kontak: "08123456789",
     },
     {
       id: 2,
@@ -664,7 +670,10 @@ const DonasiBarang = () => {
       campaign: "Donasi Bencana Alam",
       namabarang: "Selimut",
       qty: 50,
-      kualitas: "Layak Pakai"
+      kualitas: "Layak Pakai",
+      status: "Terkonfirmasi",
+      kota: "Bandung",
+      kontak: "08234567890",
     },
     {
       id: 3,
@@ -672,17 +681,96 @@ const DonasiBarang = () => {
       campaign: "Bantu Lansia",
       namabarang: "Kursi Roda",
       qty: 5,
-      kualitas: "Baru"
+      kualitas: "Baru",
+      status: "Terverifikasi",
+      kota: "Yogyakarta",
+      kontak: "08345678901",
     },
-    // Tambah data jika perlu
+    {
+      id: 4,
+      volunteer: "Aminah",
+      campaign: "Bantu Anak Yatim",
+      namabarang: "Mainan Anak",
+      qty: 25,
+      kualitas: "Baru",
+      status: "Gagal",
+      kota: "Surabaya",
+      kontak: "08456789012",
+    },
+    {
+      id: 5,
+      volunteer: "Bambang",
+      campaign: "Bantuan Kebakaran",
+      namabarang: "Pakaian",
+      qty: 70,
+      kualitas: "Baru",
+      status: "Menunggu Konfirmasi",
+      kota: "Semarang",
+      kontak: "08567890123",
+    },
+    {
+      id: 6,
+      volunteer: "Citra",
+      campaign: "Bantu Sekolah",
+      namabarang: "Seragam",
+      qty: 60,
+      kualitas: "Layak Pakai",
+      status: "Terkonfirmasi",
+      kota: "Depok",
+      kontak: "08678901234",
+    },
+    {
+      id: 7,
+      volunteer: "Dedi",
+      campaign: "Donasi Bencana Alam",
+      namabarang: "Tenda",
+      qty: 10,
+      kualitas: "Baru",
+      status: "Terverifikasi",
+      kota: "Bogor",
+      kontak: "08789012345",
+    },
+    {
+      id: 8,
+      volunteer: "Eka",
+      campaign: "Bantu Lansia",
+      namabarang: "Makanan",
+      qty: 200,
+      kualitas: "Baru",
+      status: "Gagal",
+      kota: "Tangerang",
+      kontak: "08890123456",
+    },
+    {
+      id: 9,
+      volunteer: "Fajar",
+      campaign: "Bantu Sekolah",
+      namabarang: "Alat Tulis",
+      qty: 120,
+      kualitas: "Baru",
+      status: "Menunggu Konfirmasi",
+      kota: "Bekasi",
+      kontak: "08901234567",
+    },
+    {
+      id: 10,
+      volunteer: "Gita",
+      campaign: "Donasi Kesehatan",
+      namabarang: "Obat-obatan",
+      qty: 30,
+      kualitas: "Baru",
+      status: "Menunggu Konfirmasi",
+      kota: "Padang",
+      kontak: "08012345678",
+    },
   ]);
 
   const [expandedRow, setExpandedRow] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 6;
 
   const handleDelete = (id) => {
-    const updated = dataDonasiBarang.filter((item) => item.id !== id);
+    const updated = dataBarang.filter((item) => item.id !== id);
     setDataDonasiBarang(updated);
   };
 
@@ -690,96 +778,162 @@ const DonasiBarang = () => {
     setExpandedRow(expandedRow === id ? null : id);
   };
 
-  // Pagination
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentData = dataDonasiBarang.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(dataDonasiBarang.length / itemsPerPage);
+  const currentData = dataBarang.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(dataBarang.length / itemsPerPage);
+
+  const handleStatusUpdate = (id, newStatus) => {
+    const updated = dataBarang.map((item) =>
+      item.id === id ? { ...item, status: newStatus } : item
+    );
+    setDataBarang(updated);
+    setModalOpen(false);
+    setModalContent({ title: "", body: "" });
+    toast.success("Berhasil Update Status");
+  };
+  const openModal = (item, type) => {
+    let content = { title: "", body: "", icon: null };
+
+    switch (type) {
+      case "konfirmasi":
+        content = {
+          title: "Konfirmasi Donasi Barang",
+          icon: <FontAwesomeIcon icon={faQuestionCircle} className="text-4xl text-accent" />,
+          body: (
+            <div className="text-center">
+              <p>Yakin ingin konfirmasi donasi dari {item.volunteer}?</p>
+              <button
+                onClick={() => handleStatusUpdate(item.id, "Terkonfirmasi")}
+                className="mt-3 px-3 py-1 bg-accent text-white rounded"
+              >
+                Konfirmasi
+              </button>
+            </div>
+          ),
+        };
+        break;
+      case "blockchain":
+        content = {
+          title: "Pencatatan ke Blockchain",
+          icon: <FontAwesomeIcon icon={faEnvelopeCircleCheck} className="text-4xl text-accent" />,
+          body: (
+            <div className="text-center">
+              <p>Catat donasi barang dari {item.volunteer} ke blockchain?</p>
+              <button
+                onClick={() => handleStatusUpdate(item.id, "Terverifikasi")}
+                className="mt-3 px-3 py-1 bg-primary text-white rounded"
+              >
+                Catat
+              </button>
+            </div>
+          ),
+        };
+        break;
+      case "detail":
+        content = {
+          title: "Detail Donasi Barang",
+          icon: <FontAwesomeIcon icon={faCheckCircle} className="text-4xl text-accent" />,
+          body: (
+            <div>
+              <p>Donatur: {item.volunteer}</p>
+              <p>Kota Asal: {item.kota}</p>
+              <p>Campaign: {item.campaign}</p>
+              <p>Barang: {item.namabarang}</p>
+              <p>Kuantitas: {item.qty}</p>
+              <p>Status: {item.status}</p>
+              <p>Link: <a href="https://etherscan.io" target="_blank" rel="noopener noreferrer" className="text-blue-500">Lihat di Blockchain</a></p>
+            </div>
+          ),
+        };
+        break;
+      case "gagal":
+        content = {
+          title: "Donasi Gagal",
+          icon: <FontAwesomeIcon icon={faXmarkCircle} className="text-4xl text-red-500" />,
+          body: <p className="text-center">Donasi dari {item.volunteer} gagal diproses.</p>,
+        };
+        break;
+      default:
+        break;
+    }
+
+    setModalContent(content);
+    setModalOpen(true);
+  };
+
+  const renderAksi = (item) => {
+    switch (item.status) {
+      case "Menunggu Konfirmasi":
+        return (
+          <button className="text-blue-500 hover:underline" onClick={() => openModal(item, "konfirmasi")}>Konfirmasi</button>
+        );
+      case "Terkonfirmasi":
+        return (
+          <button className="text-green-600 hover:underline" onClick={() => openModal(item, "blockchain")}>Catat di Blockchain →</button>
+        );
+      case "Terverifikasi":
+        return (
+          <button className="text-gray-600 hover:underline" onClick={() => openModal(item, "detail")}>Lihat di Blockchain</button>
+        );
+      case "Gagal":
+        return (
+          <button className="text-red-500 hover:underline" onClick={() => openModal(item, "gagal")}>Detail Gagal</button>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const Modal = ({ isOpen, onClose, icon, title, children }) => {
+    if (!isOpen) return null;
+    return (
+      <div className="fixed inset-0 bg-black/60 bg-opacity-30 flex items-center justify-center z-50">
+        <div className="bg-white rounded-lg w-full max-w-md p-4">
+          <div className="text-center">
+            {icon}
+            <h2 className="text-lg font-semibold mt-2">{title}</h2>
+            <div className="mt-3">{children}</div>
+            <button onClick={onClose} className="mt-4 px-4 py-1 bg-secondary text-primary rounded hover:bg-primary hover:text-white">
+              Tutup
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="p-4">
-      <table className="w-full table-auto border border-gray-300 rounded-lg overflow-hidden">
-        <thead className="bg-primary font-normal text-white text-left">
+      <table className="w-full text-sm">
+        <thead className="bg-primary text-white">
           <tr>
-            <th className="p-2">No</th>
-            <th className="p-2">Donatur</th>
-            <th className="p-2">Barang</th>
-            <th className="p-2 hidden md:table-cell">QTY</th>
-            <th className="p-2 hidden md:table-cell">Kualitas</th>
-            <th className="p-2 hidden md:table-cell">Campaign</th>
-            <th className="p-2">Aksi</th>
+            <th className="p-3">No</th>
+            <th className="p-3">Donatur</th>
+            <th className="p-3">Barang</th>
+            <th className="p-3">Kuantitas</th>
+            <th className="p-3">Status</th>
+            <th className="p-3">Aksi</th>
           </tr>
         </thead>
         <tbody>
-          {currentData.map((item, index) => (
-            <React.Fragment key={item.id}>
-              <tr className="border-t">
-                <td className="p-2">{index + 1}</td>
-                <td className="p-2">{item.volunteer}</td>
-                <td className="p-2">{item.namabarang}</td>
-                <td className="p-2 hidden md:table-cell">{item.qty}</td>
-                <td className="p-2 hidden md:table-cell">{item.kualitas}</td>
-                <td className="p-2 hidden md:table-cell">{item.campaign}</td>
-                <td className="p-2 flex flex-col justify-center md:justify-start items-center gap-1 md:flex-row">
-                  <button
-                    onClick={() => toggleExpand(item.id)}
-                    className="bg-green-500 text-white px-2 py-1 rounded-md block md:hidden"
-                  >
-                    {expandedRow === item.id ? "Tutup" : "Detail"}
-                  </button>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="bg-red-500 text-white px-2 py-1 rounded-md"
-                  >
-                    Hapus
-                  </button>
-                </td>
-              </tr>
-              {expandedRow === item.id && (
-                <tr className="bg-gray-100 border-t">
-                  <td colSpan="7" className="p-3">
-                    <div className="flex gap-2">
-                      <div className="flex-col flex gap-1 font-semibold">
-                        <span>Barang</span>
-                        <span>QTY</span>
-                        <span>Kualitas</span>
-                        <span>Campaign</span>
-                      </div>
-                      <div className="flex-col flex gap-1">
-                        <span>: {item.namabarang}</span>
-                        <span>: {item.qty}</span>
-                        <span>: {item.kualitas}</span>
-                        <span>: {item.campaign}</span>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              )}
-            </React.Fragment>
+          {dataBarang.map((item, index) => (
+            <tr key={item.id} className="border-b text-center">
+              <td className="p-3">{index + 1}</td>
+              <td className="p-3">{item.volunteer}</td>
+              <td className="p-3">{item.namabarang}</td>
+              <td className="p-3">{item.qty}</td>
+              <td className={`p-3 ${statusColor[item.status]}`}>{item.status}</td>
+              <td className="p-3">{renderAksi(item)}</td>
+            </tr>
           ))}
         </tbody>
       </table>
-
-      {/* Pagination */}
-      <div className="flex justify-center items-center mt-4 space-x-2">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentPage(index + 1)}
-            className={`px-3 py-1 rounded ${
-              currentPage === index + 1
-                ? "bg-primary text-white"
-                : "bg-secondary text-gray-700"
-            }`}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} icon={modalContent.icon} title={modalContent.title}>
+        {modalContent.body}
+      </Modal>
     </div>
   );
 };
-
-
 
 export default DonasiMasuk;
