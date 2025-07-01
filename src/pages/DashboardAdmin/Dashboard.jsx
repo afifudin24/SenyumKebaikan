@@ -93,8 +93,8 @@ const Dashboard = () => {
       {/* Konten lainnya */}
 
       <div className="p-6">
-        <ProgramSummaryHeader />
-        <ProgramTable />
+        {/* <ProgramSummaryHeader /> */}
+        {/* <ProgramTable /> */}
 
         <TransactionTable />
         <TableTransactionCrypto />

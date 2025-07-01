@@ -19,10 +19,22 @@ const LaporanKegiatanForm = () => {
     lokasi: '',
     tanggal: '',
     deskripsi: '',
-    status: 'proses',
+   
     file: null,
   });
-
+  const [preview, setPreview] = useState(null);
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setPreview(null);
+    }
+  };
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData({
@@ -104,38 +116,31 @@ const LaporanKegiatanForm = () => {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-6">
-        <div className="flex-1">
-          <label className="block text-sm font-medium text-gray-700">Unggah bukti foto/video</label>
-          <div className="border border-dashed border-gray-400 mt-1 rounded p-4 text-center text-sm text-gray-500">
-            <input
-              type="file"
-              name="file"
-              onChange={handleChange}
-              className="w-full opacity-0 text-sm"
-              accept="image/*,video/*"
-            />
-            <div className="text-center">
-            <FontAwesomeIcon icon={faCloudUpload} className="text-2xl text-primary font-semibold" />
-            <p>Upload atau seret file atau gambar ke sini</p>
-            </div>
-          </div>
+      <div className="text-center p-4 border border-dashed border-gray-300 rounded-lg">
+      <label className="cursor-pointer">
+        <div className="flex flex-col items-center space-y-2">
+          <FontAwesomeIcon icon={faCloudUpload} className="text-2xl text-primary font-semibold" />
+          <p>Upload atau seret file atau gambar ke sini</p>
         </div>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          className="hidden"
+        />
+      </label>
 
-        <div className="flex-1">
-          <label className="block text-sm font-medium text-gray-700">Status Program</label>
-          <select
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-            className="w-full mt-1 p-2 border rounded"
-          >
-            <option value="proses">Proses</option>
-            <option value="selesai">Selesai</option>
-            <option value="ditunda">Ditunda</option>
-          </select>
+      {preview && (
+        <div className="mt-4">
+          <p className="mb-2 font-medium text-gray-700">Preview:</p>
+          <img
+            src={preview}
+            alt="Preview"
+            className="mx-auto max-h-64 object-contain border rounded"
+          />
         </div>
-      </div>
+      )}
+    </div>
 
       <div>
         <button
