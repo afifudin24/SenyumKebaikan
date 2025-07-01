@@ -335,12 +335,10 @@ const DaftarCampaign = () => {
 
   return (
      
-          <div className="w-11/12 md:w-9/12 mx-auto">
+          <div className="w-11/12 md:w-9/12 mt-5 mx-auto">
               
           
-      <h1 className="text-2xl font-bold mb-4 text-center text-primary mt-2">
-        {isAddForm ? "Tambah Campaign Baru" : "Data Campaign"}
-              </h1>
+     
               <div className="flex justify-between">
               <button
           onClick={() => setIsAddForm(!isAddForm)}
@@ -739,7 +737,7 @@ const PengajuanCampaign = () => {
  
    return (
    
-     <div className="p-6 bg-white rounded-lg shadow">
+     <div className="p-6 bg-white mt-5 rounded-lg shadow">
        {/* Header & Search */}
        <div className="flex justify-between items-center mb-4">
          <h2 className="text-xl font-semibold">Daftar Program</h2>

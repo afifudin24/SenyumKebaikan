@@ -550,6 +550,7 @@ const FormBank = ({
   setShowDetailDonasi
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
+   const inputRef = useRef(null);
 
   const [formData, setFormData] = useState({
     nominal: '20000',
@@ -588,6 +589,18 @@ const FormBank = ({
       setShowDetailDonasi('bank');
     } else {
       setShowDetailDonasi('crypto');
+    }
+  };
+  const [preview, setPreview] = useState(null);
+
+  const handleUpload = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onloadend = () => setPreview(reader.result);
+      reader.readAsDataURL(file);
+    } else {
+      setPreview(null);
     }
   };
 
@@ -929,12 +942,34 @@ const FormBank = ({
 </div>
 
       
-            <div className="mb-6 text-center">
-              <button className="flex items-center justify-center text-center mx-auto gap-2 px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition">
-                <FontAwesomeIcon icon={faUpload} />
-                Unggah bukti
-              </button>
-            </div>
+           <div className="mb-6 text-center">
+      <input
+        type="file"
+        accept="image/*"
+        ref={inputRef}
+        onChange={handleUpload}
+        className="hidden"
+      />
+      <button
+        onClick={() => inputRef.current.click()}
+        className="flex items-center justify-center mx-auto gap-2 px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition"
+      >
+        <FontAwesomeIcon icon={faUpload} />
+        Unggah bukti
+      </button>
+
+      {/* Preview */}
+      {preview && (
+        <div className="mt-4">
+          <p className="text-sm text-gray-600 mb-2">Pratinjau Bukti:</p>
+          <img
+            src={preview}
+            alt="Bukti Donasi"
+            className="mx-auto max-h-64 rounded border"
+          />
+        </div>
+      )}
+    </div>
       
             <button  onClick={() => setModal(true)} className="w-full bg-green-100 text-primary font-secondary font-medium py-2 rounded-md hover:bg-green-200 transition">
               Lanjut Pembayaran

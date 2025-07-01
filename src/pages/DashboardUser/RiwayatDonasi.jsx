@@ -49,7 +49,7 @@ const [dataDonasiUang, setDataDonasiUang] = useState([
     tanggal: "2024-08-01",
     campaign: "Bantu Sekolah",
     type: "Transfer",
-    detail: "Donasi dilakukan melalui transfer bank Mandiri"
+    detail: "Donasi dilakukan melalui transfer bank Mandiri. txHash: 0xtransfer001"
   },
   {
     id: 2,
@@ -65,7 +65,7 @@ const [dataDonasiUang, setDataDonasiUang] = useState([
     tanggal: "2024-08-03",
     campaign: "Bantu Lansia",
     type: "Transfer",
-    detail: "Transfer via BCA Virtual Account"
+    detail: "Transfer via BCA Virtual Account. txHash: 0xtransfer002"
   },
   {
     id: 4,
@@ -73,7 +73,7 @@ const [dataDonasiUang, setDataDonasiUang] = useState([
     tanggal: "2024-08-04",
     campaign: "Peduli Anak Yatim",
     type: "Transfer",
-    detail: "Donasi melalui QRIS"
+    detail: "Donasi melalui QRIS. txHash: 0xtransfer003"
   },
   {
     id: 5,
@@ -89,7 +89,7 @@ const [dataDonasiUang, setDataDonasiUang] = useState([
     tanggal: "2024-08-06",
     campaign: "Donasi Air Bersih",
     type: "Transfer",
-    detail: "Transfer melalui Bank BNI"
+    detail: "Transfer melalui Bank BNI. txHash: 0xtransfer004"
   },
   {
     id: 7,
@@ -97,7 +97,7 @@ const [dataDonasiUang, setDataDonasiUang] = useState([
     tanggal: "2024-08-07",
     campaign: "Beasiswa Mahasiswa",
     type: "Transfer",
-    detail: "Virtual Account Bank Mandiri"
+    detail: "Virtual Account Bank Mandiri. txHash: 0xtransfer005"
   },
   {
     id: 8,
@@ -113,7 +113,7 @@ const [dataDonasiUang, setDataDonasiUang] = useState([
     tanggal: "2024-08-09",
     campaign: "Peduli Pendidikan",
     type: "Transfer",
-    detail: "Transfer antar bank BCA"
+    detail: "Transfer antar bank BCA. txHash: 0xtransfer006"
   },
   {
     id: 10,
@@ -124,6 +124,7 @@ const [dataDonasiUang, setDataDonasiUang] = useState([
     detail: "Via wallet Metamask. txHash: 0xmeta999tx001"
   }
 ]);
+
 
 
   const [expandedRow, setExpandedRow] = useState(null);
@@ -207,28 +208,28 @@ const [dataDonasiUang, setDataDonasiUang] = useState([
 
 
 const DonasiBarang = () => {
-  const [dataDonasiBarang, setDataDonasiBarang] = useState([
-    { id: 1, campaign: "Bantu Sekolah", namabarang: "Buku Tulis", qty: 100, kualitas: "Baru" },
-    { id: 2, campaign: "Donasi Bencana Alam", namabarang: "Selimut", qty: 50, kualitas: "Layak Pakai" },
-    { id: 3, campaign: "Bantu Lansia", namabarang: "Kursi Roda", qty: 5, kualitas: "Baru" },
-    { id: 4, campaign: "Donasi Pendidikan", namabarang: "Pensil Warna", qty: 200, kualitas: "Baru" },
-    { id: 5, campaign: "Bantu Korban Banjir", namabarang: "Pakaian Anak", qty: 80, kualitas: "Layak Pakai" },
-    { id: 6, campaign: "Donasi Musim Dingin", namabarang: "Jaket", qty: 40, kualitas: "Baru" },
-    { id: 7, campaign: "Kesehatan Gratis", namabarang: "Masker Kain", qty: 300, kualitas: "Baru" },
-    { id: 8, campaign: "Donasi Anak Yatim", namabarang: "Mainan Edukatif", qty: 20, kualitas: "Baru" },
-    { id: 9, campaign: "Bantu Desa Tertinggal", namabarang: "Peralatan Masak", qty: 30, kualitas: "Baru" },
-    { id: 10, campaign: "Donasi Darurat", namabarang: "Tenda", qty: 10, kualitas: "Baru" },
-    { id: 11, campaign: "Bantu Sekolah", namabarang: "Seragam Sekolah", qty: 70, kualitas: "Baru" },
-    { id: 12, campaign: "Donasi Bencana Alam", namabarang: "Sepatu", qty: 45, kualitas: "Layak Pakai" },
-    { id: 13, campaign: "Bantu Lansia", namabarang: "Alat Bantu Jalan", qty: 6, kualitas: "Baru" },
-    { id: 14, campaign: "Donasi Pendidikan", namabarang: "Buku Cerita", qty: 90, kualitas: "Baru" },
-    { id: 15, campaign: "Bantu Korban Banjir", namabarang: "Kasur Lipat", qty: 12, kualitas: "Layak Pakai" },
-    { id: 16, campaign: "Donasi Musim Dingin", namabarang: "Syal & Kupluk", qty: 60, kualitas: "Baru" },
-    { id: 17, campaign: "Kesehatan Gratis", namabarang: "Hand Sanitizer", qty: 100, kualitas: "Baru" },
-    { id: 18, campaign: "Donasi Anak Yatim", namabarang: "Tas Sekolah", qty: 55, kualitas: "Baru" },
-    { id: 19, campaign: "Bantu Desa Tertinggal", namabarang: "Alat Kebersihan", qty: 75, kualitas: "Baru" },
-    { id: 20, campaign: "Donasi Darurat", namabarang: "Obat-obatan", qty: 150, kualitas: "Baru" },
-  ]);
+const [dataDonasiBarang, setDataDonasiBarang] = useState([
+  { id: 1, campaign: "Bantu Sekolah", namabarang: "Buku Tulis", qty: 100, kualitas: "Baru", detail: "txHash: 0xbarang001" },
+  { id: 2, campaign: "Donasi Bencana Alam", namabarang: "Selimut", qty: 50, kualitas: "Layak Pakai", detail: "txHash: 0xbarang002" },
+  { id: 3, campaign: "Bantu Lansia", namabarang: "Kursi Roda", qty: 5, kualitas: "Baru", detail: "txHash: 0xbarang003" },
+  { id: 4, campaign: "Donasi Pendidikan", namabarang: "Pensil Warna", qty: 200, kualitas: "Baru", detail: "txHash: 0xbarang004" },
+  { id: 5, campaign: "Bantu Korban Banjir", namabarang: "Pakaian Anak", qty: 80, kualitas: "Layak Pakai", detail: "txHash: 0xbarang005" },
+  { id: 6, campaign: "Donasi Musim Dingin", namabarang: "Jaket", qty: 40, kualitas: "Baru", detail: "txHash: 0xbarang006" },
+  { id: 7, campaign: "Kesehatan Gratis", namabarang: "Masker Kain", qty: 300, kualitas: "Baru", detail: "txHash: 0xbarang007" },
+  { id: 8, campaign: "Donasi Anak Yatim", namabarang: "Mainan Edukatif", qty: 20, kualitas: "Baru", detail: "txHash: 0xbarang008" },
+  { id: 9, campaign: "Bantu Desa Tertinggal", namabarang: "Peralatan Masak", qty: 30, kualitas: "Baru", detail: "txHash: 0xbarang009" },
+  { id: 10, campaign: "Donasi Darurat", namabarang: "Tenda", qty: 10, kualitas: "Baru", detail: "txHash: 0xbarang010" },
+  { id: 11, campaign: "Bantu Sekolah", namabarang: "Seragam Sekolah", qty: 70, kualitas: "Baru", detail: "txHash: 0xbarang011" },
+  { id: 12, campaign: "Donasi Bencana Alam", namabarang: "Sepatu", qty: 45, kualitas: "Layak Pakai", detail: "txHash: 0xbarang012" },
+  { id: 13, campaign: "Bantu Lansia", namabarang: "Alat Bantu Jalan", qty: 6, kualitas: "Baru", detail: "txHash: 0xbarang013" },
+  { id: 14, campaign: "Donasi Pendidikan", namabarang: "Buku Cerita", qty: 90, kualitas: "Baru", detail: "txHash: 0xbarang014" },
+  { id: 15, campaign: "Bantu Korban Banjir", namabarang: "Kasur Lipat", qty: 12, kualitas: "Layak Pakai", detail: "txHash: 0xbarang015" },
+  { id: 16, campaign: "Donasi Musim Dingin", namabarang: "Syal & Kupluk", qty: 60, kualitas: "Baru", detail: "txHash: 0xbarang016" },
+  { id: 17, campaign: "Kesehatan Gratis", namabarang: "Hand Sanitizer", qty: 100, kualitas: "Baru", detail: "txHash: 0xbarang017" },
+  { id: 18, campaign: "Donasi Anak Yatim", namabarang: "Tas Sekolah", qty: 55, kualitas: "Baru", detail: "txHash: 0xbarang018" },
+  { id: 19, campaign: "Bantu Desa Tertinggal", namabarang: "Alat Kebersihan", qty: 75, kualitas: "Baru", detail: "txHash: 0xbarang019" },
+  { id: 20, campaign: "Donasi Darurat", namabarang: "Obat-obatan", qty: 150, kualitas: "Baru", detail: "txHash: 0xbarang020" }
+]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -262,6 +263,10 @@ const DonasiBarang = () => {
             <div>
               <p className="text-gray-500">Kualitas</p>
               <p>{item.kualitas}</p>
+            </div>
+            <div>
+              <p className="text-gray-500">Detail</p>
+              <p>{item.detail}</p>
             </div>
           </div>
         </div>
