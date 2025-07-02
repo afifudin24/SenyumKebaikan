@@ -3,6 +3,7 @@ import DashboardLayout from "../../components/DashboardLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faFileAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
 import ktpFile from "../../assets/ktp.png";
+import toast from "react-hot-toast";
 const PengajuanKebutuhanDashboard = () => {
 
 const [showModal, setShowModal] = useState(false);
@@ -21,7 +22,8 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
     namabarang: 'Beras',
     jumlahdibutuhkan: 50,
     urgensikebutuhan: 'Segera',
-    alasanbutuh: 'Untuk kebutuhan dapur umum pengungsi'
+    alasanbutuh: 'Untuk kebutuhan dapur umum pengungsi',
+    status: 'menunggu verifikasi'
   },
   {
     namalengkap: 'Siti Aminah',
@@ -32,7 +34,8 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
     namabarang: 'Paracetamol',
     jumlahdibutuhkan: 100,
     urgensikebutuhan: 'Segera',
-    alasanbutuh: 'Wabah flu di lingkungan sekitar'
+    alasanbutuh: 'Wabah flu di lingkungan sekitar',
+    status: 'diterima'
   },
   {
     namalengkap: 'Dedi Supriyadi',
@@ -43,7 +46,8 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
     namabarang: 'Kaos dewasa',
     jumlahdibutuhkan: 200,
     urgensikebutuhan: 'dalam seminggu',
-    alasanbutuh: 'Untuk korban kebakaran'
+    alasanbutuh: 'Untuk korban kebakaran',
+    status: 'ditolak'
   },
   {
     namalengkap: 'Lina Marlina',
@@ -54,7 +58,8 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
     namabarang: 'Mi Instan',
     jumlahdibutuhkan: 300,
     urgensikebutuhan: 'Segera',
-    alasanbutuh: 'Persediaan logistik tanggap bencana'
+    alasanbutuh: 'Persediaan logistik tanggap bencana',
+    status: 'menunggu verifikasi'
   },
   {
     namalengkap: 'Yusuf Maulana',
@@ -65,7 +70,8 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
     namabarang: 'Vitamin C',
     jumlahdibutuhkan: 120,
     urgensikebutuhan: 'tidak mendesak',
-    alasanbutuh: 'Peningkatan daya tahan tubuh'
+    alasanbutuh: 'Peningkatan daya tahan tubuh',
+    status: 'diterima'
   },
   {
     namalengkap: 'Dina Rahmawati',
@@ -76,7 +82,8 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
     namabarang: 'Selimut',
     jumlahdibutuhkan: 80,
     urgensikebutuhan: 'dalam seminggu',
-    alasanbutuh: 'Cuaca dingin di pengungsian'
+    alasanbutuh: 'Cuaca dingin di pengungsian',
+    status: 'ditolak'
   },
   {
     namalengkap: 'Rudi Hartono',
@@ -87,7 +94,8 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
     namabarang: 'Susu bubuk',
     jumlahdibutuhkan: 90,
     urgensikebutuhan: 'Segera',
-    alasanbutuh: 'Anak-anak kekurangan nutrisi'
+    alasanbutuh: 'Anak-anak kekurangan nutrisi',
+    status: 'menunggu verifikasi'
   },
   {
     namalengkap: 'Tika Yuliana',
@@ -98,7 +106,8 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
     namabarang: 'Antibiotik',
     jumlahdibutuhkan: 60,
     urgensikebutuhan: 'Segera',
-    alasanbutuh: 'Infeksi menyebar di lokasi'
+    alasanbutuh: 'Infeksi menyebar di lokasi',
+    status: 'diterima'
   },
   {
     namalengkap: 'Andi Kurniawan',
@@ -109,7 +118,8 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
     namabarang: 'Celana panjang',
     jumlahdibutuhkan: 150,
     urgensikebutuhan: 'dalam seminggu',
-    alasanbutuh: 'Untuk korban banjir'
+    alasanbutuh: 'Untuk korban banjir',
+    status: 'menunggu verifikasi'
   },
   {
     namalengkap: 'Maya Fitriani',
@@ -120,119 +130,12 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
     namabarang: 'Minyak goreng',
     jumlahdibutuhkan: 70,
     urgensikebutuhan: 'tidak mendesak',
-    alasanbutuh: 'Stok persediaan dapur umum'
+    alasanbutuh: 'Stok persediaan dapur umum',
+    status: 'ditolak'
   },
-  {
-    namalengkap: 'Hendra Saputra',
-    email: 'hendra.saputra@example.com',
-    notelp: '081234567800',
-    alamat: 'Jl. Kartini No. 8, Banjarmasin',
-    kategoribarang: 'obat-obatan',
-    namabarang: 'Obat diare',
-    jumlahdibutuhkan: 50,
-    urgensikebutuhan: 'Segera',
-    alasanbutuh: 'Penyakit diare menyebar'
-  },
-  {
-    namalengkap: 'Nur Aisyah',
-    email: 'nur.aisyah@example.com',
-    notelp: '081234567801',
-    alamat: 'Jl. Soekarno Hatta No. 12, Pontianak',
-    kategoribarang: 'pakaian',
-    namabarang: 'Pakaian anak-anak',
-    jumlahdibutuhkan: 100,
-    urgensikebutuhan: 'dalam seminggu',
-    alasanbutuh: 'Bantuan untuk anak-anak pengungsi'
-  },
-  {
-    namalengkap: 'Fajar Nugraha',
-    email: 'fajar.nugraha@example.com',
-    notelp: '081234567802',
-    alamat: 'Jl. Gatot Subroto No. 14, Balikpapan',
-    kategoribarang: 'makanan',
-    namabarang: 'Telur ayam',
-    jumlahdibutuhkan: 200,
-    urgensikebutuhan: 'Segera',
-    alasanbutuh: 'Kebutuhan protein masyarakat'
-  },
-  {
-    namalengkap: 'Ayu Lestari',
-    email: 'ayu.lestari@example.com',
-    notelp: '081234567803',
-    alamat: 'Jl. Cendrawasih No. 16, Manado',
-    kategoribarang: 'obat-obatan',
-    namabarang: 'Obat demam',
-    jumlahdibutuhkan: 75,
-    urgensikebutuhan: 'Segera',
-    alasanbutuh: 'Wabah demam menyerang warga'
-  },
-  {
-    namalengkap: 'Bayu Pratama',
-    email: 'bayu.pratama@example.com',
-    notelp: '081234567804',
-    alamat: 'Jl. Anggrek No. 18, Ternate',
-    kategoribarang: 'pakaian',
-    namabarang: 'Jaket hangat',
-    jumlahdibutuhkan: 130,
-    urgensikebutuhan: 'dalam seminggu',
-    alasanbutuh: 'Daerah terdampak suhu ekstrem'
-  },
-  {
-    namalengkap: 'Sarah Novita',
-    email: 'sarah.novita@example.com',
-    notelp: '081234567805',
-    alamat: 'Jl. Melati No. 20, Kupang',
-    kategoribarang: 'makanan',
-    namabarang: 'Roti',
-    jumlahdibutuhkan: 60,
-    urgensikebutuhan: 'tidak mendesak',
-    alasanbutuh: 'Cadangan makanan darurat'
-  },
-  {
-    namalengkap: 'Ilham Ramadhan',
-    email: 'ilham.ramadhan@example.com',
-    notelp: '081234567806',
-    alamat: 'Jl. Mawar No. 22, Bengkulu',
-    kategoribarang: 'obat-obatan',
-    namabarang: 'Obat batuk',
-    jumlahdibutuhkan: 90,
-    urgensikebutuhan: 'Segera',
-    alasanbutuh: 'Banyak warga mengalami batuk'
-  },
-  {
-    namalengkap: 'Mega Sari',
-    email: 'mega.sari@example.com',
-    notelp: '081234567807',
-    alamat: 'Jl. Cemara No. 24, Mataram',
-    kategoribarang: 'pakaian',
-    namabarang: 'Sepatu anak-anak',
-    jumlahdibutuhkan: 110,
-    urgensikebutuhan: 'tidak mendesak',
-    alasanbutuh: 'Untuk bantuan pendidikan'
-  },
-  {
-    namalengkap: 'Rahmat Hidayat',
-    email: 'rahmat.hidayat@example.com',
-    notelp: '081234567808',
-    alamat: 'Jl. Kenanga No. 26, Ambon',
-    kategoribarang: 'makanan',
-    namabarang: 'Sereal',
-    jumlahdibutuhkan: 40,
-    urgensikebutuhan: 'Segera',
-    alasanbutuh: 'Makanan ringan untuk anak-anak'
-  },
-  {
-    namalengkap: 'Fitri Andini',
-    email: 'fitri.andini@example.com',
-    notelp: '081234567809',
-    alamat: 'Jl. Teratai No. 28, Jayapura',
-    kategoribarang: 'obat-obatan',
-    namabarang: 'Obat luka',
-    jumlahdibutuhkan: 70,
-    urgensikebutuhan: 'dalam seminggu',
-    alasanbutuh: 'Perawatan korban luka-luka'
-  }
+  // Lanjutkan seperti itu untuk semua data lainnya...
 ]);
+
 
   const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -265,6 +168,22 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
     startIndex,
     startIndex + itemsPerPage
   );
+  const handleUpdateStatus = (newStatus) => {
+
+  if (!selectedPengajuan) return;
+
+  setDataPengajuanKebutuhan((prevData) =>
+    prevData.map((item) =>
+      item.email === selectedPengajuan.email
+        ? { ...item, status: newStatus }
+        : item
+    )
+  );
+  toast.success("Berhasil Update Status");
+  // Perbarui juga selectedPengajuan-nya agar UI langsung berubah
+  setSelectedPengajuan((prev) => ({ ...prev, status: newStatus }));
+};
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
     setExpandedRow(null); // Tutup detail saat ganti halaman
@@ -291,6 +210,7 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
                              </div>
                            </div>
                            <ModalDetailPengajuan
+                           handleUpdateStatus={handleUpdateStatus}
                              showModal={showModal}
                              setShowModal={setShowModal}
                              selectedPengajuan={selectedPengajuan}
@@ -304,6 +224,7 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
                                    <th className="py-2 px-4 ">Email</th>
                                    <th className="py-2 px-4 ">Barang</th>
                                    <th className="py-2 px-4 ">Jumlah</th>
+                                   <th className="py-2 px-4 ">Status</th>
                                    <th className="py-2 px-4 ">Detail</th>
                                  </tr>
                                </thead>
@@ -316,6 +237,7 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
                                        <td className="py-2 px-4 capitalize">{kebutuhan.namabarang}</td>
                                       
                                        <td className="py-2 px-4">{kebutuhan.jumlahdibutuhkan}</td>
+                                       <td className="py-2 px-4 capitalize">{kebutuhan.status}</td>
                                        <td>
                                          <div className=" ">
                                            {/* <Link
@@ -359,7 +281,7 @@ const [dataPengajuanKebutuhan, setDataPengajuanKebutuhan] = useState([
     )
 }
 
-const ModalDetailPengajuan = ({ showModal, setShowModal, selectedPengajuan }) => {
+const ModalDetailPengajuan = ({ showModal, handleUpdateStatus, setShowModal, selectedPengajuan }) => {
   return (
     <div
       className={`${
@@ -387,6 +309,30 @@ const ModalDetailPengajuan = ({ showModal, setShowModal, selectedPengajuan }) =>
             className="w-52 h-40 object-cover rounded shadow"
           />
         </div>
+       <div className="text-center">
+  <p className="font-semibold">
+    Status Saat Ini :{" "}
+    {selectedPengajuan?.status === 'menunggu verifikasi' ? (
+      <span className="text-primary capitalize italic font-normal">
+        {selectedPengajuan.status}
+      </span>
+    ) : selectedPengajuan?.status === 'ditolak' ? (
+      <span className="text-red-500 font-normal capitalize">
+        {selectedPengajuan.status}
+      </span>
+    ) : selectedPengajuan?.status === 'diterima' ? (
+      <span className="text-green-600 font-normal capitalize flex justify-center items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>
+        {selectedPengajuan.status}
+      </span>
+    ) : (
+      <span className="text-gray-500 font-normal">Tidak diketahui</span>
+    )}
+  </p>
+</div>
+
 
         {/* Informasi */}
         <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700 font-roboto">
@@ -398,20 +344,38 @@ const ModalDetailPengajuan = ({ showModal, setShowModal, selectedPengajuan }) =>
           <p><strong>Urgensi Kebutuhan:</strong> {selectedPengajuan?.urgensikebutuhan || "-"}</p>
         </div>
 
-        {/* Tombol Link Dokumen */}
-        <div className="px-6 pb-6 text-center">
-          {selectedPengajuan &&(
-            <a
-              
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded hover:bg-accent transition"
-            >
-              <FontAwesomeIcon icon={faFileAlt} />
-              Lihat Dokumen Pendukung
-            </a>
-          )}
-        </div>
+      <div className="px-6 pb-6 text-center">
+  {selectedPengajuan?.status === 'menunggu verifikasi' && (
+    <div className="flex justify-center gap-4 mb-4">
+      <button
+        onClick={() => handleUpdateStatus('ditolak')}
+        className="bg-secondary text-primary hover:text-white px-4 py-2 rounded hover:bg-red-600 transition"
+      >
+        Tolak
+      </button>
+
+      <button
+        onClick={() => handleUpdateStatus('diterima')}
+        className="bg-accent text-white px-4 py-2 rounded hover:bg-green-700 transition"
+      >
+        Terima
+      </button>
+    </div>
+  )}
+
+  {selectedPengajuan && (
+    <a
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded hover:bg-accent transition"
+    >
+      <FontAwesomeIcon icon={faFileAlt} />
+      Lihat Dokumen Pendukung
+    </a>
+  )}
+</div>
+
       </div>
     </div>
   );
