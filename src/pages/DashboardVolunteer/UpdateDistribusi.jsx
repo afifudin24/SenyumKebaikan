@@ -139,7 +139,7 @@ const DetailDistribusi = ({ data, onClose }) => {
   if (!data) return null;
   console.log(data);
 
-  const { status, file, deskripsi } = data;
+  const { status, file, deskripsi, txHash, buktiUpload } = data;
 
   return (
     <div className="space-y-4">
@@ -159,13 +159,20 @@ const DetailDistribusi = ({ data, onClose }) => {
 
       <div>
         <h4 className="text-primary font-semibold mb-1">Bukti Upload</h4>
-        {file ? (
+        {file || buktiUpload ? (
           <div className="p-2 border border-gray-300 rounded bg-gray-50 text-sm">
-            File: {file.name}
+            File: {file?.name || buktiUpload}
           </div>
         ) : (
           <p className="text-gray-500 italic">Belum ada file</p>
         )}
+      </div>
+
+      <div>
+        <h4 className="text-primary font-semibold mb-1">Tx Hash</h4>
+        <p className="text-gray-800 border border-gray-300 p-2 rounded bg-gray-50 break-all">
+          {txHash || "-"}
+        </p>
       </div>
 
       <div>
@@ -187,6 +194,7 @@ const DetailDistribusi = ({ data, onClose }) => {
     </div>
   );
 };
+
 const DistribusiDonasi = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalLihat, setModalLihat] = useState(false);
@@ -196,27 +204,28 @@ const DistribusiDonasi = () => {
   const itemsPerPage = 5;
 
   const [distribusiData, setDistribusiData] = useState([
-    { id: 1, lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '02/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Distribusi barang tahap awal' },
-    { id: 2, lokasi: 'Kecamatan B', bantuan: 'Uang', tanggal: '02/07/2024', status: 'Selesai', campaign: 'bencana1', deskripsi: 'Dana bantuan telah disalurkan' },
-    { id: 3, lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '02/07/2024', status: 'Dalam perjalanan', campaign: 'bencana2', deskripsi: 'Barang dalam pengiriman' },
-    { id: 4, lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '02/07/2024', status: 'Selesai', campaign: 'bencana2', deskripsi: 'Pengiriman selesai diterima' },
-    { id: 5, lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '03/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Menunggu jadwal pengiriman' },
-    { id: 6, lokasi: 'Kecamatan A', bantuan: 'Uang', tanggal: '03/07/2024', status: 'Selesai', campaign: 'bencana2', deskripsi: 'Bantuan uang telah dikirim' },
-    { id: 7, lokasi: 'Kecamatan A', bantuan: 'Barang', tanggal: '03/07/2024', status: 'Dalam perjalanan', campaign: 'bencana1', deskripsi: 'Pengiriman sedang dilakukan' },
-    { id: 8, lokasi: 'Kecamatan A', bantuan: 'Barang', tanggal: '03/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Barang masih di gudang' },
-    { id: 9, lokasi: 'Kecamatan A', bantuan: 'Barang', tanggal: '04/07/2024', status: 'Selesai', campaign: 'bencana2', deskripsi: 'Barang diterima oleh warga' },
-    { id: 10, lokasi: 'Kecamatan C', bantuan: 'Uang', tanggal: '04/07/2024', status: 'Dalam perjalanan', campaign: 'bencana1', deskripsi: 'Dana sedang dalam proses pengiriman' },
-    { id: 11, lokasi: 'Kecamatan C', bantuan: 'Barang', tanggal: '04/07/2024', status: 'Menunggu', campaign: 'bencana2', deskripsi: 'Akan dikirim setelah jadwal ditentukan' },
-    { id: 12, lokasi: 'Kecamatan C', bantuan: 'Barang', tanggal: '04/07/2024', status: 'Selesai', campaign: 'bencana1', deskripsi: 'Barang telah diterima' },
-    { id: 13, lokasi: 'Kecamatan D', bantuan: 'Uang', tanggal: '05/07/2024', status: 'Menunggu', campaign: 'bencana2', deskripsi: 'Menunggu validasi penerima' },
-    { id: 14, lokasi: 'Kecamatan D', bantuan: 'Barang', tanggal: '05/07/2024', status: 'Selesai', campaign: 'bencana1', deskripsi: 'Barang sudah tersalurkan' },
-    { id: 15, lokasi: 'Kecamatan D', bantuan: 'Barang', tanggal: '05/07/2024', status: 'Dalam perjalanan', campaign: 'bencana2', deskripsi: 'Dalam proses pengantaran' },
-    { id: 16, lokasi: 'Kecamatan D', bantuan: 'Barang', tanggal: '05/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Distribusi dijadwalkan minggu depan' },
-    { id: 17, lokasi: 'Kecamatan E', bantuan: 'Barang', tanggal: '06/07/2024', status: 'Selesai', campaign: 'bencana2', deskripsi: 'Sudah sampai tujuan' },
-    { id: 18, lokasi: 'Kecamatan E', bantuan: 'Barang', tanggal: '06/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Masih menunggu pengemudi' },
-    { id: 19, lokasi: 'Kecamatan E', bantuan: 'Uang', tanggal: '06/07/2024', status: 'Selesai', campaign: 'bencana1', deskripsi: 'Transfer dana sukses' },
-    { id: 20, lokasi: 'Kecamatan E', bantuan: 'Barang', tanggal: '06/07/2024', status: 'Menunggu', campaign: 'bencana2', deskripsi: 'Akan diproses besok pagi' },
+    { id: 1, lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '02/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Distribusi barang tahap awal', txHash: '0xabc123', buktiUpload: 'bukti1.jpg' },
+    { id: 2, lokasi: 'Kecamatan B', bantuan: 'Uang', tanggal: '02/07/2024', status: 'Selesai', campaign: 'bencana1', deskripsi: 'Dana bantuan telah disalurkan', txHash: '0xdef456', buktiUpload: 'bukti2.jpg' },
+    { id: 3, lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '02/07/2024', status: 'Dalam perjalanan', campaign: 'bencana2', deskripsi: 'Barang dalam pengiriman', txHash: '0xghi789', buktiUpload: 'bukti3.jpg' },
+    { id: 4, lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '02/07/2024', status: 'Selesai', campaign: 'bencana2', deskripsi: 'Pengiriman selesai diterima', txHash: '0xjkl012', buktiUpload: 'bukti4.jpg' },
+    { id: 5, lokasi: 'Kecamatan B', bantuan: 'Barang', tanggal: '03/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Menunggu jadwal pengiriman', txHash: '0xmnq345', buktiUpload: 'bukti5.jpg' },
+    { id: 6, lokasi: 'Kecamatan A', bantuan: 'Uang', tanggal: '03/07/2024', status: 'Selesai', campaign: 'bencana2', deskripsi: 'Bantuan uang telah dikirim', txHash: '0xrst678', buktiUpload: 'bukti6.jpg' },
+    { id: 7, lokasi: 'Kecamatan A', bantuan: 'Barang', tanggal: '03/07/2024', status: 'Dalam perjalanan', campaign: 'bencana1', deskripsi: 'Pengiriman sedang dilakukan', txHash: '0xuvw901', buktiUpload: 'bukti7.jpg' },
+    { id: 8, lokasi: 'Kecamatan A', bantuan: 'Barang', tanggal: '03/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Barang masih di gudang', txHash: '0xxyz234', buktiUpload: 'bukti8.jpg' },
+    { id: 9, lokasi: 'Kecamatan A', bantuan: 'Barang', tanggal: '04/07/2024', status: 'Selesai', campaign: 'bencana2', deskripsi: 'Barang diterima oleh warga', txHash: '0xabc567', buktiUpload: 'bukti9.jpg' },
+    { id: 10, lokasi: 'Kecamatan C', bantuan: 'Uang', tanggal: '04/07/2024', status: 'Dalam perjalanan', campaign: 'bencana1', deskripsi: 'Dana sedang dalam proses pengiriman', txHash: '0xdef890', buktiUpload: 'bukti10.jpg' },
+    { id: 11, lokasi: 'Kecamatan C', bantuan: 'Barang', tanggal: '04/07/2024', status: 'Menunggu', campaign: 'bencana2', deskripsi: 'Akan dikirim setelah jadwal ditentukan', txHash: '0xghi123', buktiUpload: 'bukti11.jpg' },
+    { id: 12, lokasi: 'Kecamatan C', bantuan: 'Barang', tanggal: '04/07/2024', status: 'Selesai', campaign: 'bencana1', deskripsi: 'Barang telah diterima', txHash: '0xjkl456', buktiUpload: 'bukti12.jpg' },
+    { id: 13, lokasi: 'Kecamatan D', bantuan: 'Uang', tanggal: '05/07/2024', status: 'Menunggu', campaign: 'bencana2', deskripsi: 'Menunggu validasi penerima', txHash: '0xmnq789', buktiUpload: 'bukti13.jpg' },
+    { id: 14, lokasi: 'Kecamatan D', bantuan: 'Barang', tanggal: '05/07/2024', status: 'Selesai', campaign: 'bencana1', deskripsi: 'Barang sudah tersalurkan', txHash: '0xrst012', buktiUpload: 'bukti14.jpg' },
+    { id: 15, lokasi: 'Kecamatan D', bantuan: 'Barang', tanggal: '05/07/2024', status: 'Dalam perjalanan', campaign: 'bencana2', deskripsi: 'Dalam proses pengantaran', txHash: '0xuvw345', buktiUpload: 'bukti15.jpg' },
+    { id: 16, lokasi: 'Kecamatan D', bantuan: 'Barang', tanggal: '05/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Distribusi dijadwalkan minggu depan', txHash: '0xxyz678', buktiUpload: 'bukti16.jpg' },
+    { id: 17, lokasi: 'Kecamatan E', bantuan: 'Barang', tanggal: '06/07/2024', status: 'Selesai', campaign: 'bencana2', deskripsi: 'Sudah sampai tujuan', txHash: '0xabc901', buktiUpload: 'bukti17.jpg' },
+    { id: 18, lokasi: 'Kecamatan E', bantuan: 'Barang', tanggal: '06/07/2024', status: 'Menunggu', campaign: 'bencana1', deskripsi: 'Masih menunggu pengemudi', txHash: '0xdef234', buktiUpload: 'bukti18.jpg' },
+    { id: 19, lokasi: 'Kecamatan E', bantuan: 'Uang', tanggal: '06/07/2024', status: 'Selesai', campaign: 'bencana1', deskripsi: 'Transfer dana sukses', txHash: '0xghi567', buktiUpload: 'bukti19.jpg' },
+    { id: 20, lokasi: 'Kecamatan E', bantuan: 'Barang', tanggal: '06/07/2024', status: 'Menunggu', campaign: 'bencana2', deskripsi: 'Akan diproses besok pagi', txHash: '0xjkl890', buktiUpload: 'bukti20.jpg' },
   ]);
+  
   
   const filteredData = selectedCampaign
   ? distribusiData.filter((d) => d.campaign === selectedCampaign)
