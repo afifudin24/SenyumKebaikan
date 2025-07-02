@@ -2,9 +2,9 @@ import React from "react";
 import Logo1 from "../assets/logo3.png"
 const Footer = ({className}) => {
   return (
-    <footer className={`${className} pb-20 md:pb-0 bg-primary font-primary text-white  rounded-t-xl`}>
+    <footer className={`${className} md:pb-0 pb-20 bg-primary font-primary text-white  rounded-t-xl`}>
     
-      <div className="flex flex-col md:flex-row justify-between rounded-2xl items-center md:items-center p-6 md:p-8  md:gap-16">
+      <div className="flex flex-col md:flex-row justify-between rounded-2xl items-center md:items-center md:px-2 md:py-0  md:gap-16">
         {/* Logo & Divider */}
         <div className="text-center   items-center md:items-center w-1/4 md:w-1/4">
           <img src={Logo1} alt="Senyum Kebaikan" className="md:mb-2 mx-auto  " />
@@ -30,7 +30,7 @@ const Footer = ({className}) => {
         </div>
       </div>
       {/* Bottom Bar */}
-      <div className="bg-[#2f3e3d] font-primary text-center text-xs py-3 ">
+      <div className="bg-[#2f3e3d] font-primary text-center text-sm  py-3 ">
         2024 © Nusantaranger | All Right reserved
       </div>
     </footer>

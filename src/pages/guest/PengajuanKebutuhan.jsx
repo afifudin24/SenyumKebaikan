@@ -248,8 +248,8 @@ const newNotification = {
 
       {/* Tombol */}
       <div className="text-center">
-        <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-full shadow transition">
-          🌱 Donasi Sekarang
+        <button className="bg-primary hover:bg-secondary hover:text-primary text-white font-semibold py-3 px-8 rounded-full shadow transition">
+         Donasi Sekarang
         </button>
       </div>
     </form>

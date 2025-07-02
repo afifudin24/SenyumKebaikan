@@ -232,8 +232,8 @@ const [dataDonasiBarangBencana, setDataDonasiBarangBencana] = useState([
 
  
          
-            <Footer />
             </Container>
+            <Footer />
             </div>
     )
 

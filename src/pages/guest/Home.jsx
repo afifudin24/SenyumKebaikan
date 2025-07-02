@@ -310,11 +310,11 @@ KLIK DI BAWAH INI UNTUK MENUNJUKAN CARA KERJA MENGENAI TEKNOLOGI BLOCKCHAIN</p>
 
             </div>
 
-            <Footer className={'md:mx-4 mx-0'} />
 
             
               
       </Container>
+            <Footer className={'md:mx-4 mx-0'} />
     </div>
   )
 }
