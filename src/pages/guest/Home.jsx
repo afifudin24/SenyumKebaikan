@@ -314,7 +314,7 @@ KLIK DI BAWAH INI UNTUK MENUNJUKAN CARA KERJA MENGENAI TEKNOLOGI BLOCKCHAIN</p>
             
               
       </Container>
-            <Footer className={'md:mx-4 mx-0'} />
+            <Footer className={'md:mx-0 mx-0'} />
     </div>
   )
 }
