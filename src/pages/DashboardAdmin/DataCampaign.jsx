@@ -46,17 +46,32 @@ const DataCampaign = () => {
  
 };
 const DaftarCampaign = () => {
-   const [campaigns, setCampaigns] = useState([
+  const [campaigns, setCampaigns] = useState([
     {
       id: "CAMP001",
       namaprogram: "Bantuan Pangan Lebaran",
-      Jenis: "barang",
-      target: 1000,
-      tercapai: 850,
-      status: "Aktif",
-      rekdistribusi: "BNI Syariah - 1234567890",
+      kategori: "barang",
       tanggal_mulai: "2024-03-01",
       tanggal_selesai: "2024-03-31",
+      target: 1000,
+      tercapai: 850,
+      deskripsi: "Distribusi sembako kepada keluarga prasejahtera selama Ramadhan.",
+      status: "Aktif",
+      rekdistribusi: "BNI Syariah - 1234567890",
+      metadata: {
+        namaLengkap: "Ahmad Zaki",
+        nik: "1234567890123456",
+        noTelepon: "+6281234567890",
+        namaPemilik: "Ahmad Zaki",
+        bank: "BNI Syariah",
+        noRekening: "1234567890",
+      },
+      files: {
+        fotoCampaign: "foto_lebaran.jpg",
+        galeriPendukung: "galeri_lebaran.zip",
+        fotoKTP: "ktp_ahmad.jpg",
+        fotoDiriKTP: "selfie_ktp_ahmad.jpg"
+      },
       distribusi: {
         status: "Selesai",
         tanggal_distribusi: "2024-04-02",
@@ -65,20 +80,34 @@ const DaftarCampaign = () => {
       },
       donatur: [
         { nama: "Andi Susanto", tanggal: "2024-03-10", nominal: 500000, email: "andi.s@example.com" },
-        { nama: "Budi Santoso", tanggal: "2024-03-12", nominal: 250000, email: "budi.s@example.com" },
-        { nama: "Citra Dewi", tanggal: "2024-03-15", nominal: 1000000, email: "citra.d@example.com" },
-      ],
+        { nama: "Budi Santoso", tanggal: "2024-03-12", nominal: 250000, email: "budi.s@example.com" }
+      ]
     },
     {
       id: "CAMP002",
       namaprogram: "Beasiswa Anak Yatim",
-      Jenis: "dana",
-      target: 75000000,
-      tercapai: 62000000,
-      status: "Aktif",
-      rekdistribusi: "Bank Mandiri - 0987654321",
+      kategori: "dana",
       tanggal_mulai: "2024-04-01",
       tanggal_selesai: "2024-09-30",
+      target: 75000000,
+      tercapai: 62000000,
+      deskripsi: "Memberikan beasiswa pendidikan kepada anak-anak yatim di daerah terpencil.",
+      status: "Aktif",
+      rekdistribusi: "Bank Mandiri - 0987654321",
+      metadata: {
+        namaLengkap: "Rina Amelia",
+        nik: "3271089999990001",
+        noTelepon: "+628111223344",
+        namaPemilik: "Rina Amelia",
+        bank: "Bank Mandiri",
+        noRekening: "0987654321"
+      },
+      files: {
+        fotoCampaign: "foto_beasiswa.jpg",
+        galeriPendukung: "galeri_beasiswa.zip",
+        fotoKTP: "ktp_rina.jpg",
+        fotoDiriKTP: "selfie_rina.jpg"
+      },
       distribusi: {
         status: "Berlangsung",
         tanggal_distribusi: null,
@@ -86,176 +115,98 @@ const DaftarCampaign = () => {
         konfirmasi_distribusi: "Menunggu Konfirmasi"
       },
       donatur: [
-        { nama: "Dewi Lestari", tanggal: "2024-04-01", nominal: 750000, email: "dewi.l@example.com" },
-        { nama: "Eko Pratama", tanggal: "2024-04-05", nominal: 300000, email: "eko.p@example.com" },
-      ],
+        { nama: "Dewi Lestari", tanggal: "2024-04-01", nominal: 750000, email: "dewi.l@example.com" }
+      ]
     },
     {
       id: "CAMP003",
       namaprogram: "Pembangunan Mushola",
-      Jenis: "dana",
-      target: 200000000,
-      tercapai: 15000000,
-      status: "Aktif",
-      rekdistribusi: "BCA - 1122334455",
+      kategori: "dana",
       tanggal_mulai: "2024-07-01",
       tanggal_selesai: "2024-12-31",
+      target: 200000000,
+      tercapai: 15000000,
+      deskripsi: "Membantu pembangunan Mushola di wilayah pelosok yang belum memiliki tempat ibadah.",
+      status: "Aktif",
+      rekdistribusi: "BCA - 1122334455",
+      metadata: {
+        namaLengkap: "Hendra Purnama",
+        nik: "3210012345678901",
+        noTelepon: "+628522223333",
+        namaPemilik: "Hendra Purnama",
+        bank: "BCA",
+        noRekening: "1122334455"
+      },
+      files: {
+        fotoCampaign: "foto_mushola.jpg",
+        galeriPendukung: "galeri_mushola.zip",
+        fotoKTP: "ktp_hendra.jpg",
+        fotoDiriKTP: "selfie_hendra.jpg"
+      },
       distribusi: null,
-      donatur: [
-        { nama: "Fajar Nugraha", tanggal: "2024-05-20", nominal: 5000000, email: "fajar.n@example.com" },
-      ],
+      donatur: []
     },
     {
       id: "CAMP004",
-      namaprogram: "Sembako untuk Dhuafa",
-      Jenis: "barang",
-      target: 500,
-      tercapai: 500,
-    status: "Aktif",
-      rekdistribusi: "BRI - 6789012345",
-      tanggal_mulai: "2023-11-01",
-      tanggal_selesai: "2023-12-15",
-      distribusi: {
-        status: "Selesai",
-        tanggal_distribusi: "2023-12-20",
-        bukti: "bukti_camp004.png",
-        konfirmasi_distribusi: "Ditolak"
+      namaprogram: "Santunan Lansia",
+      kategori: "dana",
+      tanggal_mulai: "2024-06-01",
+      tanggal_selesai: "2024-08-01",
+      target: 30000000,
+      tercapai: 18000000,
+      deskripsi: "Santunan rutin kepada para lansia yang hidup sendirian tanpa keluarga.",
+      status: "Aktif",
+      rekdistribusi: "BTN - 3344556677",
+      metadata: {
+        namaLengkap: "Nurhayati",
+        nik: "3671099998880002",
+        noTelepon: "+6289876543210",
+        namaPemilik: "Nurhayati",
+        bank: "BTN",
+        noRekening: "3344556677"
       },
-      donatur: [
-        { nama: "Gita Permata", tanggal: "2023-12-01", nominal: 200000, email: "gita.p@example.com" },
-        { nama: "Hadi Kusumo", tanggal: "2023-12-05", nominal: 150000, email: "hadi.k@example.com" },
-        { nama: "Indah Sari", tanggal: "2023-12-08", nominal: 400000, email: "indah.s@example.com" },
-      ],
+      files: {
+        fotoCampaign: "foto_lansia.jpg",
+        galeriPendukung: "galeri_lansia.zip",
+        fotoKTP: "ktp_nur.jpg",
+        fotoDiriKTP: "selfie_nur.jpg"
+      },
+      distribusi: null,
+      donatur: []
     },
     {
       id: "CAMP005",
       namaprogram: "Operasi Gratis",
-      Jenis: "dana",
-      target: 100000000,
-      tercapai: 20000000,
-      status: "Aktif",
-      rekdistribusi: "CIMB Niaga - 5566778899",
+      kategori: "dana",
       tanggal_mulai: "2024-05-01",
       tanggal_selesai: "2024-10-30",
+      target: 100000000,
+      tercapai: 20000000,
+      deskripsi: "Pembiayaan operasi gratis untuk masyarakat tidak mampu di daerah terpencil.",
+      status: "Aktif",
+      rekdistribusi: "CIMB Niaga - 5566778899",
+      metadata: {
+        namaLengkap: "Teguh Santoso",
+        nik: "3302123456789000",
+        noTelepon: "+6281345678900",
+        namaPemilik: "Teguh Santoso",
+        bank: "CIMB Niaga",
+        noRekening: "5566778899"
+      },
+      files: {
+        fotoCampaign: "foto_operasi.jpg",
+        galeriPendukung: "galeri_operasi.zip",
+        fotoKTP: "ktp_teguh.jpg",
+        fotoDiriKTP: "selfie_teguh.jpg"
+      },
       distribusi: null,
       donatur: [
         { nama: "Joko Widodo", tanggal: "2024-05-05", nominal: 1000000, email: "joko.w@example.com" }
-      ],
-    },
-    {
-      id: "CAMP006",
-      namaprogram: "Bantuan Banjir Kalimantan",
-      Jenis: "barang",
-      target: 2000,
-      tercapai: 1500,
-      status: "Aktif",
-      rekdistribusi: "Danamon - 6677889900",
-      tanggal_mulai: "2024-01-10",
-      tanggal_selesai: "2024-02-10",
-      distribusi: {
-        status: "Selesai",
-        tanggal_distribusi: "2024-02-12",
-        bukti: "bukti_camp006.jpg",
-        konfirmasi_distribusi: "Dikonfirmasi"
-      },
-      donatur: [
-        { nama: "Lina Marlina", tanggal: "2024-01-15", nominal: 250000, email: "lina.m@example.com" },
-      ],
-    },
-    {
-      id: "CAMP007",
-      namaprogram: "Santunan Lansia",
-      Jenis: "dana",
-      target: 30000000,
-      tercapai: 18000000,
-      status: "Aktif",
-      rekdistribusi: "BTN - 3344556677",
-      tanggal_mulai: "2024-06-01",
-      tanggal_selesai: "2024-08-01",
-      distribusi: null,
-      donatur: [],
-    },
-    {
-      id: "CAMP008",
-      namaprogram: "Pendidikan Santri",
-      Jenis: "dana",
-      target: 50000000,
-      tercapai: 30000000,
-    status: "Aktif",
-      rekdistribusi: "BSI - 8899001122",
-      tanggal_mulai: "2023-09-01",
-      tanggal_selesai: "2023-12-01",
-      distribusi: {
-        status: "Selesai",
-        tanggal_distribusi: "2023-12-10",
-        bukti: "bukti_camp008.jpg",
-        konfirmasi_distribusi: "Dikonfirmasi"
-      },
-      donatur: [
-        { nama: "Mahmud Arif", tanggal: "2023-10-15", nominal: 1000000, email: "mahmud.a@example.com" },
-      ],
-    },
-    {
-      id: "CAMP009",
-      namaprogram: "Bantuan Air Bersih",
-      Jenis: "barang",
-      target: 1200,
-      tercapai: 900,
-      status: "Aktif",
-      rekdistribusi: "Mega Syariah - 7766554433",
-      tanggal_mulai: "2024-02-01",
-      tanggal_selesai: "2024-03-15",
-      distribusi: {
-        status: "Berlangsung",
-        tanggal_distribusi: null,
-        bukti: null,
-        konfirmasi_distribusi: "Menunggu Konfirmasi"
-      },
-      donatur: [],
-    },
-    {
-      id: "CAMP010",
-      namaprogram: "Al-Qur'an untuk Pelosok",
-      Jenis: "barang",
-      target: 500,
-      tercapai: 200,
-      status: "Aktif",
-      rekdistribusi: "Muamalat - 5566442211",
-      tanggal_mulai: "2024-07-10",
-      tanggal_selesai: "2024-09-10",
-      distribusi: null,
-      donatur: [],
-    },
-    // Tambahan sampai 20
-    ...Array.from({ length: 10 }, (_, i) => {
-      const idNum = i + 11;
-      return {
-        id: `CAMP${String(idNum).padStart(3, '0')}`,
-        namaprogram: `Program Bantuan ${idNum}`,
-        Jenis: i % 2 === 0 ? "barang" : "dana",
-        target: i % 2 === 0 ? 1000 + i * 100 : 5000000 + i * 1000000,
-        tercapai: i % 2 === 0 ? 800 + i * 50 : 2500000 + i * 500000,
-        status:  "Aktif",
-        rekdistribusi: `Bank ${idNum} - ${1000000000 + idNum}`,
-        tanggal_mulai: `2024-${String((i % 12) + 1).padStart(2, '0')}-01`,
-        tanggal_selesai: `2024-${String((i % 12) + 2).padStart(2, '0')}-01`,
-        distribusi: i % 4 === 0 ? {
-          status: "Selesai",
-          tanggal_distribusi: `2024-${String((i % 12) + 2).padStart(2, '0')}-10`,
-          bukti: `bukti_camp${idNum}.jpg`,
-          konfirmasi_distribusi: "Dikonfirmasi"
-        } : null,
-        donatur: [
-          {
-            nama: `Donatur ${idNum}`,
-            tanggal: `2024-${String((i % 12) + 1).padStart(2, '0')}-10`,
-            nominal: 100000 * idNum,
-            email: `donatur${idNum}@example.com`
-          }
-        ]
-      };
-    })
+      ]
+    }
   ]);
+  
+  
   
   const [isAddForm, setIsAddForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -290,13 +241,23 @@ const DaftarCampaign = () => {
   );
 
     const [newData, setNewData] = useState({
-        judul: "",
-        kategori: "",
-        targetDana: "",
-        tanggalMulai: "",
-        tanggalSelesai: "",
-        noTelepon: "",
-      });
+      namaprogram: '',
+      kategori: '',
+      tanggalMulai: '',
+      tanggalSelesai: '',
+      noTelepon: '',
+      targetDana: '',
+      deskripsi: '',
+      fotoCampaign: null,
+      galeriPendukung: null,
+      namaLengkap: '',
+      nik: '',
+      bank: '',
+      noRekening: '',
+      namaPemilik: '',
+      fotoKTP: null,
+      fotoDiriKTP: null,
+    });
     
 
   const toggleDetail = (id) => {
@@ -317,6 +278,7 @@ const DaftarCampaign = () => {
         const newCampaign = {
           id: campaigns.length + 1,
           ...newData,
+          status : "Aktif",
           targetDana: parseInt(newData.targetDana)
         };
         setCampaigns(prev => [...prev, newCampaign]);
@@ -362,94 +324,140 @@ const DaftarCampaign = () => {
 </div>
             )
           }
-      {/* <div className="relative w-full max-w-sm">
-  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
-    <i className="fas fa-search"></i>
-            </span>
-            
-  <input
-    type="text"
-    onChange={handleSearch}
-    className="pl-10 border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-300"
-    placeholder="Cari Campaign"
-  />
-</div> */}
 
           </div>
               {isAddForm && (
-                  <div className="bg-white p-6 rounded shadow-md">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {[
-  { label: "Nama Program", name: "namaprogram" },
-  {
-    label: "Kategori / Jenis",
-    name: "Jenis",
-    type: "select",
-    options: ["Pendidikan", "Bencana Alam", "Bantuan Sosial"],
-  },
-  { label: "Target Dana", name: "target", type: "number" },
-  { label: "Tanggal Mulai", name: "tanggal_mulai", type: "date" },
-  { label: "Tanggal Selesai", name: "tanggal_selesai", type: "date" },
-  {
-    label: "Status",
-    name: "status",
-    type: "select",
-    options: ["Aktif", "Tidak Aktif"],
-  },
-  {
-    label: "Status Distribusi",
-    name: "status_distribusi",
-    type: "select",
-    options: ["Belum Diajukan", "Menunggu Konfirmasi", "Dikonfirmasi"],
-  },
-  { label: "Rekening Distribusi", name: "rekdistribusi" },
-].map((field) => (
-  <div key={field.name} className="mb-4">
-    <label className="block mb-1">{field.label}</label>
+                   <div className="p-2 w-10/12">
 
-    {field.type === "select" ? (
-      <select
-        name={field.name}
-        value={newData[field.name] || ""}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded"
-      >
-        <option value="">-- Pilih {field.label} --</option>
-        {field.options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-    ) : (
-      <input
-        type={
-          field.type
-            ? field.type
-            : field.name.includes("tanggal")
-            ? "date"
-            : field.name === "target"
-            ? "number"
-            : "text"
-        }
-        name={field.name}
-        value={newData[field.name] || ""}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded"
-      />
-    )}
-  </div>
-))}
-
-
-                      </div>
-                      <button
-                          onClick={handleSave}
-                          className="mt-4 bg-primary text-white px-4 py-2 rounded"
-                      >
-                          Simpan Data
-                      </button>
-                  </div>
+                   <h1 className="font-primary text-primary my-2 font-semibold text-xl">Judul Program</h1>
+                  <input
+         type="text"
+         className="rounded-md border border-gray-500 p-2 w-full block"
+         name="namaprogram"
+         value={newData.namaprogram}
+         onChange={handleChange}
+       />
+                   <div className="my-2 rounded-md bg-primary">
+                     <div className="p-2 flex justify-center gap-2">
+                           {/* kiri */}
+                           <div className="w-1/2 text-white font-semibold p-2">
+                           <div className="mb-2">
+       
+                               <h3 className="my-1">Kategori</h3>
+                             <select
+         name="kategori"
+         className="w-9/12 my-1 bg-white font-light text-primary p-2 rounded-lg"
+         value={newData.kategori}
+         onChange={handleChange}
+       >
+         <option value="">Pilih Kategori</option>
+         <option value="Bencana Alam">Bencana Alam</option>
+         <option value="Bantuan Sosial">Bantuan Sosial</option>
+         <option value="Pendidikan">Pendidikan</option>
+       </select>
+                           </div>
+                             <div className="mb-2">
+       
+                               <h3 className="my-1">Tanggal Mulai</h3>
+                              <input
+         type="date"
+         name="tanggalMulai"
+         className="w-9/12 my-1 bg-white font-light text-primary p-2 rounded-lg"
+         value={newData.tanggalMulai}
+         onChange={handleChange}
+       />
+       
+                           </div>
+                             <div className="mb-2">
+       
+                               <h3 className="my-1">No Telepon</h3>
+                             <input
+         type="text"
+         name="noTelepon"
+         className="w-9/12 my-1 bg-white font-light text-primary p-2 rounded-lg"
+         value={newData.noTelepon}
+         onChange={handleChange}
+       />
+                           </div>
+                           </div>
+                           <div className="w-1/2 text-white p-2">
+                                 <div className="mb-2">
+       
+                               <h3 className="my-1">Target Dana</h3>
+                           <input
+         type="number"
+         name="targetDana"
+         className="w-9/12 my-1 bg-white font-light text-primary p-2 rounded-lg"
+         value={newData.targetDana}
+         onChange={handleChange}
+       />
+                           </div>
+                             <div className="mb-2">
+       
+                               <h3 className="my-1">Tanggal Selesai</h3>
+                                <input
+         type="date"
+         name="tanggalSelesai"
+         className="w-9/12 my-1 bg-white font-light text-primary p-2 rounded-lg"
+         value={newData.tanggalSelesai}
+         onChange={handleChange}
+       />
+                           </div>
+                           </div>
+                   </div>
+                   <div className="p-2 mx-2 w-11/12">
+                       <h3 className="font-primary  text-white my-2 font-semibold text-xl">Deskripsi Program</h3>
+                       <textarea className="w-full border h-52 border-gray-400 bg-white text-primary rounded-md p-2" onChange={handleChange} name="deskripsi" id="">{newData.deskripsi}</textarea>
+                 </div>
+                   </div>
+              
+       <div className="flex justify-between gap-2">
+                 {/* Foto utama dan galeri pendukung */}
+       <div className="my-2">
+         <h1 className="font-primary text-primary my-2 font-semibold text-xl">Foto utama Campaign (Thumbnail)</h1>
+         <input type="file" name="fotoCampaign" onChange={handleChange} className="rounded-md border border-gray-400 p-2 block" />
+       </div>
+       
+       <div className="my-2">
+         <h1 className="font-primary text-primary my-2 font-semibold text-xl">Galeri Foto/Video Pendukung</h1>
+         <input type="file" name="galeriPendukung" multiple onChange={handleChange} className="rounded-md border border-gray-400 p-2 block" />
+                   </div>
+                   </div>
+       
+                   <div className="my-4 rounded-md bg-primary text-white p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div>
+           <label className="block mb-1">Nama Lengkap (sesuai KTP)</label>
+           <input type="text" name="namaLengkap" className="w-full p-2 bg-white text-primary rounded-md" value={newData.namaLengkap} onChange={handleChange} />
+       
+           <label className="block  mt-2 mb-1">Pilih Bank/Ewallet</label>
+           <input type="text" name="bank" className="w-full p-2 bg-white text-primary rounded-md" value={newData.bank} onChange={handleChange} />
+       
+           <label className="block mt-2 mb-1">Nama Pemilik</label>
+           <input type="text" name="namaPemilik" className="w-full bg-white p-2 text-primary rounded-md" value={newData.namaPemilik} onChange={handleChange} />
+       
+           <label className="block mt-2 mb-1">Foto KTP</label>
+           <input type="file" name="fotoKTP" onChange={handleChange} className="w-full bg-white text-primary p-2 rounded-md" />
+         </div>
+       
+         <div>
+           <label className="block mb-1">Nomor Induk Kependudukan (NIK)</label>
+           <input type="text" name="nik" className="w-full p-2 bg-white text-primary rounded-md" value={newData.nik} onChange={handleChange} />
+       
+           <label className="block mt-2 mb-1">No Rekening</label>
+           <input type="text" name="noRekening" className="w-full bg-white p-2 text-primary rounded-md" value={newData.noRekening} onChange={handleChange} />
+                     <div>
+                   <label className="block mt-2 mb-1">Alamat</label>
+                   <input type="text" name="alamat" className="w-full bg-white p-2 text-primary rounded-md" value={newData.alamat} onChange={handleChange} />
+                 </div>
+           <label className="block mt-2 mb-1">Foto Diri dengan KTP</label>
+           <input type="file" name="fotoDiriKTP" onChange={handleChange} className="w-full bg-white text-primary p-2 rounded-md" />
+         </div>
+       </div>
+       
+                   <div className="text-center my-4">
+                       <button onClick={handleSave} className="w-auto mx-auto bg-primary hover:bg-secondary cursor-pointer hover:text-primary text-white rounded-lg py-2 px-3 text-base md:text-lg">Kirim Pengajuan</button>
+                   </div>
+               </div>
               )
               }
       {!isAddForm && (
@@ -471,7 +479,7 @@ const DaftarCampaign = () => {
                   <tr className="">
                  
                     <td className="py-2 px-4">{campaign.namaprogram}</td>
-                    <td className="py-2 px-4 capitalize">{campaign.Jenis}</td>
+                    <td className="py-2 px-4 capitalize">{campaign.kategori}</td>
                     <td className="py-2 px-4">{campaign.distribusi?.status ?? '-'}</td>
 
                     <td className="py-2 px-4">

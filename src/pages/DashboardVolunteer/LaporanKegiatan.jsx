@@ -56,6 +56,7 @@ const LaporanKegiatanForm = () => {
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
       <div>
+        <h2 className="text-2xl text-primary font-semibold mb-4">Update Campaign</h2>
         <label className="block text-sm font-medium text-gray-700">Campaign</label>
         <select
           name="campaign"
@@ -69,7 +70,7 @@ const LaporanKegiatanForm = () => {
         </select>
       </div>
 
-      <div className="bg-[#2d4a48] text-white p-4 rounded-lg space-y-4">
+      <div className="bg-primary text-white p-4 rounded-lg space-y-4">
         <div>
           <label className="block text-sm">Judul Laporan</label>
           <input
@@ -120,7 +121,7 @@ const LaporanKegiatanForm = () => {
       <label className="cursor-pointer">
         <div className="flex flex-col items-center space-y-2">
           <FontAwesomeIcon icon={faCloudUpload} className="text-2xl text-primary font-semibold" />
-          <p>Upload atau seret file atau gambar ke sini</p>
+          <p>Upload atau seret file atau gambar kesini </p>
         </div>
         <input
           type="file"
@@ -142,10 +143,10 @@ const LaporanKegiatanForm = () => {
       )}
     </div>
 
-      <div>
+      <div className="text-center">
         <button
           type="submit"
-          className="bg-[#2d4a48] text-white px-6 py-2 rounded hover:bg-[#1f3533]"
+          className="bg-primary mx-auto text-white px-6 py-2 rounded hover:bg-[#1f3533]"
         >
           Kirim Laporan
         </button>
