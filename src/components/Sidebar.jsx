@@ -13,7 +13,8 @@ import {
   faSignOutAlt,
   faUserAlt,
   faMagnifyingGlass,
-  faSignOut
+  faSignOut,
+  faFileArchive
 } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLocation } from 'react-router-dom';
 import LogoBaru from '../assets/logobaru.png'
@@ -38,6 +39,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
   { icon: faChartLine, text: 'Data Campaign', url: '/datacampaign' },
   { icon: faHandHoldingUsd, text: 'Donasi Masuk', url: '/donasimasuk' },
   { icon: faFileAlt, text: 'Pengajuan Kebutuhan', url: '/pengajuankebutuhan' },
+  { icon: faFileArchive, text: 'Pengajuan Distribusi', url: '/pengajuandistribusi' },
    { icon: faMagnifyingGlass, text: 'Audit', url: '/audit' },
    { icon: faEnvelopeOpenText, text: 'Kontak Masuk', url: '/kontakmasuk' },
    { icon: faCog, text: 'Pengelolaan APK', url: '/pengelolaanapk' },

@@ -42,6 +42,7 @@ import DetailUpdateDistribusi from './pages/DashboardVolunteer/DetailUpdateDistr
 import PesanKeAdmin from './pages/DashboardVolunteer/PesanKeAdmin';
 import RiwayatAktifitasVolunteer from './pages/DashboardVolunteer/RiwayatAktifitasVolunteer';
 import ProgramDetailCard from './pages/DashboardAdmin/ProgramDetailCard';
+import PengajuanDistribusi from './pages/DashboardAdmin/PengajuanDistribusi';
 function App() {
   return (
     <div className="font-primary">
@@ -84,6 +85,7 @@ function App() {
         <Route path='/datacampaign' element={<DataCampaign />} />
         <Route path='/datacampaign/detailcampaign' element={<DetailCampaign />} />
         <Route path='/pengajuankebutuhan' element={<PengajuanKebutuhanDashboard />} />
+        <Route path='/pengajuandistribusi' element={<PengajuanDistribusi />} />
         <Route path='/kontakmasuk' element={<KontakMasuk />} />
         <Route path="/audit" element={<Audit />} />
         <Route path='/audit/detailaudit' element={<DetailAudit />} />

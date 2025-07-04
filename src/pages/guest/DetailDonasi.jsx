@@ -106,6 +106,150 @@ const DetailDonasi = () => {
     },
   ]);
 
+  const [distribusiDana, setDistribusiDana] = useState([
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti1"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti2"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti3"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti4"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti5"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti6"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti7"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti8"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti9"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti10"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti11"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti12"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti13"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti14"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti15"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti16"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti17"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti18"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti19"
+  },
+  {
+    tanggal: "22/05/2025",
+    tujuan: "Pembelian 50 paket seragam sekolah",
+    jumlah: -2000000,
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti20"
+  }
+]);
+
+
   const [isAdd, setIsAdd] = useState(false);
   const [modal, setModal] = useState(false);
 
@@ -178,6 +322,15 @@ const DetailDonasi = () => {
                   aria-current={activeTab === 'donasi' ? 'page' : undefined}
                 >
                   Donasi masuk
+                </button>
+                <button
+                onClick={() => setActiveTab('distribusidana')}
+                className={`pb-1 relative ${
+                    activeTab == 'distribusidana'
+                      ? 'font-semibold text-primary after:content-[""] after:absolute after:-bottom-3 after:left-1/2 after:-translate-x-1/2 after:w-10 after:h-1 after:bg-primary after:rounded-full'
+                      : 'hover:text-black text-primary'
+                  }`}>
+                  Distribusi Dana
                 </button>
               </nav>
 
@@ -299,6 +452,39 @@ const DetailDonasi = () => {
                             <td className="p-4">{item.tanggal}</td>
                             <td className="p-4">{item.nominal}</td>
                             <td className="p-4">{item.txHash}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              )}
+
+                     {activeTab === 'distribusidana' && (
+               <section className="text-center  text-primary mb-16 p-4  rounded-2xl border border-gray-400 text-sm">
+                  <div className="mx-auto text-center w-full">
+                    <table className="mx-auto w-full">
+                      <thead className="border-b-2 border-gray-300">
+                        <tr>
+                          <th className="p-4">TANGGAL</th>
+                          <th className="p-4">KEGUNAAN/TUJUAN</th>
+                          <th className="p-4">JUMLAH (RP)</th>
+                          <th className="p-4">TX HASH</th>
+                          <th className="p-4">BUKTI</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {distribusiDana.map((item, index) => (
+                          <tr key={index}>
+                            <td className="p-4">{item.tanggal}</td>
+                            <td className="p-4">{item.tujuan}</td>
+                            <td className="p-4">{item.jumlah}</td>
+                            <td className="p-4">{item.txHash}</td>
+                            <td className="p-4">
+                              <a className='underline text-blue-500 hover:text-blue-600' href={item.bukti}>
+                              Bukti
+                              </a>
+                              </td>
                           </tr>
                         ))}
                       </tbody>
