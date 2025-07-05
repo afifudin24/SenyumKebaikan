@@ -15,7 +15,8 @@ import {
   faMagnifyingGlass,
   faHandsHelping,
   faFileCircleCheck,
-  faChevronLeft
+  faChevronLeft,
+  faBoxOpen
 } from '@fortawesome/free-solid-svg-icons';
 import { Link, useLocation } from 'react-router-dom';
 import LogoBaru from '../assets/logobaru.png'
@@ -33,6 +34,7 @@ const menu = [
   { icon: faFileAlt, text: 'Laporan Kegiatan', url: '/laporankegiatan' },
   { icon: faFileCircleCheck, text: 'Pesan Ke Admin', url: '/pesankeadmin' },
   { icon: faUserAlt, text: 'Riwayat Aktifitas', url: '/riwayataktifitasvolunteer' },
+  { icon: faBoxOpen, text: 'Verifikasi Barang Masuk', url: '/verifikasibarangmasuk' },
   { icon: faChevronLeft, text: 'Kembali Ke User', url: '/dashboarduser' },
 
 

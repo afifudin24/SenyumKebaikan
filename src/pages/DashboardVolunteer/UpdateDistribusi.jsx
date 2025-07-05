@@ -3,15 +3,15 @@ import DashboardVolunteerLayout from "../../components/DashboardVolunteerLayout"
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
+import { useRef } from "react";
 import toast from "react-hot-toast";
-import { faCheckCircle, faEnvelopeCircleCheck, faFileAlt, faInfo, faInfoCircle, faPlus, faQuestionCircle, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faEnvelopeCircleCheck, faFileAlt, faInfo, faInfoCircle, faPlus, faQuestionCircle, faUpload, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 const UpdateDistribusi = () => {
       const [user, setUser] = useState(() => {
                 const savedUser = localStorage.getItem('user');
                 return savedUser ? JSON.parse(savedUser) : null;
       }) 
-  const [isAdd, setIsAdd] = useState(false);
-              
+  const [isAdd, setIsAdd] = useState(false);  
     return (
         <DashboardVolunteerLayout>
           
@@ -36,99 +36,138 @@ const Modal = ({ children, onClose }) => {
   );
 };
 
-const DistribusiForm = ({ onClose, item, setDistribusiData, distribusiData }) => {
+const DistribusiForm = ({ onClose,  setDistribusiData, distribusiData, setIsAdd }) => {
 
- const [status, setStatus] = useState(item?.status || "");
-const [file, setFile] = useState(item?.file || null);
-const [deskripsi, setDeskripsi] = useState(item?.deskripsi || "");
+  const [newData, setNewData] = useState({
+    judulProgram : "",
+    jumlahDana: "",
+    file: null,
+    deskripsi: "",
+  });
+
+  const fileInputRef = useRef(null);
+  const [preview, setPreview] = useState(null);
+
+const handleClick = () => {
+    fileInputRef.current.click();
+  };
+
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setPreview(imageUrl);
+     setNewData((prev) => ({
+      ...prev,
+      file: file.name, // hanya simpan nama file
+    }));
+    }
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+   e.preventDefault();
+  const generateId = () => {
+  const random = Math.floor(Math.random() * 1000)
+    .toString()
+    .padStart(3, '0'); // hasil misal: 007, 123
+  return `DST-${random}`;
+};
+  const today = new Date();
+  const formattedDate = `${today.getDate().toString().padStart(2, '0')}/${
+  (today.getMonth() + 1).toString().padStart(2, '0')
+  }/${today.getFullYear()}`;
 
-    const updatedItem = {
-      ...item,
-      status,
-      file,
-      deskripsi,
+    const newDistribusi = {
+      id: generateId(),
+      judulPengajuan: newData.judulProgram,
+      tujuan: newData.deskripsi,
+      jumlah: newData.jumlahDana,
+      tanggal: formattedDate,
+      status: 'Menunggu Konfirmasi',
+      txHash: '0xabc002'
     };
 
-    const filteredData = distribusiData.filter((d) => d.id !== item.id);
-   
-    const newData = [...filteredData, updatedItem]; // Tambah updated item di akhir (bisa diubah kalau perlu urutan)
-
-    setDistribusiData(newData);
-
+    setDistribusiData((prevData) => [...prevData, newDistribusi]);
+    setIsAdd(false);
+    // onClose();
+    
     toast.success("Data berhasil disimpan!");
-    onClose();
+    
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="text-sm text-gray-700 mb-2 flex items-center gap-2">
-        📍 Lokasi Distribusi: <span className="font-semibold">Kecamatan B</span>
-      </div>
-      <div className="text-sm text-gray-700 mb-4 flex items-center gap-2">
-        📅 Tanggal Distribusi: <span className="font-semibold">09/05/2025</span>
+      <div className="text-xl text-gray-700 mb-2 flex items-center gap-2">
+       <p className="font-semibold"> Pengajuan Distribusi  <span className="font-normal">: Campaign B</span></p>
       </div>
 
-      <div>
-        <label className="block text-primary mb-1">Status Distribusi</label>
-        <select
-          className="w-full p-2 rounded border bg-white border-gray-300 focus:outline-none"
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-        >
-          <option value="">Pilih Status</option>
-          <option value="selesai">Selesai</option>
-          <option value="Menunggu">Menunggu</option>
-          <option value="Dalam perjalanan">Dalam Perjalanan</option>
-          <option value="tertunda">Tertunda</option>
-          <option value="dibatalkan">Dibatalkan</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-primary mb-1">Upload Bukti</label>
-        <div className="border-2 border-dashed border-gray-300 rounded-md p-4 text-center bg-gray-50 text-gray-500 hover:bg-gray-100 cursor-pointer">
-          <input
-            type="file"
-            onChange={handleFileChange}
-            className="hidden"
-            id="upload"
-          />
-          <label htmlFor="upload" className="cursor-pointer block">
-            Upload atau seret file atau gambar ke sini
-          </label>
+      <div className="p-4 rounded-lg bg-primary text-white">
+        <div className="flex justify-between gap-3">
+            <div className="flex w-1/2 flex-col gap-1">
+              <p className="my-1 font-semibold">Judul Program</p>
+              <input type="text" value={newData.judulProgram} name="judulProgram" onChange={(e) => setNewData({ ...newData, judulProgram: e.target.value })} placeholder="" className="p-2 w-full rounded-md bg-white text-primary" />
+            </div>
+            <div className="flex w-1/2 flex-col gap-1">
+              <p className="my-1 font-semibold">Jumlah Dana</p>
+              <input type="text" name="jumlahDana" onChange={(e) => setNewData({ ...newData, jumlahDana: e.target.value })} value={newData.jumlahDana} className="p-2 w-full rounded-md bg-white text-primary" />
+              <p className="text-light text-green-500">Saldo tersedia : Rp. 8.500.000</p>
+            </div>
         </div>
-        {file && (
-          <p className="text-sm text-primary mt-1">File: {file.name}</p>
-        )}
-      </div>
-
-      <div>
-        <label className="block text-primary mb-1">Deskripsi</label>
+        <div className="w-1/2 mt-2">
+          <p>
+            Dokumen Pendukung (Opsional) : 
+            <span className="text-primary"> (pdf, png, jpg, jpeg)</span>
+          </p>
+         <div
+      className="p-2 border border-dashed bg-white h-28 border-gray-300 rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-50 transition"
+      onClick={handleClick}
+    >
+      {preview ? (
+        <img src={preview} alt="Preview" className="h-full object-contain" />
+      ) : (
+        <div className="text-gray-500 text-sm flex flex-col items-center gap-1">
+          <FontAwesomeIcon icon={faUpload} className="text-xl" />
+          <span>Unggah Gambar</span>
+        </div>
+      )}
+      <input
+        type="file"
+        accept="image/*"
+        className="hidden"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+      />
+    </div>
+        </div>
+           <div>
+        <label className="block text-white my-2">Deskripsi</label>
         <textarea
           className="w-full p-2 rounded border bg-white text-primary border-gray-300 resize-none"
           rows="4"
-          value={deskripsi}
-          onChange={(e) => setDeskripsi(e.target.value)}
+          value={newData.deskripsi}
+          onChange={(e) => setNewData({ ...newData, deskripsi: e.target.value })}
           placeholder="Tulis deskripsi di sini..."
         ></textarea>
       </div>
+      </div>
+    
 
-      <div className="flex justify-between mt-4">
+      
+
+   
+
+   
+
+      <div className="flex gap-2 mt-4">
         <button
           type="submit"
           className="bg-primary text-white px-6 py-2 rounded hover:bg-secondary"
         >
-          Simpan
+          Ajukan
         </button>
         <button
           type="button"
-          onClick={onClose}
+          onClick={() => setIsAdd(false)}
           className="bg-gray-400 text-white px-6 py-2 rounded hover:bg-gray-600"
         >
           Batal
@@ -204,6 +243,7 @@ const DistribusiDonasi = () => {
   const [modalContent, setModalContent] = useState({ title: "", body: "", icon : '' });
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedFile2, setSelectedFile2] = useState(null);
+  const [isAdd, setIsAdd] = useState(false);
 
   const [selectedCampaign, setSelectedCampaign] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -563,7 +603,7 @@ const DistribusiDonasi = () => {
               className="text-blue-500 hover:underline"
               onClick={() => openModal(item, "detail")}
             >
-              Lihat Detail
+              Lihat Detail →
             </button>
           );
         case "Disetujui":
@@ -664,7 +704,13 @@ const DistribusiDonasi = () => {
   
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    
+      isAdd ? (
+        <div className="p-2 w-6/12 ">
+          <DistribusiForm setIsAdd={setIsAdd} setDistribusiData={setDistribusiData} />
+        </div>
+      ) : (
+            <div className="max-w-4xl mx-auto space-y-6">
       <div>
         <h1 className="text-2xl font-semibold text-gray-800">Pengajuan Distribusi Donasi</h1>
         
@@ -759,13 +805,16 @@ const DistribusiDonasi = () => {
 
         {/* penutup pagination */}
         <div className="flex flex-end justify-end w-full">
-        <button className="bg-primary text-white px-4 py-2 rounded hover:text-primary hover:bg-secondary">
+        <button onClick={() => setIsAdd(true)} className="bg-primary text-white px-4 py-2 rounded hover:text-primary hover:bg-secondary">
           <FontAwesomeIcon icon={faPlus} /> Ajukan Penyaluran Baru
         </button>
         </div>
      
     </div>
      </div>
+      )
+    
+  
           )
    
 };
