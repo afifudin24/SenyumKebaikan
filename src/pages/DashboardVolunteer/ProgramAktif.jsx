@@ -66,6 +66,9 @@ const ManajemenDonasiAktif = () => {
       {/* Tabel Donatur */}
       <div className="bg-white  overflow-x-auto">
         <TabelDonatur />
+        <div className="my-20">
+
+        </div>
         <TablePengeluaran />
       </div>
       {/* Tombol Update */}
