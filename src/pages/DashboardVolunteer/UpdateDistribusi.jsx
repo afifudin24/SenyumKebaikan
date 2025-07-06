@@ -1,8 +1,9 @@
 import React from "react";
 import DashboardVolunteerLayout from "../../components/DashboardVolunteerLayout";
+import UploadPreview from "../../components/UploadPreview";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import { useRef } from "react";
 import toast from "react-hot-toast";
 import { faCheckCircle, faEnvelopeCircleCheck, faFileAlt, faInfo, faInfoCircle, faPlus, faQuestionCircle, faUpload, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
@@ -11,30 +12,104 @@ const UpdateDistribusi = () => {
                 const savedUser = localStorage.getItem('user');
                 return savedUser ? JSON.parse(savedUser) : null;
       }) 
+      const [bukti1, setBukti1] = useState(null);
+      const [bukti2, setBukti2] = useState(null);
   const [isAdd, setIsAdd] = useState(false);  
     return (
         <DashboardVolunteerLayout>
           
                 <div className="mt-5">
-          <DistribusiDonasi/>
+          <DistribusiDonasi bukti1={bukti1} setBukti1={setBukti1} bukti2={bukti2} setBukti2={setBukti2} />
+          
+
                 </div>
         </DashboardVolunteerLayout>
     )
 }
 
-const Modal = ({ children, onClose }) => {
+const Modal = ({ isOpen, icon, onClose, title, children }) => {
+  if (!isOpen) return null;
+
   return (
     <div className="fixed inset-0 bg-opacity-30 flex items-center justify-center z-50">
-      <div className="bg-white w-full max-w-md rounded-xl shadow-lg overflow-hidden">
-        <div className="flex justify-between items-center bg-primary text-white p-4 font-semibold">
-          <span>Distribusi</span>
-          <button onClick={onClose} className="text-white text-xl font-bold">×</button>
+      <div className="bg-white rounded-lg w-6/12 shadow-lg relative">
+        <div className="flex relative flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 w-full bg-secondary ">
+          {icon}
+          <h4 className="font-semibold my-2 text-primary">{title}</h4>
+          <p className="text-sm text-primary my-1">Berisi mengenai data yang telah anda masukan</p>
         </div>
-        <div className="p-4">{children}</div>
+        <div className="w-11/12 mx-auto">{children}</div>
+        <div className="text-center my-3">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 mt-3 mx-auto bg-secondary text-primary hover:text-white text-sm rounded hover:bg-primary"
+          >
+            Tutup
+          </button>
+        </div>
       </div>
     </div>
   );
 };
+
+const ModalContentLapor = ({ item, bukti1, setBukti1, bukti2, setBukti2, kirim }) => {
+  const handleFilePreview = (file, setFile) => (e) => {
+    const selected = e.target.files[0];
+    if (selected) {
+      setFile(URL.createObjectURL(selected));
+    }
+  };
+
+  return (
+    <div>
+      <h3 className="text-lg mt-2 text-center text-primary font-semibold">
+        Judul Pengajuan : <span className="font-normal">{item.judulPengajuan}</span>
+      </h3>
+      <div className="mt-5 flex justify-between text-primary gap-2 w-9/12 mx-auto">
+        <div>
+          <h4>Jumlah Dana : <span>{item.jumlah}</span></h4>
+          <h4>Tanggal Distribusi : <span>{item.tanggal}</span></h4>
+        </div>
+        <div>
+          <h4>Tx Hash : <span>{item.txHash}</span></h4>
+          <h4>Status : <span>{item.status}</span></h4>
+        </div>
+      </div>
+
+      <div className="flex w-9/12 gap-4 mx-auto mt-4">
+        <div className="flex-1">
+          <label className="block text-sm font-medium text-primary mb-1">
+            Foto Unggah Bukti Transaksi (Kuitansi/Nota)
+          </label>
+          <input type="file" accept="image/*" onChange={handleFilePreview(bukti1, setBukti1)} className="w-full p-2 border rounded-md" />
+          {/* {bukti1 && <img src={bukti1} alt="Bukti 1" className="mt-2 h-32 w-full object-cover rounded-md shadow" />} */}
+        </div>
+        <div className="flex-1">
+          <label className="block text-sm font-medium text-primary mb-1">
+            Foto Diri dengan Dokumentasi - SANGAT DIANJURKAN
+          </label>
+          <input type="file" accept="image/*" onChange={handleFilePreview(bukti2, setBukti2)} className="w-full p-2 border rounded-md" />
+          {/* {bukti2 && <img src={bukti2} alt="Bukti 2" className="mt-2 h-32 w-full object-cover rounded-md shadow" />} */}
+        </div>
+      </div>
+
+      <div className="w-9/12 mx-auto mt-4">
+        <h2 className="text-lg text-center text-primary font-semibold">Deskripsi</h2>
+        <p className="text-sm text-primary text-center">{item.tujuan}</p>
+      </div>
+
+      <div className="text-center mt-5">
+        <button
+          onClick={() => kirim(item)}
+          className="text-white bg-primary px-6 py-2 rounded-md hover:bg-secondary transition-all"
+        >
+          Kirim
+        </button>
+      </div>
+    </div>
+  );
+};
+
 
 const DistribusiForm = ({ onClose,  setDistribusiData, distribusiData, setIsAdd }) => {
 
@@ -237,13 +312,18 @@ const DetailDistribusi = ({ data, onClose }) => {
   );
 };
 
-const DistribusiDonasi = () => {
+// upload preview
+
+// akhir upload preview
+
+const DistribusiDonasi = ({ bukti1, setBukti1, bukti2, setBukti2}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalLihat, setModalLihat] = useState(false);
   const [modalContent, setModalContent] = useState({ title: "", body: "", icon : '' });
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedFile2, setSelectedFile2] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
+
 
   const [selectedCampaign, setSelectedCampaign] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -374,6 +454,7 @@ const DistribusiDonasi = () => {
             title: "Konfirmasi Donasi",
             icon : <FontAwesomeIcon className="text-4xl text-accent" icon={faQuestionCircle} />,
             body: (
+
               <div className="flex  gap-2 justify-center mt-2 items-center">
                 <div className="flex flex-col gap-2">
                   <h3 className="text-center font-semibold text-primary">Bukti Transfer</h3>
@@ -410,94 +491,16 @@ const DistribusiDonasi = () => {
         case "lapor":
           content = {
             icon : <FontAwesomeIcon className="text-4xl text-accent" icon={faFileAlt} />,
-            title: "Lapor Distribsui",
+            title: "Lapor Distribusi",
             body: (
-              <div className="">
-               <h3 className="text-lg mt-2 text-center text-primary font-semibold">Judul Pengajuan : <span className="font-normal">{item.judulPengajuan}</span></h3>
-                <div className="mt-5 flex justify-between text-primary gap-2 w-9/12 mx-auto">
-                  <div>
-                    <h4>Jumlah Dana : <span className="">{item.jumlah}</span></h4>
-                    <h4>Tanggal Distribusi : <span className="">{item.tanggal}</span></h4>
-                  </div>
-                  <div>
-                      <h4>Tx Hash : <span className="">{item.txHash}</span></h4>
-                      <h4>Status : <span className="">{item.status}</span></h4>
-                  </div>
-                </div>
-                <div className="flex w-9/12 gap-2 mx-auto">
-                <div className="mb-4">
-  <p className="mb-2 mt-3 font-medium text-gray-700">
-    Foto Unggah Bukti Transaksi (Kuitansi/Nota) <span className="text-red-500">*</span>
-  </p>
-
-  <label className="flex flex-col items-center justify-center w-full h-40 p-4 text-gray-500 border-2 border-dashed rounded-2xl cursor-pointer hover:border-[#2d4a48] hover:text-[#2d4a48] transition-all">
-    <svg
-      className="w-8 h-4 mb-8 text-gray-400"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 18 18"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M7 16V4m0 0L4 7m3-3l3 3M5 12h14" />
-    </svg>
-    <span className="text-sm text-center">
-      Klik di sini untuk memilih file atau tarik file ke sini
-    </span>
-    <input
-      type="file"
-      className="hidden"
-      onChange={(e) => setSelectedFile(e.target.files[0])}
-    />
-  </label>
-
-  {selectedFile && (
-    <p className="mt-2 text-sm text-green-600">
-      File dipilih: <strong>{selectedFile.name}</strong>
-    </p>
-  )}
-                  </div>
-                  
-                  <div className="mb-4">
-  <p className="mb-2 mt-3 font-medium text-gray-700">
-   Foto Diri dengan Ungah Foto Dokumentasi - SANGAT DIANJURKAN <span className="text-red-500">*</span>
-  </p>
-
-  <label className="flex flex-col items-center justify-center w-full h-40 p-4 text-gray-500 border-2 border-dashed rounded-2xl cursor-pointer hover:border-[#2d4a48] hover:text-[#2d4a48] transition-all">
-    <svg
-      className="w-8 h-4 mb-8 text-gray-400"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 18 18"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M7 16V4m0 0L4 7m3-3l3 3M5 12h14" />
-    </svg>
-    <span className="text-sm text-center">
-      Klik di sini untuk memilih file atau tarik file ke sini
-    </span>
-    <input
-      type="file"
-      className="hidden"
-      onChange={(e) => setSelectedFile2(e.target.files[0])}
-    />
-  </label>
-
-  {selectedFile2 && (
-    <p className="mt-2 text-sm text-green-600">
-      File dipilih: <strong>{selectedFile2.name}</strong>
-    </p>
-  )}
-</div>
-
-                </div>
-                <div className="w-9/12 mx-auto">
-                  <h2 className="text-lg mt-2 text-center text-primary font-semibold">Deskripsi</h2>
-                  <p className="text-sm text-primary text-center">{item.tujuan}</p>
-                </div>
-                <div className="text-center mt-5">
-                    <button onClick={() => kirim(item)} className="text-white bg-primary p-2 rounded-md hover:bg-secondary transition-all">Kirim</button>
-                </div>
-              </div>
+              <ModalContentLapor
+                item={item}
+                bukti1={bukti1}
+                setBukti1={setBukti1}
+                bukti2={bukti2}
+                setBukti2={setBukti2}
+                kirim={kirim}
+              />
             ),
           };
           break;
@@ -670,38 +673,6 @@ const DistribusiDonasi = () => {
     setSelectedItem(item);
   }
 
-  const Modal = ({ isOpen, icon, onClose, title, children }) => {
-    if (!isOpen) return null;
-  
-    return (
-      <div className="fixed inset-0  bg-opacity-30 flex items-center justify-center z-50">
-        <div className="bg-white rounded-lg w-6/12 shadow-lg relative">
-         <div className="flex relative flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 w-full bg-secondary ">
-               {icon}
-            <h4 className="font-semibold my-2 text-primary">{title}</h4>
-            <p className="text-sm text-primary my-1">Berisi mengenai data yang telah anda masukan</p>
-               
-          </div>
-          <div className="w-11/12 mx-auto">
-         {children}
-
-          </div>
-
-          {/* {children} */}
-          <div className="text-center my-3">
-
-          <button
-            onClick={onClose}
-            className="px-4 py-2 mt-3 mx-auto bg-secondary text-primary hover:text-white text-sm rounded hover:bg-primary"
-            >
-          Tutup
-          </button>
-            </div>
-        </div>
-      </div>
-    );
-  };
-  
 
   return (
     
@@ -818,6 +789,8 @@ const DistribusiDonasi = () => {
           )
    
 };
+
+
 
 
 export default UpdateDistribusi;
