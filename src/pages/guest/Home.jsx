@@ -303,9 +303,9 @@ const Home = () => {
                 <div className='absolute z-40 text-center w-full p-2 top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 '>
                   <p className='text-white md:text-2xl font-primary text-sm text-center'>MASIH RAGU DENGAN KAMI?
 KLIK DI BAWAH INI UNTUK MENUNJUKAN CARA KERJA MENGENAI TEKNOLOGI BLOCKCHAIN</p>
- <button className='border mx-auto border-white px-4 font-primary py-2 my-4 rounded-full text-sm hover:bg-primary bg-white text-primary hover:text-white transition'>
+ <a target='_blank' href="/edukasi.pdf" className='border mx-auto border-white px-4 font-primary py-2 my-4 block w-3/12 rounded-full text-sm hover:bg-primary bg-white text-primary hover:text-white transition'>
                 Selengkapnya <FontAwesomeIcon icon={ faArrowUpRightDots} />
-              </button>
+              </a>
                 </div>
 
             </div>
