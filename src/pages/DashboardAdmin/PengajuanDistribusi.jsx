@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faCheckCircle, faEnvelopeCircleCheck, faFileAlt, faQuestionCircle, faTimes, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faCheckCircle, faEnvelopeCircleCheck, faFileAlt, faQuestionCircle, faTimes, faTimesCircle, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import ktpFile from "../../assets/ktp.png";
 import toast from "react-hot-toast";
 const PengajuanDistribusi = () => {

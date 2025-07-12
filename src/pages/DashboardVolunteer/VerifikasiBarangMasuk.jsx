@@ -68,6 +68,7 @@ const [data, setData] = useState([
     });
     setData(updatedData);
     setModalOpen(false);
+    setSelectedFile(null);
     toast.success("Verifikasi Selesai!");
   }
 
@@ -83,6 +84,45 @@ const [data, setData] = useState([
     setModalOpen(false);
     toast.success("Barang berhasil ditolak!");
   }
+
+  const LaporModalContent = ({ item, selectedFile, setSelectedFile, onSubmit }) => (
+    <div>
+      <h3 className="text-lg mt-2 text-center text-primary font-semibold">Campaign : <span className="font-normal">Campaign B</span></h3>
+      <div className="mt-5 flex justify-between text-primary gap-2 w-9/12 mx-auto">
+        <div>
+          <h4>Jumlah Barang : <span>{item.jumlah} pcs</span></h4>
+          <h4>Tanggal Tiba : <span>{item.tanggal}</span></h4>
+        </div>
+        <div>
+          <h4>ID Donasi : <span>{item.id}</span></h4>
+          <h4>Status : <span>{item.status}</span></h4>
+        </div>
+      </div>
+  
+      <div className="flex w-9/12 gap-2 mx-auto">
+        <div className="mb-4">
+          <p className="mb-2 mt-3 font-medium text-gray-700">Foto Unggah Bukti</p>
+          <label className="flex flex-col items-center justify-center w-full h-40 p-4 text-gray-500 border-2 border-dashed rounded-2xl cursor-pointer hover:border-[#2d4a48] hover:text-[#2d4a48] transition-all">
+            <svg className="w-8 h-4 mb-8 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 18 18">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M7 16V4m0 0L4 7m3-3l3 3M5 12h14" />
+            </svg>
+            <span className="text-sm text-center">Klik di sini untuk memilih file atau tarik file ke sini</span>
+            <input type="file" className="hidden" onChange={(e) => setSelectedFile(e.target.files[0])} />
+          </label>
+          {selectedFile && (
+            <p className="mt-2 text-sm text-green-600">
+              File dipilih: <strong>{selectedFile.name}</strong>
+            </p>
+          )}
+        </div>
+      </div>
+  
+      <div className="text-center mt-5">
+        <button onClick={() => onSubmit(item)} className="text-white bg-primary p-2 rounded-md hover:bg-secondary transition-all">Kirim</button>
+      </div>
+    </div>
+  );
+  
 
    const openModal = (item, type) => {
         let content = { title: "", body: "" };
@@ -162,10 +202,47 @@ const [data, setData] = useState([
       <span className="text-sm text-center">
         Klik di sini untuk memilih file atau tarik file ke sini
       </span>
-      <input
+      {/* <input
         type="file"
         className="hidden"
         onChange={(e) => setSelectedFile(e.target.files[0])}
+      /> */}
+                        
+                         <input
+        type="file"
+        className="hidden"
+        onChange={(e) => {
+          const file = e.target.files[0];
+          setSelectedFile(file);
+        
+          setModalContent((prev) => ({
+            ...prev,
+            body: (
+              <div className="">
+              <h3 className="text-lg mt-2 text-center text-primary font-semibold">Campaign : <span className="font-normal">Campaign B</span></h3>
+               <div className="mt-5 flex justify-between text-primary gap-2 w-9/12 mx-auto">
+                 <div>
+                   <h4>Jumlah Barang : <span className="">{item.jumlah} pcs</span></h4>
+                   <h4>Tanggal Tiba : <span className="">{item.tanggal}</span></h4>
+                 </div>
+                 <div>
+                     <h4>ID Donasi : <span className="">{item.id}</span></h4>
+                     <h4>Status : <span className="">{item.status}</span></h4>
+                 </div>
+               </div>
+              <div>
+                <p className="mt-2 text-center text-sm text-green-600">
+                  File dipilih: <strong>{file?.name}</strong>
+                </p>
+                </div>
+                <div className="text-center mt-5">
+                      <button onClick={() => kirim(item)} className="text-white bg-primary p-2 rounded-md hover:bg-secondary transition-all">Kirim</button>
+                  </div>
+                </div>
+            ),
+          }));
+        }}
+                          
       />
     </label>
   

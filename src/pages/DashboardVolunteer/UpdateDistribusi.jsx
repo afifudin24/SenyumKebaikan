@@ -7,6 +7,7 @@ import { useState, useEffect} from "react";
 import { useRef } from "react";
 import toast from "react-hot-toast";
 import { faCheckCircle, faEnvelopeCircleCheck, faFileAlt, faInfo, faInfoCircle, faPlus, faQuestionCircle, faUpload, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+import updateDistribusi from '../../assets/updatedistribusi.png';
 const UpdateDistribusi = () => {
       const [user, setUser] = useState(() => {
                 const savedUser = localStorage.getItem('user');
@@ -510,7 +511,9 @@ const DistribusiDonasi = ({ bukti1, setBukti1, bukti2, setBukti2}) => {
                    icon : <FontAwesomeIcon className="text-4xl text-accent" icon={faQuestionCircle} />,
                    body: (
                      <div className="mt-2 items-center">
-                        <div className="w-100 mx-auto bg-white shadow-2xl rounded-2xl h-50 my-2"></div>
+                       <div className="w-100 mx-auto bg-white shadow-2xl rounded-2xl h-50 my-2">
+                         <img src={updateDistribusi} className="w-full" alt="" />
+                        </div>
                         <div className="mt-5 w-full ">
                         <hr className="text-primary bg-primary" />
                         </div>
@@ -570,11 +573,11 @@ const DistribusiDonasi = ({ bukti1, setBukti1, bukti2, setBukti2}) => {
                 </div>
                 <div className="flex w-9/12 gap-2 mx-auto">
                 <div className="mb-4 h-40 w-1/2 p-2 block bg-white rounded-2xl shadow-2xl">
-  
+                <img src={updateDistribusi} className="w-full" alt="" />
                   </div>
                   
                   <div className="mb-4 h-40 p-2 w-1/2 block bg-white rounded-2xl shadow-2xl">
-
+                  <img src={updateDistribusi} className="w-full" alt="" />
                   </div>
 
                 </div>

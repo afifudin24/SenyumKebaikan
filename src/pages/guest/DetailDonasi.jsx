@@ -481,7 +481,7 @@ const DetailDonasi = () => {
                             <td className="p-4">{item.jumlah}</td>
                             <td className="p-4">{item.txHash}</td>
                             <td className="p-4">
-                              <a className='underline text-blue-500 hover:text-blue-600' href={item.bukti}>
+                              <a className='underline text-blue-500 hover:text-blue-600' href="/updatedistribusi.png" target="_blank">
                               Bukti
                               </a>
                               </td>
@@ -1274,9 +1274,9 @@ const ModalSuccess = ({
 
         <div className="flex flex-col gap-1">
           <h4> Bantuan Banjir Jakarta</h4>
-          <button className="rounded-lg bg-accent hover:bg-secondary text-xs md:text-sm text-white">
+          <a href='https://etherscan.io/' target="_blank" className="rounded-lg bg-accent hover:bg-secondary text-xs md:text-sm text-white">
             Lihat di Etherscan
-          </button>
+          </a>
         </div>
       </div>
 

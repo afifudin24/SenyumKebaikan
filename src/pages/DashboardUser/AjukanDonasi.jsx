@@ -182,27 +182,7 @@ const handleSave = () => {
                 <textarea className="w-full border h-52 border-gray-400 bg-white text-primary rounded-md p-2" onChange={handleChange} name="deskripsi" id="">{newData.deskripsi}</textarea>
           </div>
             </div>
-            {/* <div className="flex justify-between gap-2">
-                <div>
-
-                <h1 className="font-primary text-primary my-2 font-semibold text-xl">Unggah Bukti Identitas</h1>
-               <input
-  type="file"
-  name="buktiIdentitas"
-  className="rounded-md border border-gray-400 p-2"
-  onChange={handleChange}
-/>
-                </div>
-                <div>
-                    <h1 className="font-primary text-primary my-2 font-semibold text-xl">Unggah TKP</h1>
-                         <input
-  type="file"
-  name="lokasiTKP"
-  className="rounded-md border border-gray-400 p-2"
-  onChange={handleChange}
-/>
-                </div>
-            </div> */}
+       
 <div className="flex justify-between gap-2">
           {/* Foto utama dan galeri pendukung */}
 <div className="my-2">
