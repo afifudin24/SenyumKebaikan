@@ -104,7 +104,7 @@ const CariKebutuhan = () => {
         <div>
 
         <p className="font-primary my-2 font-light uppercase">{item.jenis}</p>
-        <h4 className="text-primary md:text-lg xl:text-lg text-base my-1 font-semibold">
+        <h4 className="text-primary md:text-base xl:text-base text-base my-1 font-semibold">
           {item.barang}
         </h4>
         </div>
