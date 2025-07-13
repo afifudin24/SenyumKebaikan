@@ -6,6 +6,8 @@ import home1 from '../../assets/home1.png'
 import home2 from '../../assets/home2.png'
 import home3 from '../../assets/home3.png'
 import home4 from '../../assets/home4.png'
+import home6 from '../../assets/home/home6.jpg'
+import home7 from '../../assets//home/home7.jpg'
 import home42 from '../../assets/home4-2.png'; 
 import pilihan1 from '../../assets/home/pilihan1.png'
 import pilihan2 from '../../assets/home/pilihan2.png'
@@ -100,11 +102,22 @@ const Home = () => {
                 </div>
               </div>
               <div className='rounded-xl relative overflow-hidden shadow'>
-                <img
-                  src={home3}
-                  alt='Bencana Alam'
-                  className='w-full h-full object-cover hover:scale-110 transition-all duration-100'
-                />
+                {
+                  user ? (
+                    <img
+                    src={home7}
+                    alt='Bencana Alam'
+                    className='w-full h-full object-cover hover:scale-110 transition-all duration-100'
+                  />
+                  ): (
+                    <img
+                    src={home7}
+                    alt='Bencana Alam'
+                    className='w-full h-full object-cover hover:scale-110 transition-all duration-100'
+                  /> 
+                  )
+                }
+              
                 <div className='p-2 text-center absolute bottom-0 left-0 right-0 text-white'>
                   <p>BENCANA ALAM</p>
                 </div>
