@@ -70,7 +70,7 @@ const DataDonasi = ({type, title, href, description, percent, raised, goal}) => 
                               </div>
                               
                               {/* <img src={home4} className='absolute right-0 top-0 h-full' alt="" /> */}
-                              <img src={href} className='absolute w-3/12 -right-5 -top-0 -bottom-5 h-full scale-y-105' alt="" />
+                              <img src={href} className='absolute w-80 -right-5 -top-0 -bottom-5 h-full scale-y-105' alt="" />
         
                   {/* Kanan: Gambar */}
                           </div>
