@@ -109,9 +109,9 @@ const RingkasanDonasi = () => {
   </table>
 </div>
         <div className="text-center mt-4">
-          <button className="bg-green-100 text-green-800 font-semibold px-4 py-2 rounded-md hover:bg-green-200">
+          <a href='https://etherscan.io/' target="_blank" className="bg-green-100 text-green-800 font-semibold px-4 py-2 rounded-md hover:bg-green-200">
             Lihat di Etherscan
-          </button>
+          </a>
         </div>
       </div>
       </div>

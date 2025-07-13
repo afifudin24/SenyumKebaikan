@@ -984,7 +984,7 @@ const ModalDetailDonasi = ({showDetailDonasi, setShowDetailDonasi}) => {
       </tr>
       <tr>
         <td colspan="2" class="py-3 px-4 text-center">
-          <a href="#" class="inline-block px-4 py-2 text-sm bg-green-100 text-green-600 rounded hover:bg-green-200 transition">
+          <a href='https://etherscan.io/' target="_blank" class="inline-block px-4 py-2 text-sm bg-green-100 text-green-600 rounded hover:bg-green-200 transition">
             Lihat di Etherscan
           </a>
         </td>
