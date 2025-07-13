@@ -7,11 +7,11 @@ const Footer = ({className}) => {
       <div className="flex flex-col md:flex-row justify-between rounded-2xl items-center md:items-center md:px-2 md:py-0">
         {/* Logo & Divider */}
         <div className="text-center   items-center md:items-center w-1/4 md:w-1/4">
-          <img src={Logo1} alt="Senyum Kebaikan" className="mx-auto  h-40" />
+          <img src={Logo1} alt="Senyum Kebaikan" className="mx-auto  h-35" />
         
         </div>
         {/* Menu Columns */}
-        <div className="flex flex-col md:flex-row font-primary gap-6 text-sm md:text-lg w-full justify-around">
+        <div className="flex flex-col md:flex-row font-primary gap-6 text-sm md:text-base w-full justify-around">
           <div className="flex flex-col text-center gap-1">
             <span>Mitra Kami</span>
             <span>Tentang Kami</span>
