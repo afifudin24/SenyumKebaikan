@@ -82,7 +82,7 @@ const DataDonasiBarang = ({type, title, img, href, items, description}) => {
                     </div>
                               </div>
                               
-                              <img src={href} className='absolute right-0 top-0 h-full' alt="" />
+                              <img src={href} className='absolute -right-5 scale-y-105 top-0 h-full' alt="" />
         
                   {/* Kanan: Gambar */}
                           </div>

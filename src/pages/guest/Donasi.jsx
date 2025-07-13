@@ -63,12 +63,12 @@ const Donasi = () => {
     const [dataDonasiBencana, setDataDonasiBencana] = useState([
       {
         type: 'Bencana Alam',
-        title: 'Bantu Korban Gempa Cianjur Bangkit Kembali',
-        description: 'Gempa bumi berkekuatan 5.6 SR mengguncang Cianjur dan menyebabkan ratusan rumah rusak berat.',
-        percent: '65%',
-        goal: '20',
-        raised: 13000000,
-        href : '/bencana1.png'
+        title: 'Banjir bandang di pinggiran kota METROPOLITAN',
+        description: 'Persediaan baju tidak tentu jika anda memang di anggap membutuhkan dan stok barang masih ada maka pengajuan anda di terima tinggal menunggungu konfirmasi',
+        percent: '60%',
+        goal: '16',
+        raised: 600000,
+        href : '/bencana8.png'
       },
       {
         type: 'Bencana Alam',
