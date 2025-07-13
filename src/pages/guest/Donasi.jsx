@@ -19,7 +19,8 @@ const Donasi = () => {
           description: 'Anak-anak panti asuhan Al-Hikmah membutuhkan bantuan biaya pendidikan untuk semester baru.',
           percent: '45%',
           goal: '20',
-          raised: 4500000,
+        raised: 4500000,
+          href : '/panti1.png'
         },
         {
          type: 'Panti Asuhan',
@@ -28,6 +29,7 @@ const Donasi = () => {
           percent: '70%',
           goal: '25',
           raised: 7000000,
+          href : '/panti2.png'
         },
         {
           type: 'Panti Asuhan',
@@ -36,6 +38,7 @@ const Donasi = () => {
           percent: '30%',
           goal: '30',
           raised: 3000000,
+          href : '/panti1.png'
         },
         {
           type: 'Panti Asuhan',
@@ -44,6 +47,7 @@ const Donasi = () => {
           percent: '50%',
           goal: '15',
           raised: 7500000,
+          href : '/panti2.png'
         },
         {
           type: 'Panti Asuhan',
@@ -52,6 +56,7 @@ const Donasi = () => {
           percent: '80%',
           goal: '10',
           raised: 8000000,
+          href : '/panti1.png'
         },
     ]);
     
@@ -63,6 +68,7 @@ const Donasi = () => {
         percent: '65%',
         goal: '20',
         raised: 13000000,
+        href : '/bencana1.png'
       },
       {
         type: 'Bencana Alam',
@@ -71,6 +77,7 @@ const Donasi = () => {
         percent: '40%',
         goal: '25',
         raised: 10000000,
+         href : '/bencana2.png'
       },
       {
         type: 'Bencana Alam',
@@ -79,6 +86,7 @@ const Donasi = () => {
         percent: '55%',
         goal: '30',
         raised: 16500000,
+         href : '/bencana1.png'
       },
       {
         type: 'Bencana Alam',
@@ -87,6 +95,7 @@ const Donasi = () => {
         percent: '75%',
         goal: '40',
         raised: 30000000,
+         href : '/bencana2.png'
       },
       {
         type: 'Bencana Alam',
@@ -95,6 +104,7 @@ const Donasi = () => {
         percent: '20%',
         goal: '50',
         raised: 10000000,
+         href : '/bencana1.png'
       },
     ]);
 
@@ -109,6 +119,7 @@ const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
       { title: 'Makanan', progress: '30%', kebutuhan: 150, terkumpul: 45 },
       { title: 'Perlengkapan', progress: '20%', kebutuhan: 200, terkumpul: 40 },
     ],
+    href : '/barang1.png'
   },
   {
     title: 'Untuk pendidikan panti asuhan B',
@@ -120,6 +131,7 @@ const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
       { title: 'Makanan', progress: '30%', kebutuhan: 120, terkumpul: 36 },
       { title: 'Perlengkapan', progress: '20%', kebutuhan: 100, terkumpul: 20 },
     ],
+    href : '/barang2.png'
   },
   {
     title: 'Kebutuhan pokok panti asuhan C',
@@ -131,6 +143,7 @@ const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
       { title: 'Makanan', progress: '60%', kebutuhan: 150, terkumpul: 90 },
       { title: 'Perlengkapan', progress: '25%', kebutuhan: 80, terkumpul: 20 },
     ],
+    href : '/barang3.png'
   },
   {
     title: 'Peningkatan sarana belajar panti D',
@@ -142,6 +155,7 @@ const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
       { title: 'Makanan', progress: '45%', kebutuhan: 130, terkumpul: 58 },
       { title: 'Perlengkapan', progress: '35%', kebutuhan: 110, terkumpul: 39 },
     ],
+    href : '/barang2.png'
   },
   {
     title: 'Pemenuhan gizi anak-anak panti E',
@@ -153,6 +167,7 @@ const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
       { title: 'Makanan', progress: '70%', kebutuhan: 180, terkumpul: 126 },
       { title: 'Perlengkapan', progress: '30%', kebutuhan: 90, terkumpul: 27 },
     ],
+    href : '/barang1.png'
   },
 ]);
 
@@ -165,7 +180,8 @@ const [dataDonasiBarangBencana, setDataDonasiBarangBencana] = useState([
       { title: 'Pakaian', progress: '60%', kebutuhan: 100, terkumpul: 60 },
       { title: 'Makanan', progress: '80%', kebutuhan: 200, terkumpul: 160 },
       { title: 'Perlengkapan', progress: '50%', kebutuhan: 150, terkumpul: 75 },
-    ]
+    ],
+    href : '/barang2.png'
   },
   {
     title: 'Pemulihan pasca gempa di Sulawesi Barat',
@@ -175,7 +191,8 @@ const [dataDonasiBarangBencana, setDataDonasiBarangBencana] = useState([
       { title: 'Pakaian', progress: '30%', kebutuhan: 100, terkumpul: 30 },
       { title: 'Makanan', progress: '55%', kebutuhan: 200, terkumpul: 110 },
       { title: 'Perlengkapan', progress: '40%', kebutuhan: 150, terkumpul: 60 },
-    ]
+    ],
+    href : '/barang3.png'
   },
   {
     title: 'Bantuan untuk korban longsor di Sumatera Barat',
@@ -185,7 +202,8 @@ const [dataDonasiBarangBencana, setDataDonasiBarangBencana] = useState([
       { title: 'Pakaian', progress: '25%', kebutuhan: 80, terkumpul: 20 },
       { title: 'Makanan', progress: '65%', kebutuhan: 150, terkumpul: 98 },
       { title: 'Perlengkapan', progress: '35%', kebutuhan: 100, terkumpul: 35 },
-    ]
+    ],
+    href : '/barang4.png'
   }
 ]);
 

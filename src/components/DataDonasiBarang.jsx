@@ -6,7 +6,7 @@ import { faLeftLong } from "@fortawesome/free-solid-svg-icons";
 import home4 from '../assets/home4.png'
 import gambar from "../assets/donasi/barang1.png"
 import { Link } from "react-router-dom";
-const DataDonasiBarang = ({type, title, img, items, description}) => {
+const DataDonasiBarang = ({type, title, img, href, items, description}) => {
     const [showImg, setShowImg] = useState(false);
     const datadonasi = {
         type,
@@ -82,7 +82,7 @@ const DataDonasiBarang = ({type, title, img, items, description}) => {
                     </div>
                               </div>
                               
-                              <img src={gambar} className='absolute right-0 top-0 h-full' alt="" />
+                              <img src={href} className='absolute right-0 top-0 h-full' alt="" />
         
                   {/* Kanan: Gambar */}
                           </div>

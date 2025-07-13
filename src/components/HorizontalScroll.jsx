@@ -89,7 +89,7 @@ const HorizontalScroll = ({data}) => {
     <Slider {...settings}>
       {data.map((item, i) => (
        <div className='w-full'>
-         <DataDonasi key={i} type={item.type} title={item.title} description={item.description} percent={item.percent} raised={item.raised} goal={item.goal} />
+          <DataDonasi key={i} type={item.type} title={item.title} href={item.href} description={item.description} percent={item.percent} raised={item.raised} goal={item.goal} />
           
        </div>
       ))}

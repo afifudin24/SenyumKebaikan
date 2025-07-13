@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeftLong } from "@fortawesome/free-solid-svg-icons";
 import home4 from '../assets/home4.png'
 import { Link } from "react-router-dom";
-const DataDonasi = ({type, title, description, percent, raised, goal}) => {
+const DataDonasi = ({type, title, href, description, percent, raised, goal}) => {
     const [showImg, setShowImg] = useState(false);
   
     const toggleImage = () => {
@@ -69,7 +69,8 @@ const DataDonasi = ({type, title, description, percent, raised, goal}) => {
                     </div>
                               </div>
                               
-                              <img src={home4} className='absolute right-0 top-0 h-full' alt="" />
+                              {/* <img src={home4} className='absolute right-0 top-0 h-full' alt="" /> */}
+                              <img src={href} className='absolute right-0 top-0 h-full' alt="" />
         
                   {/* Kanan: Gambar */}
                           </div>
