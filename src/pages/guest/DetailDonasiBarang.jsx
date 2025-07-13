@@ -89,6 +89,151 @@ const DetailDonasiBarang = () => {
       txHash: '0xbcd890efg123',
     },
   ]);
+  const [distribusiDana, setDistribusiDana] = useState([
+    {
+      tanggal: "01/01/2025",
+      tujuan: "Pengadaan buku tulis untuk anak panti",
+      jumlah: "50 buku tulis",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti1"
+    },
+    {
+      tanggal: "10/01/2025",
+      tujuan: "Pembelian tas sekolah untuk anak panti",
+      jumlah: "10 tas sekolah",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti2"
+    },
+    {
+      tanggal: "15/01/2025",
+      tujuan: "Paket alat tulis (pensil, penghapus, dll)",
+      jumlah: "30 paket alat tulis",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti3"
+    },
+    {
+      tanggal: "25/01/2025",
+      tujuan: "Seragam sekolah lengkap untuk anak yatim",
+      jumlah: "15 setel seragam",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti4"
+    },
+    {
+      tanggal: "01/02/2025",
+      tujuan: "Sepatu sekolah untuk anak panti",
+      jumlah: "10 pasang sepatu",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti5"
+    },
+    {
+      tanggal: "10/02/2025",
+      tujuan: "Sumbangan meja belajar dan kursi",
+      jumlah: "5 set meja & kursi",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti6"
+    },
+    {
+      tanggal: "15/02/2025",
+      tujuan: "Biaya transport anak panti ke sekolah",
+      jumlah: "Transportasi 1 bulan",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti7"
+    },
+    {
+      tanggal: "20/02/2025",
+      tujuan: "Pengadaan alat tulis khusus SD",
+      jumlah: "40 paket alat tulis SD",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti8"
+    },
+    {
+      tanggal: "01/03/2025",
+      tujuan: "Donasi perlengkapan sekolah SMP",
+      jumlah: "20 paket lengkap SMP",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti9"
+    },
+    {
+      tanggal: "10/03/2025",
+      tujuan: "Pembelian buku pelajaran untuk anak panti",
+      jumlah: "20 buku pelajaran",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti10"
+    },
+    {
+      tanggal: "15/03/2025",
+      tujuan: "Sumbangan kalkulator untuk siswa SMA",
+      jumlah: "10 kalkulator",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti11"
+    },
+    {
+      tanggal: "25/03/2025",
+      tujuan: "Paket seragam olahraga untuk anak panti",
+      jumlah: "15 setel seragam olahraga",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti12"
+    },
+    {
+      tanggal: "01/04/2025",
+      tujuan: "Bantuan alat gambar dan mewarnai",
+      jumlah: "25 paket alat gambar",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti13"
+    },
+    {
+      tanggal: "10/04/2025",
+      tujuan: "Sumbangan papan tulis untuk ruang belajar",
+      jumlah: "2 papan tulis",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti14"
+    },
+    {
+      tanggal: "15/04/2025",
+      tujuan: "Donasi buku bacaan dan cerita",
+      jumlah: "30 buku bacaan",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti15"
+    },
+    {
+      tanggal: "25/04/2025",
+      tujuan: "Perlengkapan ujian nasional",
+      jumlah: "30 paket ujian",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti16"
+    },
+    {
+      tanggal: "01/05/2025",
+      tujuan: "Penyediaan rak buku untuk perpustakaan",
+      jumlah: "4 rak buku",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti17"
+    },
+    {
+      tanggal: "10/05/2025",
+      tujuan: "Internet dan listrik ruang belajar",
+      jumlah: "Biaya operasional 1 bulan",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti18"
+    },
+    {
+      tanggal: "15/05/2025",
+      tujuan: "Donasi laptop bekas layak pakai",
+      jumlah: "3 unit laptop",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti19"
+    },
+    {
+      tanggal: "20/05/2025",
+      tujuan: "Biaya fotokopi dan print tugas",
+      jumlah: "Fotokopi & print 1 semester",
+      txHash: "0x8b9c...d4f",
+      bukti: "https://random.link/bukti20"
+    }
+  ]);
+  
+  
+  
     return (
         <div>
             <Navbar />
@@ -168,6 +313,17 @@ const DetailDonasiBarang = () => {
   >
     Donasi masuk
   </button>
+  <button
+    onClick={() => setActiveTab('distribusidana')}
+    className={`pb-1 relative ${
+            activeTab == 'donasi'
+              ? 'font-semibold text-primary after:content-[""] after:absolute after:-bottom-3 after:left-1/2 after:-translate-x-1/2 after:w-10 after:h-1 after:bg-primary after:rounded-full'
+              : 'hover:text-black text-primary'
+          }`}
+    aria-current={activeTab === 'distribusidana' ? 'page' : undefined}
+  >
+    Distribusi Dana
+  </button>
   </nav>
 
   
@@ -179,6 +335,39 @@ const DetailDonasiBarang = () => {
                   </div>
               </section>
             )}
+
+{activeTab === 'distribusidana' && (
+               <section className="text-center  text-primary mb-16 p-4  rounded-2xl border border-gray-400 text-sm">
+                  <div className="mx-auto text-center w-full">
+                    <table className="mx-auto w-full">
+                      <thead className="border-b-2 border-gray-300">
+                        <tr>
+                          <th className="p-4">TANGGAL</th>
+                          <th className="p-4">KEGUNAAN/TUJUAN</th>
+                          <th className="p-4">JUMLAH</th>
+                          <th className="p-4">TX HASH</th>
+                          <th className="p-4">BUKTI</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {distribusiDana.map((item, index) => (
+                          <tr key={index}>
+                            <td className="p-4">{item.tanggal}</td>
+                            <td className="p-4">{item.tujuan}</td>
+                            <td className="p-4">{item.jumlah}</td>
+                            <td className="p-4">{item.txHash}</td>
+                            <td className="p-4">
+                              <a className='underline text-blue-500 hover:text-blue-600' href="/updatedistribusi.png" target="_blank">
+                              Bukti
+                              </a>
+                              </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              )}
   
             {activeTab === 'donasi' && (
               <section className="text-center  text-primary mb-16 p-4  rounded-2xl border border-gray-400 text-sm">
