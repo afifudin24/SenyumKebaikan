@@ -2,7 +2,8 @@ import React from "react";
 import Logo1 from "../assets/logo3.png"
 const Footer = ({className}) => {
   return (
-    <footer className={`${className} md:pb-0 pb-20 bg-primary block font-primary text-white  rounded-t-xl`}>
+    <div className="w-12/12 md:w-10/12 mx-auto  text-center">    
+    <footer className={`${className} md:pb-0 pb-20 bg-primary block font-primary text-white rounded-t-xl`}>
     
       <div className="flex flex-col md:flex-row justify-between rounded-2xl items-center md:items-center md:px-2 md:py-0">
         {/* Logo & Divider */}
@@ -34,6 +35,7 @@ const Footer = ({className}) => {
         2024 © Nusantaranger | All Right reserved
       </div>
     </footer>
+    </div>
   );
 };
 export default Footer;

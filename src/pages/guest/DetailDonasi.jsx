@@ -503,8 +503,8 @@ const DetailDonasi = () => {
             showPayment={showPayment}
           />
 
-          <Footer />
         </Container>
+          <Footer />
       </div>
     </div>
   );

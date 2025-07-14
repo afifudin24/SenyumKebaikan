@@ -240,7 +240,7 @@ const DetailDonasiBarang = () => {
             <Container className={'mt-15 md:mt-20'}>
                 <div className="bg-primary p-10 rounded-xl">
                     <h1 className="text-white uppercase text-xl">{data.type}</h1>
-                    <img src={Donasi} className="rounded-lg my-2 w-full" alt="" />
+                    <img src='/detaildonasibarang.png' className="rounded-lg my-2 w-full" alt="" />
                     <p className="text-white font-primary my-2 text-2xl font-semibold">{data.title}</p>
                     <p className="text-white my-2 font-primary text-sm"> 12 hari tersisa untuk melakukan donasi</p>
                     <p className="font-secondary text-sm text-white my-2">{data.description} </p>

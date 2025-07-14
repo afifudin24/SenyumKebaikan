@@ -113,13 +113,13 @@ const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
     title: 'Untuk pendidikan panti asuhan A',
     type: 'Panti Asuhan',
     description:
-      'Untuk menunjang agar nyaman saat melaksanakan kegiatan menuntut ilmu maka perlu beberapa perlengkapan pokok bersekolah. Bantuan dari anda semua adalah salah satu bentuk kepedulian dengan pendidikan di Indonesia untuk mencapai Indonesia emas.',
+      'Anak-anak di berbagai panti asuhan saat ini sangat membutuhkan bantuan perlengkapan sekolah untuk mendukung pendidikan mereka. Kebutuhan mendesak tersebut meliputi:.',
     items: [
       { title: 'Pakaian', progress: '50%', kebutuhan: 100, terkumpul: 50 },
       { title: 'Makanan', progress: '30%', kebutuhan: 150, terkumpul: 45 },
       { title: 'Perlengkapan', progress: '20%', kebutuhan: 200, terkumpul: 40 },
     ],
-    href : '/barang1.png'
+    href : '/donasibarang1.png'
   },
   {
     title: 'Untuk pendidikan panti asuhan B',
@@ -131,7 +131,7 @@ const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
       { title: 'Makanan', progress: '30%', kebutuhan: 120, terkumpul: 36 },
       { title: 'Perlengkapan', progress: '20%', kebutuhan: 100, terkumpul: 20 },
     ],
-    href : '/barang2.png'
+    href : '/donasibarang2.png'
   },
   {
     title: 'Kebutuhan pokok panti asuhan C',
@@ -143,7 +143,7 @@ const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
       { title: 'Makanan', progress: '60%', kebutuhan: 150, terkumpul: 90 },
       { title: 'Perlengkapan', progress: '25%', kebutuhan: 80, terkumpul: 20 },
     ],
-    href : '/barang3.png'
+    href : '/donasibarang3.png'
   },
   {
     title: 'Peningkatan sarana belajar panti D',
@@ -155,20 +155,9 @@ const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
       { title: 'Makanan', progress: '45%', kebutuhan: 130, terkumpul: 58 },
       { title: 'Perlengkapan', progress: '35%', kebutuhan: 110, terkumpul: 39 },
     ],
-    href : '/barang2.png'
+    href : '/donasibarang4.png'
   },
-  {
-    title: 'Pemenuhan gizi anak-anak panti E',
-    type: 'Panti Asuhan',
-    description:
-      'Pemenuhan gizi menjadi fokus utama di panti ini demi mendukung pertumbuhan anak-anak.',
-    items: [
-      { title: 'Pakaian', progress: '10%', kebutuhan: 50, terkumpul: 5 },
-      { title: 'Makanan', progress: '70%', kebutuhan: 180, terkumpul: 126 },
-      { title: 'Perlengkapan', progress: '30%', kebutuhan: 90, terkumpul: 27 },
-    ],
-    href : '/barang1.png'
-  },
+  
 ]);
 
 const [dataDonasiBarangBencana, setDataDonasiBarangBencana] = useState([
