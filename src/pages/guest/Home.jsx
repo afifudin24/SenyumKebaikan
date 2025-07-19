@@ -95,7 +95,7 @@ const Home = () => {
                 <img
                   src={home2}
                   alt='Panti Asuhan'
-                  className='w-full hover:scale-110 transition-all duration-100 h-auto object-cover'
+                  className='w-full hover:scale-120 scale-110 transition-all duration-100 h-auto object-cover'
                 />
                 <div className='p-2  absolute bottom-0 left-0 right-0 text-white text-center'>
                   PANTI ASUHAN
@@ -107,13 +107,13 @@ const Home = () => {
                     <img
                     src={home7}
                     alt='Bencana Alam'
-                    className='w-full h-full object-cover hover:scale-110 transition-all duration-100'
+                    className='w-full h-full object-cover scale-100 hover:scale-110 transition-all duration-100'
                   />
                   ): (
                     <img
                     src={home7}
                     alt='Bencana Alam'
-                    className='w-full h-full object-cover hover:scale-110 transition-all duration-100'
+                    className='w-full h-full object-cover scale-100 hover:scale-110 transition-all duration-100'
                   /> 
                   )
                 }
