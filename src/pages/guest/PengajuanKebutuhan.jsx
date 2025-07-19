@@ -29,7 +29,7 @@ const PengajuanKebutuhan = () => {
                    
                     <div className="flex gap-2">
                         <div className="w-4/12 text-center ">
-                            <img className="mx-auto" src={data.image} alt="" />
+                            <img className="mx-auto" src={`/${data.href}`} alt="" />
                         </div>
                         <div className="w-8/12">
                             <p className="text-primary font-semibold text-lg md:text-2xl xl:text-4xl">{data.barang}</p>
