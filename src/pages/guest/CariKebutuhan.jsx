@@ -11,7 +11,7 @@ import { faArrowUpRightDots } from "@fortawesome/free-solid-svg-icons";
 const CariKebutuhan = () => {
     const [kebutuhanbarang, setKebutuhanbarang] = useState([
         {
-            href : '/kebutuhan1.png',
+            href : 'kebutuhan1.png',
             barang: "Pakaian keren yang dapat kamu gunakan",
             sisa: "10",
             percent: '50%',

@@ -424,7 +424,7 @@ const DetailDonasiBarang = () => {
                   </section>
                   <section>
                     <img
-                      src="https://storage.googleapis.com/a1aa/image/59253e5d-24ac-4787-21b7-811591f7f6e3.jpg"
+                      src="/detaildonasi.png"
                       alt="Aerial view of city affected by flooding with houses and trees"
                       className="w-full rounded-md"
                       height="400"
