@@ -344,40 +344,25 @@ const DetailDonasi = () => {
                     </h1>
                     <div className="md:text-sm text-xs">
                       <p className="text-xs sm:text-sm font-secondary text-gray-600 mb-4 leading-relaxed">
-                        Peristiwa banjir tidak terduga pada malam menimpa di
-                        sungai menyebabkan dan ribu kurang masih ada resiko
-                        petugas anda di lereng tegal menanggung kerusakan.
+                     Persediaan baju tidak tentu jika anda memang di anggap membutuhkan dan stok barang masih ada maka pengajuan anda di terima tinggal menunggungu konfirmasi.
                       </p>
                       <p className="text-xs sm:text-sm text-gray-600 mb-4 font-secondary leading-relaxed">
-                        Kebakaran hutan yang melanda Kalimantan telah
-                        menyebabkan kegiatan besar bagi kegiatan, kehidupan
-                        satwa liar dan komunitas lokal. Berbagai upaya untuk
-                        dilakukan, serta mengedukasi agar dapat menjauhkan
-                        masyarakat serta tanaman.
+                       Kebakaran hutan yang melanda Kalimantan telah menyebabkan kerugian besar bagi lingkungan, kehidupan satwa liar, dan komunitas lokal. Berbagai upaya sedang dilakukan untuk memadamkan api dan membantu masyarakat yang terdampak. 
                       </p>
                       <p className="text-xs sm:text-sm text-gray-600 mb-4 leading-relaxed font-secondary">
-                        Kami, sebagai komponen peduli lingkungan, ingin
-                        memberikan dukungan solidaritas kami untuk membantu
-                        mereka yang terkena dampak langsung dari bencana ini:
+                       Kami, sebagai komunitas peduli lingkungan, ingin memberikan dukungan solidaritas kami untuk membantu mereka yang terkena dampak langsung dari bencana ini.
+
                       </p>
                       <ul className="list-disc list-inside text-xs sm:text-sm text-gray-600 mb-4 space-y-1 font-secondary">
                         <li>
-                          Penanaman Kembali Daun yang bertumpul atau digunakan
-                          oleh mendukung upaya pemulihan kekuatan oleh tim
-                          peneliti dibantu juga lewat di lapangan.
+                         Pemadaman Kebakaran: Dana yang terkumpul akan digunakan untuk mendukung upaya pemadaman kebakaran oleh tim pemadam kebakaran yang bekerja di lapangan.
                         </li>
                         <li>
-                          Pemulihan Lingkungan Banjir dan dana akan disalurkan
-                          untuk mendukung program pemulihan lingkungan, termasuk
-                          penanaman kembali pohon dan upaya rehabilitasi habitat
-                          satwa liar yang terkena dampak.
+                         
+Pemulihan Lingkungan: Bagian dari dana akan dialokasikan untuk mendukung program pemulihan lingkungan, termasuk penanaman kembali pohon dan upaya rehabilitasi habitat satwa liar yang terkena dampak.
                         </li>
                         <li>
-                          Bantuan Komunitas Kese juga akan bekerja sama dengan
-                          organisasi lokal untuk memberikan bantuan langsung
-                          kepada masyarakat yang terkena dampak, seperti
-                          penyediaan makanan, air bersih, dan kebutuhan dasar
-                          lainnya.
+                        Bantuan Kemanusiaan: Kami juga akan bekerja sama dengan organisasi lokal untuk memberikan bantuan langsung kepada masyarakat yang terkena dampak, seperti penyediaan makanan, air bersih, dan kebutuhan dasar lainnya.
                         </li>
                       </ul>
                     </div>
@@ -744,14 +729,20 @@ const FormBank = ({
     nama: '',
     email: '',
     pesan: '',
+    setujuBlockchain: false
   });
 
   const handleChange = (e) => {
     if (e.target.name === 'metode') setShowDropdown(!showDropdown);
-    const { name, value } = e.target;
+
+   const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+   setFormData((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
@@ -1013,6 +1004,17 @@ const FormBank = ({
               rows="4"
             ></textarea>
           </div>
+            <div className="flex gap-1">
+          <input
+            type="checkbox"
+            name="setujuBlockchain"
+            checked={formData.setujuBlockchain}
+            onChange={handleChange}
+            className="my-auto rounded-sm"
+          />
+          <p>Saya setuju donasi ini dicatat di blockchain</p>
+        </div>
+
 
           {/* Tombol Submit */}
           <button
