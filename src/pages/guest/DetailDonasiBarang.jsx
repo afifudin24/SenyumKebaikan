@@ -385,9 +385,7 @@ Pemulihan Lingkungan: Bagian dari dana akan dialokasikan untuk mendukung program
                         80%
                       </div>
                       <div className="flex flex-col items-start ">
-                        <div className="text-sm font-semibold text-primary">
-                          Rp. 60.000.000
-                        </div>
+                      
                         <div className="text-xs text-gray-600 mt-1">
                           Donasi sekarang terkumpul
                         </div>
