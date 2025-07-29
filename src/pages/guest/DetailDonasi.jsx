@@ -252,6 +252,7 @@ const DetailDonasi = () => {
 
   const [isAdd, setIsAdd] = useState(false);
   const [modal, setModal] = useState(false);
+  const [modalCrypto, setModalCrypto]  = useState(false);
 
   const [activeTab, setActiveTab] = useState('detail');
   return (
@@ -286,6 +287,8 @@ const DetailDonasi = () => {
               showDetailDonasi={showDetailDonasi}
               setModal={setModal}
               setShowDetailDonasi={setShowDetailDonasi}
+              modalCrypto={modalCrypto}
+              setModalCrypto={setModalCrypto}
             />
           ) : (
             <div>
@@ -487,6 +490,13 @@ Pemulihan Lingkungan: Bagian dari dana akan dialokasikan untuk mendukung program
             setShowPayment={setShowPayment}
             showPayment={showPayment}
           />
+          <ModalSuccessCrypto
+            modal={modalCrypto}
+            formData={valueForm}
+            setModal={setModalCrypto}
+            setShowPayment={setShowPayment}
+            showPayment={showPayment}
+          />
 
           <Footer />
         </Container>
@@ -495,7 +505,7 @@ Pemulihan Lingkungan: Bagian dari dana akan dialokasikan untuk mendukung program
   );
 };
 
-const FormCrypto = ({ modal, setModal, setValueForm }) => {
+const FormCrypto = ({ modalCrypto, setModalCrypto, setValueForm }) => {
   const [connectWallet, setConnectWallet] = useState(false);
   const [konfirmasiWallet, setKonfirmasiWallet] = useState(false);
 
@@ -694,7 +704,7 @@ const FormCrypto = ({ modal, setModal, setValueForm }) => {
             <button
                 onClick={() =>
                 {
-                  setModal(true)
+                  setModalCrypto(true)
                     setKonfirmasiWallet(false)
                 }
                 }
@@ -1174,6 +1184,8 @@ const FormBank = ({
 const AddDonasi = ({
   modal,
   setModal,
+  modalCrypto,
+  setModalCrypto,
   isAdd,
   setIsAdd,
   valueForm,
@@ -1187,7 +1199,7 @@ const AddDonasi = ({
   const metodeBayar = [
     {
       title: 'Crypto Wallet',
-      component: <FormCrypto modal={modal} setModal={setModal} setValueForm={setValueForm} />,
+      component: <FormCrypto modalCrypto={modalCrypto} setModalCrypto={setModalCrypto} setValueForm={setValueForm} />,
     },
     {
       title: 'Bank/Ewallet',
@@ -1306,6 +1318,101 @@ const ModalSuccess = ({
         <button
           onClick={() => {
             setModal(false);
+            setShowPayment(false);
+          }}
+          className="bg-primary hover:bg-secondary hover:text-primary text-white rounded-lg py-2 px-3 text-xs md:text-sm"
+        >
+          Tutup
+        </button>
+        {/* <button className="bg-primary hover:bg-secondary hover:text-primary text-white rounded-lg py-2 px-3 text-xs md:text-sm">
+              Dashboard Donasi Saya
+            </button> */}
+      </div>
+
+      <div>
+        <p className="text-primary text-sm text-center mx-auto font-semibold my-1">
+          Terima kash, Naufal! Dukungan anda sangat berarti bagi para penyitas
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const ModalSuccessCrypto = ({
+  modal,
+  setModal,
+  formData,
+  showPayment,
+  setShowPayment,
+}) => {
+  return (
+    <div
+      className={`rounded-xl mt-4 mb-4 text-center  ${
+        modal
+          ? 'w-auto opacity-100 h-auto scale-100 '
+          : 'w-0 h-0 opacity-0 scale-95 '
+      } md:w-6/12  duration-300 transition-all top-1/2 fixed left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto overflow-hidden bg-white text-primary border border-gray-400`}
+    >
+      <div className="flex relative flex-col items-center justify-center rounded-xl font-primary gap-2 p-4 w-full bg-secondary ">
+        <FontAwesomeIcon
+          icon={faCheckCircle}
+          className="text-5xl  text-accent"
+        />
+        <h4 className="font-semibold my-2 text-primary">Donasi Berhasil!</h4>
+        <p className="text-sm">
+          Donasi Anda berhasil diverifikasi & dicatat di blockchain
+        </p>
+        <FontAwesomeIcon
+          onClick={() => setModal(false)}
+          className="absolute top-2 right-2"
+          icon={faTimes}
+        />
+      </div>
+      <div className="flex flex-row justify-center gap-5 mt-5">
+        <div className="flex flex-col gap-1">
+          <h4 className="font-semibold">
+            {' '}
+            Rp{formData ? formData.nominal : ''}/
+           {formData ? formData.nominal / 5 : ''}Eth
+          </h4>
+          <p>21-02-2024</p>
+          <p>0x9a29c4c</p>
+        </div>
+        <div></div>
+
+        <div className="flex flex-col gap-1">
+          <h4> Bantuan Banjir Jakarta</h4>
+          <a href='https://etherscan.io/' target="_blank" className="rounded-lg bg-accent hover:bg-secondary text-xs md:text-sm text-white">
+            Lihat di Etherscan
+          </a>
+        </div>
+      </div>
+
+      <div className="p-5 w-8/12 mx-auto">
+        <div className="relative h-2 rounded-full bg-secondary">
+          <div
+            className="absolute top-0 left-0 h-2 rounded-full bg-primary"
+            style={{ width: `70%` }}
+          ></div>
+          <div
+            className="absolute -top-8 left-[70%] -translate-x-1/2 bg-[#C6F6D5] text-[#1E1E1E] text-[10px] font-sans px-1 rounded pointer-down"
+            style={{ width: '28px', left: `70%` }}
+          >
+            70%
+          </div>
+        </div>
+      </div>
+      <p className="my-2 text-xs md:text-sm">
+        Tersisa 12 hari lagi galang donasi ini akan berakhir
+      </p>
+      <button className="p-2 rounded-lg hover:bg-secondary hover:text-primary bg-accent text-white mt-4 mx-auto block">
+        Unduh PDF Bukti Donasi
+      </button>
+      <div className="flex gap-2 mt-3 mb-3 justify-center flex-row w-9/12 mx-auto">
+        <button
+          onClick={() => {
+            setModal(false);
+            
             setShowPayment(false);
           }}
           className="bg-primary hover:bg-secondary hover:text-primary text-white rounded-lg py-2 px-3 text-xs md:text-sm"
