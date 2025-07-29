@@ -351,9 +351,8 @@ const DetailDonasiBarang = () => {
                 <section className="mb-16 p-4  rounded-2xl border border-gray-400">
                   <article>
                     <h1 className="text-lg sm:text-xl text-primary font-primary font-semibold  mb-2 leading-tight">
-                      Banjir bandang di pinggiran kota
-                      <br />
-                      <span className="font-bold">METROPOLITAN.</span>
+                      Untuk pendidikan panti asuhan A
+                   
                     </h1>
                          <div className="md:text-sm text-xs">
                       <p className="text-xs sm:text-sm font-secondary text-gray-600 mb-4 leading-relaxed">
