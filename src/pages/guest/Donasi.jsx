@@ -113,13 +113,13 @@ const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
     title: 'Untuk pendidikan panti asuhan A',
     type: 'Panti Asuhan',
     description:
-      'Anak-anak di berbagai panti asuhan saat ini sangat membutuhkan bantuan perlengkapan sekolah untuk mendukung pendidikan mereka. Kebutuhan mendesak tersebut meliputi:.',
+      'Anak-anak di berbagai panti asuhan saat ini sangat membutuhkan bantuan perlengkapan sekolah untuk mendukung pendidikan mereka. Kebutuhan mendesak tersebut meliputi:',
     items: [
-      { title: 'Pakaian', progress: '50%', kebutuhan: 100, terkumpul: 50 },
-      { title: 'Makanan', progress: '30%', kebutuhan: 150, terkumpul: 45 },
-      { title: 'Perlengkapan', progress: '20%', kebutuhan: 200, terkumpul: 40 },
+      { title: 'Pakaian Seragam', progress: '50%', kebutuhan: 100, terkumpul: '50 pcs' },
+      { title: 'Beras', progress: '30%', kebutuhan: 150, terkumpul: '45 kg' },
+      { title: 'Alat Tulis', progress: '20%', kebutuhan: 200, terkumpul: '40 pcs' },
     ],
-    href : '/donasibarang1.png'
+    href: '/donasibarang1.png'
   },
   {
     title: 'Untuk pendidikan panti asuhan B',
@@ -127,11 +127,11 @@ const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
     description:
       'Untuk menunjang agar nyaman saat melaksanakan kegiatan menuntut ilmu maka perlu peningkatan ketersediaan barang maupun pangan.',
     items: [
-      { title: 'Pakaian', progress: '50%', kebutuhan: 80, terkumpul: 40 },
-      { title: 'Makanan', progress: '30%', kebutuhan: 120, terkumpul: 36 },
-      { title: 'Perlengkapan', progress: '20%', kebutuhan: 100, terkumpul: 20 },
+      { title: 'Pakaian Sehari-hari', progress: '50%', kebutuhan: 80, terkumpul: '40 pcs' },
+      { title: 'Minyak Goreng', progress: '30%', kebutuhan: 120, terkumpul: '36 liter' },
+      { title: 'Tas Sekolah', progress: '20%', kebutuhan: 100, terkumpul: '20 pcs' },
     ],
-    href : '/donasibarang2.png'
+    href: '/donasibarang2.png'
   },
   {
     title: 'Kebutuhan pokok panti asuhan C',
@@ -139,11 +139,11 @@ const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
     description:
       'Kebutuhan pokok seperti makanan, pakaian, dan perlengkapan lainnya sangat penting bagi keseharian anak-anak di panti ini.',
     items: [
-      { title: 'Pakaian', progress: '40%', kebutuhan: 90, terkumpul: 36 },
-      { title: 'Makanan', progress: '60%', kebutuhan: 150, terkumpul: 90 },
-      { title: 'Perlengkapan', progress: '25%', kebutuhan: 80, terkumpul: 20 },
+      { title: 'Jaket Hangat', progress: '40%', kebutuhan: 90, terkumpul: '36 pcs' },
+      { title: 'Tepung Terigu', progress: '60%', kebutuhan: 150, terkumpul: '90 kg' },
+      { title: 'Buku Cerita', progress: '25%', kebutuhan: 80, terkumpul: '20 pcs' },
     ],
-    href : '/donasibarang3.png'
+    href: '/donasibarang3.png'
   },
   {
     title: 'Peningkatan sarana belajar panti D',
@@ -151,13 +151,12 @@ const [dataDonasiBarangPanti, setDataDonasiBarangPanti] = useState([
     description:
       'Untuk meningkatkan sarana belajar, dibutuhkan buku, alat tulis, dan perlengkapan kelas lainnya.',
     items: [
-      { title: 'Pakaian', progress: '20%', kebutuhan: 60, terkumpul: 12 },
-      { title: 'Makanan', progress: '45%', kebutuhan: 130, terkumpul: 58 },
-      { title: 'Perlengkapan', progress: '35%', kebutuhan: 110, terkumpul: 39 },
+      { title: 'Seragam Olahraga', progress: '20%', kebutuhan: 60, terkumpul: '12 pcs' },
+      { title: 'Susu Cair', progress: '45%', kebutuhan: 130, terkumpul: '58 liter' },
+      { title: 'Meja Belajar', progress: '35%', kebutuhan: 110, terkumpul: '39 pcs' },
     ],
-    href : '/donasibarang4.png'
-  },
-  
+    href: '/donasibarang4.png'
+  }
 ]);
 
 const [dataDonasiBarangBencana, setDataDonasiBarangBencana] = useState([
@@ -166,33 +165,33 @@ const [dataDonasiBarangBencana, setDataDonasiBarangBencana] = useState([
     type: 'Bencana Alam',
     description: 'Banjir besar menyebabkan banyak warga kehilangan rumah dan harta benda. Dibutuhkan bantuan darurat berupa makanan, pakaian, dan kebutuhan pokok lainnya.',
     items: [
-      { title: 'Pakaian', progress: '60%', kebutuhan: 100, terkumpul: 60 },
-      { title: 'Makanan', progress: '80%', kebutuhan: 200, terkumpul: 160 },
-      { title: 'Perlengkapan', progress: '50%', kebutuhan: 150, terkumpul: 75 },
+      { title: 'Baju Ganti & Selimut', progress: '60%', kebutuhan: 100, terkumpul: '60 pcs' },
+      { title: 'Beras & Makanan Instan', progress: '80%', kebutuhan: 200, terkumpul: '160 kg' },
+      { title: 'Air Bersih & Minuman', progress: '50%', kebutuhan: 150, terkumpul: '75 liter' },
     ],
-    href : '/barang2.png'
+    href: '/barang2.png'
   },
   {
     title: 'Pemulihan pasca gempa di Sulawesi Barat',
     type: 'Bencana Alam',
     description: 'Gempa bumi menyebabkan banyak kerusakan. Bantuan dibutuhkan untuk membangun kembali serta menyediakan perlengkapan hidup sementara.',
     items: [
-      { title: 'Pakaian', progress: '30%', kebutuhan: 100, terkumpul: 30 },
-      { title: 'Makanan', progress: '55%', kebutuhan: 200, terkumpul: 110 },
-      { title: 'Perlengkapan', progress: '40%', kebutuhan: 150, terkumpul: 60 },
+      { title: 'Pakaian Sehari-hari', progress: '30%', kebutuhan: 100, terkumpul: '30 pcs' },
+      { title: 'Logistik Makanan', progress: '55%', kebutuhan: 200, terkumpul: '110 kg' },
+      { title: 'Air Minum Kemasan', progress: '40%', kebutuhan: 150, terkumpul: '60 liter' },
     ],
-    href : '/barang3.png'
+    href: '/barang3.png'
   },
   {
     title: 'Bantuan untuk korban longsor di Sumatera Barat',
     type: 'Bencana Alam',
     description: 'Longsor menutup akses ke beberapa desa. Bantuan logistik sangat dibutuhkan untuk memenuhi kebutuhan dasar warga.',
     items: [
-      { title: 'Pakaian', progress: '25%', kebutuhan: 80, terkumpul: 20 },
-      { title: 'Makanan', progress: '65%', kebutuhan: 150, terkumpul: 98 },
-      { title: 'Perlengkapan', progress: '35%', kebutuhan: 100, terkumpul: 35 },
+      { title: 'Jaket & Pakaian Hangat', progress: '25%', kebutuhan: 80, terkumpul: '20 pcs' },
+      { title: 'Sembako (beras, mie)', progress: '65%', kebutuhan: 150, terkumpul: '98 kg' },
+      { title: 'Air Galon & Cairan Pembersih', progress: '35%', kebutuhan: 100, terkumpul: '35 liter' },
     ],
-    href : '/barang4.png'
+    href: '/barang4.png'
   }
 ]);
 

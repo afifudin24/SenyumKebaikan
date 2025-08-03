@@ -53,7 +53,8 @@ const DataDonasiBarang = ({type, title, img, href, items, description}) => {
                                     
                       
                                     </div>
-                                </div>
+                      </div>
+                      <p className="text-sm font-semibold">Terkumpul : {item.terkumpul}</p>
                                 </div>
                         </div>
                 ))

@@ -90,148 +90,148 @@ const DetailDonasiBarang = () => {
     },
   ]);
   const [distribusiDana, setDistribusiDana] = useState([
-    {
-      tanggal: "01/01/2025",
-      tujuan: "Pengadaan buku tulis untuk anak panti",
-      jumlah: "50 buku tulis",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti1"
-    },
-    {
-      tanggal: "10/01/2025",
-      tujuan: "Pembelian tas sekolah untuk anak panti",
-      jumlah: "10 tas sekolah",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti2"
-    },
-    {
-      tanggal: "15/01/2025",
-      tujuan: "Paket alat tulis (pensil, penghapus, dll)",
-      jumlah: "30 paket alat tulis",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti3"
-    },
-    {
-      tanggal: "25/01/2025",
-      tujuan: "Seragam sekolah lengkap untuk anak yatim",
-      jumlah: "15 setel seragam",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti4"
-    },
-    {
-      tanggal: "01/02/2025",
-      tujuan: "Sepatu sekolah untuk anak panti",
-      jumlah: "10 pasang sepatu",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti5"
-    },
-    {
-      tanggal: "10/02/2025",
-      tujuan: "Sumbangan meja belajar dan kursi",
-      jumlah: "5 set meja & kursi",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti6"
-    },
-    {
-      tanggal: "15/02/2025",
-      tujuan: "Biaya transport anak panti ke sekolah",
-      jumlah: "Transportasi 1 bulan",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti7"
-    },
-    {
-      tanggal: "20/02/2025",
-      tujuan: "Pengadaan alat tulis khusus SD",
-      jumlah: "40 paket alat tulis SD",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti8"
-    },
-    {
-      tanggal: "01/03/2025",
-      tujuan: "Donasi perlengkapan sekolah SMP",
-      jumlah: "20 paket lengkap SMP",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti9"
-    },
-    {
-      tanggal: "10/03/2025",
-      tujuan: "Pembelian buku pelajaran untuk anak panti",
-      jumlah: "20 buku pelajaran",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti10"
-    },
-    {
-      tanggal: "15/03/2025",
-      tujuan: "Sumbangan kalkulator untuk siswa SMA",
-      jumlah: "10 kalkulator",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti11"
-    },
-    {
-      tanggal: "25/03/2025",
-      tujuan: "Paket seragam olahraga untuk anak panti",
-      jumlah: "15 setel seragam olahraga",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti12"
-    },
-    {
-      tanggal: "01/04/2025",
-      tujuan: "Bantuan alat gambar dan mewarnai",
-      jumlah: "25 paket alat gambar",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti13"
-    },
-    {
-      tanggal: "10/04/2025",
-      tujuan: "Sumbangan papan tulis untuk ruang belajar",
-      jumlah: "2 papan tulis",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti14"
-    },
-    {
-      tanggal: "15/04/2025",
-      tujuan: "Donasi buku bacaan dan cerita",
-      jumlah: "30 buku bacaan",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti15"
-    },
-    {
-      tanggal: "25/04/2025",
-      tujuan: "Perlengkapan ujian nasional",
-      jumlah: "30 paket ujian",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti16"
-    },
-    {
-      tanggal: "01/05/2025",
-      tujuan: "Penyediaan rak buku untuk perpustakaan",
-      jumlah: "4 rak buku",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti17"
-    },
-    {
-      tanggal: "10/05/2025",
-      tujuan: "Internet dan listrik ruang belajar",
-      jumlah: "Biaya operasional 1 bulan",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti18"
-    },
-    {
-      tanggal: "15/05/2025",
-      tujuan: "Donasi laptop bekas layak pakai",
-      jumlah: "3 unit laptop",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti19"
-    },
-    {
-      tanggal: "20/05/2025",
-      tujuan: "Biaya fotokopi dan print tugas",
-      jumlah: "Fotokopi & print 1 semester",
-      txHash: "0x8b9c...d4f",
-      bukti: "https://random.link/bukti20"
-    }
-  ]);
-  
+  {
+    tanggal: "01/01/2025",
+    tujuan: "Pengadaan buku tulis untuk anak panti",
+    jumlah: "50 pcs",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti1"
+  },
+  {
+    tanggal: "10/01/2025",
+    tujuan: "Pembelian tas sekolah untuk anak panti",
+    jumlah: "10 pcs",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti2"
+  },
+  {
+    tanggal: "15/01/2025",
+    tujuan: "Paket alat tulis (pensil, penghapus, dll)",
+    jumlah: "30 pcs",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti3"
+  },
+  {
+    tanggal: "25/01/2025",
+    tujuan: "Seragam sekolah untuk anak yatim",
+    jumlah: "15 pcs",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti4"
+  },
+  {
+    tanggal: "01/02/2025",
+    tujuan: "Sepatu sekolah untuk anak panti",
+    jumlah: "10 pcs",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti5"
+  },
+  {
+    tanggal: "10/02/2025",
+    tujuan: "Pengadaan tinta printer",
+    jumlah: "10 liter",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti6"
+  },
+  {
+    tanggal: "15/02/2025",
+    tujuan: "Beras untuk konsumsi anak panti",
+    jumlah: "100 kg",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti7"
+  },
+  {
+    tanggal: "20/02/2025",
+    tujuan: "Susu cair untuk anak panti",
+    jumlah: "50 liter",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti8"
+  },
+  {
+    tanggal: "01/03/2025",
+    tujuan: "Donasi perlengkapan sekolah",
+    jumlah: "40 pcs",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti9"
+  },
+  {
+    tanggal: "10/03/2025",
+    tujuan: "Pembelian buku pelajaran",
+    jumlah: "20 pcs",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti10"
+  },
+  {
+    tanggal: "15/03/2025",
+    tujuan: "Kalkulator untuk siswa SMA",
+    jumlah: "10 pcs",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti11"
+  },
+  {
+    tanggal: "25/03/2025",
+    tujuan: "Seragam olahraga",
+    jumlah: "15 pcs",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti12"
+  },
+  {
+    tanggal: "01/04/2025",
+    tujuan: "Alat gambar dan mewarnai",
+    jumlah: "25 pcs",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti13"
+  },
+  {
+    tanggal: "10/04/2025",
+    tujuan: "Sumbangan papan tulis",
+    jumlah: "2 pcs",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti14"
+  },
+  {
+    tanggal: "15/04/2025",
+    tujuan: "Donasi buku bacaan dan cerita",
+    jumlah: "30 pcs",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti15"
+  },
+  {
+    tanggal: "25/04/2025",
+    tujuan: "Tepung terigu untuk konsumsi anak panti",
+    jumlah: "75 kg",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti16"
+  },
+  {
+    tanggal: "01/05/2025",
+    tujuan: "Minyak goreng untuk kebutuhan dapur panti",
+    jumlah: "30 liter",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti17"
+  },
+  {
+    tanggal: "10/05/2025",
+    tujuan: "Donasi laptop bekas",
+    jumlah: "3 pcs",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti18"
+  },
+  {
+    tanggal: "15/05/2025",
+    tujuan: "Rak buku untuk perpustakaan",
+    jumlah: "4 pcs",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti19"
+  },
+  {
+    tanggal: "20/05/2025",
+    tujuan: "Sumbangan air mineral galon",
+    jumlah: "60 liter",
+    txHash: "0x8b9c...d4f",
+    bukti: "https://random.link/bukti20"
+  }
+]);
+
   
   
     return (
@@ -627,6 +627,20 @@ const AddDonasi = ({modal, setModal, setIsAdd}) => {
 
   //   // Lanjutkan dengan pengiriman form...
   // };
+    const getSatuan = (kategori) => {
+    switch (kategori) {
+      case "Barang Pakai":
+        return "pcs";
+      case "Barang Cair":
+        return "liter";
+      case "Barang Bobot":
+        return "kg";
+      default:
+        return "";
+    }
+  };
+
+  const satuan = getSatuan(kategori);
 
   const clearSignature = () => {
     sigCanvas.current.clear();
@@ -751,18 +765,24 @@ const AddDonasi = ({modal, setModal, setIsAdd}) => {
 
       <div className="w-8/12 mx-auto">
         <h4 className="text-start my-2 font-semibold">Kategori Barang</h4>
-        <select className="border w-full p-2 rounded-lg" value={kategori} onChange={(e) => setKategori(e.target.value)}>
+      <select
+          className="border w-full p-2 rounded-lg"
+          value={kategori}
+          onChange={(e) => setKategori(e.target.value)}
+        >
           <option value="">-- Pilih Kategori --</option>
           <option value="Barang Pakai">Barang Pakai</option>
-          <option value="Barang Tidak Pakai">Barang Tidak Pakai</option>
-          <option value="Barang Elektronik">Barang Elektronik</option>
-          <option value="Barang Bahan Bangunan">Barang Bahan Bangunan</option>
+          <option value="Barang Cair">Barang Cair</option>
+          <option value="Barang Bobot">Barang Bobot</option>
         </select>
       </div>
 
       <div className="w-8/12 mx-auto">
-        <h4 className="text-start my-2 font-semibold">Jumlah / Kuantitas Barang</h4>
+        <h4 className="text-start my-2 font-semibold">Jumlah / Kuantitas Barang ({satuan && <span className="text-sm text-gray-600">{satuan}</span>})</h4>
         <input type="number" className="border w-full p-2 rounded-lg" value={jumlah} onChange={(e) => setJumlah(e.target.value)} placeholder="Jumlah" />
+        {/* <h5 className="text-start my-2 font-semibold">
+            {satuan && <span className="text-sm text-gray-600">{satuan}</span>}
+        </h5> */}
       </div>
 
       <div className="w-8/12 mx-auto text-start">

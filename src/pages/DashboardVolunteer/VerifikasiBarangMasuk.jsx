@@ -14,27 +14,28 @@ const VerifikasiBarangMasuk = () => {
 
   // 20 data dummy
 const [data, setData] = useState([
-  { id: "BRG-7A2", donatur: "John Dae", barang: "Buku Tulis", qty: 100, kualitas: "Baru", campaign: "Bantu Sekolah", status: "Menunggu", tanggal: "2025-07-01" },
-  { id: "BRG-9XK", donatur: "Sarah A.", barang: "Pulpen", qty: 250, kualitas: "Baru", campaign: "Bantu Sekolah", status: "Selesai", tanggal: "2025-06-28" },
-  { id: "BRG-1L3", donatur: "Ahmad R.", barang: "Tas Sekolah", qty: 40, kualitas: "Bekas Layak", campaign: "Bantu Sekolah", status: "Diterima", tanggal: "2025-06-29" },
-  { id: "BRG-WE5", donatur: "Lisa M.", barang: "Sepatu", qty: 60, kualitas: "Baru", campaign: "Bencana Alam", status: "Ditolak", tanggal: "2025-06-25" },
-  { id: "BRG-M98", donatur: "Tommy J.", barang: "Seragam", qty: 30, kualitas: "Baru", campaign: "Bantu Sekolah", status: "Menunggu", tanggal: "2025-07-03" },
-  { id: "BRG-Q02", donatur: "Gita N.", barang: "Buku Cerita", qty: 150, kualitas: "Bekas Layak", campaign: "Literasi Desa", status: "Diterima", tanggal: "2025-06-30" },
-  { id: "BRG-45P", donatur: "Robert A.", barang: "Laptop Bekas", qty: 10, kualitas: "Bekas Layak", campaign: "Digitalisasi Sekolah", status: "Selesai", tanggal: "2025-06-20" },
-  { id: "BRG-T6U", donatur: "Hana F.", barang: "Meja Belajar", qty: 20, kualitas: "Baru", campaign: "Bantu Sekolah", status: "Menunggu", tanggal: "2025-07-02" },
-  { id: "BRG-2ZD", donatur: "Dian W.", barang: "Masker Kain", qty: 500, kualitas: "Baru", campaign: "Bencana Alam", status: "Ditolak", tanggal: "2025-06-24" },
-  { id: "BRG-A9L", donatur: "Irfan L.", barang: "Pensil Warna", qty: 300, kualitas: "Baru", campaign: "Literasi Desa", status: "Selesai", tanggal: "2025-06-29" },
-  { id: "BRG-66H", donatur: "Mira S.", barang: "Papan Tulis", qty: 5, kualitas: "Baru", campaign: "Digitalisasi Sekolah", status: "Diterima", tanggal: "2025-06-27" },
-  { id: "BRG-X0Y", donatur: "Kevin P.", barang: "Kursi", qty: 20, kualitas: "Bekas Layak", campaign: "Bantu Sekolah", status: "Selesai", tanggal: "2025-06-21" },
-  { id: "BRG-5YU", donatur: "Tania Q.", barang: "Tablet", qty: 8, kualitas: "Baru", campaign: "Digitalisasi Sekolah", status: "Menunggu", tanggal: "2025-07-04" },
-  { id: "BRG-BL2", donatur: "Fajar G.", barang: "Rak Buku", qty: 10, kualitas: "Baru", campaign: "Literasi Desa", status: "Diterima", tanggal: "2025-06-26" },
-  { id: "BRG-Z78", donatur: "Anita R.", barang: "Baju Hangat", qty: 100, kualitas: "Baru", campaign: "Bencana Alam", status: "Ditolak", tanggal: "2025-06-22" },
-  { id: "BRG-91K", donatur: "Bayu S.", barang: "Selimut", qty: 120, kualitas: "Baru", campaign: "Bencana Alam", status: "Selesai", tanggal: "2025-06-30" },
-  { id: "BRG-P16", donatur: "Linda H.", barang: "Boneka", qty: 50, kualitas: "Bekas Layak", campaign: "Bantu Sekolah", status: "Menunggu", tanggal: "2025-07-05" },
-  { id: "BRG-G43", donatur: "Niko V.", barang: "Crayon", qty: 200, kualitas: "Baru", campaign: "Literasi Desa", status: "Diterima", tanggal: "2025-06-23" },
-  { id: "BRG-YU3", donatur: "Sinta Z.", barang: "Notebook", qty: 300, kualitas: "Baru", campaign: "Bantu Sekolah", status: "Diterima", tanggal: "2025-06-28" },
-  { id: "BRG-F5N", donatur: "Yusuf K.", barang: "Buku Pelajaran", qty: 100, kualitas: "Bekas Layak", campaign: "Bantu Sekolah", status: "Selesai", tanggal: "2025-06-25" },
+  { id: "BRG-7A2", donatur: "John Dae", barang: "Buku Tulis", qty: "100 pcs", kualitas: "Baru", campaign: "Bantu Sekolah", status: "Menunggu", tanggal: "2025-07-01" },
+  { id: "BRG-9XK", donatur: "Sarah A.", barang: "Minyak Goreng", qty: "20 liter", kualitas: "Baru", campaign: "Bencana Alam", status: "Selesai", tanggal: "2025-06-28" },
+  { id: "BRG-1L3", donatur: "Ahmad R.", barang: "Tas Sekolah", qty: "40 pcs", kualitas: "Bekas Layak", campaign: "Bantu Sekolah", status: "Diterima", tanggal: "2025-06-29" },
+  { id: "BRG-WE5", donatur: "Lisa M.", barang: "Beras", qty: "50 kg", kualitas: "Baru", campaign: "Bencana Alam", status: "Ditolak", tanggal: "2025-06-25" },
+  { id: "BRG-M98", donatur: "Tommy J.", barang: "Seragam", qty: "30 pcs", kualitas: "Baru", campaign: "Bantu Sekolah", status: "Menunggu", tanggal: "2025-07-03" },
+  { id: "BRG-Q02", donatur: "Gita N.", barang: "Sabun Cair", qty: "15 liter", kualitas: "Baru", campaign: "Bencana Alam", status: "Diterima", tanggal: "2025-06-30" },
+  { id: "BRG-45P", donatur: "Robert A.", barang: "Laptop Bekas", qty: "10 pcs", kualitas: "Bekas Layak", campaign: "Digitalisasi Sekolah", status: "Selesai", tanggal: "2025-06-20" },
+  { id: "BRG-T6U", donatur: "Hana F.", barang: "Meja Belajar", qty: "20 pcs", kualitas: "Baru", campaign: "Bantu Sekolah", status: "Menunggu", tanggal: "2025-07-02" },
+  { id: "BRG-2ZD", donatur: "Dian W.", barang: "Masker Kain", qty: "500 pcs", kualitas: "Baru", campaign: "Bencana Alam", status: "Ditolak", tanggal: "2025-06-24" },
+  { id: "BRG-A9L", donatur: "Irfan L.", barang: "Pensil Warna", qty: "300 pcs", kualitas: "Baru", campaign: "Literasi Desa", status: "Selesai", tanggal: "2025-06-29" },
+  { id: "BRG-66H", donatur: "Mira S.", barang: "Papan Tulis", qty: "5 pcs", kualitas: "Baru", campaign: "Digitalisasi Sekolah", status: "Diterima", tanggal: "2025-06-27" },
+  { id: "BRG-X0Y", donatur: "Kevin P.", barang: "Gula", qty: "25 kg", kualitas: "Baru", campaign: "Bencana Alam", status: "Selesai", tanggal: "2025-06-21" },
+  { id: "BRG-5YU", donatur: "Tania Q.", barang: "Tablet", qty: "8 pcs", kualitas: "Baru", campaign: "Digitalisasi Sekolah", status: "Menunggu", tanggal: "2025-07-04" },
+  { id: "BRG-BL2", donatur: "Fajar G.", barang: "Rak Buku", qty: "10 pcs", kualitas: "Baru", campaign: "Literasi Desa", status: "Diterima", tanggal: "2025-06-26" },
+  { id: "BRG-Z78", donatur: "Anita R.", barang: "Baju Hangat", qty: "100 pcs", kualitas: "Baru", campaign: "Bencana Alam", status: "Ditolak", tanggal: "2025-06-22" },
+  { id: "BRG-91K", donatur: "Bayu S.", barang: "Air Mineral", qty: "100 liter", kualitas: "Baru", campaign: "Bencana Alam", status: "Selesai", tanggal: "2025-06-30" },
+  { id: "BRG-P16", donatur: "Linda H.", barang: "Boneka", qty: "50 pcs", kualitas: "Bekas Layak", campaign: "Bantu Sekolah", status: "Menunggu", tanggal: "2025-07-05" },
+  { id: "BRG-G43", donatur: "Niko V.", barang: "Crayon", qty: "200 pcs", kualitas: "Baru", campaign: "Literasi Desa", status: "Diterima", tanggal: "2025-06-23" },
+  { id: "BRG-YU3", donatur: "Sinta Z.", barang: "Notebook", qty: "300 pcs", kualitas: "Baru", campaign: "Bantu Sekolah", status: "Diterima", tanggal: "2025-06-28" },
+  { id: "BRG-F5N", donatur: "Yusuf K.", barang: "Tepung Terigu", qty: "40 kg", kualitas: "Baru", campaign: "Bencana Alam", status: "Selesai", tanggal: "2025-06-25" }
 ]);
+
 
 
   const totalPages = Math.ceil(data.length / itemsPerPage);

@@ -155,7 +155,7 @@ const DonasiChart = () => {
         yAxisID: 'y1',
       },
       {
-        label: 'Donasi Barang (pcs)',
+        label: 'Donasi Barang (pcs, Liter, KG)',
         data: currentData.barang,
         borderColor: 'rgba(99, 234, 155, 1)',
          borderRadius: 5, // 🔸 inilah yang membuat batangnya rounded
@@ -196,7 +196,7 @@ const DonasiChart = () => {
         title: {
           display: true,
           color: 'rgba(34, 197, 94, 1)',
-          text: 'Donasi Barang (pcs)',
+          text: 'Donasi Barang (pcs, Liter, KG)',
         },
       },
     },
